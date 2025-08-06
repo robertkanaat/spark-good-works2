@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { DollarSign } from "lucide-react";
 import heroImage from "@/assets/hero-recovery-person.jpg";
 
 const HeroSection = () => {
@@ -106,7 +107,11 @@ const HeroSection = () => {
                   </div>
                   
                   <Link to={`/donation?amount=${selectedAmount}`}>
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold mb-4">
+                    <Button 
+                      variant="success" 
+                      className="w-full py-6 text-lg font-semibold mb-4 gap-3"
+                    >
+                      <DollarSign className="w-5 h-5" />
                       DONATE NOW
                     </Button>
                   </Link>
