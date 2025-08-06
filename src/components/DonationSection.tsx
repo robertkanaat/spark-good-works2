@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const DonationSection = () => {
   return (
     <section className="py-16 bg-background">
@@ -12,9 +14,11 @@ const DonationSection = () => {
           
           <div className="text-center">
             <div className="text-muted-foreground text-sm mb-2">I WANT TO...</div>
-            <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-md w-full">
-              DONATE
-            </button>
+            <Link to="/donation" className="block">
+              <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold rounded-md w-full">
+                DONATE
+              </button>
+            </Link>
           </div>
           
           <div className="text-center">
