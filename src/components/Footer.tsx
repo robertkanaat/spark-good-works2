@@ -6,10 +6,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="col-span-1 lg:col-span-2">
             <div className="flex items-center mb-4">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">🧠</span>
-              </div>
-              <span className="ml-2 text-xl font-bold">GENIUS RECOVERY</span>
+              <img 
+                src="/genius-recovery-logo.png" 
+                alt="Genius Recovery" 
+                className="w-[180px] h-auto"
+              />
             </div>
             <p className="text-white/80 mb-6 max-w-md">
               Changing the global conversation around addiction from one of judgment to one of compassion. 
