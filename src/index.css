@@ -32,9 +32,9 @@ All colors MUST be HSL.
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --donate: 20 100% 55%;
+    --donate: 24 100% 50%;
     --donate-foreground: 0 0% 100%;
-    --donate-glow: 25 100% 65%;
+    --donate-glow: 32 100% 60%;
 
     --border: 25 95% 85%;
     --input: 25 95% 85%;
@@ -87,9 +87,9 @@ All colors MUST be HSL.
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --donate: 20 95% 60%;
+    --donate: 24 95% 55%;
     --donate-foreground: 0 0% 100%;
-    --donate-glow: 25 95% 70%;
+    --donate-glow: 32 95% 65%;
 
     --border: 230 35% 20%;
     --input: 230 35% 20%;
