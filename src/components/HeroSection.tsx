@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-recovery-person.jpg";
 
 const HeroSection = () => {
-  const [selectedAmount, setSelectedAmount] = useState(40);
+  const [selectedAmount, setSelectedAmount] = useState(50);
   const [activeView, setActiveView] = useState<'donate' | 'help' | 'support'>('donate');
-  const presetAmounts = [10, 20, 40, 100];
+  const presetAmounts = [25, 50, 100, 200];
 
   return (
     <section className="relative min-h-screen flex items-center">
@@ -105,7 +105,7 @@ const HeroSection = () => {
                     <span className="text-3xl font-bold text-foreground">${selectedAmount}.00 USD</span>
                   </div>
                   
-                  <Link to="/donation">
+                  <Link to={`/donation?amount=${selectedAmount}`}>
                     <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold mb-4">
                       DONATE NOW
                     </Button>
