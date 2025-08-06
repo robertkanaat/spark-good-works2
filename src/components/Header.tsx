@@ -11,7 +11,7 @@ const Header = () => {
               <img 
                 src="/genius-recovery-logo.png" 
                 alt="Genius Recovery" 
-                className="h-8 lg:h-10 w-auto transition-opacity group-hover:opacity-80"
+                className="w-[200px] h-auto transition-opacity group-hover:opacity-80"
               />
             </Link>
           </div>
