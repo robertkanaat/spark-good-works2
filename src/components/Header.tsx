@@ -9,7 +9,7 @@ const Header = () => {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center group">
               <img 
-                src="/src/assets/genius-recovery-logo-main.png" 
+                src="/genius-recovery-logo.png" 
                 alt="Genius Recovery" 
                 className="h-8 lg:h-10 w-auto transition-opacity group-hover:opacity-80"
               />
