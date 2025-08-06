@@ -24,17 +24,21 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-6">
-              <Link to="/emergency" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors">
-                GET HELP
+              <Link to="/emergency" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+                <span className="relative z-10">GET HELP</span>
+                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
-              <a href="#" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors">
-                RESOURCES
-              </a>
-              <Link to="/blog" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors">
-                BLOG
+              <Link to="/resources" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+                <span className="relative z-10">RESOURCES</span>
+                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
-              <Link to="/shop" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors">
-                SHOP
+              <Link to="/blog" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+                <span className="relative z-10">BLOG</span>
+                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </Link>
+              <Link to="/shop" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+                <span className="relative z-10">SHOP</span>
+                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
             </div>
           </nav>
@@ -82,13 +86,13 @@ const Header = () => {
                     >
                       GET HELP
                     </Link>
-                    <a 
-                      href="#" 
+                    <Link 
+                      to="/resources" 
                       className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
                       RESOURCES
-                    </a>
+                    </Link>
                     <Link 
                       to="/blog" 
                       className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
