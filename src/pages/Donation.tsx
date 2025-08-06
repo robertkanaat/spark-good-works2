@@ -8,6 +8,9 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { ArrowLeft, Heart, Users, Globe, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import Footer from "@/components/Footer";
 import basicBg from "@/assets/donation-bg-basic.jpg";
 import supporterBg from "@/assets/donation-bg-supporter.jpg";
 import championBg from "@/assets/donation-bg-champion.jpg";
@@ -19,6 +22,9 @@ const Donation = () => {
   const [customAmount, setCustomAmount] = useState("");
   const [isCustomMode, setIsCustomMode] = useState(false);
   const [isMonthly, setIsMonthly] = useState(true); // Default to monthly
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [email, setEmail] = useState("");
+  const { toast } = useToast();
   const amount = donationAmount[0];
 
   // Initialize amount from URL parameter
@@ -104,6 +110,51 @@ const Donation = () => {
     setDonationAmount(values);
     setIsCustomMode(false);
     setCustomAmount("");
+  };
+
+  const handleDonation = async () => {
+    if (!email.trim()) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address to proceed with the donation.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsProcessing(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('create-payment', {
+        body: {
+          amount: amount,
+          currency: 'USD',
+          isRecurring: isMonthly,
+          customerEmail: email
+        }
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data.payment_url) {
+        // Open payment page in new tab
+        window.open(data.payment_url, '_blank');
+      } else {
+        throw new Error('No payment URL received');
+      }
+
+    } catch (error) {
+      console.error('Payment error:', error);
+      toast({
+        title: "Payment Error",
+        description: error.message || "Failed to process payment. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const currentTier = getTier(amount);
@@ -222,6 +273,22 @@ const Donation = () => {
               </div>
             </div>
 
+            {/* Email Input */}
+            <div className="mb-8">
+              <Label htmlFor="email" className="text-base font-medium mb-4 block">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <p className="text-xs text-muted-foreground mt-2">
+                Required for donation receipt and updates
+              </p>
+            </div>
+
             {/* Quick amounts - updated values */}
             <div className="grid grid-cols-4 gap-3 mb-8">
               {[25, 50, 100, 200].map((quickAmount) => (
@@ -237,8 +304,12 @@ const Donation = () => {
             </div>
 
             {/* Donate button */}
-            <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4">
-              DONATE ${amount} {isMonthly ? 'MONTHLY' : 'NOW'}
+            <Button 
+              onClick={handleDonation}
+              disabled={isProcessing || !email.trim()}
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4"
+            >
+              {isProcessing ? 'PROCESSING...' : `DONATE $${amount} ${isMonthly ? 'MONTHLY' : 'NOW'}`}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">
@@ -328,6 +399,9 @@ const Donation = () => {
           </div>
         </div>
       </div>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
