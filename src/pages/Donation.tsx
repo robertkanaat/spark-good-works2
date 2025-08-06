@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import { ArrowLeft, Heart, Users, Globe, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import basicBg from "@/assets/donation-bg-basic.jpg";
 import supporterBg from "@/assets/donation-bg-supporter.jpg";
@@ -162,6 +164,9 @@ const Donation = () => {
 
   return (
     <div className="min-h-screen relative">
+      {/* Header */}
+      <Header />
+      
       {/* Dynamic background with images */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out -z-10"
