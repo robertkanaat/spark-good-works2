@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { ArrowLeft, Heart, Users, Globe, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import basicBg from "@/assets/donation-bg-basic.jpg";
@@ -17,6 +18,7 @@ const Donation = () => {
   const [donationAmount, setDonationAmount] = useState([50]);
   const [customAmount, setCustomAmount] = useState("");
   const [isCustomMode, setIsCustomMode] = useState(false);
+  const [isMonthly, setIsMonthly] = useState(true); // Default to monthly
   const amount = donationAmount[0];
 
   // Initialize amount from URL parameter
@@ -30,10 +32,19 @@ const Donation = () => {
     }
   }, [searchParams]);
 
-  // Calculate impact based on donation amount
-  const getLivesSupported = (amount: number) => Math.floor(amount / 10);
-  const getFamiliesHelped = (amount: number) => Math.floor(amount / 25);
-  const getSessionsProvided = (amount: number) => Math.floor(amount / 5);
+  // Calculate impact based on donation amount and frequency
+  const getLivesSupported = (amount: number) => {
+    const multiplier = isMonthly ? 1 : 12;
+    return Math.floor((amount * multiplier) / 10);
+  };
+  const getFamiliesHelped = (amount: number) => {
+    const multiplier = isMonthly ? 1 : 12;
+    return Math.floor((amount * multiplier) / 25);
+  };
+  const getSessionsProvided = (amount: number) => {
+    const multiplier = isMonthly ? 1 : 12;
+    return Math.floor((amount * multiplier) / 5);
+  };
 
   const getTier = (amount: number) => {
     if (amount >= 200) return "hero";
@@ -55,11 +66,30 @@ const Donation = () => {
     const tier = getTier(amount);
     const messages = {
       basic: "Every dollar creates ripples of hope",
-      supporter: "Your generosity builds stronger communities",
+      supporter: "Your generosity builds stronger communities", 
       champion: "You're making a significant impact",
       hero: "You're a champion of recovery and healing"
     };
     return messages[tier as keyof typeof messages];
+  };
+
+  const getImpactText = (amount: number, isMonthly: boolean) => {
+    const multiplier = isMonthly ? 1 : 12; // Show yearly impact for one-time donations
+    const adjustedAmount = amount * multiplier;
+    const livesSupported = Math.floor(adjustedAmount / 10);
+    const tier = getTier(amount);
+    
+    const period = isMonthly ? "monthly" : "one-time";
+    const impactPeriod = isMonthly ? "each month" : "over the year";
+    
+    const impactMessages = {
+      basic: `Your $${amount} ${period} donation helps provide recovery resources for ${livesSupported} ${livesSupported === 1 ? 'person' : 'people'} ${impactPeriod}.`,
+      supporter: `Your $${amount} ${period} donation creates a strong support network for ${livesSupported} ${livesSupported === 1 ? 'person' : 'people'} on their recovery journey ${impactPeriod}.`,
+      champion: `Your $${amount} ${period} donation champions recovery by supporting ${livesSupported} ${livesSupported === 1 ? 'life' : 'lives'} with comprehensive resources ${impactPeriod}.`,
+      hero: `Your incredible $${amount} ${period} donation transforms ${livesSupported} ${livesSupported === 1 ? 'life' : 'lives'} through our complete recovery ecosystem ${impactPeriod}.`
+    };
+    
+    return impactMessages[tier as keyof typeof impactMessages];
   };
 
   const handleCustomAmountChange = (value: string) => {
@@ -108,8 +138,23 @@ const Donation = () => {
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold mb-4">Choose Your Impact</h2>
               <p className="text-muted-foreground">
-                Select your donation amount and see the lives you'll transform
+                Select your donation amount and frequency to see the lives you'll transform
               </p>
+            </div>
+
+            {/* Monthly/One-time Toggle */}
+            <div className="flex items-center justify-center space-x-4 mb-8 p-4 bg-muted/30 rounded-lg">
+              <Label htmlFor="donation-type" className={`font-medium ${!isMonthly ? 'text-muted-foreground' : ''}`}>
+                One-time
+              </Label>
+              <Switch
+                id="donation-type"
+                checked={isMonthly}
+                onCheckedChange={setIsMonthly}
+              />
+              <Label htmlFor="donation-type" className={`font-medium ${isMonthly ? 'text-muted-foreground' : ''}`}>
+                Monthly
+              </Label>
             </div>
 
             {/* Amount display with tier */}
@@ -117,7 +162,9 @@ const Donation = () => {
               <div className="text-6xl font-bold text-primary mb-2">
                 ${amount}
               </div>
-              <div className="text-lg text-muted-foreground mb-2">per month</div>
+              <div className="text-lg text-muted-foreground mb-2">
+                {isMonthly ? 'per month' : 'one-time donation'}
+              </div>
               <div className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
                 currentTier === 'hero' ? 'bg-purple-100 text-purple-800' :
                 currentTier === 'champion' ? 'bg-yellow-100 text-yellow-800' :
@@ -191,11 +238,11 @@ const Donation = () => {
 
             {/* Donate button */}
             <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4">
-              DONATE ${amount} NOW
+              DONATE ${amount} {isMonthly ? 'MONTHLY' : 'NOW'}
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">
-              Secure donation processing • Cancel anytime • Tax deductible
+              Secure donation processing • {isMonthly ? 'Cancel anytime • ' : ''}Tax deductible
             </p>
           </Card>
 
@@ -216,7 +263,7 @@ const Donation = () => {
                       {getLivesSupported(amount)}
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      Lives directly supported each month
+                      Lives directly supported {isMonthly ? 'each month' : 'over the year'}
                     </div>
                   </div>
                 </div>
@@ -230,7 +277,7 @@ const Donation = () => {
                       {getFamiliesHelped(amount)}
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      Families receive hope and guidance
+                      Families receive hope and guidance {isMonthly ? 'monthly' : 'annually'}
                     </div>
                   </div>
                 </div>
@@ -244,7 +291,7 @@ const Donation = () => {
                       {getSessionsProvided(amount)}
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      Recovery support sessions funded
+                      Recovery support sessions funded {isMonthly ? 'monthly' : 'annually'}
                     </div>
                   </div>
                 </div>
