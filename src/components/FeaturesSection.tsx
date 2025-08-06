@@ -1,8 +1,29 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const FeaturesSection = () => {
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+
+  // Add keyframes to document head for the float animation
+  useEffect(() => {
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        25% { transform: translateY(-10px) rotate(90deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+        75% { transform: translateY(-10px) rotate(270deg); }
+      }
+      .float-animation {
+        animation: float 3s ease-in-out infinite;
+      }
+    `;
+    document.head.appendChild(styleElement);
+
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
 
   const features = [
     {
@@ -97,12 +118,11 @@ const FeaturesSection = () => {
                   {[...Array(3)].map((_, i) => (
                     <div
                       key={i}
-                      className={`absolute w-2 h-2 bg-gradient-to-r ${feature.color} rounded-full opacity-0 group-hover:opacity-60 transition-all duration-1000`}
+                      className={`absolute w-2 h-2 bg-gradient-to-r ${feature.color} rounded-full opacity-0 group-hover:opacity-60 transition-all duration-1000 ${hoveredFeature === index ? 'float-animation' : ''}`}
                       style={{
                         left: `${20 + i * 30}%`,
                         top: `${30 + i * 20}%`,
                         animationDelay: `${i * 0.3}s`,
-                        animation: hoveredFeature === index ? 'float 3s ease-in-out infinite' : 'none'
                       }}
                     ></div>
                   ))}
@@ -172,15 +192,6 @@ const FeaturesSection = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          25% { transform: translateY(-10px) rotate(90deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
-          75% { transform: translateY(-10px) rotate(270deg); }
-        }
-      `}</style>
     </section>
   );
 };
