@@ -23,12 +23,12 @@ const Header = () => {
               <a href="#" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium">
                 RESOURCES
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium">
+              <Link to="/blog" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium">
                 BLOG
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium">
+              </Link>
+              <Link to="/shop" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium">
                 SHOP
-              </a>
+              </Link>
             </div>
           </nav>
 
