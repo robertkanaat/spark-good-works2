@@ -8,10 +8,11 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center group">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
-                <span className="text-primary-foreground font-bold text-sm">🧠</span>
-              </div>
-              <span className="text-lg lg:text-xl font-bold text-foreground">GENIUS RECOVERY</span>
+              <img 
+                src="/src/assets/genius-recovery-logo-main.png" 
+                alt="Genius Recovery" 
+                className="h-8 lg:h-10 w-auto transition-opacity group-hover:opacity-80"
+              />
             </Link>
           </div>
           
