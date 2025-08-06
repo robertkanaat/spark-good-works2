@@ -7,9 +7,9 @@ const Footer = () => {
           <div className="col-span-1 lg:col-span-2">
             <div className="flex items-center mb-4">
               <img 
-                src="/genius-recovery-logo.png" 
+                src="/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
                 alt="Genius Recovery" 
-                className="w-[180px] h-auto"
+                className="w-[240px] h-auto"
               />
             </div>
             <p className="text-white/80 mb-6 max-w-md">
