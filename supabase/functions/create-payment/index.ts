@@ -21,17 +21,20 @@ serve(async (req) => {
 
     // Get the private key from Supabase secrets
     const privateKey = Deno.env.get("CHECKOUT_PRIVATE_KEY");
-    const publicKey = "checkout_public_NmyzpM3D3g952jwP8k6K26cWm5qe7cKU";
-    const gatewayId = "949487";
 
     if (!privateKey) {
       throw new Error("Payment gateway private key not configured");
     }
 
-    // Create payment request payload
+    console.log("Creating payment session for amount:", amount, "currency:", currency, "recurring:", isRecurring);
+
+    // Checkout.com API endpoint for creating payment sessions
+    const apiUrl = "https://api.checkout.com/hosted-payments";
+    
+    // Create payment session payload for Checkout.com
     const paymentData = {
       amount: amount * 100, // Convert to cents
-      currency: currency.toLowerCase(),
+      currency: currency.toUpperCase(),
       reference: `donation-${Date.now()}`,
       description: `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`,
       customer: customerEmail ? { email: customerEmail } : undefined,
@@ -41,27 +44,20 @@ serve(async (req) => {
       metadata: {
         donation_type: isRecurring ? "monthly" : "one_time",
         organization: "Genius Recovery"
-      }
+      },
+      billing: isRecurring ? {
+        plan: {
+          type: "recurring",
+          interval: "month",
+          interval_count: 1
+        }
+      } : undefined
     };
 
-    // If recurring, set up subscription
-    if (isRecurring) {
-      paymentData.payment_type = "Recurring";
-      paymentData.billing = {
-        plan: {
-          name: `Monthly Donation - $${amount}`,
-          plan_track_id: `monthly-${amount}`,
-          auto_cap_time: "0",
-          interval: "1",
-          interval_type: "month"
-        }
-      };
-    }
+    console.log("Sending request to Checkout.com with data:", JSON.stringify(paymentData, null, 2));
 
-    console.log("Creating payment with data:", paymentData);
-
-    // Make payment request to checkout gateway
-    const response = await fetch("https://api.checkout.com/payments", {
+    // Make payment request to Checkout.com
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${privateKey}`,
@@ -70,17 +66,29 @@ serve(async (req) => {
       body: JSON.stringify(paymentData),
     });
 
-    const result = await response.json();
+    console.log("Checkout.com response status:", response.status);
+    console.log("Checkout.com response headers:", Object.fromEntries(response.headers.entries()));
+
+    const responseText = await response.text();
+    console.log("Checkout.com response body:", responseText);
 
     if (!response.ok) {
-      console.error("Payment creation failed:", result);
-      throw new Error(result.error_type || "Payment creation failed");
+      console.error("Payment creation failed with status:", response.status);
+      throw new Error(`Payment gateway error: ${response.status} - ${responseText}`);
     }
 
-    console.log("Payment created successfully:", result);
+    let result;
+    try {
+      result = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error("Failed to parse response as JSON:", parseError);
+      throw new Error("Invalid response from payment gateway");
+    }
+
+    console.log("Payment session created successfully:", result);
 
     return new Response(JSON.stringify({ 
-      payment_url: result._links?.redirect?.href || result.redirect_url,
+      payment_url: result._links?.redirect?.href || result.url || result.redirect_url,
       payment_id: result.id,
       status: result.status 
     }), {
