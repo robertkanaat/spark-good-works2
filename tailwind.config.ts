@@ -36,9 +36,10 @@ export default {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
 				},
-				success: {
-					DEFAULT: 'hsl(var(--success))',
-					foreground: 'hsl(var(--success-foreground))'
+				donate: {
+					DEFAULT: 'hsl(var(--donate))',
+					foreground: 'hsl(var(--donate-foreground))',
+					glow: 'hsl(var(--donate-glow))'
 				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',

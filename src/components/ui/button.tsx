@@ -12,8 +12,8 @@ const buttonVariants = cva(
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        success:
-          "bg-success text-success-foreground hover:bg-success/90 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-success/30",
+        donate:
+          "bg-gradient-to-r from-donate to-donate-glow text-donate-foreground font-bold shadow-lg hover:shadow-xl hover:shadow-donate/30 hover:scale-[1.02] transition-all duration-300 hover:from-donate-glow hover:to-donate",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { DollarSign } from "lucide-react";
+import { Heart } from "lucide-react";
 import heroImage from "@/assets/hero-recovery-person.jpg";
 
 const HeroSection = () => {
@@ -108,10 +108,11 @@ const HeroSection = () => {
                   
                   <Link to={`/donation?amount=${selectedAmount}`}>
                     <Button 
-                      variant="success" 
-                      className="w-full py-6 text-lg font-semibold mb-4 gap-3"
+                      variant="donate" 
+                      className="w-full py-6 text-xl font-bold mb-4 gap-3 relative overflow-hidden group"
                     >
-                      <DollarSign className="w-5 h-5" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                      <Heart className="w-6 h-6 animate-pulse" fill="currentColor" />
                       DONATE NOW
                     </Button>
                   </Link>
