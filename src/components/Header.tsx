@@ -17,9 +17,9 @@ const Header = () => {
           
           <nav className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <a href="#" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium">
+              <Link to="/emergency" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium">
                 GET HELP
-              </a>
+              </Link>
               <a href="#" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium">
                 RESOURCES
               </a>

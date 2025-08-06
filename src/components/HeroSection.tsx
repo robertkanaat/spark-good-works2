@@ -29,9 +29,9 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
-              Our mission is to change the{" "}
-              <span className="text-primary">global conversation around addiction</span>{" "}
-              from one of judgment to one of compassion
+              On A Mission To{" "}
+              <span className="text-primary">Obliterate Addiction Around The World</span>{" "}
+              One Lost Soul At A Time
             </h1>
             
             <div className="flex flex-col sm:flex-row gap-4 mt-12">
@@ -213,9 +213,11 @@ const HeroSection = () => {
         </div>
         
         <div className="flex justify-center gap-4 mt-6">
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            GET HELP NOW
-          </Button>
+          <Link to="/emergency">
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+              GET HELP NOW
+            </Button>
+          </Link>
           <Button variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
             LEARN MORE
           </Button>
