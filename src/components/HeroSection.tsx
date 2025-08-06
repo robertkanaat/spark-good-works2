@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-recovery-person.jpg";
 
 const HeroSection = () => {
@@ -104,9 +105,11 @@ const HeroSection = () => {
                     <span className="text-3xl font-bold text-foreground">${selectedAmount}.00 USD</span>
                   </div>
                   
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold mb-4">
-                    DONATE NOW
-                  </Button>
+                  <Link to="/donation">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold mb-4">
+                      DONATE NOW
+                    </Button>
+                  </Link>
                   
                   <p className="text-sm text-muted-foreground mb-4 text-center">
                     Your ${selectedAmount}.00 donation helps provide 24/7 recovery support and connects people to life-saving resources. Every dollar makes a difference.
