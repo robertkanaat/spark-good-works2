@@ -16,7 +16,7 @@ const StatsSection = () => {
       suffix: " million",
       label: "Americans struggle with addiction",
       description: "That's 1 in 12 people needing support",
-      color: "from-red-400 to-pink-400",
+      color: "from-red-500 to-pink-500",
       icon: "👥"
     },
     {
@@ -25,7 +25,7 @@ const StatsSection = () => {
       suffix: "/7",
       label: "AI Recovery Companion available",
       description: "Always there when you need support most",
-      color: "from-blue-400 to-cyan-400",
+      color: "from-blue-500 to-cyan-500",
       icon: "🤖"
     },
     {
@@ -34,7 +34,7 @@ const StatsSection = () => {
       suffix: "+",
       label: "people supported in recovery",
       description: "Building a community of hope and healing",
-      color: "from-green-400 to-emerald-400",
+      color: "from-green-500 to-emerald-500",
       icon: "❤️"
     },
     {
@@ -43,7 +43,7 @@ const StatsSection = () => {
       suffix: "%",
       label: "report feeling less alone",
       description: "Connection and community make all the difference",
-      color: "from-purple-400 to-violet-400",
+      color: "from-purple-500 to-violet-500",
       icon: "🌟"
     }
   ];
@@ -119,34 +119,30 @@ const StatsSection = () => {
               }`}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
-              <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 text-center border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 overflow-hidden group h-80 flex flex-col justify-between">
+              <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 text-center border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 overflow-hidden group">
                 {/* Gradient background on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-8 transition-opacity duration-500 rounded-3xl`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`}></div>
                 
-                <div className="relative z-10 flex flex-col h-full justify-between">
-                  {/* Animated icon */}
-                  <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-500">
-                    {stat.icon}
-                  </div>
-                  
-                  {/* Animated number */}
-                  <div className={`text-5xl md:text-6xl font-bold mb-3 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500`}>
-                    {index === 0 && `${animatedNumbers.addiction}${stat.suffix}`}
-                    {index === 1 && stat.number}
-                    {index === 2 && `${animatedNumbers.supported.toLocaleString()}${stat.suffix}`}
-                    {index === 3 && `${animatedNumbers.lessAlone}${stat.suffix}`}
-                  </div>
-                  
-                  <div className="flex-1 flex flex-col justify-center">
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                      {stat.label}
-                    </h3>
-                    
-                    <p className="text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
-                      {stat.description}
-                    </p>
-                  </div>
+                {/* Animated icon */}
+                <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-500">
+                  {stat.icon}
                 </div>
+                
+                {/* Animated number */}
+                <div className={`text-5xl md:text-6xl font-bold mb-3 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500`}>
+                  {index === 0 && `${animatedNumbers.addiction}${stat.suffix}`}
+                  {index === 1 && stat.number}
+                  {index === 2 && `${animatedNumbers.supported.toLocaleString()}${stat.suffix}`}
+                  {index === 3 && `${animatedNumbers.lessAlone}${stat.suffix}`}
+                </div>
+                
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
+                  {stat.label}
+                </h3>
+                
+                <p className="text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
+                  {stat.description}
+                </p>
 
                 {/* Decorative elements */}
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-primary/20 to-orange-500/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

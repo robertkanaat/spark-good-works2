@@ -1,14 +1,12 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-hope-healing.svg";
+import heroImage from "@/assets/hero-recovery-person.jpg";
 
 const HeroSection = () => {
   const [selectedAmount, setSelectedAmount] = useState(50);
   const [activeView, setActiveView] = useState<'donate' | 'help' | 'support'>('donate');
-  const [isHovering, setIsHovering] = useState(false);
   const presetAmounts = [25, 50, 100, 200];
 
   return (
@@ -17,7 +15,7 @@ const HeroSection = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 via-purple-800/30 to-blue-900/40"></div>
+        <div className="absolute inset-0 bg-hero-overlay/60"></div>
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -108,51 +106,12 @@ const HeroSection = () => {
                   </div>
                   
                   <Link to={`/donation?amount=${selectedAmount}`}>
-                    <div
-                      className="relative overflow-hidden rounded-lg"
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
-                    >
-                      <Button className={`w-full py-4 text-lg font-bold relative transition-all duration-500 transform ${
-                        isHovering ? 'scale-105 shadow-2xl' : 'shadow-lg'
-                      } bg-gradient-to-r from-primary via-blue-600 to-purple-600 hover:from-primary/90 hover:via-blue-600/90 hover:to-purple-600/90`}>
-                        {/* Animated background sparkles */}
-                        <div className="absolute inset-0 overflow-hidden">
-                          {[...Array(6)].map((_, i) => (
-                            <div
-                              key={i}
-                              className={`absolute w-2 h-2 bg-white rounded-full transition-all duration-1000 ${
-                                isHovering ? 'opacity-80 animate-ping' : 'opacity-0'
-                              }`}
-                              style={{
-                                left: `${15 + i * 15}%`,
-                                top: `${20 + (i % 2) * 60}%`,
-                                animationDelay: `${i * 0.2}s`,
-                              }}
-                            ></div>
-                          ))}
-                        </div>
-                        
-                        {/* Main button content */}
-                        <div className="relative z-10 flex items-center justify-center gap-3">
-                          <span className={`text-2xl transition-all duration-500 ${
-                            isHovering ? 'animate-bounce scale-125' : ''
-                          }`}>💝</span>
-                          <span>DONATE NOW</span>
-                          <span className={`text-2xl transition-all duration-500 ${
-                            isHovering ? 'animate-bounce scale-125' : ''
-                          }`}>✨</span>
-                        </div>
-                        
-                        {/* Gradient overlay on hover */}
-                        <div className={`absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-pink-400/20 to-purple-400/20 transition-opacity duration-500 ${
-                          isHovering ? 'opacity-100' : 'opacity-0'
-                        }`}></div>
-                      </Button>
-                    </div>
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 text-lg font-semibold mb-4">
+                      DONATE NOW
+                    </Button>
                   </Link>
                   
-                  <p className="text-sm text-muted-foreground mb-4 text-center mt-4">
+                  <p className="text-sm text-muted-foreground mb-4 text-center">
                     Your ${selectedAmount}.00 donation helps provide 24/7 recovery support and connects people to life-saving resources. Every dollar makes a difference.
                   </p>
                   
