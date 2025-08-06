@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import shopHeroBg from "@/assets/shop-hero-bg.jpg";
-import recoveryKitHero from "@/assets/recovery-kit-hero.jpg";
 import hoodieImg from "@/assets/hoodie.jpg";
 import backpackImg from "@/assets/backpack.jpg";
 import mugImg from "@/assets/mug.jpg";
@@ -26,7 +25,7 @@ const Shop = () => {
       price: 24.99,
       originalPrice: 34.99,
       category: "Recovery Kits",
-      image: recoveryKitHero,
+      image: "/lovable-uploads/3e7570fb-81cb-420b-9f97-79f46edfba7b.png",
       rating: 4.9,
       reviews: 127,
       badge: "Best Seller",
