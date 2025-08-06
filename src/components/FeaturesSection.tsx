@@ -30,49 +30,49 @@ const FeaturesSection = () => {
       icon: "🤖",
       title: "24/7 AI Recovery Support",
       description: "Advanced AI companion available whenever you need support, guidance, or someone to talk to",
-      color: "from-blue-500 to-cyan-500",
-      bgColor: "from-blue-50 to-cyan-50",
-      darkBgColor: "from-blue-950/30 to-cyan-950/30"
+      color: "from-slate-500 to-slate-600",
+      bgColor: "from-slate-50 to-slate-100",
+      darkBgColor: "from-slate-950/20 to-slate-900/20"
     },
     {
       icon: "🏥",
       title: "Treatment Center Network",
       description: "Comprehensive directory of vetted treatment centers and recovery programs nationwide",
-      color: "from-green-500 to-emerald-500",
-      bgColor: "from-green-50 to-emerald-50",
-      darkBgColor: "from-green-950/30 to-emerald-950/30"
+      color: "from-slate-600 to-slate-700",
+      bgColor: "from-slate-50 to-slate-100",
+      darkBgColor: "from-slate-950/20 to-slate-900/20"
     },
     {
       icon: "👥",
       title: "Peer Support Community",
       description: "Connect with others in recovery through our moderated support groups and forums",
-      color: "from-purple-500 to-violet-500",
-      bgColor: "from-purple-50 to-violet-50",
-      darkBgColor: "from-purple-950/30 to-violet-950/30"
+      color: "from-slate-700 to-slate-800",
+      bgColor: "from-slate-50 to-slate-100",
+      darkBgColor: "from-slate-950/20 to-slate-900/20"
     },
     {
       icon: "📱",
       title: "Mobile Recovery App",
       description: "Access tools, resources, and support directly from your smartphone or tablet",
-      color: "from-orange-500 to-red-500",
-      bgColor: "from-orange-50 to-red-50",
-      darkBgColor: "from-orange-950/30 to-red-950/30"
+      color: "from-primary to-primary",
+      bgColor: "from-primary/5 to-primary/10",
+      darkBgColor: "from-primary/10 to-primary/20"
     },
     {
       icon: "🎯",
       title: "Personalized Recovery Plans",
       description: "Customized recovery paths based on your specific needs and circumstances",
-      color: "from-pink-500 to-rose-500",
-      bgColor: "from-pink-50 to-rose-50",
-      darkBgColor: "from-pink-950/30 to-rose-950/30"
+      color: "from-slate-400 to-slate-500",
+      bgColor: "from-slate-50 to-slate-100",
+      darkBgColor: "from-slate-950/20 to-slate-900/20"
     },
     {
       icon: "📊",
       title: "Progress Tracking",
       description: "Monitor your recovery journey with comprehensive tracking and milestone recognition",
-      color: "from-indigo-500 to-blue-500",
-      bgColor: "from-indigo-50 to-blue-50",
-      darkBgColor: "from-indigo-950/30 to-blue-950/30"
+      color: "from-slate-600 to-slate-700",
+      bgColor: "from-slate-50 to-slate-100",
+      darkBgColor: "from-slate-950/20 to-slate-900/20"
     }
   ];
 
