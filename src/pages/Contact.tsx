@@ -57,6 +57,7 @@ const Contact = () => {
         toast({
           title: "Message sent successfully!",
           description: "We'll get back to you as soon as possible.",
+          className: "bg-green-50 border-green-200 text-green-800",
         });
         
         // Reset form
@@ -86,36 +87,65 @@ const Contact = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-32 overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-secondary/15" />
-        <div className="absolute inset-0 bg-gradient-to-tl from-accent/10 via-transparent to-primary/10" />
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: `url('/src/assets/hero-recovery-person.jpg')`,
+            backgroundPosition: 'center 30%'
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90"></div>
+        </div>
         
         {/* Floating Elements */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl animate-pulse" />
-        <div className="absolute top-20 right-20 w-24 h-24 bg-secondary/25 rounded-full blur-xl animate-pulse delay-1000" />
-        <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-accent/15 rounded-full blur-3xl animate-pulse delay-500" />
-        <div className="absolute bottom-10 right-1/3 w-28 h-28 bg-primary/15 rounded-full blur-2xl animate-pulse delay-1500" />
+        <div className="absolute top-20 left-20 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-40 right-32 w-24 h-24 bg-secondary/15 rounded-full blur-2xl animate-pulse delay-1000" />
+        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-accent/10 rounded-full blur-3xl animate-pulse delay-500" />
+        <div className="absolute bottom-20 right-1/4 w-28 h-28 bg-primary/15 rounded-full blur-2xl animate-pulse delay-1500" />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 mb-6">
-              <MessageCircle className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Get in Touch</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left side - Content */}
+            <div className="text-left">
+              <div className="mb-8">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 mb-6">
+                  <MessageCircle className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-medium text-primary tracking-wider uppercase">Get in Touch</span>
+                </div>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-8 leading-tight">
+                We're Here to{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">
+                  Help You
+                </span>{" "}
+                <br />
+                <span className="text-primary">Connect & Heal</span>
+              </h1>
+              
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
+                Whether you need support, have questions, or want to join our mission, 
+                we're here to listen and help you every step of the way.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex items-center gap-3 text-foreground">
+                  <CheckCircle className="w-5 h-5 text-primary" />
+                  <span>24/7 Crisis Support Available</span>
+                </div>
+                <div className="flex items-center gap-3 text-foreground">
+                  <CheckCircle className="w-5 h-5 text-primary" />
+                  <span>Confidential & Compassionate</span>
+                </div>
+              </div>
             </div>
+            
+            {/* Right side - Spacer for image background */}
+            <div className="hidden lg:block"></div>
           </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-8 animate-fade-in">
-            We're Here to{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-              Help
-            </span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto animate-fade-in leading-relaxed">
-            Whether you need support, have questions, or want to join our mission, 
-            we're here to listen and help you every step of the way.
-          </p>
         </div>
       </section>
 
