@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle, Heart, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import heroImage from "@/assets/hero-recovery-person.jpg";
+import resourcesHeroImage from "@/assets/resources-hero-bg.jpg";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -93,8 +93,8 @@ const Contact = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
           style={{ 
-            backgroundImage: `url(${heroImage})`,
-            backgroundPosition: 'center 40%'
+            backgroundImage: `url(${resourcesHeroImage})`,
+            backgroundPosition: 'center 50%'
           }}
         >
           {/* Dark overlay for better text contrast */}
