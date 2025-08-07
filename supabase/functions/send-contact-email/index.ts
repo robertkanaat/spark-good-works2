@@ -115,10 +115,18 @@ const handler = async (req: Request): Promise<Response> => {
     );
   } catch (error: any) {
     console.error("Error in send-contact-email function:", error);
+    console.error("Error details:", JSON.stringify(error, null, 2));
+    
+    // Log more specific error information
+    if (error.name) console.error("Error name:", error.name);
+    if (error.message) console.error("Error message:", error.message);
+    if (error.response) console.error("Error response:", error.response);
+    
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error.message 
+        error: error.message,
+        details: error.name || 'Unknown error'
       }),
       {
         status: 500,
