@@ -185,8 +185,8 @@ const Contact = () => {
                       <h3 className="font-bold text-xl text-foreground mb-3">Headquarters</h3>
                       <p className="text-muted-foreground leading-relaxed">
                         Genius Recovery<br />
-                        123 Recovery Way<br />
-                        Hope City, HC 12345<br />
+                        4440 S Rural Rd BLDG F<br />
+                        Tempe, AZ 85282<br />
                         United States
                       </p>
                     </div>
