@@ -61,7 +61,7 @@ const Press = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
           style={{ 
             backgroundImage: `url('/lovable-uploads/411b8a25-5350-48b3-a3b5-b01e67d05ea2.png')`,
-            backgroundPosition: 'center 30%'
+            backgroundPosition: 'center 60%'
           }}
         >
           {/* Dark overlay for better text contrast */}
@@ -152,7 +152,7 @@ const Press = () => {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 group"
+                  className="border-white/30 text-white hover:bg-white/10 hover:text-white px-8 py-6 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 group bg-black/20"
                   onClick={() => {
                     document.getElementById('media-contacts')?.scrollIntoView({ 
                       behavior: 'smooth',
