@@ -44,12 +44,12 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Get Help</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Crisis Support</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Treatment Centers</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Recovery Resources</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Support Groups</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Family Support</a></li>
+              <li><Link to="/emergency" className="text-white/70 hover:text-primary transition-colors">Get Help</Link></li>
+              <li><Link to="/emergency" className="text-white/70 hover:text-primary transition-colors">Crisis Support</Link></li>
+              <li><Link to="/resources" className="text-white/70 hover:text-primary transition-colors">Treatment Centers</Link></li>
+              <li><Link to="/resources" className="text-white/70 hover:text-primary transition-colors">Recovery Resources</Link></li>
+              <li><Link to="/resources" className="text-white/70 hover:text-primary transition-colors">Support Groups</Link></li>
+              <li><Link to="/resources" className="text-white/70 hover:text-primary transition-colors">Family Support</Link></li>
             </ul>
           </div>
 
@@ -57,12 +57,12 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">About</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Our Mission</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Our Story</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">AI Technology</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Research</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Impact Reports</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary transition-colors">Careers</a></li>
+              <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Our Mission</Link></li>
+              <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Our Story</Link></li>
+              <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">AI Technology</Link></li>
+              <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Research</Link></li>
+              <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Impact Reports</Link></li>
+              <li><Link to="/contact" className="text-white/70 hover:text-primary transition-colors">Careers</Link></li>
             </ul>
           </div>
         </div>

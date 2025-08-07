@@ -33,7 +33,8 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
-              <span className="text-primary">On A Mission To Heal Addiction Around The World</span>{" "}
+              On A Mission To{" "}
+              <span className="text-primary">Heal Addiction Around The World</span>{" "}
               One Human At A Time
             </h1>
             
