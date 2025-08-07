@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, Download, Calendar, Mail, Phone } from "lucide-react";
+import { FileText, Download, Calendar, Mail, Phone, Newspaper, ArrowRight, Users, CheckCircle } from "lucide-react";
 
 const Press = () => {
   const pressReleases = [
@@ -55,40 +55,153 @@ const Press = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-24 overflow-hidden">
-        {/* Background Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-secondary/10" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary/5 to-accent/15" />
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
+          style={{ 
+            backgroundImage: `url('/lovable-uploads/411b8a25-5350-48b3-a3b5-b01e67d05ea2.png')`,
+            backgroundPosition: 'center 30%'
+          }}
+        >
+          {/* Dark overlay for better text contrast */}
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+        </div>
         
-        {/* Decorative Elements */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-secondary/15 rounded-full blur-2xl translate-x-1/2 translate-y-1/2" />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-accent/10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2" />
+        {/* Animated Glow Effects */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/15 rounded-full blur-3xl animate-pulse opacity-60" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000 opacity-40" />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
-            Press Center
-          </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in">
-            Stay informed about Genius Recovery's mission to transform addiction treatment and recovery support through innovation and compassion.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              variant="default" 
-              size="lg" 
-              className="gap-2 animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 bg-gradient-to-r from-primary to-primary/80"
-            >
-              <FileText className="w-5 h-5" />
-              Download Media Kit
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="gap-2 animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-lg backdrop-blur-sm bg-background/80 border-primary/20 hover:bg-primary/5"
-            >
-              <Mail className="w-5 h-5" />
-              Contact Press Team
-            </Button>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            {/* Left side - Powerful Content */}
+            <div className="lg:col-span-7 text-left">
+              {/* Badge */}
+              <div className="mb-8 animate-fade-in">
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                  <Newspaper className="w-5 h-5 text-primary animate-pulse" />
+                  <span className="text-white font-semibold tracking-wider uppercase text-sm">
+                    Media & Press Center
+                  </span>
+                </div>
+              </div>
+              
+              {/* Main Headline */}
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[0.9] animate-fade-in">
+                Sharing{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-secondary">
+                  Hope
+                </span>{" "}
+                <br />
+                <span className="text-primary">Worldwide</span>
+              </h1>
+              
+              {/* Subheadline */}
+              <p className="text-2xl md:text-3xl text-white/90 mb-8 leading-relaxed font-medium animate-fade-in">
+                Transforming the global conversation.<br />
+                <span className="text-white/70">From judgment to compassion.</span>
+              </p>
+              
+              {/* Trust Indicators */}
+              <div className="flex flex-col gap-4 mb-12 animate-fade-in">
+                <div className="flex items-center gap-4 text-white">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                    <span className="text-lg font-medium">Comprehensive Media Kit</span>
+                  </div>
+                  <div className="w-2 h-2 bg-white/40 rounded-full"></div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                    <span className="text-lg font-medium">Expert Interviews Available</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 text-white">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                    <span className="text-lg font-medium">24/7 Press Support</span>
+                  </div>
+                  <div className="w-2 h-2 bg-white/40 rounded-full"></div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                    <span className="text-lg font-medium">High-Res Assets</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in">
+                <Button 
+                  size="lg" 
+                  className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-2xl hover:shadow-primary/30 group"
+                  onClick={() => {
+                    document.getElementById('media-kit')?.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start' 
+                    });
+                  }}
+                >
+                  <span className="relative">
+                    Download Media Kit
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+                  </span>
+                  <Download className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-y-0.5" />
+                </Button>
+                
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 group"
+                  onClick={() => {
+                    document.getElementById('media-contacts')?.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start' 
+                    });
+                  }}
+                >
+                  Contact Press Team
+                  <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                </Button>
+              </div>
+            </div>
+            
+            {/* Right side - Stats Card */}
+            <div className="lg:col-span-5 animate-fade-in">
+              <Card className="bg-white/10 backdrop-blur-md border-white/20 p-8 shadow-2xl">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Users className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-white text-2xl font-bold mb-6">Our Impact</h3>
+                  <div className="grid grid-cols-2 gap-6 text-white">
+                    <div>
+                      <div className="text-3xl font-bold text-primary">2.5M</div>
+                      <div className="text-white/70 text-sm">Lives Touched</div>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-bold text-primary">89%</div>
+                      <div className="text-white/70 text-sm">Success Rate</div>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-bold text-primary">24/7</div>
+                      <div className="text-white/70 text-sm">Support Available</div>
+                    </div>
+                    <div>
+                      <div className="text-3xl font-bold text-primary">50+</div>
+                      <div className="text-white/70 text-sm">Media Partners</div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
@@ -135,7 +248,7 @@ const Press = () => {
       </section>
 
       {/* Media Kit Section */}
-      <section className="py-16 bg-muted/50">
+      <section className="py-16 bg-muted/50" id="media-kit">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -172,7 +285,7 @@ const Press = () => {
       </section>
 
       {/* Contact Information */}
-      <section className="py-16">
+      <section className="py-16" id="media-contacts">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
