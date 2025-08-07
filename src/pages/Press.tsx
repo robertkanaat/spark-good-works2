@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, Download, Calendar, Mail, Phone } from "lucide-react";
-import pressHeroBg from "@/assets/press-hero-bg.jpg";
 
 const Press = () => {
   const pressReleases = [
@@ -57,13 +56,14 @@ const Press = () => {
       
       {/* Hero Section */}
       <section className="relative py-24 overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${pressHeroBg})` }}
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/80 to-background/90" />
+        {/* Background Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-secondary/10" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary/5 to-accent/15" />
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-secondary/15 rounded-full blur-2xl translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-accent/10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2" />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
@@ -76,7 +76,7 @@ const Press = () => {
             <Button 
               variant="default" 
               size="lg" 
-              className="gap-2 animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-primary/25"
+              className="gap-2 animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 bg-gradient-to-r from-primary to-primary/80"
             >
               <FileText className="w-5 h-5" />
               Download Media Kit
@@ -84,7 +84,7 @@ const Press = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="gap-2 animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-lg backdrop-blur-sm bg-background/50 border-border/50"
+              className="gap-2 animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-lg backdrop-blur-sm bg-background/80 border-primary/20 hover:bg-primary/5"
             >
               <Mail className="w-5 h-5" />
               Contact Press Team
