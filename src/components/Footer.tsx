@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-slate-800 text-white">
@@ -94,8 +96,8 @@ const Footer = () => {
               © 2025 Genius Recovery. All rights reserved. 501(c)(3) nonprofit organization.
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-white/60 hover:text-primary transition-colors">Privacy Policy</a>
-              <a href="#" className="text-white/60 hover:text-primary transition-colors">Terms of Service</a>
+              <Link to="/privacy-policy" className="text-white/60 hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link to="/terms-conditions" className="text-white/60 hover:text-primary transition-colors">Terms & Conditions</Link>
               <a href="#" className="text-white/60 hover:text-primary transition-colors">Contact Us</a>
             </div>
           </div>
