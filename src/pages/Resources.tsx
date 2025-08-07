@@ -82,11 +82,12 @@ const Resources = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/10 to-primary/5 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-gradient-to-br from-hero-bg via-hero-overlay to-primary/20 py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 mb-8">
             <Link to="/">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="bg-card/80 backdrop-blur-sm border-primary/20 hover:bg-card/90">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back Home
               </Button>
@@ -94,23 +95,23 @@ const Resources = () => {
           </div>
           
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary/80 to-donate bg-clip-text text-transparent mb-6 animate-fade-in">
               Recovery Resources & Support
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
               Comprehensive resources to support your recovery journey. From crisis intervention to long-term support, 
               we're here to help you find the right path forward.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Badge variant="secondary" className="px-4 py-2 text-sm">
+              <Badge variant="secondary" className="px-6 py-3 text-sm bg-card/80 backdrop-blur-sm border-primary/20 hover:scale-105 transition-all duration-300">
                 <Shield className="w-4 h-4 mr-2" />
                 Safe & Confidential
               </Badge>
-              <Badge variant="secondary" className="px-4 py-2 text-sm">
+              <Badge variant="secondary" className="px-6 py-3 text-sm bg-card/80 backdrop-blur-sm border-primary/20 hover:scale-105 transition-all duration-300">
                 <Users className="w-4 h-4 mr-2" />
                 Community Support
               </Badge>
-              <Badge variant="secondary" className="px-4 py-2 text-sm">
+              <Badge variant="secondary" className="px-6 py-3 text-sm bg-card/80 backdrop-blur-sm border-primary/20 hover:scale-105 transition-all duration-300">
                 <Globe className="w-4 h-4 mr-2" />
                 Available Worldwide
               </Badge>
@@ -120,35 +121,36 @@ const Resources = () => {
       </section>
 
       {/* Emergency Resources */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+      <section className="py-20 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-destructive/5 to-transparent"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-destructive to-destructive/70 bg-clip-text text-transparent mb-6">
               Emergency & Crisis Support
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-xl text-muted-foreground">
               If you or someone you know is in crisis, immediate help is available
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {emergencyResources.map((resource, index) => (
-              <Card key={index} className="p-6 border-l-4 border-l-red-500 hover:shadow-lg transition-shadow">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                    <resource.icon className="w-6 h-6 text-red-600" />
+              <Card key={index} className="group p-8 border-l-4 border-l-destructive bg-gradient-to-br from-card to-card/50 hover:shadow-2xl hover:scale-105 transition-all duration-500 hover:border-l-destructive/80">
+                <div className="flex items-start gap-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-destructive/20 to-destructive/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <resource.icon className="w-8 h-8 text-destructive" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-2">{resource.title}</h3>
-                    <p className="text-muted-foreground mb-3">{resource.description}</p>
-                    <div className="space-y-2">
+                    <h3 className="font-bold text-xl mb-3 text-foreground">{resource.title}</h3>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">{resource.description}</p>
+                    <div className="space-y-3">
                       <a 
                         href={`tel:${resource.phone.replace(/[^0-9]/g, '')}`}
-                        className="block text-xl font-bold text-primary hover:underline"
+                        className="block text-2xl font-bold text-destructive hover:text-destructive/80 transition-colors duration-200"
                       >
                         {resource.phone}
                       </a>
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="outline" className="border-destructive/20 text-destructive bg-destructive/5">
                         {resource.available}
                       </Badge>
                     </div>
@@ -160,7 +162,7 @@ const Resources = () => {
 
           <div className="text-center">
             <Link to="/emergency">
-              <Button className="bg-red-600 hover:bg-red-700 text-white">
+              <Button className="bg-gradient-to-r from-destructive to-destructive/80 hover:from-destructive/90 hover:to-destructive/70 text-white px-8 py-3 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                 View All Emergency Resources
               </Button>
             </Link>
@@ -169,32 +171,36 @@ const Resources = () => {
       </section>
 
       {/* Recovery Resources */}
-      <section className="py-16 bg-muted/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+      <section className="py-20 relative bg-gradient-to-br from-muted/30 via-muted/10 to-primary/5">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.05),transparent_70%)]"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-primary via-primary/80 to-donate bg-clip-text text-transparent mb-6">
               Recovery Support Resources
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-xl text-muted-foreground">
               Find the support and tools you need for every stage of recovery
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {recoveryResources.map((resource, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <div className="mb-4">
-                  <h3 className="font-semibold text-lg mb-2">{resource.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">{resource.description}</p>
+              <Card key={index} className="group p-8 bg-gradient-to-br from-card via-card/95 to-card/80 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:rotate-1 border-primary/10">
+                <div className="mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Heart className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-bold text-xl mb-3 text-foreground">{resource.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-6">{resource.description}</p>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3 mb-6">
                   {resource.topics.map((topic, topicIndex) => (
-                    <Badge key={topicIndex} variant="outline" className="text-xs mr-2 mb-2">
+                    <Badge key={topicIndex} variant="outline" className="text-xs mr-2 mb-2 border-primary/20 bg-primary/5 hover:bg-primary/10 transition-colors duration-200">
                       {topic}
                     </Badge>
                   ))}
                 </div>
-                <Button variant="outline" className="w-full mt-4" size="sm">
+                <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
                   Explore Resources
                 </Button>
               </Card>
@@ -204,30 +210,31 @@ const Resources = () => {
       </section>
 
       {/* Educational Resources */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+      <section className="py-20 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent mb-6">
               Educational Resources
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-xl text-muted-foreground">
               Knowledge is power. Learn about addiction, recovery, and wellness
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {educationalResources.map((resource, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <BookOpen className="w-6 h-6 text-primary" />
+              <Card key={index} className="group p-8 bg-gradient-to-br from-card to-card/80 hover:shadow-2xl hover:scale-105 transition-all duration-500 border-accent/20">
+                <div className="flex items-start gap-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <BookOpen className="w-8 h-8 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-2">{resource.title}</h3>
-                    <p className="text-muted-foreground mb-4">{resource.description}</p>
-                    <Button variant="ghost" size="sm" className="p-0 h-auto">
+                    <h3 className="font-bold text-xl mb-3 text-foreground">{resource.title}</h3>
+                    <p className="text-muted-foreground mb-6 leading-relaxed">{resource.description}</p>
+                    <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:translate-x-2 transition-transform duration-300">
                       Learn More
-                      <ExternalLink className="w-4 h-4 ml-2" />
+                      <ExternalLink className="w-5 h-5 ml-2" />
                     </Button>
                   </div>
                 </div>
@@ -237,7 +244,7 @@ const Resources = () => {
 
           <div className="text-center">
             <Link to="/blog">
-              <Button variant="outline">
+              <Button variant="outline" className="px-8 py-3 text-lg font-semibold border-primary/20 hover:bg-primary hover:text-primary-foreground transition-all duration-300">
                 Visit Our Blog for More Resources
               </Button>
             </Link>
@@ -246,58 +253,63 @@ const Resources = () => {
       </section>
 
       {/* Our Mission Section */}
-      <section className="py-16 bg-gradient-to-br from-primary/5 to-primary/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-8">
-            <Heart className="w-16 h-16 text-primary mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-foreground mb-6">
+      <section className="py-24 relative bg-gradient-to-br from-hero-bg via-primary/10 to-donate/5 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,hsl(var(--primary)/0.1),transparent_50%)] opacity-50"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--donate)/0.1),transparent_50%)] opacity-50"></div>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="mb-16">
+            <div className="relative inline-block mb-8">
+              <Heart className="w-20 h-20 text-primary mx-auto animate-pulse" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-donate/20 rounded-full blur-2xl opacity-50"></div>
+            </div>
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-primary via-donate to-primary/80 bg-clip-text text-transparent mb-8">
               Changing the Global Conversation
             </h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-4xl mx-auto">
               Genius Recovery was born out of a mission to change the way the world understands and supports 
               addiction recovery. We believe in transforming the conversation from one of judgment to one of 
               compassion, providing hope and healing to those who need it most.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 text-primary" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            <div className="group text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-primary/30 to-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Heart className="w-10 h-10 text-primary" />
               </div>
-              <h3 className="font-semibold mb-2">Compassionate Care</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-bold text-xl mb-4 text-foreground">Compassionate Care</h3>
+              <p className="text-muted-foreground leading-relaxed">
                 Moving beyond judgment to offer understanding and support
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-primary" />
+            <div className="group text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-donate/30 to-donate/10 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Users className="w-10 h-10 text-donate" />
               </div>
-              <h3 className="font-semibold mb-2">Community Connection</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-bold text-xl mb-4 text-foreground">Community Connection</h3>
+              <p className="text-muted-foreground leading-relaxed">
                 Building networks of support and shared experiences
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8 text-primary" />
+            <div className="group text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-primary/30 to-donate/20 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Shield className="w-10 h-10 text-primary" />
               </div>
-              <h3 className="font-semibold mb-2">Safe Spaces</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-bold text-xl mb-4 text-foreground">Safe Spaces</h3>
+              <p className="text-muted-foreground leading-relaxed">
                 Creating environments where healing can truly begin
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link to="/donation">
-              <Button className="bg-primary hover:bg-primary/90">
+              <Button className="bg-gradient-to-r from-primary to-donate hover:from-primary/90 hover:to-donate/90 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                 Support Our Mission
               </Button>
             </Link>
             <Link to="/emergency">
-              <Button variant="outline">
+              <Button variant="outline" className="px-8 py-4 text-lg font-semibold border-primary/30 hover:bg-primary hover:text-primary-foreground rounded-xl transition-all duration-300">
                 Get Help Now
               </Button>
             </Link>
