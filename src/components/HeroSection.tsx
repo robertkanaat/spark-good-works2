@@ -33,9 +33,8 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
-              On A Mission To{" "}
-              <span className="text-primary">Obliterate Addiction Around The World</span>{" "}
-              One Lost Soul At A Time
+              <span className="text-primary">On A Mission To Heal Addiction Around The World</span>{" "}
+              One Human At A Time
             </h1>
             
             <div className="flex flex-col gap-6 mt-12">
