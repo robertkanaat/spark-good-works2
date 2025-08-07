@@ -74,16 +74,24 @@ const Footer = () => {
         </div>
 
         {/* Emergency Support */}
-        <div className="mt-12 p-6 bg-primary/20 rounded-lg border border-primary/30">
+        <div className="mt-12 p-6 bg-slate-700/50 rounded-lg border border-slate-600/30 backdrop-blur-sm">
           <div className="text-center">
-            <h3 className="text-xl font-bold mb-2">24/7 Crisis Support Available</h3>
+            <h3 className="text-xl font-bold mb-2 text-white">24/7 Crisis Support Available</h3>
             <p className="text-white/80 mb-4">If you or someone you know is in crisis, help is available right now.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="tel:988" className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-md font-semibold inline-block transition-colors">
-                Call 988 - Suicide & Crisis Lifeline
+              <a 
+                href="tel:988" 
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-3 rounded-md font-semibold inline-block transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-red-500/25 hover:scale-[1.02] relative overflow-hidden group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <span className="relative">Call 988 - Suicide & Crisis Lifeline</span>
               </a>
-              <a href="tel:1-800-662-4357" className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-md font-semibold inline-block transition-colors border border-white/30">
-                Call SAMHSA: 1-800-662-4357
+              <a 
+                href="tel:1-800-662-4357" 
+                className="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-500 hover:to-slate-600 text-white px-6 py-3 rounded-md font-semibold inline-block transition-all duration-300 border border-slate-500/50 shadow-lg hover:shadow-xl hover:shadow-slate-500/25 hover:scale-[1.02] relative overflow-hidden group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <span className="relative">Call SAMHSA: 1-800-662-4357</span>
               </a>
             </div>
           </div>
