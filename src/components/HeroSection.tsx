@@ -13,8 +13,11 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center">
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        className="absolute inset-0 bg-cover bg-no-repeat bg-center md:bg-center lg:bg-right-top"
+        style={{ 
+          backgroundImage: `url(${heroImage})`,
+          backgroundPosition: 'center 20%'
+        }}
       >
         <div className="absolute inset-0 bg-hero-overlay/60"></div>
       </div>
@@ -35,49 +38,99 @@ const HeroSection = () => {
               One Lost Soul At A Time
             </h1>
             
-            <div className="flex flex-col sm:flex-row gap-4 mt-12">
-              <div className="text-center">
-                <div className="text-white/70 text-sm mb-2">I NEED...</div>
-                <Button 
-                  variant="outline" 
-                  className={`px-8 py-6 text-lg font-semibold ${
-                    activeView === 'help' 
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                      : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
-                  }`}
-                  onClick={() => setActiveView('help')}
-                >
-                  HELP
-                </Button>
+            <div className="flex flex-col gap-6 mt-12">
+              {/* Mobile: Stack buttons vertically but make them more compact */}
+              <div className="flex flex-col sm:hidden gap-3">
+                <div className="text-center">
+                  <div className="text-white/70 text-xs mb-1">I NEED...</div>
+                  <Button 
+                    variant="outline" 
+                    className={`w-full py-4 text-base font-semibold ${
+                      activeView === 'help' 
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                    }`}
+                    onClick={() => setActiveView('help')}
+                  >
+                    HELP
+                  </Button>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-white/70 text-xs mb-1">I WANT TO...</div>
+                  <Button 
+                    className={`w-full py-4 text-base font-semibold ${
+                      activeView === 'donate'
+                        ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                    }`}
+                    onClick={() => setActiveView('donate')}
+                  >
+                    DONATE
+                  </Button>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-white/70 text-xs mb-1">I WANT TO...</div>
+                  <Button 
+                    variant="outline" 
+                    className={`w-full py-4 text-base font-semibold ${
+                      activeView === 'support' 
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                    }`}
+                    onClick={() => setActiveView('support')}
+                  >
+                    SUPPORT
+                  </Button>
+                </div>
               </div>
-              
-              <div className="text-center">
-                <div className="text-white/70 text-sm mb-2">I WANT TO...</div>
-                <Button 
-                  className={`px-8 py-6 text-lg font-semibold ${
-                    activeView === 'donate'
-                      ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
-                      : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
-                  }`}
-                  onClick={() => setActiveView('donate')}
-                >
-                  DONATE
-                </Button>
-              </div>
-              
-              <div className="text-center">
-                <div className="text-white/70 text-sm mb-2">I WANT TO...</div>
-                <Button 
-                  variant="outline" 
-                  className={`px-8 py-6 text-lg font-semibold ${
-                    activeView === 'support' 
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                      : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
-                  }`}
-                  onClick={() => setActiveView('support')}
-                >
-                  SUPPORT
-                </Button>
+
+              {/* Desktop: Horizontal layout */}
+              <div className="hidden sm:flex gap-4">
+                <div className="text-center">
+                  <div className="text-white/70 text-sm mb-2">I NEED...</div>
+                  <Button 
+                    variant="outline" 
+                    className={`px-8 py-6 text-lg font-semibold ${
+                      activeView === 'help' 
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                    }`}
+                    onClick={() => setActiveView('help')}
+                  >
+                    HELP
+                  </Button>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-white/70 text-sm mb-2">I WANT TO...</div>
+                  <Button 
+                    className={`px-8 py-6 text-lg font-semibold ${
+                      activeView === 'donate'
+                        ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                    }`}
+                    onClick={() => setActiveView('donate')}
+                  >
+                    DONATE
+                  </Button>
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-white/70 text-sm mb-2">I WANT TO...</div>
+                  <Button 
+                    variant="outline" 
+                    className={`px-8 py-6 text-lg font-semibold ${
+                      activeView === 'support' 
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                    }`}
+                    onClick={() => setActiveView('support')}
+                  >
+                    SUPPORT
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
