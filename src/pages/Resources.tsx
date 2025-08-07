@@ -106,7 +106,7 @@ const Resources = () => {
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary/80 to-donate bg-clip-text text-transparent mb-6 animate-fade-in">
               Recovery Resources & Support
             </h1>
-            <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
+            <p className="text-xl text-white/90 mb-10 leading-relaxed">
               Comprehensive resources to support your recovery journey. From crisis intervention to long-term support, 
               we're here to help you find the right path forward.
             </p>
