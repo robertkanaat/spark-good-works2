@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle, Heart, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import heroImage from "@/assets/hero-recovery-person.jpg";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -88,63 +89,118 @@ const Contact = () => {
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image with Better Contrast */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
           style={{ 
-            backgroundImage: `url('/src/assets/hero-recovery-person.jpg')`,
-            backgroundPosition: 'center 30%'
+            backgroundImage: `url(${heroImage})`,
+            backgroundPosition: 'center 40%'
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/70"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90"></div>
+          {/* Dark overlay for better text contrast */}
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"></div>
         </div>
         
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-20 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-40 right-32 w-24 h-24 bg-secondary/15 rounded-full blur-2xl animate-pulse delay-1000" />
-        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-accent/10 rounded-full blur-3xl animate-pulse delay-500" />
-        <div className="absolute bottom-20 right-1/4 w-28 h-28 bg-primary/15 rounded-full blur-2xl animate-pulse delay-1500" />
+        {/* Animated Glow Effects */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse opacity-60" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/15 rounded-full blur-3xl animate-pulse delay-1000 opacity-40" />
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left side - Content */}
-            <div className="text-left">
-              <div className="mb-8">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 mb-6">
-                  <MessageCircle className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium text-primary tracking-wider uppercase">Get in Touch</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            {/* Left side - Powerful Content */}
+            <div className="lg:col-span-7 text-left">
+              {/* Badge */}
+              <div className="mb-8 animate-fade-in">
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                  <Heart className="w-5 h-5 text-primary animate-pulse" />
+                  <span className="text-white font-semibold tracking-wider uppercase text-sm">
+                    Compassionate Support
+                  </span>
                 </div>
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-8 leading-tight">
-                We're Here to{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">
-                  Help You
+              {/* Main Headline - More Impactful */}
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[0.9] animate-fade-in">
+                Your{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-secondary">
+                  Voice
                 </span>{" "}
                 <br />
-                <span className="text-primary">Connect & Heal</span>
+                <span className="text-primary">Matters</span>
               </h1>
               
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl">
-                Whether you need support, have questions, or want to join our mission, 
-                we're here to listen and help you every step of the way.
+              {/* Subheadline */}
+              <p className="text-2xl md:text-3xl text-white/90 mb-8 leading-relaxed font-medium animate-fade-in">
+                Every story deserves to be heard.<br />
+                <span className="text-white/70">Every journey deserves support.</span>
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex items-center gap-3 text-foreground">
-                  <CheckCircle className="w-5 h-5 text-primary" />
-                  <span>24/7 Crisis Support Available</span>
+              {/* Trust Indicators */}
+              <div className="flex flex-col gap-4 mb-12 animate-fade-in">
+                <div className="flex items-center gap-4 text-white">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                    <span className="text-lg font-medium">24/7 Crisis Support</span>
+                  </div>
+                  <div className="w-2 h-2 bg-white/40 rounded-full"></div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                    <span className="text-lg font-medium">100% Confidential</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 text-foreground">
-                  <CheckCircle className="w-5 h-5 text-primary" />
-                  <span>Confidential & Compassionate</span>
+                <div className="flex items-center gap-4 text-white">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                    <span className="text-lg font-medium">Professional Support Team</span>
+                  </div>
+                  <div className="w-2 h-2 bg-white/40 rounded-full"></div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                    <span className="text-lg font-medium">Free Resources</span>
+                  </div>
                 </div>
+              </div>
+              
+              {/* CTA Button */}
+              <div className="animate-fade-in">
+                <Button 
+                  size="lg" 
+                  className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
+                  onClick={() => {
+                    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Start the Conversation
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
               </div>
             </div>
             
-            {/* Right side - Spacer for image background */}
-            <div className="hidden lg:block"></div>
+            {/* Right side - Quote/Testimonial Card */}
+            <div className="lg:col-span-5 animate-fade-in">
+              <Card className="bg-white/10 backdrop-blur-md border-white/20 p-8 shadow-2xl">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <MessageCircle className="w-8 h-8 text-primary" />
+                  </div>
+                  <blockquote className="text-white text-xl font-medium mb-6 leading-relaxed">
+                    "Recovery is not a destination, it's a journey. And no one should walk that path alone."
+                  </blockquote>
+                  <div className="text-white/70 font-medium">
+                    - Genius Recovery Team
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
