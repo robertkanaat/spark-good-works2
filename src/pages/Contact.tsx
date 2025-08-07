@@ -167,13 +167,19 @@ const Contact = () => {
               <div className="animate-fade-in">
                 <Button 
                   size="lg" 
-                  className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
+                  className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-2xl hover:shadow-primary/30 group"
                   onClick={() => {
-                    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('contact-form')?.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start' 
+                    });
                   }}
                 >
-                  Start the Conversation
-                  <ArrowRight className="w-5 h-5 ml-2" />
+                  <span className="relative">
+                    Start the Conversation
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+                  </span>
+                  <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               </div>
             </div>
