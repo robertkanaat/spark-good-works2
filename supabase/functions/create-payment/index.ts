@@ -22,125 +22,144 @@ serve(async (req) => {
     const securityKey = Deno.env.get("INCHEK_SECURITY_KEY");
     
     if (!securityKey) {
-      // For testing purposes, use demo credentials
-      console.log("Using demo credentials for testing");
+      throw new Error("INCHEK security key not configured");
     }
 
-    console.log("=== INCHEK PAYMENT PROCESSING START ===");
-    console.log("Amount:", amount);
-    console.log("Currency:", currency);
-    console.log("Recurring:", isRecurring);
-    console.log("Customer Email:", customerEmail);
-
-    // INCHEK Payment API endpoint
-    const apiUrl = "https://secure.inchekgateway.com/api/transact.php";
+    // For INCHEK, we need to create a hosted payment page
+    // This is the most reliable way to handle payments with their system
     
-    // For demo/testing, we'll create a hosted payment page
-    // In production, you would use the actual security key
-    const useDemoCredentials = !securityKey;
-    
-    if (useDemoCredentials) {
-      // For demo purposes, we'll simulate creating a payment session
-      // In production, you would integrate with INCHEK's hosted payment pages or use their API
-      
-      const baseUrl = req.headers.get("origin") || "https://geniusrecovery.org";
-      const successUrl = `${baseUrl}/payment-success?amount=${amount}&type=${isRecurring ? 'monthly' : 'one-time'}`;
-      const failureUrl = `${baseUrl}/payment-failed`;
-      
-      // Create a mock hosted payment URL (in production, this would be INCHEK's actual hosted page)
-      const mockPaymentUrl = `https://secure.inchekgateway.com/demo-payment?amount=${amount}&recurring=${isRecurring}&success_url=${encodeURIComponent(successUrl)}&failure_url=${encodeURIComponent(failureUrl)}&email=${encodeURIComponent(customerEmail || '')}`;
-      
-      console.log("Demo mode - Generated mock payment URL:", mockPaymentUrl);
-      
-      return new Response(JSON.stringify({ 
-        payment_url: mockPaymentUrl,
-        payment_id: `demo-${Date.now()}`,
-        status: "pending",
-        message: "Demo payment URL generated (no actual charges)"
-      }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 200,
-      });
-    }
-
-    // Production INCHEK API integration
-    const paymentData = new URLSearchParams();
-    paymentData.append('type', 'sale');
-    paymentData.append('security_key', securityKey);
-    paymentData.append('amount', amount.toString());
-    paymentData.append('currency', currency.toUpperCase());
-    paymentData.append('order_description', `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`);
-    paymentData.append('orderid', `donation-${Date.now()}`);
-    
-    // Add customer information if provided
-    if (customerEmail) {
-      paymentData.append('email', customerEmail);
-    }
-    
-    // Add recurring billing if needed
-    if (isRecurring) {
-      paymentData.append('billing_method', 'recurring');
-      paymentData.append('recurring', 'add_subscription');
-      paymentData.append('plan_amount', amount.toString());
-      paymentData.append('month_frequency', '1');
-      paymentData.append('day_of_month', '1');
-      paymentData.append('plan_payments', '0'); // Until canceled
-    }
-    
-    // Set success/failure URLs
     const baseUrl = req.headers.get("origin") || "https://geniusrecovery.org";
-    paymentData.append('redirect_url', `${baseUrl}/payment-success`);
-    paymentData.append('decline_url', `${baseUrl}/payment-failed`);
+    const successUrl = `${baseUrl}/payment-success`;
+    const failureUrl = `${baseUrl}/payment-failed`;
+    
+    // Create a simple HTML payment form that will be hosted
+    const orderid = `donation-${Date.now()}`;
+    const description = `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`;
+    
+    // Generate payment form HTML with INCHEK's required fields
+    const paymentFormHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Genius Recovery Donation</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .form-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+        }
+        .button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+        }
+        .button:hover { background: #45a049; }
+        .amount-display {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Complete Your Donation</h2>
+        <div class="amount-display">$${amount} ${isRecurring ? 'Monthly' : 'One-time'} Donation</div>
+        <p>${description}</p>
+        
+        <form action="https://secure.inchekgateway.com/api/transact.php" method="POST">
+            <input type="hidden" name="type" value="sale">
+            <input type="hidden" name="security_key" value="${securityKey}">
+            <input type="hidden" name="amount" value="${amount}">
+            <input type="hidden" name="currency" value="${currency.toUpperCase()}">
+            <input type="hidden" name="order_description" value="${description}">
+            <input type="hidden" name="orderid" value="${orderid}">
+            <input type="hidden" name="redirect_url" value="${successUrl}">
+            <input type="hidden" name="decline_url" value="${failureUrl}">
+            ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
+            
+            ${isRecurring ? `
+            <input type="hidden" name="billing_method" value="recurring">
+            <input type="hidden" name="recurring" value="add_subscription">
+            <input type="hidden" name="plan_amount" value="${amount}">
+            <input type="hidden" name="month_frequency" value="1">
+            <input type="hidden" name="day_of_month" value="1">
+            <input type="hidden" name="plan_payments" value="0">
+            ` : ''}
+            
+            <h3>Payment Information</h3>
+            <label>Cardholder Name:</label>
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
+            
+            <label>Credit Card Number:</label>
+            <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required>
+            
+            <label>Expiration Date:</label>
+            <input type="text" name="ccexp" placeholder="MMYY" maxlength="4" required>
+            
+            <label>CVV:</label>
+            <input type="text" name="cvv" placeholder="123" maxlength="4" required>
+            
+            <h3>Billing Address</h3>
+            <input type="text" name="address1" placeholder="Street Address" required>
+            <input type="text" name="city" placeholder="City" required>
+            <input type="text" name="state" placeholder="State" maxlength="2" required>
+            <input type="text" name="zip" placeholder="ZIP Code" required>
+            <input type="text" name="phone" placeholder="Phone Number">
+            
+            <button type="submit" class="button">
+                Complete $${amount} ${isRecurring ? 'Monthly' : ''} Donation
+            </button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 20px; font-size: 12px; opacity: 0.8;">
+            Secure donation processing • ${isRecurring ? 'Cancel anytime • ' : ''}Tax deductible
+        </p>
+    </div>
+</body>
+</html>`;
 
-    console.log("Payment data:", Object.fromEntries(paymentData.entries()));
+    console.log("Generated payment form for order:", orderid);
 
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: paymentData.toString(),
+    // Return the payment form HTML as a data URL that can be opened in a new window
+    const dataUrl = `data:text/html;base64,${btoa(paymentFormHtml)}`;
+    
+    return new Response(JSON.stringify({ 
+      payment_url: dataUrl,
+      payment_id: orderid,
+      status: "form_generated",
+      message: "Payment form generated successfully"
+    }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 200,
     });
-
-    console.log("Response status:", response.status);
-    console.log("Response headers:", Object.fromEntries(response.headers.entries()));
-
-    const responseText = await response.text();
-    console.log("Response body:", responseText);
-
-    if (response.ok) {
-      // Parse the response (INCHEK returns key=value&key=value format)
-      const responseParams = new URLSearchParams(responseText);
-      const responseData = Object.fromEntries(responseParams.entries());
-      
-      console.log("Parsed response:", responseData);
-
-      if (responseData.response === '1') {
-        // Success - transaction approved
-        return new Response(JSON.stringify({ 
-          payment_url: responseData.redirect_url || `${baseUrl}/payment-success`,
-          payment_id: responseData.transactionid,
-          status: "approved",
-          response_code: responseData.response_code,
-          auth_code: responseData.authcode,
-          raw_response: responseData
-        }), {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 200,
-        });
-      } else if (responseData.response === '2') {
-        // Declined
-        throw new Error(`Transaction declined: ${responseData.responsetext}`);
-      } else if (responseData.response === '3') {
-        // Error
-        throw new Error(`Transaction error: ${responseData.responsetext}`);
-      } else {
-        // Unknown response
-        throw new Error(`Unknown response: ${responseText}`);
-      }
-    } else {
-      throw new Error(`HTTP ${response.status}: ${responseText}`);
-    }
 
   } catch (error) {
     console.error("=== PAYMENT PROCESSING ERROR ===");
