@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, Download, Calendar, Mail, Phone } from "lucide-react";
+import pressHeroBg from "@/assets/press-hero-bg.jpg";
 
 const Press = () => {
   const pressReleases = [
@@ -55,20 +56,36 @@ const Press = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-primary/10 via-primary/5 to-background py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+      <section className="relative py-24 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${pressHeroBg})` }}
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/80 to-background/90" />
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
             Press Center
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in">
             Stay informed about Genius Recovery's mission to transform addiction treatment and recovery support through innovation and compassion.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="default" size="lg" className="gap-2">
+            <Button 
+              variant="default" 
+              size="lg" 
+              className="gap-2 animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-primary/25"
+            >
               <FileText className="w-5 h-5" />
               Download Media Kit
             </Button>
-            <Button variant="outline" size="lg" className="gap-2">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="gap-2 animate-fade-in hover:scale-105 transition-all duration-300 hover:shadow-lg backdrop-blur-sm bg-background/50 border-border/50"
+            >
               <Mail className="w-5 h-5" />
               Contact Press Team
             </Button>
