@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,15 +35,11 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/send-contact-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData,
       });
 
-      if (response.ok) {
+      if (!error) {
         toast({
           title: "Message sent successfully!",
           description: "We'll get back to you as soon as possible.",
