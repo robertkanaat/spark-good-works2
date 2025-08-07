@@ -9,7 +9,7 @@ const Footer = () => {
               <img 
                 src="/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
                 alt="Genius Recovery" 
-                className="w-[240px] h-auto"
+                className="w-[240px] h-auto brightness-0 invert"
               />
             </div>
             <p className="text-white/80 mb-6 max-w-md">
@@ -91,7 +91,7 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-white/20">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-white/60 text-sm mb-4 md:mb-0">
-              © 2024 Genius Recovery. All rights reserved. 501(c)(3) nonprofit organization.
+              © 2025 Genius Recovery. All rights reserved. 501(c)(3) nonprofit organization.
             </div>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-white/60 hover:text-primary transition-colors">Privacy Policy</a>
