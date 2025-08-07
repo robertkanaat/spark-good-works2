@@ -11,27 +11,16 @@ const HeroSection = () => {
   const presetAmounts = [25, 50, 100, 200];
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Video Background */}
-      <video 
-        className="absolute inset-0 w-full h-full object-cover"
-        autoPlay 
-        loop 
-        muted 
-        playsInline
+    <section className="relative min-h-screen flex items-center">
+      <div 
+        className="absolute inset-0 bg-cover bg-no-repeat bg-center md:bg-center lg:bg-right-top"
+        style={{ 
+          backgroundImage: `url(${heroImage})`,
+          backgroundPosition: 'center 20%'
+        }}
       >
-        <source src="/hero-background.mp4" type="video/mp4" />
-        {/* Fallback to image if video fails to load */}
-        <div 
-          className="absolute inset-0 bg-cover bg-no-repeat bg-center md:bg-center lg:bg-right-top"
-          style={{ 
-            backgroundImage: `url(${heroImage})`,
-            backgroundPosition: 'center 20%'
-          }}
-        />
-      </video>
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-hero-overlay/70"></div>
+        <div className="absolute inset-0 bg-hero-overlay/60"></div>
+      </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
