@@ -44,6 +44,10 @@ const Header = () => {
                 <span className="relative z-10">PRESS</span>
                 <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
+              <Link to="/contact" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+                <span className="relative z-10">CONTACT</span>
+                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </Link>
             </div>
           </nav>
 
@@ -117,6 +121,13 @@ const Header = () => {
                       onClick={() => setIsOpen(false)}
                     >
                       PRESS
+                    </Link>
+                    <Link 
+                      to="/contact" 
+                      className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      CONTACT
                     </Link>
                     
                     {/* Mobile Donate Button */}
