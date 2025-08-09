@@ -46,7 +46,7 @@ serve(async (req) => {
             }
             body { 
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-                background: linear-gradient(135deg, hsl(25, 95%, 53%) 0%, hsl(20, 90%, 48%) 100%);
+                background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%) !important;
                 margin: 0; 
                 padding: 20px; 
                 min-height: 100vh; 
@@ -141,6 +141,59 @@ serve(async (req) => {
                 color: hsl(25, 95%, 53%);
             }
         </style>
+        <script>
+            function formatCardNumber(input) {
+                let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = '';
+                
+                // American Express: 4-6-5 format
+                if (value.match(/^3[47]/)) {
+                    for (let i = 0; i < value.length; i++) {
+                        if (i === 4 || i === 10) {
+                            formattedValue += ' ';
+                        }
+                        formattedValue += value[i];
+                    }
+                    input.maxLength = 17;
+                } else {
+                    // All other cards: 4-4-4-4 format
+                    for (let i = 0; i < value.length; i++) {
+                        if (i > 0 && i % 4 === 0) {
+                            formattedValue += ' ';
+                        }
+                        formattedValue += value[i];
+                    }
+                    input.maxLength = 19;
+                }
+                
+                input.value = formattedValue;
+            }
+            
+            function formatExpiryDate(input) {
+                let value = input.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0,2) + '/' + value.substring(2,4);
+                }
+                input.value = value;
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                const cardInput = document.getElementById('card-number');
+                const expiryInput = document.getElementById('expiry-date');
+                
+                if (cardInput) {
+                    cardInput.addEventListener('input', function() {
+                        formatCardNumber(this);
+                    });
+                }
+                
+                if (expiryInput) {
+                    expiryInput.addEventListener('input', function() {
+                        formatExpiryDate(this);
+                    });
+                }
+            });
+        </script>
 </head>
 <body>
     <div class="form-container">
@@ -176,10 +229,10 @@ serve(async (req) => {
             </div>
             
             <label>Credit Card Number:</label>
-            <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required>
+            <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required id="card-number" maxlength="19">
             
             <label>Expiration Date:</label>
-            <input type="text" name="ccexp" placeholder="MMYY" maxlength="4" required>
+            <input type="text" name="ccexp" placeholder="MM/YY" maxlength="5" required id="expiry-date">
             
             <label>CVV:</label>
             <input type="text" name="cvv" placeholder="123" maxlength="4" required>
