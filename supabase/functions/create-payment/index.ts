@@ -258,33 +258,80 @@ serve(async (req) => {
                      style="width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
                      onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                      onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
-              <div style="display: flex; gap: 8px;">
+              <div style="display: flex; gap: 8px; margin-bottom: 10px;">
                 <input type="text" name="city" placeholder="City" required 
-                       style="flex: 2; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 0;"
+                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 100px;"
                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
-                <select name="state" required 
-                        style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer; z-index: 1000; min-width: 0;"
-                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
-                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
-                  <option value="" disabled selected>State</option>
-                  <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option>
-                  <option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="FL">FL</option><option value="GA">GA</option>
-                  <option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option>
-                  <option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option>
-                  <option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option>
-                  <option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option>
-                  <option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option>
-                  <option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option>
-                  <option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option>
-                  <option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option>
-                  <option value="DC">DC</option>
-                </select>
-                <input type="text" name="zip" placeholder="12345" required 
-                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 0;"
+                <input type="text" name="state" placeholder="State/Province" required 
+                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 100px;"
+                       onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                       onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
+                <input type="text" name="zip" placeholder="ZIP/Postal" required 
+                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 80px;"
                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
               </div>
+              <select name="country" required 
+                      style="width: 100%; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer;"
+                      onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                      onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
+                <option value="US" selected>United States</option>
+                <option value="CA">Canada</option>
+                <option value="GB">United Kingdom</option>
+                <option value="AU">Australia</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="IT">Italy</option>
+                <option value="ES">Spain</option>
+                <option value="NL">Netherlands</option>
+                <option value="BE">Belgium</option>
+                <option value="CH">Switzerland</option>
+                <option value="AT">Austria</option>
+                <option value="SE">Sweden</option>
+                <option value="NO">Norway</option>
+                <option value="DK">Denmark</option>
+                <option value="FI">Finland</option>
+                <option value="IE">Ireland</option>
+                <option value="NZ">New Zealand</option>
+                <option value="JP">Japan</option>
+                <option value="SG">Singapore</option>
+                <option value="HK">Hong Kong</option>
+                <option value="IN">India</option>
+                <option value="BR">Brazil</option>
+                <option value="MX">Mexico</option>
+                <option value="AR">Argentina</option>
+                <option value="CL">Chile</option>
+                <option value="CO">Colombia</option>
+                <option value="PE">Peru</option>
+                <option value="ZA">South Africa</option>
+                <option value="EG">Egypt</option>
+                <option value="NG">Nigeria</option>
+                <option value="KE">Kenya</option>
+                <option value="GH">Ghana</option>
+                <option value="IL">Israel</option>
+                <option value="AE">United Arab Emirates</option>
+                <option value="SA">Saudi Arabia</option>
+                <option value="TR">Turkey</option>
+                <option value="GR">Greece</option>
+                <option value="PT">Portugal</option>
+                <option value="CZ">Czech Republic</option>
+                <option value="PL">Poland</option>
+                <option value="HU">Hungary</option>
+                <option value="RO">Romania</option>
+                <option value="BG">Bulgaria</option>
+                <option value="HR">Croatia</option>
+                <option value="SI">Slovenia</option>
+                <option value="SK">Slovakia</option>
+                <option value="LT">Lithuania</option>
+                <option value="LV">Latvia</option>
+                <option value="EE">Estonia</option>
+                <option value="IS">Iceland</option>
+                <option value="LU">Luxembourg</option>
+                <option value="MT">Malta</option>
+                <option value="CY">Cyprus</option>
+                <option value="OTHER">Other</option>
+              </select>
             </div>
             
             <div style="margin-bottom: 25px;">
