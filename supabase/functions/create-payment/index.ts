@@ -113,10 +113,15 @@ serve(async (req) => {
                 display: flex; 
                 gap: 10px; 
                 margin-bottom: 10px; 
+                width: 100%;
             }
             .form-row input, .form-row select { 
                 flex: 1; 
                 min-width: 0;
+                max-width: 100%;
+                box-sizing: border-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             #state-container { 
                 margin-top: 10px; 
