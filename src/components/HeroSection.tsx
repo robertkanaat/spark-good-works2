@@ -208,13 +208,15 @@ const HeroSection = () => {
                     </div>
                   </div>
                   
-                  <Button 
-                    variant="donate" 
-                    className="w-full py-6 text-xl font-bold mb-4 gap-3 relative overflow-hidden group"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                    GET RECOVERY SUPPORT
-                  </Button>
+                  <Link to="/support">
+                    <Button 
+                      variant="donate" 
+                      className="w-full py-6 text-xl font-bold mb-4 gap-3 relative overflow-hidden group"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                      GET RECOVERY SUPPORT
+                    </Button>
+                  </Link>
                   
                   <p className="text-sm text-muted-foreground mb-4 text-center">
                     Access expert videos, articles, live events, and a supportive community to guide your recovery journey.
