@@ -215,16 +215,22 @@ serve(async (req) => {
               <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Cardholder Name</label>
               <div style="display: flex; gap: 10px;">
                 <input type="text" name="first_name" placeholder="First Name" required 
-                       style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
+                       onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                       onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
                 <input type="text" name="last_name" placeholder="Last Name" required 
-                       style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
+                       onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                       onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
               </div>
             </div>
             
             <div style="margin-bottom: 20px;">
               <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Credit Card Number</label>
               <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required 
-                     style="width: 100%; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                     style="width: 100%; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
+                     onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                     onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
             </div>
             
             <div style="margin-bottom: 20px;">
@@ -232,12 +238,16 @@ serve(async (req) => {
                 <div style="flex: 1;">
                   <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Expiry (MMYY)</label>
                   <input type="text" name="ccexp" placeholder="1225" maxlength="4" required 
-                         style="width: 100%; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                         style="width: 100%; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
+                         onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                         onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
                 </div>
                 <div style="flex: 1;">
                   <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">CVV</label>
                   <input type="text" name="cvv" placeholder="123" maxlength="4" required 
-                         style="width: 100%; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                         style="width: 100%; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
+                         onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                         onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
                 </div>
               </div>
             </div>
@@ -245,21 +255,44 @@ serve(async (req) => {
             <div style="margin-bottom: 20px;">
               <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Billing Address</label>
               <input type="text" name="address1" placeholder="Street Address" required 
-                     style="width: 100%; padding: 15px; margin-bottom: 10px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-              <div style="display: flex; gap: 10px;">
+                     style="width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
+                     onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                     onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
+              <div style="display: flex; gap: 8px;">
                 <input type="text" name="city" placeholder="City" required 
-                       style="flex: 2; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <input type="text" name="state" placeholder="ST" maxlength="2" required 
-                       style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                       style="flex: 2; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 0;"
+                       onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                       onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
+                <select name="state" required 
+                        style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer; z-index: 1000; min-width: 0;"
+                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
+                  <option value="" disabled selected>State</option>
+                  <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option>
+                  <option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="FL">FL</option><option value="GA">GA</option>
+                  <option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option>
+                  <option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option>
+                  <option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option>
+                  <option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option>
+                  <option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option>
+                  <option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option>
+                  <option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option>
+                  <option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option>
+                  <option value="DC">DC</option>
+                </select>
                 <input type="text" name="zip" placeholder="12345" required 
-                       style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 0;"
+                       onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                       onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
               </div>
             </div>
             
             <div style="margin-bottom: 25px;">
               <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Phone Number (Optional)</label>
               <input type="text" name="phone" placeholder="(555) 123-4567" 
-                     style="width: 100%; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                     style="width: 100%; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
+                     onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                     onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
             </div>
             
             <button type="submit" 
