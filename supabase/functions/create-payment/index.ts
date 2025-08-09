@@ -271,12 +271,60 @@ serve(async (req) => {
                     <option value="HK">Hong Kong</option>
                     <option value="NZ">New Zealand</option>
                 </select>
-                <div id="state-container">
-                    <input type="text" name="state" id="state-input" placeholder="State/Province" maxlength="2" required style="display: none;">
-                    <select name="state" id="state-select" required style="display: none;">
-                        <option value="">Select State</option>
-                    </select>
-                </div>
+                <select name="state" required style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff !important; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer; z-index: 100;" onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'" onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
+                    <option value="">Select State</option>
+                    <option value="AL">AL - Alabama</option>
+                    <option value="AK">AK - Alaska</option>
+                    <option value="AZ">AZ - Arizona</option>
+                    <option value="AR">AR - Arkansas</option>
+                    <option value="CA">CA - California</option>
+                    <option value="CO">CO - Colorado</option>
+                    <option value="CT">CT - Connecticut</option>
+                    <option value="DE">DE - Delaware</option>
+                    <option value="FL">FL - Florida</option>
+                    <option value="GA">GA - Georgia</option>
+                    <option value="HI">HI - Hawaii</option>
+                    <option value="ID">ID - Idaho</option>
+                    <option value="IL">IL - Illinois</option>
+                    <option value="IN">IN - Indiana</option>
+                    <option value="IA">IA - Iowa</option>
+                    <option value="KS">KS - Kansas</option>
+                    <option value="KY">KY - Kentucky</option>
+                    <option value="LA">LA - Louisiana</option>
+                    <option value="ME">ME - Maine</option>
+                    <option value="MD">MD - Maryland</option>
+                    <option value="MA">MA - Massachusetts</option>
+                    <option value="MI">MI - Michigan</option>
+                    <option value="MN">MN - Minnesota</option>
+                    <option value="MS">MS - Mississippi</option>
+                    <option value="MO">MO - Missouri</option>
+                    <option value="MT">MT - Montana</option>
+                    <option value="NE">NE - Nebraska</option>
+                    <option value="NV">NV - Nevada</option>
+                    <option value="NH">NH - New Hampshire</option>
+                    <option value="NJ">NJ - New Jersey</option>
+                    <option value="NM">NM - New Mexico</option>
+                    <option value="NY">NY - New York</option>
+                    <option value="NC">NC - North Carolina</option>
+                    <option value="ND">ND - North Dakota</option>
+                    <option value="OH">OH - Ohio</option>
+                    <option value="OK">OK - Oklahoma</option>
+                    <option value="OR">OR - Oregon</option>
+                    <option value="PA">PA - Pennsylvania</option>
+                    <option value="RI">RI - Rhode Island</option>
+                    <option value="SC">SC - South Carolina</option>
+                    <option value="SD">SD - South Dakota</option>
+                    <option value="TN">TN - Tennessee</option>
+                    <option value="TX">TX - Texas</option>
+                    <option value="UT">UT - Utah</option>
+                    <option value="VT">VT - Vermont</option>
+                    <option value="VA">VA - Virginia</option>
+                    <option value="WA">WA - Washington</option>
+                    <option value="WV">WV - West Virginia</option>
+                    <option value="WI">WI - Wisconsin</option>
+                    <option value="WY">WY - Wyoming</option>
+                    <option value="DC">DC - District of Columbia</option>
+                </select>
             </div>
             <input type="text" name="phone" placeholder="Phone Number">
             
@@ -508,11 +556,62 @@ serve(async (req) => {
                   <option value="CY">Cyprus</option>
                   <option value="OTHER">Other</option>
                 </select>
-                <select id="stateField" name="state" style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer;"
+                <select id="stateField" name="state" style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff !important; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer; z-index: 100;"
                         onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                         onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'"
                         required>
-                  <option value="">Select State/Province</option>
+                  <option value="">Select State</option>
+                  <option value="AL">AL - Alabama</option>
+                  <option value="AK">AK - Alaska</option>
+                  <option value="AZ">AZ - Arizona</option>
+                  <option value="AR">AR - Arkansas</option>
+                  <option value="CA">CA - California</option>
+                  <option value="CO">CO - Colorado</option>
+                  <option value="CT">CT - Connecticut</option>
+                  <option value="DE">DE - Delaware</option>
+                  <option value="FL">FL - Florida</option>
+                  <option value="GA">GA - Georgia</option>
+                  <option value="HI">HI - Hawaii</option>
+                  <option value="ID">ID - Idaho</option>
+                  <option value="IL">IL - Illinois</option>
+                  <option value="IN">IN - Indiana</option>
+                  <option value="IA">IA - Iowa</option>
+                  <option value="KS">KS - Kansas</option>
+                  <option value="KY">KY - Kentucky</option>
+                  <option value="LA">LA - Louisiana</option>
+                  <option value="ME">ME - Maine</option>
+                  <option value="MD">MD - Maryland</option>
+                  <option value="MA">MA - Massachusetts</option>
+                  <option value="MI">MI - Michigan</option>
+                  <option value="MN">MN - Minnesota</option>
+                  <option value="MS">MS - Mississippi</option>
+                  <option value="MO">MO - Missouri</option>
+                  <option value="MT">MT - Montana</option>
+                  <option value="NE">NE - Nebraska</option>
+                  <option value="NV">NV - Nevada</option>
+                  <option value="NH">NH - New Hampshire</option>
+                  <option value="NJ">NJ - New Jersey</option>
+                  <option value="NM">NM - New Mexico</option>
+                  <option value="NY">NY - New York</option>
+                  <option value="NC">NC - North Carolina</option>
+                  <option value="ND">ND - North Dakota</option>
+                  <option value="OH">OH - Ohio</option>
+                  <option value="OK">OK - Oklahoma</option>
+                  <option value="OR">OR - Oregon</option>
+                  <option value="PA">PA - Pennsylvania</option>
+                  <option value="RI">RI - Rhode Island</option>
+                  <option value="SC">SC - South Carolina</option>
+                  <option value="SD">SD - South Dakota</option>
+                  <option value="TN">TN - Tennessee</option>
+                  <option value="TX">TX - Texas</option>
+                  <option value="UT">UT - Utah</option>
+                  <option value="VT">VT - Vermont</option>
+                  <option value="VA">VA - Virginia</option>
+                  <option value="WA">WA - Washington</option>
+                  <option value="WV">WV - West Virginia</option>
+                  <option value="WI">WI - Wisconsin</option>
+                  <option value="WY">WY - Wyoming</option>
+                  <option value="DC">DC - District of Columbia</option>
                 </select>
               </div>
               <input type="text" name="phone" placeholder="Phone Number (optional)" 
