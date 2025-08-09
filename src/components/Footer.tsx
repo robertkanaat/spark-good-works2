@@ -60,7 +60,7 @@ const Footer = () => {
               <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Our Mission</Link></li>
               <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Our Story</Link></li>
               <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">AI Technology</Link></li>
-              <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Research</Link></li>
+              <li><Link to="/press" className="text-white/70 hover:text-primary transition-colors">Press</Link></li>
               <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Impact Reports</Link></li>
               <li><Link to="/contact" className="text-white/70 hover:text-primary transition-colors">Careers</Link></li>
             </ul>
