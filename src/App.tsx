@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Support from "./pages/Support";
 import CrisisSupport from "./pages/CrisisSupport";
+import Donors from "./pages/Donors";
 import Donation from "./pages/Donation";
 import Resources from "./pages/Resources";
 import PaymentSuccess from "./pages/PaymentSuccess";
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/support" element={<Support />} />
           <Route path="/crisis-support" element={<CrisisSupport />} />
+          <Route path="/donors" element={<Donors />} />
           <Route path="/donation" element={<Donation />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
