@@ -21,6 +21,7 @@ import TermsConditions from "./pages/TermsConditions";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import OpenLetter from "./pages/OpenLetter";
+import AICompanion from "./pages/AICompanion";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/open-letter" element={<OpenLetter />} />
+          <Route path="/ai-companion" element={<AICompanion />} />
           <Route path="/press" element={<Press />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
