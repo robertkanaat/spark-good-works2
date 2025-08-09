@@ -324,8 +324,45 @@ serve(async (req) => {
       const failureUrl = `${baseUrl}/payment-failed`;
       
       const formHtml = `
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; color: white; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
-          <form action="https://secure.inchekgateway.com/api/transact.php" method="POST">
+        <div style="background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%) !important; padding: 30px; border-radius: 15px; color: white; box-shadow: 0 20px 40px rgba(0,0,0,0.1); max-width: 500px; overflow: hidden; box-sizing: border-box;">
+          <style>
+            .card-form * { box-sizing: border-box !important; }
+            .card-form input { width: 100% !important; max-width: 100% !important; }
+            .card-form .form-row { display: flex !important; gap: 10px !important; width: 100% !important; }
+            .card-form .form-row input { flex: 1 !important; min-width: 0 !important; }
+          </style>
+          <script>
+            function formatCardNumber(input) {
+                let value = input.value.replace(/\\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = '';
+                if (value.match(/^3[47]/)) {
+                    for (let i = 0; i < value.length; i++) {
+                        if (i === 4 || i === 10) { formattedValue += ' '; }
+                        formattedValue += value[i];
+                    }
+                    input.maxLength = 17;
+                } else {
+                    for (let i = 0; i < value.length; i++) {
+                        if (i > 0 && i % 4 === 0) { formattedValue += ' '; }
+                        formattedValue += value[i];
+                    }
+                    input.maxLength = 19;
+                }
+                input.value = formattedValue;
+            }
+            function formatExpiryDate(input) {
+                let value = input.value.replace(/\\D/g, '');
+                if (value.length >= 2) { value = value.substring(0,2) + '/' + value.substring(2,4); }
+                input.value = value;
+            }
+            setTimeout(function() {
+                const cardInput = document.querySelector('.card-form input[name="ccnumber"]');
+                const expiryInput = document.querySelector('.card-form input[name="ccexp"]');
+                if (cardInput) { cardInput.addEventListener('input', function() { formatCardNumber(this); }); }
+                if (expiryInput) { expiryInput.addEventListener('input', function() { formatExpiryDate(this); }); }
+            }, 100);
+          </script>
+          <form action="https://secure.inchekgateway.com/api/transact.php" method="POST" class="card-form">
             <input type="hidden" name="type" value="sale">
             <input type="hidden" name="security_key" value="${securityKey}">
             <input type="hidden" name="amount" value="${amount}">
@@ -354,13 +391,13 @@ serve(async (req) => {
             
             <div style="margin-bottom: 20px;">
               <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Cardholder Name</label>
-              <div style="display: flex; gap: 10px;">
+              <div class="form-row">
                 <input type="text" name="first_name" placeholder="First Name" required 
-                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; box-sizing: border-box;"
+                       style="padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
                 <input type="text" name="last_name" placeholder="Last Name" required 
-                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; box-sizing: border-box;"
+                       style="padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
               </div>
@@ -375,10 +412,10 @@ serve(async (req) => {
             </div>
             
             <div style="margin-bottom: 20px;">
-              <div style="display: flex; gap: 10px;">
+              <div class="form-row">
                 <div style="flex: 1;">
-                  <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Expiry (MMYY)</label>
-                  <input type="text" name="ccexp" placeholder="1225" maxlength="4" required 
+                  <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Expiry (MM/YY)</label>
+                  <input type="text" name="ccexp" placeholder="12/25" maxlength="5" required
                          style="width: 100%; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
                          onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                          onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
