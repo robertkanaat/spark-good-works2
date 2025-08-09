@@ -59,7 +59,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/about" className="text-white/70 hover:text-primary transition-colors">Our Journey</Link></li>
               <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Our Story</Link></li>
-              <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">AI Technology</Link></li>
+              <li><Link to="/ai-companion" className="text-white/70 hover:text-primary transition-colors">AI Recovery Clone</Link></li>
               <li><Link to="/press" className="text-white/70 hover:text-primary transition-colors">Press</Link></li>
               <li><Link to="/donors" className="text-white/70 hover:text-primary transition-colors">Donors</Link></li>
               <li><Link to="/contact" className="text-white/70 hover:text-primary transition-colors">Careers</Link></li>
