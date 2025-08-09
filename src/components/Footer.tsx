@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 const Footer = () => {
   return (
     <footer className="bg-slate-800 text-white">
@@ -44,12 +48,12 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/emergency" className="text-white/70 hover:text-primary transition-colors">Get Help</Link></li>
-              <li><Link to="/crisis-support" className="text-white/70 hover:text-primary transition-colors">Crisis Support</Link></li>
-              <li><Link to="/resources" className="text-white/70 hover:text-primary transition-colors">Treatment Centers</Link></li>
-              <li><Link to="/resources" className="text-white/70 hover:text-primary transition-colors">Recovery Resources</Link></li>
-              <li><Link to="/resources" className="text-white/70 hover:text-primary transition-colors">Support Groups</Link></li>
-              <li><Link to="/resources" className="text-white/70 hover:text-primary transition-colors">Family Support</Link></li>
+              <li><Link to="/emergency" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Get Help</Link></li>
+              <li><Link to="/crisis-support" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Crisis Support</Link></li>
+              <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Treatment Centers</Link></li>
+              <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Recovery Resources</Link></li>
+              <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Support Groups</Link></li>
+              <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Family Support</Link></li>
             </ul>
           </div>
 
@@ -57,12 +61,12 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">About</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-white/70 hover:text-primary transition-colors">Our Journey</Link></li>
-              <li><Link to="/blog" className="text-white/70 hover:text-primary transition-colors">Our Story</Link></li>
-              <li><Link to="/ai-companion" className="text-white/70 hover:text-primary transition-colors">AI Recovery Clone</Link></li>
-              <li><Link to="/press" className="text-white/70 hover:text-primary transition-colors">Press</Link></li>
-              <li><Link to="/donors" className="text-white/70 hover:text-primary transition-colors">Donors</Link></li>
-              <li><Link to="/contact" className="text-white/70 hover:text-primary transition-colors">Careers</Link></li>
+              <li><Link to="/about" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Our Journey</Link></li>
+              <li><Link to="/blog" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Our Story</Link></li>
+              <li><Link to="/ai-companion" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">AI Recovery Clone</Link></li>
+              <li><Link to="/press" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Press</Link></li>
+              <li><Link to="/donors" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Donors</Link></li>
+              <li><Link to="/contact" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Careers</Link></li>
             </ul>
           </div>
         </div>
@@ -98,9 +102,9 @@ const Footer = () => {
               © 2025 Genius Recovery. All rights reserved. 501(c)(3) nonprofit organization.
             </div>
             <div className="flex space-x-6 text-sm">
-              <Link to="/privacy-policy" className="text-white/60 hover:text-primary transition-colors">Privacy Policy</Link>
-              <Link to="/terms-conditions" className="text-white/60 hover:text-primary transition-colors">Terms & Conditions</Link>
-              <Link to="/contact" className="text-white/60 hover:text-primary transition-colors">Contact Us</Link>
+              <Link to="/privacy-policy" onClick={scrollToTop} className="text-white/60 hover:text-primary transition-colors">Privacy Policy</Link>
+              <Link to="/terms-conditions" onClick={scrollToTop} className="text-white/60 hover:text-primary transition-colors">Terms & Conditions</Link>
+              <Link to="/contact" onClick={scrollToTop} className="text-white/60 hover:text-primary transition-colors">Contact Us</Link>
             </div>
           </div>
         </div>
