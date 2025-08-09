@@ -183,68 +183,100 @@ serve(async (req) => {
       const failureUrl = `${baseUrl}/payment-failed`;
       
       const formHtml = `
-        <form action="https://secure.inchekgateway.com/api/transact.php" method="POST" style="color: white;">
-          <input type="hidden" name="type" value="sale">
-          <input type="hidden" name="security_key" value="${securityKey}">
-          <input type="hidden" name="amount" value="${amount}">
-          <input type="hidden" name="currency" value="${currency.toUpperCase()}">
-          <input type="hidden" name="order_description" value="${description}">
-          <input type="hidden" name="orderid" value="${orderid}">
-          <input type="hidden" name="redirect_url" value="${successUrl}">
-          <input type="hidden" name="decline_url" value="${failureUrl}">
-          ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
-          
-          ${isRecurring ? `
-          <input type="hidden" name="billing_method" value="recurring">
-          <input type="hidden" name="recurring" value="add_subscription">
-          <input type="hidden" name="plan_amount" value="${amount}">
-          <input type="hidden" name="month_frequency" value="1">
-          <input type="hidden" name="day_of_month" value="1">
-          <input type="hidden" name="plan_payments" value="0">
-          ` : ''}
-          
-          <div style="margin-bottom: 20px; text-align: center;">
-            <div style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">$${amount} ${isRecurring ? 'Monthly' : 'One-time'} Donation</div>
-            <div style="opacity: 0.8;">${description}</div>
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Cardholder Name:</label>
-            <input type="text" name="first_name" placeholder="First Name" required style="width: 48%; padding: 10px; margin-right: 4%; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
-            <input type="text" name="last_name" placeholder="Last Name" required style="width: 48%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Credit Card Number:</label>
-            <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required style="width: 100%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333; box-sizing: border-box;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Expiration Date:</label>
-            <input type="text" name="ccexp" placeholder="MMYY" maxlength="4" required style="width: 48%; padding: 10px; margin-right: 4%; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
-            <input type="text" name="cvv" placeholder="CVV" maxlength="4" required style="width: 48%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Billing Address:</label>
-            <input type="text" name="address1" placeholder="Street Address" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333; box-sizing: border-box;">
-            <input type="text" name="city" placeholder="City" required style="width: 48%; padding: 10px; margin-right: 4%; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
-            <input type="text" name="state" placeholder="State" maxlength="2" required style="width: 23%; padding: 10px; margin-right: 4%; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
-            <input type="text" name="zip" placeholder="ZIP" required style="width: 21%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <input type="text" name="phone" placeholder="Phone Number (Optional)" style="width: 100%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333; box-sizing: border-box;">
-          </div>
-          
-          <button type="submit" style="background: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%;">
-            Complete $${amount} ${isRecurring ? 'Monthly' : ''} Donation
-          </button>
-          
-          <p style="text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.8;">
-            Secure donation processing • ${isRecurring ? 'Cancel anytime • ' : ''}Tax deductible
-          </p>
-        </form>`;
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; color: white; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+          <form action="https://secure.inchekgateway.com/api/transact.php" method="POST">
+            <input type="hidden" name="type" value="sale">
+            <input type="hidden" name="security_key" value="${securityKey}">
+            <input type="hidden" name="amount" value="${amount}">
+            <input type="hidden" name="currency" value="${currency.toUpperCase()}">
+            <input type="hidden" name="order_description" value="${description}">
+            <input type="hidden" name="orderid" value="${orderid}">
+            <input type="hidden" name="redirect_url" value="${successUrl}">
+            <input type="hidden" name="decline_url" value="${failureUrl}">
+            ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
+            
+            ${isRecurring ? `
+            <input type="hidden" name="billing_method" value="recurring">
+            <input type="hidden" name="recurring" value="add_subscription">
+            <input type="hidden" name="plan_amount" value="${amount}">
+            <input type="hidden" name="month_frequency" value="1">
+            <input type="hidden" name="day_of_month" value="1">
+            <input type="hidden" name="plan_payments" value="0">
+            ` : ''}
+            
+            <div style="text-align: center; margin-bottom: 30px;">
+              <div style="font-size: 28px; font-weight: bold; margin-bottom: 8px; background: linear-gradient(45deg, #fff, #f0f0f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                $${amount} ${isRecurring ? 'Monthly' : 'One-time'} Donation
+              </div>
+              <div style="opacity: 0.9; font-size: 16px;">${description}</div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Cardholder Name</label>
+              <div style="display: flex; gap: 10px;">
+                <input type="text" name="first_name" placeholder="First Name" required 
+                       style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <input type="text" name="last_name" placeholder="Last Name" required 
+                       style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+              </div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Credit Card Number</label>
+              <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required 
+                     style="width: 100%; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+              <div style="display: flex; gap: 10px;">
+                <div style="flex: 1;">
+                  <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Expiry (MMYY)</label>
+                  <input type="text" name="ccexp" placeholder="1225" maxlength="4" required 
+                         style="width: 100%; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                </div>
+                <div style="flex: 1;">
+                  <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">CVV</label>
+                  <input type="text" name="cvv" placeholder="123" maxlength="4" required 
+                         style="width: 100%; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                </div>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Billing Address</label>
+              <input type="text" name="address1" placeholder="Street Address" required 
+                     style="width: 100%; padding: 15px; margin-bottom: 10px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+              <div style="display: flex; gap: 10px;">
+                <input type="text" name="city" placeholder="City" required 
+                       style="flex: 2; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <input type="text" name="state" placeholder="ST" maxlength="2" required 
+                       style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <input type="text" name="zip" placeholder="12345" required 
+                       style="flex: 1; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+              </div>
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+              <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Phone Number (Optional)</label>
+              <input type="text" name="phone" placeholder="(555) 123-4567" 
+                     style="width: 100%; padding: 15px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            </div>
+            
+            <button type="submit" 
+                    style="background: linear-gradient(45deg, #4CAF50, #45a049); color: white; padding: 18px 30px; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: bold; width: 100%; box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 20px rgba(76, 175, 80, 0.4)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 16px rgba(76, 175, 80, 0.3)'">
+              🔒 Complete $${amount} ${isRecurring ? 'Monthly' : ''} Donation
+            </button>
+            
+            <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+              <p style="margin: 0; font-size: 14px; opacity: 0.9; line-height: 1.4;">
+                🛡️ Secure SSL encryption • ${isRecurring ? '📅 Cancel anytime • ' : ''}📄 Tax deductible<br>
+                <span style="font-size: 12px; opacity: 0.7;">Your payment information is protected with bank-level security</span>
+              </p>
+            </div>
+          </form>
+        </div>`;
 
       return new Response(JSON.stringify({ 
         form_html: formHtml,

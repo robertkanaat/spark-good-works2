@@ -116,11 +116,25 @@ const Donation = () => {
     setCustomAmount("");
   };
 
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleDonation = async () => {
     if (!email.trim()) {
       toast({
         title: "Email Required",
         description: "Please enter your email address to proceed with the donation.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!isValidEmail(email.trim())) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
         variant: "destructive",
       });
       return;
@@ -316,7 +330,7 @@ const Donation = () => {
                 {/* Donate button */}
                 <Button 
                   onClick={handleDonation}
-                  disabled={isProcessing || !email.trim()}
+                  disabled={isProcessing || !email.trim() || !isValidEmail(email.trim())}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4"
                 >
                   {isProcessing ? 'PROCESSING...' : `DONATE $${amount} ${isMonthly ? 'MONTHLY' : 'NOW'}`}
