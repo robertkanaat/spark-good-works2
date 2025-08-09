@@ -41,9 +41,12 @@ serve(async (req) => {
     <title>Genius Recovery Donation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
+            * {
+                box-sizing: border-box !important;
+            }
             body { 
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-                background: linear-gradient(135deg, hsl(25, 45%, 15%) 0%, hsl(25, 95%, 5%) 100%);
+                background: linear-gradient(135deg, hsl(25, 95%, 53%) 0%, hsl(20, 90%, 48%) 100%);
                 margin: 0; 
                 padding: 20px; 
                 min-height: 100vh; 
@@ -58,15 +61,16 @@ serve(async (req) => {
                 box-shadow: 0 25px 50px rgba(0,0,0,0.15); 
                 max-width: 450px; 
                 width: 100%; 
+                overflow: hidden;
             }
             h2 { 
                 text-align: center; 
-                color: #333; 
+                color: hsl(25, 95%, 53%); 
                 margin-bottom: 20px; 
                 font-size: 24px; 
             }
             h3 { 
-                color: #555; 
+                color: hsl(25, 95%, 53%); 
                 margin: 20px 0 10px 0; 
                 font-size: 16px; 
                 border-bottom: 2px solid #f0f0f0; 
@@ -79,13 +83,14 @@ serve(async (req) => {
                 font-weight: 500; 
             }
             input[type="text"], input[type="email"], select { 
-                width: 100%; 
+                width: 100% !important; 
+                max-width: 100% !important;
                 padding: 12px; 
                 border: 2px solid #e1e5e9; 
                 border-radius: 6px; 
                 font-size: 14px; 
                 transition: border-color 0.3s ease; 
-                box-sizing: border-box;
+                box-sizing: border-box !important;
             }
             input[type="text"]:focus, input[type="email"]:focus, select:focus { 
                 outline: none; 
@@ -110,18 +115,20 @@ serve(async (req) => {
                 box-shadow: 0 5px 15px hsla(25, 95%, 53%, 0.4); 
             }
             .form-row { 
-                display: flex; 
-                gap: 10px; 
+                display: flex !important; 
+                gap: 8px !important; 
                 margin-bottom: 10px; 
-                width: 100%;
+                width: 100% !important;
+                max-width: 100% !important;
             }
             .form-row input, .form-row select { 
-                flex: 1; 
-                min-width: 0;
-                max-width: 100%;
-                box-sizing: border-box;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                flex: 1 !important; 
+                min-width: 0 !important;
+                max-width: calc(50% - 4px) !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                width: auto !important;
             }
             #state-container { 
                 margin-top: 10px; 
