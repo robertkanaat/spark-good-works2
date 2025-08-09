@@ -29,7 +29,7 @@ serve(async (req) => {
       return new Response("Payment gateway not configured", { status: 500 });
     }
     
-    const baseUrl = req.headers.get("origin") || "https://geniusrecovery.org";
+    const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
     const successUrl = `${baseUrl}/payment-success`;
     const failureUrl = `${baseUrl}/payment-failed`;
     const description = `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`;
