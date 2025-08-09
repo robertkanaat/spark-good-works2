@@ -149,7 +149,11 @@ serve(async (req) => {
     console.log("Generated payment form for order:", orderid);
 
     // Return the payment form HTML as a data URL that can be opened in a new window
-    const dataUrl = `data:text/html;base64,${btoa(paymentFormHtml)}`;
+    // Use TextEncoder to properly handle Unicode characters before base64 encoding
+    const encoder = new TextEncoder();
+    const data = encoder.encode(paymentFormHtml);
+    const base64 = btoa(String.fromCharCode(...data));
+    const dataUrl = `data:text/html;base64,${base64}`;
     
     return new Response(JSON.stringify({ 
       payment_url: dataUrl,
