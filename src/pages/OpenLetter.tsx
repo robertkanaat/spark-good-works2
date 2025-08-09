@@ -88,7 +88,7 @@ const OpenLetter = () => {
                 
                 {/* Main Headline */}
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-foreground mb-8 leading-tight animate-fade-in">
-                  An Open Letter to{" "}
+                  Open Letter to{" "}
                   <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-donate to-primary">
                     Anyone Struggling
