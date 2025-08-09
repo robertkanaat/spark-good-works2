@@ -59,7 +59,7 @@ const OpenLetter = () => {
             style={{ backgroundImage: `url(${heroBg})` }}
             aria-hidden
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-hero-overlay/80 via-hero-overlay/60 to-hero-overlay/90" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-br from-hero-overlay/40 via-hero-overlay/30 to-hero-overlay/50" aria-hidden />
           
           {/* Floating geometric elements */}
           <div className="absolute inset-0 overflow-hidden" aria-hidden>
@@ -73,12 +73,12 @@ const OpenLetter = () => {
                 Open Letter
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-black leading-[0.9] text-foreground mb-6 tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-black leading-tight text-foreground mb-8 tracking-tight">
               An Open Letter to
-              <span className="block bg-gradient-to-r from-primary to-donate bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-primary to-donate bg-clip-text text-transparent leading-tight">
                 Anyone Struggling
               </span>
-              <span className="block text-4xl md:text-6xl">with Addiction</span>
+              <span className="block text-4xl md:text-6xl leading-tight">with Addiction</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
               From the heart of the Genius Recovery community
