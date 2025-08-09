@@ -285,9 +285,11 @@ const HeroSection = () => {
               GET HELP NOW
             </Button>
           </Link>
-          <Button variant="hero">
-            LEARN MORE
-          </Button>
+          <Link to="/about">
+            <Button variant="hero">
+              LEARN MORE
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
