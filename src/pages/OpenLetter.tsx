@@ -53,41 +53,147 @@ const OpenLetter = () => {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="relative isolate min-h-[60vh] flex items-center justify-center overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-fixed"
-            style={{ backgroundImage: `url(${heroBg})` }}
-            aria-hidden
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-hero-overlay/40 via-hero-overlay/30 to-hero-overlay/50" aria-hidden />
-          
-          {/* Floating geometric elements */}
-          <div className="absolute inset-0 overflow-hidden" aria-hidden>
-            <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-primary/10 animate-pulse" />
-            <div className="absolute bottom-1/3 right-1/4 w-24 h-24 rounded-full bg-donate/10 animate-pulse delay-700" />
+        <section className="relative min-h-screen flex items-center overflow-hidden">
+          {/* Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
+            style={{ 
+              backgroundImage: `url(${heroBg})`,
+              backgroundPosition: 'center center'
+            }}
+          >
+            {/* Bright overlay for better text contrast while keeping image visible */}
+            <div className="absolute inset-0 bg-white/20"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-white/10 to-primary/20"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/30"></div>
           </div>
-
-          <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-            <div className="mb-6">
-              <span className="inline-block px-4 py-2 text-xs font-bold tracking-widest uppercase bg-primary/20 text-primary-foreground rounded-full backdrop-blur border border-primary/30">
-                Open Letter
-              </span>
+          
+          {/* Animated Glow Effects */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse opacity-40" />
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-donate/10 rounded-full blur-3xl animate-pulse delay-1000 opacity-30" />
+          
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+              {/* Left side - Main Content */}
+              <div className="lg:col-span-8 text-left">
+                {/* Badge */}
+                <div className="mb-8 animate-fade-in">
+                  <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full border border-primary/30">
+                    <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                    <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+                      Open Letter
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Main Headline */}
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-foreground mb-8 leading-tight animate-fade-in">
+                  An Open Letter to{" "}
+                  <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-donate to-primary">
+                    Anyone Struggling
+                  </span>{" "}
+                  <br />
+                  <span className="text-primary">with Addiction</span>
+                </h1>
+                
+                {/* Subheadline */}
+                <p className="text-2xl md:text-3xl text-foreground/80 mb-8 leading-relaxed font-medium animate-fade-in">
+                  From the heart of compassion.<br />
+                  <span className="text-foreground/60">A message of hope and understanding.</span>
+                </p>
+                
+                {/* Key Points */}
+                <div className="flex flex-col gap-4 mb-12 animate-fade-in">
+                  <div className="flex items-center gap-4 text-foreground">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                        <span className="text-primary-foreground text-xs font-bold">✓</span>
+                      </div>
+                      <span className="text-lg font-medium">You are not alone in this struggle</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 text-foreground">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                        <span className="text-primary-foreground text-xs font-bold">✓</span>
+                      </div>
+                      <span className="text-lg font-medium">Addiction is not a choice—it's a condition</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 text-foreground">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                        <span className="text-primary-foreground text-xs font-bold">✓</span>
+                      </div>
+                      <span className="text-lg font-medium">Help and hope are always available</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 animate-fade-in">
+                  <Button 
+                    size="lg" 
+                    className="px-8 py-6 text-lg font-semibold rounded-full shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group"
+                    style={{ 
+                      background: 'var(--gradient-primary)',
+                      boxShadow: 'var(--shadow-elegant)'
+                    }}
+                    onClick={() => {
+                      document.getElementById('letter-content')?.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start' 
+                      });
+                    }}
+                  >
+                    <span className="relative">
+                      Read the Full Letter
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                  </Button>
+                  
+                  <Link to="/emergency">
+                    <Button 
+                      variant="outline" 
+                      size="lg" 
+                      className="border-primary/30 text-foreground hover:bg-primary/10 hover:text-foreground px-8 py-6 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 group bg-white/20"
+                    >
+                      Get Help Now
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Right side - Inspirational Quote Card */}
+              <div className="lg:col-span-4 animate-fade-in">
+                <div className="bg-white/20 backdrop-blur-md border border-primary/20 p-8 shadow-2xl rounded-2xl">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <span className="text-primary text-2xl">💝</span>
+                    </div>
+                    <blockquote className="text-foreground text-xl font-medium mb-6 italic leading-relaxed">
+                      "Addiction is not a problem—it's actually a solution to pain. Understanding this changes everything."
+                    </blockquote>
+                    <div className="text-foreground/70 text-sm font-medium">
+                      — Genius Recovery Community
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h1 className="text-5xl md:text-7xl font-black leading-tight text-foreground mb-8 tracking-tight">
-              An Open Letter to
-              <span className="block bg-gradient-to-r from-primary to-donate bg-clip-text text-transparent leading-tight">
-                Anyone Struggling
-              </span>
-              <span className="block text-4xl md:text-6xl leading-tight">with Addiction</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed">
-              From the heart of the Genius Recovery community
-            </p>
+          </div>
+          
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div className="w-6 h-10 border-2 border-foreground/40 rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-foreground/60 rounded-full mt-2 animate-pulse"></div>
+            </div>
           </div>
         </section>
 
         {/* Main Content */}
-        <section className="relative -mt-32 pb-20">
+        <section className="relative -mt-32 pb-20" id="letter-content">
           {/* Background pattern */}
           <div className="absolute inset-0 bg-gradient-subtle opacity-30" aria-hidden />
           
