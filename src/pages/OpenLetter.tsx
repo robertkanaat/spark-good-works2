@@ -193,7 +193,7 @@ const OpenLetter = () => {
         </section>
 
         {/* Main Content */}
-        <section className="relative -mt-32 pb-20" id="letter-content">
+        <section className="relative mt-20 pb-20" id="letter-content">
           {/* Background pattern */}
           <div className="absolute inset-0 bg-gradient-subtle opacity-30" aria-hidden />
           
