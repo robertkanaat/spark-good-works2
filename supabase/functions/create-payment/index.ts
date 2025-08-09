@@ -40,57 +40,95 @@ serve(async (req) => {
 <head>
     <title>Genius Recovery Donation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            max-width: 600px; 
-            margin: 50px auto; 
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 100vh;
-        }
-        .form-container {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255,255,255,0.9);
-            color: #333;
-            box-sizing: border-box;
-        }
-        .button {
-            background: #4CAF50;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            width: 100%;
-        }
-        .button:hover { background: #45a049; }
-        .amount-display {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            margin: 20px 0;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
-        }
-    </style>
+        <style>
+            body { 
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+                background: linear-gradient(135deg, hsl(25, 45%, 15%) 0%, hsl(25, 95%, 5%) 100%);
+                margin: 0; 
+                padding: 20px; 
+                min-height: 100vh; 
+                display: flex; 
+                justify-content: center; 
+                align-items: center; 
+            }
+            .form-container { 
+                background: white; 
+                padding: 30px; 
+                border-radius: 12px; 
+                box-shadow: 0 25px 50px rgba(0,0,0,0.15); 
+                max-width: 450px; 
+                width: 100%; 
+            }
+            h2 { 
+                text-align: center; 
+                color: #333; 
+                margin-bottom: 20px; 
+                font-size: 24px; 
+            }
+            h3 { 
+                color: #555; 
+                margin: 20px 0 10px 0; 
+                font-size: 16px; 
+                border-bottom: 2px solid #f0f0f0; 
+                padding-bottom: 5px; 
+            }
+            label { 
+                display: block; 
+                margin: 15px 0 5px 0; 
+                color: #666; 
+                font-weight: 500; 
+            }
+            input[type="text"], input[type="email"], select { 
+                width: 100%; 
+                padding: 12px; 
+                border: 2px solid #e1e5e9; 
+                border-radius: 6px; 
+                font-size: 14px; 
+                transition: border-color 0.3s ease; 
+                box-sizing: border-box;
+            }
+            input[type="text"]:focus, input[type="email"]:focus, select:focus { 
+                outline: none; 
+                border-color: hsl(25, 95%, 53%); 
+                box-shadow: 0 0 0 3px hsla(25, 95%, 53%, 0.1); 
+            }
+            .button { 
+                width: 100%; 
+                background: linear-gradient(135deg, hsl(25, 95%, 53%) 0%, hsl(24, 100%, 50%) 100%); 
+                color: white; 
+                padding: 15px; 
+                border: none; 
+                border-radius: 6px; 
+                font-size: 16px; 
+                font-weight: 600; 
+                cursor: pointer; 
+                margin-top: 20px; 
+                transition: transform 0.2s ease; 
+            }
+            .button:hover { 
+                transform: translateY(-2px); 
+                box-shadow: 0 5px 15px hsla(25, 95%, 53%, 0.4); 
+            }
+            .form-row { 
+                display: flex; 
+                gap: 10px; 
+                margin-bottom: 10px; 
+            }
+            .form-row input, .form-row select { 
+                flex: 1; 
+                min-width: 0;
+            }
+            #state-container { 
+                margin-top: 10px; 
+            }
+            .amount-display {
+                font-size: 24px;
+                font-weight: bold;
+                text-align: center;
+                margin: 20px 0;
+                color: hsl(25, 95%, 53%);
+            }
+        </style>
 </head>
 <body>
     <div class="form-container">
@@ -120,8 +158,10 @@ serve(async (req) => {
             
             <h3>Payment Information</h3>
             <label>Cardholder Name:</label>
-            <input type="text" name="first_name" placeholder="First Name" required>
-            <input type="text" name="last_name" placeholder="Last Name" required>
+            <div class="form-row">
+                <input type="text" name="first_name" placeholder="First Name" required>
+                <input type="text" name="last_name" placeholder="Last Name" required>
+            </div>
             
             <label>Credit Card Number:</label>
             <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required>
@@ -134,9 +174,45 @@ serve(async (req) => {
             
             <h3>Billing Address</h3>
             <input type="text" name="address1" placeholder="Street Address" required>
-            <input type="text" name="city" placeholder="City" required>
-            <input type="text" name="state" placeholder="State" maxlength="2" required>
-            <input type="text" name="zip" placeholder="ZIP Code" required>
+            <div class="form-row">
+                <input type="text" name="city" placeholder="City" required>
+                <input type="text" name="zip" placeholder="ZIP Code" required>
+            </div>
+            <div class="form-row">
+                <select name="country" id="country" required onchange="updateStateField()">
+                    <option value="">Select Country</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="AU">Australia</option>
+                    <option value="DE">Germany</option>
+                    <option value="FR">France</option>
+                    <option value="IT">Italy</option>
+                    <option value="ES">Spain</option>
+                    <option value="NL">Netherlands</option>
+                    <option value="SE">Sweden</option>
+                    <option value="NO">Norway</option>
+                    <option value="DK">Denmark</option>
+                    <option value="FI">Finland</option>
+                    <option value="CH">Switzerland</option>
+                    <option value="AT">Austria</option>
+                    <option value="BE">Belgium</option>
+                    <option value="IE">Ireland</option>
+                    <option value="PT">Portugal</option>
+                    <option value="LU">Luxembourg</option>
+                    <option value="JP">Japan</option>
+                    <option value="KR">South Korea</option>
+                    <option value="SG">Singapore</option>
+                    <option value="HK">Hong Kong</option>
+                    <option value="NZ">New Zealand</option>
+                </select>
+                <div id="state-container">
+                    <input type="text" name="state" id="state-input" placeholder="State/Province" maxlength="2" required style="display: none;">
+                    <select name="state" id="state-select" required style="display: none;">
+                        <option value="">Select State</option>
+                    </select>
+                </div>
+            </div>
             <input type="text" name="phone" placeholder="Phone Number">
             
             <button type="submit" class="button">
