@@ -44,11 +44,11 @@ const HeroSection = () => {
                 <div className="text-center">
                   <div className="text-white/70 text-xs mb-1">I NEED...</div>
                   <Button 
-                    variant="outline" 
+                    variant="hero" 
                     className={`w-full py-4 text-base font-semibold ${
                       activeView === 'help' 
-                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
+                        : ''
                     }`}
                     onClick={() => setActiveView('help')}
                   >
@@ -73,11 +73,11 @@ const HeroSection = () => {
                 <div className="text-center">
                   <div className="text-white/70 text-xs mb-1">I WANT TO...</div>
                   <Button 
-                    variant="outline" 
+                    variant="hero" 
                     className={`w-full py-4 text-base font-semibold ${
                       activeView === 'support' 
-                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
+                        : ''
                     }`}
                     onClick={() => setActiveView('support')}
                   >
@@ -91,11 +91,11 @@ const HeroSection = () => {
                 <div className="text-center">
                   <div className="text-white/70 text-sm mb-2">I NEED...</div>
                   <Button 
-                    variant="outline" 
+                    variant="hero" 
                     className={`px-8 py-6 text-lg font-semibold ${
                       activeView === 'help' 
-                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
+                        : ''
                     }`}
                     onClick={() => setActiveView('help')}
                   >
@@ -120,11 +120,11 @@ const HeroSection = () => {
                 <div className="text-center">
                   <div className="text-white/70 text-sm mb-2">I WANT TO...</div>
                   <Button 
-                    variant="outline" 
+                    variant="hero" 
                     className={`px-8 py-6 text-lg font-semibold ${
                       activeView === 'support' 
-                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                        : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
+                        : ''
                     }`}
                     onClick={() => setActiveView('support')}
                   >
@@ -285,7 +285,7 @@ const HeroSection = () => {
               GET HELP NOW
             </Button>
           </Link>
-          <Button variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
+          <Button variant="hero">
             LEARN MORE
           </Button>
         </div>
