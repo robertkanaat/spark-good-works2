@@ -152,7 +152,10 @@ serve(async (req) => {
 </html>`;
     
     return new Response(paymentFormHtml, {
-      headers: { "Content-Type": "text/html" },
+      headers: { 
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "no-cache"
+      },
     });
   }
 
