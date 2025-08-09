@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import heroBg from "@/assets/resources-hero-bg.jpg";
+import heroBg from "@/assets/open-letter-hero-bg.jpg";
 
 const OpenLetter = () => {
   useEffect(() => {
