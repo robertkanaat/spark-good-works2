@@ -160,7 +160,7 @@ serve(async (req) => {
   }
 
   try {
-    const { amount, currency = "USD", isRecurring = false, customerEmail } = await req.json();
+    const { amount, currency = "USD", isRecurring = false, customerEmail, embedForm = false } = await req.json();
 
     if (!amount || amount < 1) {
       throw new Error("Invalid amount");
@@ -173,25 +173,106 @@ serve(async (req) => {
       throw new Error("INCHEK security key not configured");
     }
 
-    // Generate unique order ID and create payment form URL
     const orderid = `donation-${Date.now()}`;
+    const description = `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`;
     
-    // Instead of returning HTML, return a URL to our edge function that serves the form
-    const baseUrl = req.headers.get("origin") || "https://geniusrecovery.org";
-    const functionUrl = `https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/create-payment`;
-    const paymentUrl = `${functionUrl}?payment_id=${orderid}&amount=${amount}&recurring=${isRecurring}&email=${encodeURIComponent(customerEmail || '')}`;
+    if (embedForm) {
+      // Return just the form HTML for embedding
+      const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+      const successUrl = `${baseUrl}/payment-success`;
+      const failureUrl = `${baseUrl}/payment-failed`;
+      
+      const formHtml = `
+        <form action="https://secure.inchekgateway.com/api/transact.php" method="POST" style="color: white;">
+          <input type="hidden" name="type" value="sale">
+          <input type="hidden" name="security_key" value="${securityKey}">
+          <input type="hidden" name="amount" value="${amount}">
+          <input type="hidden" name="currency" value="${currency.toUpperCase()}">
+          <input type="hidden" name="order_description" value="${description}">
+          <input type="hidden" name="orderid" value="${orderid}">
+          <input type="hidden" name="redirect_url" value="${successUrl}">
+          <input type="hidden" name="decline_url" value="${failureUrl}">
+          ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
+          
+          ${isRecurring ? `
+          <input type="hidden" name="billing_method" value="recurring">
+          <input type="hidden" name="recurring" value="add_subscription">
+          <input type="hidden" name="plan_amount" value="${amount}">
+          <input type="hidden" name="month_frequency" value="1">
+          <input type="hidden" name="day_of_month" value="1">
+          <input type="hidden" name="plan_payments" value="0">
+          ` : ''}
+          
+          <div style="margin-bottom: 20px; text-align: center;">
+            <div style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">$${amount} ${isRecurring ? 'Monthly' : 'One-time'} Donation</div>
+            <div style="opacity: 0.8;">${description}</div>
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Cardholder Name:</label>
+            <input type="text" name="first_name" placeholder="First Name" required style="width: 48%; padding: 10px; margin-right: 4%; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
+            <input type="text" name="last_name" placeholder="Last Name" required style="width: 48%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Credit Card Number:</label>
+            <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required style="width: 100%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333; box-sizing: border-box;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Expiration Date:</label>
+            <input type="text" name="ccexp" placeholder="MMYY" maxlength="4" required style="width: 48%; padding: 10px; margin-right: 4%; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
+            <input type="text" name="cvv" placeholder="CVV" maxlength="4" required style="width: 48%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Billing Address:</label>
+            <input type="text" name="address1" placeholder="Street Address" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333; box-sizing: border-box;">
+            <input type="text" name="city" placeholder="City" required style="width: 48%; padding: 10px; margin-right: 4%; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
+            <input type="text" name="state" placeholder="State" maxlength="2" required style="width: 23%; padding: 10px; margin-right: 4%; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
+            <input type="text" name="zip" placeholder="ZIP" required style="width: 21%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <input type="text" name="phone" placeholder="Phone Number (Optional)" style="width: 100%; padding: 10px; border: none; border-radius: 5px; background: rgba(255,255,255,0.9); color: #333; box-sizing: border-box;">
+          </div>
+          
+          <button type="submit" style="background: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%;">
+            Complete $${amount} ${isRecurring ? 'Monthly' : ''} Donation
+          </button>
+          
+          <p style="text-align: center; margin-top: 15px; font-size: 12px; opacity: 0.8;">
+            Secure donation processing • ${isRecurring ? 'Cancel anytime • ' : ''}Tax deductible
+          </p>
+        </form>`;
 
-    console.log("Generated payment URL for order:", orderid);
-    
-    return new Response(JSON.stringify({ 
-      payment_url: paymentUrl,
-      payment_id: orderid,
-      status: "payment_url_generated",
-      message: "Payment URL generated successfully"
-    }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
-    });
+      return new Response(JSON.stringify({ 
+        form_html: formHtml,
+        payment_id: orderid,
+        status: "form_html_generated",
+        message: "Payment form HTML generated successfully"
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      });
+    } else {
+      // Generate unique order ID and create payment form URL
+      const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+      const functionUrl = `https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/create-payment`;
+      const paymentUrl = `${functionUrl}?payment_id=${orderid}&amount=${amount}&recurring=${isRecurring}&email=${encodeURIComponent(customerEmail || '')}`;
+
+      console.log("Generated payment URL for order:", orderid);
+      
+      return new Response(JSON.stringify({ 
+        payment_url: paymentUrl,
+        payment_id: orderid,
+        status: "payment_url_generated",
+        message: "Payment URL generated successfully"
+      }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      });
+    }
 
   } catch (error) {
     console.error("=== PAYMENT PROCESSING ERROR ===");

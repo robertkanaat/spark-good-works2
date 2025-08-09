@@ -26,6 +26,8 @@ const Donation = () => {
   const [isMonthly, setIsMonthly] = useState(true); // Default to monthly
   const [isProcessing, setIsProcessing] = useState(false);
   const [email, setEmail] = useState("");
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [paymentFormHtml, setPaymentFormHtml] = useState("");
   const { toast } = useToast();
   const amount = donationAmount[0];
 
@@ -132,7 +134,8 @@ const Donation = () => {
           amount: amount,
           currency: 'USD',
           isRecurring: isMonthly,
-          customerEmail: email
+          customerEmail: email,
+          embedForm: true // Request form HTML instead of redirect URL
         }
       });
 
@@ -140,11 +143,11 @@ const Donation = () => {
         throw error;
       }
 
-      if (data.payment_url) {
-        // Open payment page in new tab
-        window.open(data.payment_url, '_blank');
+      if (data.form_html) {
+        setPaymentFormHtml(data.form_html);
+        setShowPaymentForm(true);
       } else {
-        throw new Error('No payment URL received');
+        throw new Error('No payment form received');
       }
 
     } catch (error) {
@@ -189,137 +192,156 @@ const Donation = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left side - Donation controls */}
+          {/* Left side - Donation controls or Payment form */}
           <Card className="p-8 bg-white/95 backdrop-blur-sm">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Choose Your Impact</h2>
-              <p className="text-muted-foreground">
-                Select your donation amount and frequency to see the lives you'll transform
-              </p>
-            </div>
-
-            {/* Monthly/One-time Toggle */}
-            <div className="flex items-center justify-center space-x-4 mb-8 p-4 bg-muted/30 rounded-lg">
-              <Label htmlFor="donation-type" className={`font-medium ${!isMonthly ? 'text-muted-foreground' : ''}`}>
-                One-time
-              </Label>
-              <Switch
-                id="donation-type"
-                checked={isMonthly}
-                onCheckedChange={setIsMonthly}
-              />
-              <Label htmlFor="donation-type" className={`font-medium ${isMonthly ? 'text-muted-foreground' : ''}`}>
-                Monthly
-              </Label>
-            </div>
-
-            {/* Amount display with tier */}
-            <div className="text-center mb-8">
-              <div className="text-6xl font-bold text-primary mb-2">
-                ${amount}
-              </div>
-              <div className="text-lg text-muted-foreground mb-2">
-                {isMonthly ? 'per month' : 'one-time donation'}
-              </div>
-              <div className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
-                currentTier === 'hero' ? 'bg-purple-100 text-purple-800' :
-                currentTier === 'champion' ? 'bg-yellow-100 text-yellow-800' :
-                currentTier === 'supporter' ? 'bg-blue-100 text-blue-800' :
-                'bg-green-100 text-green-800'
-              }`}>
-                {currentTier.charAt(0).toUpperCase() + currentTier.slice(1)} Donor
-              </div>
-            </div>
-
-            {/* Slider */}
-            <div className="mb-8 px-4">
-              <Label className="text-base font-medium mb-4 block">Donation Amount</Label>
-              <Slider
-                value={donationAmount}
-                onValueChange={handleSliderChange}
-                max={500}
-                min={10}
-                step={5}
-                className="w-full"
-              />
-              <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                <span>$10</span>
-                <span>$500+</span>
-              </div>
-            </div>
-
-            {/* Custom Amount Input */}
-            <div className="mb-8">
-              <Label className="text-base font-medium mb-4 block">Or enter a custom amount</Label>
-              <div className="flex gap-2">
-                <div className="relative flex-1">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
-                  <Input
-                    type="number"
-                    placeholder="Enter amount"
-                    value={customAmount}
-                    onChange={(e) => {
-                      handleCustomAmountChange(e.target.value);
-                      setIsCustomMode(true);
-                    }}
-                    className="pl-8"
-                  />
+            {!showPaymentForm ? (
+              <>
+                <div className="text-center mb-8">
+                  <h2 className="text-3xl font-bold mb-4">Choose Your Impact</h2>
+                  <p className="text-muted-foreground">
+                    Select your donation amount and frequency to see the lives you'll transform
+                  </p>
                 </div>
+
+                {/* Monthly/One-time Toggle */}
+                <div className="flex items-center justify-center space-x-4 mb-8 p-4 bg-muted/30 rounded-lg">
+                  <Label htmlFor="donation-type" className={`font-medium ${!isMonthly ? 'text-muted-foreground' : ''}`}>
+                    One-time
+                  </Label>
+                  <Switch
+                    id="donation-type"
+                    checked={isMonthly}
+                    onCheckedChange={setIsMonthly}
+                  />
+                  <Label htmlFor="donation-type" className={`font-medium ${isMonthly ? 'text-muted-foreground' : ''}`}>
+                    Monthly
+                  </Label>
+                </div>
+
+                {/* Amount display with tier */}
+                <div className="text-center mb-8">
+                  <div className="text-6xl font-bold text-primary mb-2">
+                    ${amount}
+                  </div>
+                  <div className="text-lg text-muted-foreground mb-2">
+                    {isMonthly ? 'per month' : 'one-time donation'}
+                  </div>
+                  <div className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
+                    currentTier === 'hero' ? 'bg-purple-100 text-purple-800' :
+                    currentTier === 'champion' ? 'bg-yellow-100 text-yellow-800' :
+                    currentTier === 'supporter' ? 'bg-blue-100 text-blue-800' :
+                    'bg-green-100 text-green-800'
+                  }`}>
+                    {currentTier.charAt(0).toUpperCase() + currentTier.slice(1)} Donor
+                  </div>
+                </div>
+
+                {/* Slider */}
+                <div className="mb-8 px-4">
+                  <Label className="text-base font-medium mb-4 block">Donation Amount</Label>
+                  <Slider
+                    value={donationAmount}
+                    onValueChange={handleSliderChange}
+                    max={500}
+                    min={10}
+                    step={5}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-sm text-muted-foreground mt-2">
+                    <span>$10</span>
+                    <span>$500+</span>
+                  </div>
+                </div>
+
+                {/* Custom Amount Input */}
+                <div className="mb-8">
+                  <Label className="text-base font-medium mb-4 block">Or enter a custom amount</Label>
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
+                      <Input
+                        type="number"
+                        placeholder="Enter amount"
+                        value={customAmount}
+                        onChange={(e) => {
+                          handleCustomAmountChange(e.target.value);
+                          setIsCustomMode(true);
+                        }}
+                        className="pl-8"
+                      />
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        setIsCustomMode(false);
+                        setCustomAmount("");
+                      }}
+                      disabled={!isCustomMode}
+                    >
+                      Use Slider
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Email Input */}
+                <div className="mb-8">
+                  <Label htmlFor="email" className="text-base font-medium mb-4 block">Email Address</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Required for donation receipt and updates
+                  </p>
+                </div>
+
+                {/* Quick amounts - updated values */}
+                <div className="grid grid-cols-4 gap-3 mb-8">
+                  {[25, 50, 100, 200].map((quickAmount) => (
+                    <Button
+                      key={quickAmount}
+                      variant={amount === quickAmount ? "default" : "outline"}
+                      onClick={() => setDonationAmount([quickAmount])}
+                      className="h-12"
+                    >
+                      ${quickAmount}
+                    </Button>
+                  ))}
+                </div>
+
+                {/* Donate button */}
                 <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    setIsCustomMode(false);
-                    setCustomAmount("");
-                  }}
-                  disabled={!isCustomMode}
+                  onClick={handleDonation}
+                  disabled={isProcessing || !email.trim()}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4"
                 >
-                  Use Slider
+                  {isProcessing ? 'PROCESSING...' : `DONATE $${amount} ${isMonthly ? 'MONTHLY' : 'NOW'}`}
                 </Button>
+
+                <p className="text-xs text-muted-foreground text-center">
+                  Secure donation processing • {isMonthly ? 'Cancel anytime • ' : ''}Tax deductible
+                </p>
+              </>
+            ) : (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold">Complete Your Payment</h3>
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowPaymentForm(false)}
+                  >
+                    Back
+                  </Button>
+                </div>
+                <div 
+                  dangerouslySetInnerHTML={{ __html: paymentFormHtml }}
+                />
               </div>
-            </div>
-
-            {/* Email Input */}
-            <div className="mb-8">
-              <Label htmlFor="email" className="text-base font-medium mb-4 block">Email Address</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <p className="text-xs text-muted-foreground mt-2">
-                Required for donation receipt and updates
-              </p>
-            </div>
-
-            {/* Quick amounts - updated values */}
-            <div className="grid grid-cols-4 gap-3 mb-8">
-              {[25, 50, 100, 200].map((quickAmount) => (
-                <Button
-                  key={quickAmount}
-                  variant={amount === quickAmount ? "default" : "outline"}
-                  onClick={() => setDonationAmount([quickAmount])}
-                  className="h-12"
-                >
-                  ${quickAmount}
-                </Button>
-              ))}
-            </div>
-
-            {/* Donate button */}
-            <Button 
-              onClick={handleDonation}
-              disabled={isProcessing || !email.trim()}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4"
-            >
-              {isProcessing ? 'PROCESSING...' : `DONATE $${amount} ${isMonthly ? 'MONTHLY' : 'NOW'}`}
-            </Button>
-
-            <p className="text-xs text-muted-foreground text-center">
-              Secure donation processing • {isMonthly ? 'Cancel anytime • ' : ''}Tax deductible
-            </p>
+            )}
           </Card>
 
           {/* Right side - Impact visualization */}
