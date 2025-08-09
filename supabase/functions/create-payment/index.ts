@@ -215,11 +215,11 @@ serve(async (req) => {
               <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Cardholder Name</label>
               <div style="display: flex; gap: 10px;">
                 <input type="text" name="first_name" placeholder="First Name" required 
-                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
+                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; box-sizing: border-box;"
                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
                 <input type="text" name="last_name" placeholder="Last Name" required 
-                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
+                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; box-sizing: border-box;"
                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
               </div>
@@ -260,87 +260,147 @@ serve(async (req) => {
                      onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
               <div style="display: flex; gap: 8px; margin-bottom: 10px;">
                 <input type="text" name="city" placeholder="City" required 
-                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 100px;"
-                       onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
-                       onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
-                <input type="text" name="state" placeholder="State/Province" required 
-                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 100px;"
+                       style="flex: 2; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; box-sizing: border-box;"
                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
                 <input type="text" name="zip" placeholder="ZIP/Postal" required 
-                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; min-width: 80px;"
+                       style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; box-sizing: border-box;"
                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
               </div>
-              <select name="country" required 
-                      style="width: 100%; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer;"
-                      onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
-                      onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
-                <option value="US" selected>United States</option>
-                <option value="CA">Canada</option>
-                <option value="GB">United Kingdom</option>
-                <option value="AU">Australia</option>
-                <option value="DE">Germany</option>
-                <option value="FR">France</option>
-                <option value="IT">Italy</option>
-                <option value="ES">Spain</option>
-                <option value="NL">Netherlands</option>
-                <option value="BE">Belgium</option>
-                <option value="CH">Switzerland</option>
-                <option value="AT">Austria</option>
-                <option value="SE">Sweden</option>
-                <option value="NO">Norway</option>
-                <option value="DK">Denmark</option>
-                <option value="FI">Finland</option>
-                <option value="IE">Ireland</option>
-                <option value="NZ">New Zealand</option>
-                <option value="JP">Japan</option>
-                <option value="SG">Singapore</option>
-                <option value="HK">Hong Kong</option>
-                <option value="IN">India</option>
-                <option value="BR">Brazil</option>
-                <option value="MX">Mexico</option>
-                <option value="AR">Argentina</option>
-                <option value="CL">Chile</option>
-                <option value="CO">Colombia</option>
-                <option value="PE">Peru</option>
-                <option value="ZA">South Africa</option>
-                <option value="EG">Egypt</option>
-                <option value="NG">Nigeria</option>
-                <option value="KE">Kenya</option>
-                <option value="GH">Ghana</option>
-                <option value="IL">Israel</option>
-                <option value="AE">United Arab Emirates</option>
-                <option value="SA">Saudi Arabia</option>
-                <option value="TR">Turkey</option>
-                <option value="GR">Greece</option>
-                <option value="PT">Portugal</option>
-                <option value="CZ">Czech Republic</option>
-                <option value="PL">Poland</option>
-                <option value="HU">Hungary</option>
-                <option value="RO">Romania</option>
-                <option value="BG">Bulgaria</option>
-                <option value="HR">Croatia</option>
-                <option value="SI">Slovenia</option>
-                <option value="SK">Slovakia</option>
-                <option value="LT">Lithuania</option>
-                <option value="LV">Latvia</option>
-                <option value="EE">Estonia</option>
-                <option value="IS">Iceland</option>
-                <option value="LU">Luxembourg</option>
-                <option value="MT">Malta</option>
-                <option value="CY">Cyprus</option>
-                <option value="OTHER">Other</option>
-              </select>
-            </div>
-            
-            <div style="margin-bottom: 25px;">
-              <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Phone Number (Optional)</label>
-              <input type="text" name="phone" placeholder="(555) 123-4567" 
+              <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                <select name="country" required 
+                        style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer;"
+                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'"
+                        onchange="toggleStateField(this.value)">
+                  <option value="US" selected>United States</option>
+                  <option value="CA">Canada</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="AU">Australia</option>
+                  <option value="DE">Germany</option>
+                  <option value="FR">France</option>
+                  <option value="IT">Italy</option>
+                  <option value="ES">Spain</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="BE">Belgium</option>
+                  <option value="CH">Switzerland</option>
+                  <option value="AT">Austria</option>
+                  <option value="SE">Sweden</option>
+                  <option value="NO">Norway</option>
+                  <option value="DK">Denmark</option>
+                  <option value="FI">Finland</option>
+                  <option value="IE">Ireland</option>
+                  <option value="NZ">New Zealand</option>
+                  <option value="JP">Japan</option>
+                  <option value="SG">Singapore</option>
+                  <option value="HK">Hong Kong</option>
+                  <option value="IN">India</option>
+                  <option value="BR">Brazil</option>
+                  <option value="MX">Mexico</option>
+                  <option value="AR">Argentina</option>
+                  <option value="CL">Chile</option>
+                  <option value="CO">Colombia</option>
+                  <option value="PE">Peru</option>
+                  <option value="ZA">South Africa</option>
+                  <option value="EG">Egypt</option>
+                  <option value="NG">Nigeria</option>
+                  <option value="KE">Kenya</option>
+                  <option value="GH">Ghana</option>
+                  <option value="IL">Israel</option>
+                  <option value="AE">United Arab Emirates</option>
+                  <option value="SA">Saudi Arabia</option>
+                  <option value="TR">Turkey</option>
+                  <option value="GR">Greece</option>
+                  <option value="PT">Portugal</option>
+                  <option value="CZ">Czech Republic</option>
+                  <option value="PL">Poland</option>
+                  <option value="HU">Hungary</option>
+                  <option value="RO">Romania</option>
+                  <option value="BG">Bulgaria</option>
+                  <option value="HR">Croatia</option>
+                  <option value="SI">Slovenia</option>
+                  <option value="SK">Slovakia</option>
+                  <option value="LV">Latvia</option>
+                  <option value="LT">Lithuania</option>
+                  <option value="EE">Estonia</option>
+                  <option value="IS">Iceland</option>
+                  <option value="LU">Luxembourg</option>
+                  <option value="MT">Malta</option>
+                  <option value="CY">Cyprus</option>
+                  <option value="OTHER">Other</option>
+                </select>
+                <select id="stateField" name="state" style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer;"
+                        onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
+                        onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'"
+                        required>
+                  <option value="">Select State/Province</option>
+                </select>
+              </div>
+              <input type="text" name="phone" placeholder="Phone Number (optional)" 
                      style="width: 100%; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
                      onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                      onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
-            </div>
+             </div>
+             
+             <script>
+               const usStates = [
+                 {code: 'AL', name: 'Alabama'}, {code: 'AK', name: 'Alaska'}, {code: 'AZ', name: 'Arizona'}, {code: 'AR', name: 'Arkansas'},
+                 {code: 'CA', name: 'California'}, {code: 'CO', name: 'Colorado'}, {code: 'CT', name: 'Connecticut'}, {code: 'DE', name: 'Delaware'},
+                 {code: 'FL', name: 'Florida'}, {code: 'GA', name: 'Georgia'}, {code: 'HI', name: 'Hawaii'}, {code: 'ID', name: 'Idaho'},
+                 {code: 'IL', name: 'Illinois'}, {code: 'IN', name: 'Indiana'}, {code: 'IA', name: 'Iowa'}, {code: 'KS', name: 'Kansas'},
+                 {code: 'KY', name: 'Kentucky'}, {code: 'LA', name: 'Louisiana'}, {code: 'ME', name: 'Maine'}, {code: 'MD', name: 'Maryland'},
+                 {code: 'MA', name: 'Massachusetts'}, {code: 'MI', name: 'Michigan'}, {code: 'MN', name: 'Minnesota'}, {code: 'MS', name: 'Mississippi'},
+                 {code: 'MO', name: 'Missouri'}, {code: 'MT', name: 'Montana'}, {code: 'NE', name: 'Nebraska'}, {code: 'NV', name: 'Nevada'},
+                 {code: 'NH', name: 'New Hampshire'}, {code: 'NJ', name: 'New Jersey'}, {code: 'NM', name: 'New Mexico'}, {code: 'NY', name: 'New York'},
+                 {code: 'NC', name: 'North Carolina'}, {code: 'ND', name: 'North Dakota'}, {code: 'OH', name: 'Ohio'}, {code: 'OK', name: 'Oklahoma'},
+                 {code: 'OR', name: 'Oregon'}, {code: 'PA', name: 'Pennsylvania'}, {code: 'RI', name: 'Rhode Island'}, {code: 'SC', name: 'South Carolina'},
+                 {code: 'SD', name: 'South Dakota'}, {code: 'TN', name: 'Tennessee'}, {code: 'TX', name: 'Texas'}, {code: 'UT', name: 'Utah'},
+                 {code: 'VT', name: 'Vermont'}, {code: 'VA', name: 'Virginia'}, {code: 'WA', name: 'Washington'}, {code: 'WV', name: 'West Virginia'},
+                 {code: 'WI', name: 'Wisconsin'}, {code: 'WY', name: 'Wyoming'}, {code: 'DC', name: 'District of Columbia'}
+               ];
+               
+               const canadianProvinces = [
+                 {code: 'AB', name: 'Alberta'}, {code: 'BC', name: 'British Columbia'}, {code: 'MB', name: 'Manitoba'},
+                 {code: 'NB', name: 'New Brunswick'}, {code: 'NL', name: 'Newfoundland and Labrador'}, {code: 'NS', name: 'Nova Scotia'},
+                 {code: 'NT', name: 'Northwest Territories'}, {code: 'NU', name: 'Nunavut'}, {code: 'ON', name: 'Ontario'},
+                 {code: 'PE', name: 'Prince Edward Island'}, {code: 'QC', name: 'Quebec'}, {code: 'SK', name: 'Saskatchewan'},
+                 {code: 'YT', name: 'Yukon'}
+               ];
+               
+               function toggleStateField(country) {
+                 const stateField = document.getElementById('stateField');
+                 stateField.innerHTML = '<option value="">Select State/Province</option>';
+                 
+                 if (country === 'US') {
+                   stateField.style.display = 'block';
+                   stateField.required = true;
+                   usStates.forEach(state => {
+                     const option = document.createElement('option');
+                     option.value = state.code;
+                     option.textContent = state.name;
+                     stateField.appendChild(option);
+                   });
+                 } else if (country === 'CA') {
+                   stateField.style.display = 'block';
+                   stateField.required = true;
+                   canadianProvinces.forEach(province => {
+                     const option = document.createElement('option');
+                     option.value = province.code;
+                     option.textContent = province.name;
+                     stateField.appendChild(option);
+                   });
+                 } else {
+                   stateField.style.display = 'none';
+                   stateField.required = false;
+                 }
+               }
+               
+               // Initialize on page load
+               document.addEventListener('DOMContentLoaded', function() {
+                 toggleStateField('US'); // Default to US
+               });
+             </script>
             
             <button type="submit" 
                     style="background: linear-gradient(45deg, #4CAF50, #45a049); color: white; padding: 18px 30px; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: bold; width: 100%; box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;"
@@ -349,54 +409,38 @@ serve(async (req) => {
               🔒 Complete $${amount} ${isRecurring ? 'Monthly' : ''} Donation
             </button>
             
-            <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-              <p style="margin: 0; font-size: 14px; opacity: 0.9; line-height: 1.4;">
-                🛡️ Secure SSL encryption • ${isRecurring ? '📅 Cancel anytime • ' : ''}📄 Tax deductible<br>
-                <span style="font-size: 12px; opacity: 0.7;">Your payment information is protected with bank-level security</span>
-              </p>
+            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+              <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
+                <span style="font-size: 12px; opacity: 0.8;">🔒 Secure encryption</span>
+                <span style="font-size: 12px; opacity: 0.8;">💳 Safe payment processing</span>
+              </div>
+              <div style="font-size: 12px; opacity: 0.8;">
+                ${isRecurring ? 'Cancel your monthly donation anytime • ' : ''}Tax deductible • Genius Recovery is a registered 501(c)(3)
+              </div>
             </div>
           </form>
         </div>`;
-
-      return new Response(JSON.stringify({ 
-        form_html: formHtml,
-        payment_id: orderid,
-        status: "form_html_generated",
-        message: "Payment form HTML generated successfully"
-      }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 200,
-      });
-    } else {
-      // Generate unique order ID and create payment form URL
-      const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
-      const functionUrl = `https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/create-payment`;
-      const paymentUrl = `${functionUrl}?payment_id=${orderid}&amount=${amount}&recurring=${isRecurring}&email=${encodeURIComponent(customerEmail || '')}`;
-
-      console.log("Generated payment URL for order:", orderid);
       
-      return new Response(JSON.stringify({ 
-        payment_url: paymentUrl,
-        payment_id: orderid,
-        status: "payment_url_generated",
-        message: "Payment URL generated successfully"
-      }), {
+      return new Response(JSON.stringify({ html: formHtml }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 200,
       });
     }
-
-  } catch (error) {
-    console.error("=== PAYMENT PROCESSING ERROR ===");
-    console.error("Error:", error.message);
-    console.error("Stack:", error.stack);
+    
+    // Generate a direct payment URL using INCHEK
+    const paymentFormUrl = `https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com/api/create-payment?payment_id=${orderid}&amount=${amount}&recurring=${isRecurring}&email=${encodeURIComponent(customerEmail || '')}`;
     
     return new Response(JSON.stringify({ 
-      error: error.message || "Payment processing failed",
-      details: error.toString()
+      payment_url: paymentFormUrl,
+      payment_id: orderid 
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
+
+  } catch (error) {
+    console.error("Payment error:", error);
+    return new Response(JSON.stringify({ error: error.message }), {
       status: 400,
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
 });
