@@ -157,8 +157,8 @@ const Donation = () => {
         throw error;
       }
 
-      if (data.form_html) {
-        setPaymentFormHtml(data.form_html);
+      if (data.html) {
+        setPaymentFormHtml(data.html);
         setShowPaymentForm(true);
       } else {
         throw new Error('No payment form received');
