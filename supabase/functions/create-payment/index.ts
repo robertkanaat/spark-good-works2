@@ -652,12 +652,12 @@ serve(async (req) => {
                  if (country === 'US') {
                    stateField.style.display = 'block';
                    stateField.required = true;
-                   usStates.forEach(state => {
-                     const option = document.createElement('option');
-                     option.value = state.code;
-                     option.textContent = state.name;
-                     stateField.appendChild(option);
-                   });
+                    usStates.forEach(state => {
+                      const option = document.createElement('option');
+                      option.value = state.code;
+                      option.textContent = state.code;
+                      stateField.appendChild(option);
+                    });
                  } else if (country === 'CA') {
                    stateField.style.display = 'block';
                    stateField.required = true;
