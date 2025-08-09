@@ -11,37 +11,35 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  try {
-    const { amount, currency = "USD", isRecurring = false, customerEmail } = await req.json();
-
-    if (!amount || amount < 1) {
-      throw new Error("Invalid amount");
-    }
-
-    // Get INCHEK credentials from environment
-    const securityKey = Deno.env.get("INCHEK_SECURITY_KEY");
+  const url = new URL(req.url);
+  
+  // If requesting payment form directly, serve the HTML
+  if (req.method === "GET" && url.searchParams.has('payment_id')) {
+    const paymentId = url.searchParams.get('payment_id');
+    const amount = url.searchParams.get('amount');
+    const isRecurring = url.searchParams.get('recurring') === 'true';
+    const customerEmail = url.searchParams.get('email');
     
-    if (!securityKey) {
-      throw new Error("INCHEK security key not configured");
+    if (!paymentId || !amount) {
+      return new Response("Missing required parameters", { status: 400 });
     }
-
-    // For INCHEK, we need to create a hosted payment page
-    // This is the most reliable way to handle payments with their system
+    
+    const securityKey = Deno.env.get("INCHEK_SECURITY_KEY");
+    if (!securityKey) {
+      return new Response("Payment gateway not configured", { status: 500 });
+    }
     
     const baseUrl = req.headers.get("origin") || "https://geniusrecovery.org";
     const successUrl = `${baseUrl}/payment-success`;
     const failureUrl = `${baseUrl}/payment-failed`;
-    
-    // Create a simple HTML payment form that will be hosted
-    const orderid = `donation-${Date.now()}`;
     const description = `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`;
     
-    // Generate payment form HTML with INCHEK's required fields
     const paymentFormHtml = `
 <!DOCTYPE html>
 <html>
 <head>
     <title>Genius Recovery Donation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body { 
             font-family: Arial, sans-serif; 
@@ -50,6 +48,7 @@ serve(async (req) => {
             padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            min-height: 100vh;
         }
         .form-container {
             background: rgba(255,255,255,0.1);
@@ -66,6 +65,7 @@ serve(async (req) => {
             border-radius: 8px;
             background: rgba(255,255,255,0.9);
             color: #333;
+            box-sizing: border-box;
         }
         .button {
             background: #4CAF50;
@@ -85,6 +85,11 @@ serve(async (req) => {
             text-align: center;
             margin: 20px 0;
         }
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -97,9 +102,9 @@ serve(async (req) => {
             <input type="hidden" name="type" value="sale">
             <input type="hidden" name="security_key" value="${securityKey}">
             <input type="hidden" name="amount" value="${amount}">
-            <input type="hidden" name="currency" value="${currency.toUpperCase()}">
+            <input type="hidden" name="currency" value="USD">
             <input type="hidden" name="order_description" value="${description}">
-            <input type="hidden" name="orderid" value="${orderid}">
+            <input type="hidden" name="orderid" value="${paymentId}">
             <input type="hidden" name="redirect_url" value="${successUrl}">
             <input type="hidden" name="decline_url" value="${failureUrl}">
             ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
@@ -145,21 +150,41 @@ serve(async (req) => {
     </div>
 </body>
 </html>`;
+    
+    return new Response(paymentFormHtml, {
+      headers: { "Content-Type": "text/html" },
+    });
+  }
 
-    console.log("Generated payment form for order:", orderid);
+  try {
+    const { amount, currency = "USD", isRecurring = false, customerEmail } = await req.json();
 
-    // Return the payment form HTML as a data URL that can be opened in a new window
-    // Use TextEncoder to properly handle Unicode characters before base64 encoding
-    const encoder = new TextEncoder();
-    const data = encoder.encode(paymentFormHtml);
-    const base64 = btoa(String.fromCharCode(...data));
-    const dataUrl = `data:text/html;base64,${base64}`;
+    if (!amount || amount < 1) {
+      throw new Error("Invalid amount");
+    }
+
+    // Get INCHEK credentials from environment
+    const securityKey = Deno.env.get("INCHEK_SECURITY_KEY");
+    
+    if (!securityKey) {
+      throw new Error("INCHEK security key not configured");
+    }
+
+    // Generate unique order ID and create payment form URL
+    const orderid = `donation-${Date.now()}`;
+    
+    // Instead of returning HTML, return a URL to our edge function that serves the form
+    const baseUrl = req.headers.get("origin") || "https://geniusrecovery.org";
+    const functionUrl = `https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/create-payment`;
+    const paymentUrl = `${functionUrl}?payment_id=${orderid}&amount=${amount}&recurring=${isRecurring}&email=${encodeURIComponent(customerEmail || '')}`;
+
+    console.log("Generated payment URL for order:", orderid);
     
     return new Response(JSON.stringify({ 
-      payment_url: dataUrl,
+      payment_url: paymentUrl,
       payment_id: orderid,
-      status: "form_generated",
-      message: "Payment form generated successfully"
+      status: "payment_url_generated",
+      message: "Payment URL generated successfully"
     }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
