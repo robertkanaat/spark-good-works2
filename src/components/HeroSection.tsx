@@ -208,7 +208,7 @@ const HeroSection = () => {
                     </div>
                   </div>
                   
-                  <Link to="/support">
+                  <Link to="/emergency">
                     <Button 
                       variant="donate" 
                       className="w-full py-6 text-xl font-bold mb-4 gap-3 relative overflow-hidden group"
