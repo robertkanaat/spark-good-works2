@@ -43,6 +43,14 @@ All colors MUST be HSL.
     --hero-bg: 25 45% 15%;
     --hero-overlay: 25 95% 5%;
 
+    /* Enhanced design tokens for beautiful layouts */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--donate)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card) / 0.8) 0%, hsl(var(--card) / 0.95) 100%);
+    --shadow-elegant: 0 25px 50px -12px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 20px 25px -5px hsl(var(--foreground) / 0.1), 0 10px 10px -5px hsl(var(--foreground) / 0.04);
+    --blur-backdrop: blur(20px);
+
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
@@ -97,6 +105,15 @@ All colors MUST be HSL.
 
     --hero-bg: 25 45% 12%;
     --hero-overlay: 25 95% 3%;
+
+    /* Dark mode gradients and shadows */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--donate)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card) / 0.6) 0%, hsl(var(--card) / 0.95) 100%);
+    --shadow-elegant: 0 25px 50px -12px hsl(var(--primary) / 0.25);
+    --shadow-card: 0 20px 25px -5px hsl(var(--background) / 0.3), 0 10px 10px -5px hsl(var(--background) / 0.1);
+    --blur-backdrop: blur(20px);
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
