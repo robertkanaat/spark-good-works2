@@ -22,22 +22,24 @@ const DonationSection = () => {
             onMouseLeave={() => setHoveredButton(null)}
           >
             <div className="text-muted-foreground text-sm mb-4 font-medium tracking-wide">I NEED...</div>
-            <div className="relative">
-              <button className="border-2 border-border hover:border-primary/50 bg-white/80 backdrop-blur-sm hover:bg-muted/50 px-10 py-8 text-xl font-bold rounded-2xl w-full transition-all duration-500 hover:scale-105 hover:-translate-y-2 shadow-lg hover:shadow-2xl group-hover:shadow-primary/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10 flex items-center justify-center gap-3">
-                  <span className={`text-3xl transition-transform duration-500 ${hoveredButton === 'help' ? 'scale-125 rotate-12' : ''}`}>🆘</span>
-                  <span>HELP</span>
-                </div>
-                {/* Floating particles */}
-                {hoveredButton === 'help' && (
-                  <>
-                    <div className="absolute top-2 right-2 w-2 h-2 bg-primary/40 rounded-full animate-bounce"></div>
-                    <div className="absolute bottom-2 left-2 w-1 h-1 bg-orange-500/40 rounded-full animate-ping"></div>
-                  </>
-                )}
-              </button>
-            </div>
+            <Link to="/emergency" className="block">
+              <div className="relative">
+                <button className="border-2 border-border hover:border-primary/50 bg-white/80 backdrop-blur-sm hover:bg-muted/50 px-10 py-8 text-xl font-bold rounded-2xl w-full transition-all duration-500 hover:scale-105 hover:-translate-y-2 shadow-lg hover:shadow-2xl group-hover:shadow-primary/20 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10 flex items-center justify-center gap-3">
+                    <span className={`text-3xl transition-transform duration-500 ${hoveredButton === 'help' ? 'scale-125 rotate-12' : ''}`}>🆘</span>
+                    <span>HELP</span>
+                  </div>
+                  {/* Floating particles */}
+                  {hoveredButton === 'help' && (
+                    <>
+                      <div className="absolute top-2 right-2 w-2 h-2 bg-primary/40 rounded-full animate-bounce"></div>
+                      <div className="absolute bottom-2 left-2 w-1 h-1 bg-orange-500/40 rounded-full animate-ping"></div>
+                    </>
+                  )}
+                </button>
+              </div>
+            </Link>
           </div>
           
           {/* DONATE Button */}
@@ -75,22 +77,24 @@ const DonationSection = () => {
             onMouseLeave={() => setHoveredButton(null)}
           >
             <div className="text-muted-foreground text-sm mb-4 font-medium tracking-wide">I WANT TO...</div>
-            <div className="relative">
-              <button className="border-2 border-border hover:border-green-500/50 bg-white/80 backdrop-blur-sm hover:bg-green-50/50 px-10 py-8 text-xl font-bold rounded-2xl w-full transition-all duration-500 hover:scale-105 hover:-translate-y-2 shadow-lg hover:shadow-2xl group-hover:shadow-green-500/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10 flex items-center justify-center gap-3">
-                  <span className={`text-3xl transition-transform duration-500 ${hoveredButton === 'support' ? 'scale-125 rotate-12' : ''}`}>🤝</span>
-                  <span>SUPPORT</span>
-                </div>
-                {/* Floating hearts */}
-                {hoveredButton === 'support' && (
-                  <>
-                    <div className="absolute top-2 left-2 text-red-400 animate-pulse">💚</div>
-                    <div className="absolute bottom-2 right-2 text-pink-400 animate-bounce">💙</div>
-                  </>
-                )}
-              </button>
-            </div>
+            <Link to="/support" className="block">
+              <div className="relative">
+                <button className="border-2 border-border hover:border-green-500/50 bg-white/80 backdrop-blur-sm hover:bg-green-50/50 px-10 py-8 text-xl font-bold rounded-2xl w-full transition-all duration-500 hover:scale-105 hover:-translate-y-2 shadow-lg hover:shadow-2xl group-hover:shadow-green-500/20 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative z-10 flex items-center justify-center gap-3">
+                    <span className={`text-3xl transition-transform duration-500 ${hoveredButton === 'support' ? 'scale-125 rotate-12' : ''}`}>🤝</span>
+                    <span>SUPPORT</span>
+                  </div>
+                  {/* Floating hearts */}
+                  {hoveredButton === 'support' && (
+                    <>
+                      <div className="absolute top-2 left-2 text-red-400 animate-pulse">💚</div>
+                      <div className="absolute bottom-2 right-2 text-pink-400 animate-bounce">💙</div>
+                    </>
+                  )}
+                </button>
+              </div>
+            </Link>
           </div>
         </div>
         
