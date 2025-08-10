@@ -31,7 +31,8 @@ serve(async (req) => {
     
     const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
     const successUrl = `${baseUrl}/payment-success`;
-    const failureUrl = `${baseUrl}/payment-failed`;
+    const currentFormUrl = `${baseUrl}/api/create-payment?payment_id=${paymentId}&amount=${amount}&recurring=${isRecurring}&email=${encodeURIComponent(customerEmail || '')}`;
+    const failureUrl = currentFormUrl; // Redirect back to form to show error
     const description = `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`;
     
     const paymentFormHtml = `
@@ -140,6 +141,17 @@ serve(async (req) => {
                 margin: 20px 0;
                 color: hsl(25, 95%, 53%);
             }
+            .error-message {
+                background: #fee2e2;
+                border: 1px solid #fecaca;
+                color: #dc2626;
+                padding: 12px 16px;
+                border-radius: 8px;
+                margin: 20px 0;
+                font-size: 14px;
+                display: none;
+                text-align: center;
+            }
         </style>
         <script>
             function formatCardNumber(input) {
@@ -186,6 +198,43 @@ serve(async (req) => {
                 input.value = value;
             }
             
+            function showError(message) {
+                const errorDiv = document.getElementById('error-message');
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+                errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            
+            function checkForErrors() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const response = urlParams.get('response');
+                const responseText = urlParams.get('responsetext');
+                
+                if (response === '3' || response === '2') {
+                    let errorMessage = 'Payment failed. Please try again.';
+                    
+                    if (responseText) {
+                        if (responseText.includes('Invalid Credit Card Number')) {
+                            errorMessage = 'Invalid credit card number. Please check your card number and try again.';
+                        } else if (responseText.includes('Invalid CVV')) {
+                            errorMessage = 'Invalid CVV code. Please check the security code on your card.';
+                        } else if (responseText.includes('Expired')) {
+                            errorMessage = 'Your card has expired. Please use a different card.';
+                        } else if (responseText.includes('Insufficient')) {
+                            errorMessage = 'Insufficient funds. Please use a different card or contact your bank.';
+                        } else if (responseText.includes('Declined')) {
+                            errorMessage = 'Your card was declined. Please contact your bank or use a different card.';
+                        }
+                    }
+                    
+                    showError(errorMessage);
+                    
+                    // Clean up URL parameters
+                    const cleanUrl = window.location.origin + window.location.pathname;
+                    window.history.replaceState({}, document.title, cleanUrl);
+                }
+            }
+            
             document.addEventListener('DOMContentLoaded', function() {
                 const cardInput = document.getElementById('card-number');
                 const expiryInput = document.getElementById('expiry-date');
@@ -201,6 +250,9 @@ serve(async (req) => {
                         formatExpiryDate(this);
                     });
                 }
+                
+                // Check for error parameters on page load
+                checkForErrors();
             });
         </script>
 </head>
@@ -209,6 +261,8 @@ serve(async (req) => {
         <h2>Complete Your Donation</h2>
         <div class="amount-display">$${amount} ${isRecurring ? 'Monthly' : 'One-time'} Donation</div>
         <p>${description}</p>
+        
+        <div id="error-message" class="error-message"></div>
         
         <form action="https://secure.inchekgateway.com/api/transact.php" method="POST">
             <input type="hidden" name="type" value="sale">
