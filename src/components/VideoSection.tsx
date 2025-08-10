@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import videoPreview from "@/assets/video-preview.jpg";
+import videoPreview from "@/assets/video-preview-v2.jpg";
 
 const VideoSection = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
