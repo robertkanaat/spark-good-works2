@@ -9,6 +9,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Phone, MessageCircle, Heart, Users, Shield, Clock } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const FAQ = () => {
   useEffect(() => {
@@ -181,6 +183,7 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+      <Header />
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
@@ -308,6 +311,7 @@ const FAQ = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
