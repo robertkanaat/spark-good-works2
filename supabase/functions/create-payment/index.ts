@@ -574,45 +574,40 @@ serve(async (req) => {
                 return false;
             }
             
-            // Override form submission to open in new window and monitor for errors
+            // Handle form submission with validation
             function setupFormHandler() {
                 const form = document.querySelector('.card-form');
                 if (form) {
                     form.addEventListener('submit', function(e) {
                         e.preventDefault();
                         
-                        // Submit form in a new window/tab to monitor the result
-                        const formData = new FormData(form);
-                        const params = new URLSearchParams();
-                        for (let [key, value] of formData) {
-                            params.append(key, value);
+                        // Validate required fields
+                        const requiredFields = form.querySelectorAll('input[required], select[required]');
+                        let isValid = true;
+                        
+                        requiredFields.forEach(field => {
+                            if (!field.value.trim()) {
+                                field.style.borderColor = '#ff0000';
+                                isValid = false;
+                            } else {
+                                field.style.borderColor = 'transparent';
+                            }
+                        });
+                        
+                        if (!isValid) {
+                            alert('Please fill in all required fields.');
+                            return;
                         }
                         
-                        // Create a temporary form and submit to new window
-                        const tempForm = document.createElement('form');
-                        tempForm.method = 'POST';
-                        tempForm.action = form.action;
-                        tempForm.target = '_blank';
-                        tempForm.style.display = 'none';
-                        
-                        for (let [key, value] of formData) {
-                            const input = document.createElement('input');
-                            input.type = 'hidden';
-                            input.name = key;
-                            input.value = value;
-                            tempForm.appendChild(input);
-                        }
-                        
-                        document.body.appendChild(tempForm);
-                        tempForm.submit();
-                        document.body.removeChild(tempForm);
-                        
-                        // Show processing message
+                        // Show processing state
                         const submitBtn = form.querySelector('button[type="submit"]');
                         if (submitBtn) {
                             submitBtn.innerHTML = '🔄 Processing... Please wait';
                             submitBtn.disabled = true;
                         }
+                        
+                        // Submit the form
+                        form.submit();
                     });
                 }
             }
