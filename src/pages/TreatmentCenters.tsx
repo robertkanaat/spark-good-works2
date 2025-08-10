@@ -165,6 +165,159 @@ const treatmentCenters: TreatmentCenter[] = [
     lat: 33.4484,
     lng: -112.0740,
     accreditation: ["CARF", "SAMHSA"]
+  },
+  {
+    id: 9,
+    name: "The Recovery Village",
+    location: "Umatilla, Florida",
+    city: "Umatilla",
+    state: "FL",
+    rating: 4.6,
+    reviews: 890,
+    phone: "(352) 771-2700",
+    website: "recoveryvillage.com",
+    specialties: ["Dual Diagnosis", "Trauma Therapy", "Family Programs", "Medical Detox"],
+    description: "Comprehensive addiction treatment facility offering medical detox, residential care, and dual diagnosis treatment in Central Florida.",
+    image: treatmentCenter1,
+    lat: 28.9289,
+    lng: -81.6656,
+    accreditation: ["Joint Commission", "CARF"]
+  },
+  {
+    id: 10,
+    name: "Banyan Treatment Centers",
+    location: "Pompano Beach, Florida",
+    city: "Pompano Beach",
+    state: "FL",
+    rating: 4.5,
+    reviews: 650,
+    phone: "(888) 280-4763",
+    website: "banyantreatmentcenters.com",
+    specialties: ["Detoxification", "Residential Treatment", "Mental Health", "Aftercare Support"],
+    description: "Evidence-based addiction treatment with multiple Florida locations, specializing in comprehensive care and long-term recovery support.",
+    image: treatmentCenter2,
+    lat: 26.2378,
+    lng: -80.1248,
+    accreditation: ["CARF", "SAMHSA"]
+  },
+  {
+    id: 11,
+    name: "Summit Behavioral Health",
+    location: "Florham Park, New Jersey",
+    city: "Florham Park",
+    state: "NJ",
+    rating: 4.7,
+    reviews: 520,
+    phone: "(908) 481-4400",
+    website: "summitbehavioralhealth.com",
+    specialties: ["Executive Programs", "Luxury Treatment", "Dual Diagnosis", "Intensive Outpatient"],
+    description: "Premier addiction treatment center offering executive-level care with individualized treatment plans in a discreet setting.",
+    image: treatmentCenter3,
+    lat: 40.7879,
+    lng: -74.3871,
+    accreditation: ["Joint Commission", "CARF"]
+  },
+  {
+    id: 12,
+    name: "Sunrise Detox Center",
+    location: "Cherry Hill, New Jersey",
+    city: "Cherry Hill",
+    state: "NJ",
+    rating: 4.4,
+    reviews: 430,
+    phone: "(856) 528-5550",
+    website: "sunrisedetox.com",
+    specialties: ["Medical Detox", "Withdrawal Management", "Stabilization", "24/7 Medical Support"],
+    description: "Specialized medical detoxification center providing safe withdrawal management with 24/7 medical supervision.",
+    image: treatmentCenter1,
+    lat: 39.9346,
+    lng: -75.0312,
+    accreditation: ["CARF", "SAMHSA"]
+  },
+  {
+    id: 13,
+    name: "Red Rock Recovery Center",
+    location: "Las Vegas, Nevada",
+    city: "Las Vegas",
+    state: "NV",
+    rating: 4.5,
+    reviews: 380,
+    phone: "(702) 213-0500",
+    website: "redrockrecovery.com",
+    specialties: ["Gambling Addiction", "Process Addictions", "Dual Diagnosis", "Behavioral Addictions"],
+    description: "Specialized treatment center addressing gambling addiction and other behavioral addictions with evidence-based therapies.",
+    image: treatmentCenter2,
+    lat: 36.1162,
+    lng: -115.1744,
+    accreditation: ["Joint Commission", "CARF"]
+  },
+  {
+    id: 14,
+    name: "Lakeside-Milam Recovery Centers",
+    location: "Kirkland, Washington",
+    city: "Kirkland",
+    state: "WA",
+    rating: 4.6,
+    reviews: 720,
+    phone: "(425) 823-3222",
+    website: "lakesidemilam.com",
+    specialties: ["Outpatient Treatment", "Intensive Outpatient", "Family Therapy", "Continuing Care"],
+    description: "Comprehensive outpatient addiction treatment with multiple Washington locations and a strong focus on family involvement.",
+    image: treatmentCenter3,
+    lat: 47.6815,
+    lng: -122.2087,
+    accreditation: ["CARF", "SAMHSA"]
+  },
+  {
+    id: 15,
+    name: "Schick Shadel Hospital",
+    location: "Seattle, Washington",
+    city: "Seattle",
+    state: "WA",
+    rating: 4.8,
+    reviews: 340,
+    phone: "(206) 622-2223",
+    website: "schickshadel.com",
+    specialties: ["Alcohol Treatment", "Medical Detox", "Aversion Therapy", "Medical Supervision"],
+    description: "Historic treatment hospital specializing in alcohol addiction with unique aversion therapy techniques and medical supervision.",
+    image: treatmentCenter1,
+    lat: 47.6062,
+    lng: -122.3321,
+    accreditation: ["Joint Commission", "CARF"]
+  },
+  {
+    id: 16,
+    name: "Serenity Lane",
+    location: "Eugene, Oregon",
+    city: "Eugene",
+    state: "OR",
+    rating: 4.5,
+    reviews: 560,
+    phone: "(541) 687-1110",
+    website: "serenitylane.org",
+    specialties: ["Residential Treatment", "Outpatient Programs", "Aftercare Support", "Family Services"],
+    description: "Community-based treatment center offering residential and outpatient services with a strong focus on recovery community support.",
+    image: treatmentCenter2,
+    lat: 44.0521,
+    lng: -123.0868,
+    accreditation: ["CARF", "SAMHSA"]
+  },
+  {
+    id: 17,
+    name: "De Paul Treatment Centers",
+    location: "Portland, Oregon",
+    city: "Portland",
+    state: "OR",
+    rating: 4.7,
+    reviews: 680,
+    phone: "(503) 535-1151",
+    website: "depaul.org",
+    specialties: ["Community-Based Treatment", "Medication-Assisted Treatment", "Peer Support", "Housing Services"],
+    description: "Comprehensive addiction treatment organization providing community-based services, housing, and long-term recovery support.",
+    image: treatmentCenter3,
+    lat: 45.5152,
+    lng: -122.6784,
+    accreditation: ["Joint Commission", "CARF"]
   }
 ];
 
@@ -596,10 +749,13 @@ export default function TreatmentCenters() {
                 <option value="all">All States</option>
                 <option value="AZ">Arizona</option>
                 <option value="CA">California</option>
+                <option value="FL">Florida</option>
                 <option value="MN">Minnesota</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NV">Nevada</option>
+                <option value="OR">Oregon</option>
                 <option value="PA">Pennsylvania</option>
-                <option value="NY">New York</option>
-                <option value="TX">Texas</option>
+                <option value="WA">Washington</option>
               </select>
             </div>
             

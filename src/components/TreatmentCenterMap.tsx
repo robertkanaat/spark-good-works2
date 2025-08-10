@@ -106,6 +106,105 @@ const treatmentCenters: TreatmentCenter[] = [
     lng: -112.0740,
     rating: 4.5,
     specialties: ["Outpatient Treatment", "Intensive Outpatient", "Medication-Assisted Treatment"]
+  },
+  {
+    id: 9,
+    name: "The Recovery Village",
+    location: "Umatilla, FL",
+    city: "Umatilla",
+    state: "FL",
+    lat: 28.9289,
+    lng: -81.6656,
+    rating: 4.6,
+    specialties: ["Dual Diagnosis", "Trauma Therapy", "Family Programs"]
+  },
+  {
+    id: 10,
+    name: "Banyan Treatment Centers",
+    location: "Pompano Beach, FL",
+    city: "Pompano Beach",
+    state: "FL",
+    lat: 26.2378,
+    lng: -80.1248,
+    rating: 4.5,
+    specialties: ["Detoxification", "Residential Treatment", "Mental Health"]
+  },
+  {
+    id: 11,
+    name: "Summit Behavioral Health",
+    location: "Florham Park, NJ",
+    city: "Florham Park",
+    state: "NJ",
+    lat: 40.7879,
+    lng: -74.3871,
+    rating: 4.7,
+    specialties: ["Executive Programs", "Luxury Treatment", "Dual Diagnosis"]
+  },
+  {
+    id: 12,
+    name: "Sunrise Detox Center",
+    location: "Cherry Hill, NJ",
+    city: "Cherry Hill",
+    state: "NJ",
+    lat: 39.9346,
+    lng: -75.0312,
+    rating: 4.4,
+    specialties: ["Medical Detox", "Withdrawal Management", "Stabilization"]
+  },
+  {
+    id: 13,
+    name: "Red Rock Recovery Center",
+    location: "Las Vegas, NV",
+    city: "Las Vegas",
+    state: "NV",
+    lat: 36.1162,
+    lng: -115.1744,
+    rating: 4.5,
+    specialties: ["Gambling Addiction", "Process Addictions", "Dual Diagnosis"]
+  },
+  {
+    id: 14,
+    name: "Lakeside-Milam Recovery Centers",
+    location: "Kirkland, WA",
+    city: "Kirkland",
+    state: "WA",
+    lat: 47.6815,
+    lng: -122.2087,
+    rating: 4.6,
+    specialties: ["Outpatient Treatment", "Intensive Outpatient", "Family Therapy"]
+  },
+  {
+    id: 15,
+    name: "Schick Shadel Hospital",
+    location: "Seattle, WA",
+    city: "Seattle",
+    state: "WA",
+    lat: 47.6062,
+    lng: -122.3321,
+    rating: 4.8,
+    specialties: ["Alcohol Treatment", "Medical Detox", "Aversion Therapy"]
+  },
+  {
+    id: 16,
+    name: "Serenity Lane",
+    location: "Eugene, OR",
+    city: "Eugene",
+    state: "OR",
+    lat: 44.0521,
+    lng: -123.0868,
+    rating: 4.5,
+    specialties: ["Residential Treatment", "Outpatient Programs", "Aftercare Support"]
+  },
+  {
+    id: 17,
+    name: "De Paul Treatment Centers",
+    location: "Portland, OR",
+    city: "Portland",
+    state: "OR",
+    lat: 45.5152,
+    lng: -122.6784,
+    rating: 4.7,
+    specialties: ["Community-Based Treatment", "Medication-Assisted Treatment", "Peer Support"]
   }
 ];
 
