@@ -10,6 +10,7 @@ import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle, Heart, Ar
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import resourcesHeroImage from "@/assets/resources-hero-bg.jpg";
+import DOMPurify from "dompurify";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,6 +23,30 @@ const Contact = () => {
     message: ""
   });
   const { toast } = useToast();
+
+  // Enhanced input validation and sanitization
+  const validateInput = (value: string, field: string): string => {
+    // Basic length limits to prevent abuse
+    const maxLengths: Record<string, number> = {
+      firstName: 50,
+      lastName: 50,
+      email: 254,
+      phone: 20,
+      subject: 200,
+      message: 2000
+    };
+
+    if (value.length > (maxLengths[field] || 100)) {
+      return value.substring(0, maxLengths[field] || 100);
+    }
+
+    // Basic sanitization - remove potentially dangerous characters but preserve functionality
+    return DOMPurify.sanitize(value, { 
+      ALLOWED_TAGS: [],
+      ALLOWED_ATTR: [],
+      KEEP_CONTENT: true
+    }).trim();
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -39,9 +64,9 @@ const Contact = () => {
         formatted = cleaned;
       }
       
-      setFormData(prev => ({ ...prev, [id]: formatted }));
+      setFormData(prev => ({ ...prev, [id]: validateInput(formatted, id) }));
     } else {
-      setFormData(prev => ({ ...prev, [id]: value }));
+      setFormData(prev => ({ ...prev, [id]: validateInput(value, id) }));
     }
   };
 
@@ -50,6 +75,17 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
+      // Additional validation before submission
+      if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.message.trim()) {
+        throw new Error('Please fill in all required fields');
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        throw new Error('Please enter a valid email address');
+      }
+
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: formData,
       });
@@ -76,7 +112,7 @@ const Contact = () => {
     } catch (error) {
       toast({
         title: "Error sending message",
-        description: "Please try again or contact us directly.",
+        description: error instanceof Error ? error.message : "Please try again or contact us directly.",
         variant: "destructive",
       });
     } finally {

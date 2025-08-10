@@ -4,9 +4,12 @@ import { Resend } from "npm:resend@2.0.0";
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "*", // Will be restricted in production
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY", 
+  "X-XSS-Protection": "1; mode=block",
 };
 
 interface ContactFormData {
@@ -26,6 +29,35 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const { firstName, lastName, email, phone, subject, message }: ContactFormData = await req.json();
+    
+    // Basic input validation
+    if (!firstName?.trim() || !lastName?.trim() || !email?.trim() || !subject?.trim() || !message?.trim()) {
+      return new Response(
+        JSON.stringify({ 
+          success: false, 
+          error: "Missing required fields" 
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return new Response(
+        JSON.stringify({ 
+          success: false, 
+          error: "Invalid email address" 
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
     // Send email to director@geniusrecovery.org
     const emailToDirector = await resend.emails.send({
@@ -125,8 +157,7 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error.message,
-        details: error.name || 'Unknown error'
+        error: "Internal server error" // Don't expose detailed error messages
       }),
       {
         status: 500,
