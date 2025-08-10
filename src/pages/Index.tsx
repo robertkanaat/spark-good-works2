@@ -255,42 +255,43 @@ const Index = () => {
     if (!document.querySelector('link[rel="canonical"]')) {
       document.head.appendChild(canonical);
     }
-
-    // Add all schemas to head
-    const schemas = [
-      { id: 'org-schema', data: organizationSchema },
-      { id: 'website-schema', data: websiteSchema },
-      { id: 'webpage-schema', data: webPageSchema },
-      { id: 'breadcrumb-schema', data: breadcrumbSchema },
-      ...serviceSchemas.map((schema, index) => ({ id: `service-schema-${index}`, data: schema }))
-    ];
-
-    // Remove existing schemas
-    schemas.forEach(({ id }) => {
-      const existing = document.getElementById(id);
-      if (existing) existing.remove();
-    });
-
-    // Add all schemas
-    schemas.forEach(({ id, data }) => {
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.textContent = JSON.stringify(data);
-      script.id = id;
-      document.head.appendChild(script);
-    });
-
-    // Cleanup function
-    return () => {
-      schemas.forEach(({ id }) => {
-        const script = document.getElementById(id);
-        if (script) script.remove();
-      });
-    };
   }, []);
 
   return (
     <div className="min-h-screen">
+      {/* Organization Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      
+      {/* Website Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      
+      {/* WebPage Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      
+      {/* Service Schemas */}
+      {serviceSchemas.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      
       <Header />
       <HeroSection />
       <DonationSection />
