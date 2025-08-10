@@ -211,7 +211,7 @@ const Donation = () => {
             {!showPaymentForm ? (
               <>
                 <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold mb-4">Choose Your Impact</h2>
+                  <h2 className="text-3xl font-bold mb-4">Choose An Amount To Support Genius Recovery</h2>
                   <p className="text-muted-foreground">
                     Select your donation amount and frequency to see the lives you'll transform
                   </p>
@@ -328,13 +328,13 @@ const Donation = () => {
                 </div>
 
                 {/* Donate button */}
-                <Button 
-                  onClick={handleDonation}
-                  disabled={isProcessing || !email.trim() || !isValidEmail(email.trim())}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4"
-                >
-                  {isProcessing ? 'PROCESSING...' : `DONATE $${amount} ${isMonthly ? 'MONTHLY' : 'NOW'}`}
-                </Button>
+                  <Button 
+                    onClick={handleDonation}
+                    disabled={isProcessing || !email.trim() || !isValidEmail(email.trim())}
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4"
+                  >
+                    {isProcessing ? 'PROCESSING...' : `DONATE $${amount} ${isMonthly ? '/mo' : 'NOW'}`}
+                  </Button>
 
                 <p className="text-xs text-muted-foreground text-center">
                   Secure donation processing • {isMonthly ? 'Cancel anytime • ' : ''}Tax deductible
