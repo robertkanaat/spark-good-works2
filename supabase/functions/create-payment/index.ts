@@ -476,41 +476,81 @@ serve(async (req) => {
                 input.value = value;
             }
             
-            // Check for error redirect parameters and handle them
-            function checkErrorRedirect() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const response = urlParams.get('response');
+            // More aggressive error detection and redirect
+            function checkAndRedirectOnError() {
+                const url = window.location.href;
+                const params = new URLSearchParams(window.location.search);
+                const response = params.get('response');
+                const responseText = params.get('responsetext');
                 
-                // If we detect error parameters, redirect to failure page
-                if (response && (response === '2' || response === '3')) {
+                // If we detect ANY error parameters in URL, redirect immediately
+                if (response || responseText || url.includes('response=') || url.includes('responsetext=')) {
                     const baseUrl = '${baseUrl}';
-                    window.location.href = baseUrl + '/payment-failed';
-                    return;
+                    const failureUrl = baseUrl + '/payment-failed?error=' + encodeURIComponent(responseText || 'Payment failed');
+                    window.top.location.href = failureUrl;
+                    return true;
                 }
+                return false;
             }
             
-            // Override form submission to handle errors
+            // Override form submission to open in new window and monitor for errors
             function setupFormHandler() {
                 const form = document.querySelector('.card-form');
                 if (form) {
                     form.addEventListener('submit', function(e) {
-                        // Let the form submit normally, but set up a check for errors
-                        setTimeout(function() {
-                            checkErrorRedirect();
-                        }, 1000);
+                        e.preventDefault();
+                        
+                        // Submit form in a new window/tab to monitor the result
+                        const formData = new FormData(form);
+                        const params = new URLSearchParams();
+                        for (let [key, value] of formData) {
+                            params.append(key, value);
+                        }
+                        
+                        // Create a temporary form and submit to new window
+                        const tempForm = document.createElement('form');
+                        tempForm.method = 'POST';
+                        tempForm.action = form.action;
+                        tempForm.target = '_blank';
+                        tempForm.style.display = 'none';
+                        
+                        for (let [key, value] of formData) {
+                            const input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = key;
+                            input.value = value;
+                            tempForm.appendChild(input);
+                        }
+                        
+                        document.body.appendChild(tempForm);
+                        tempForm.submit();
+                        document.body.removeChild(tempForm);
+                        
+                        // Show processing message
+                        const submitBtn = form.querySelector('button[type="submit"]');
+                        if (submitBtn) {
+                            submitBtn.innerHTML = '🔄 Processing... Please wait';
+                            submitBtn.disabled = true;
+                        }
                     });
                 }
             }
             
             setTimeout(function() {
+                // Check for errors immediately on load
+                if (checkAndRedirectOnError()) {
+                    return;
+                }
+                
                 const cardInput = document.querySelector('.card-form input[name="ccnumber"]');
                 const expiryInput = document.querySelector('.card-form input[name="ccexp"]');
                 if (cardInput) { cardInput.addEventListener('input', function() { formatCardNumber(this); }); }
                 if (expiryInput) { expiryInput.addEventListener('input', function() { formatExpiryDate(this); }); }
                 
-                // Check for errors on page load
-                checkErrorRedirect();
                 setupFormHandler();
+                
+                // Continuously check for error redirects
+                setInterval(checkAndRedirectOnError, 1000);
             }, 100);
           </script>
           <form action="https://secure.inchekgateway.com/api/transact.php" method="POST" class="card-form">
