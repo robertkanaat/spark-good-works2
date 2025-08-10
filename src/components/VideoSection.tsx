@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import videoPreview from "@/assets/video-preview.jpg";
 
 const VideoSection = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -32,7 +33,10 @@ const VideoSection = () => {
 
           <div className="relative group cursor-pointer" onClick={() => setIsVideoOpen(true)}>
             {/* Video thumbnail container */}
-            <div className="relative aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-primary/25 group-hover:scale-[1.02]">
+            <div 
+              className="relative aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-primary/25 group-hover:scale-[1.02] bg-cover bg-center"
+              style={{ backgroundImage: `url(${videoPreview})` }}
+            >
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
               
