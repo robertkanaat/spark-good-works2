@@ -97,7 +97,7 @@ const Blog = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg group hover-scale transition-all duration-300 hover:shadow-2xl hover:shadow-white/20"
+                className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white px-8 py-4 text-lg group hover-scale transition-all duration-300 hover:shadow-2xl hover:shadow-white/20"
                 onClick={() => {
                   const subject = 'I want to share my recovery story';
                   const body = `Hi Genius Recovery team,
