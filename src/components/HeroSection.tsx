@@ -140,7 +140,7 @@ const HeroSection = () => {
             <Card className="p-8 bg-white/95 backdrop-blur-sm max-w-md w-full">
               {activeView === 'donate' && (
                 <>
-                  <h3 className="text-2xl font-bold mb-6 text-center">Choose an amount to support recovery</h3>
+                  <h3 className="text-2xl font-bold mb-6 text-center">Choose an amount to support Genius Recovery</h3>
                   
                   <div className="grid grid-cols-2 gap-3 mb-6">
                     {presetAmounts.map((amount) => (
@@ -150,13 +150,13 @@ const HeroSection = () => {
                         onClick={() => setSelectedAmount(amount)}
                         className="h-12 font-semibold"
                       >
-                        ${amount}USD/mo
+                        ${amount}/mo
                       </Button>
                     ))}
                   </div>
                   
                   <div className="text-center mb-6">
-                    <span className="text-3xl font-bold text-foreground">${selectedAmount}.00 USD</span>
+                    <span className="text-3xl font-bold text-foreground">${selectedAmount}.00</span>
                   </div>
                   
                   <Link to={`/donation?amount=${selectedAmount}`}>
