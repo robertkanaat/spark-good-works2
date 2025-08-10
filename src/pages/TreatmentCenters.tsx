@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TreatmentCenterMap from "@/components/TreatmentCenterMap";
+import treatmentCenter1 from "@/assets/treatment-center-1.jpg";
+import treatmentCenter2 from "@/assets/treatment-center-2.jpg";
+import treatmentCenter3 from "@/assets/treatment-center-3.jpg";
 
 interface TreatmentCenter {
   id: number;
@@ -38,7 +41,7 @@ const treatmentCenters: TreatmentCenter[] = [
     website: "hazeldenbettyford.org",
     specialties: ["Alcohol Addiction", "Drug Addiction", "Dual Diagnosis", "Executive Treatment"],
     description: "A leading addiction treatment center with over 70 years of experience, offering evidence-based treatment programs.",
-    image: "/lovable-uploads/3e7570fb-81cb-420b-9f97-79f46edfba7b.png",
+    image: treatmentCenter1,
     lat: 45.4215,
     lng: -92.8136,
     accreditation: ["CARF", "Joint Commission"]
@@ -55,7 +58,7 @@ const treatmentCenters: TreatmentCenter[] = [
     website: "bettyfordcenter.org",
     specialties: ["Alcohol Treatment", "Prescription Drug Addiction", "Family Programs"],
     description: "World-renowned treatment center known for its comprehensive family-centered approach to addiction recovery.",
-    image: "/lovable-uploads/411b8a25-5350-48b3-a3b5-b01e67d05ea2.png",
+    image: treatmentCenter2,
     lat: 33.7399,
     lng: -116.4123,
     accreditation: ["CARF", "Joint Commission", "NAATP"]
@@ -72,7 +75,7 @@ const treatmentCenters: TreatmentCenter[] = [
     website: "passagesmalibu.com",
     specialties: ["Luxury Treatment", "Holistic Therapy", "Non-12 Step", "Executive Treatment"],
     description: "Luxury addiction treatment center offering personalized, non-12-step recovery programs in a beautiful oceanside setting.",
-    image: "/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png",
+    image: treatmentCenter3,
     lat: 34.0259,
     lng: -118.7798,
     accreditation: ["CARF", "LegitScript"]
