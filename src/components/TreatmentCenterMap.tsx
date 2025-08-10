@@ -86,27 +86,36 @@ const TreatmentCenterMap: React.FC = () => {
   // Get Mapbox token from Supabase secrets
   useEffect(() => {
     const getMapboxToken = async () => {
+      console.log('Starting to fetch Mapbox token...');
       try {
+        console.log('Calling supabase function get-secret...');
         const { data, error } = await supabase.functions.invoke('get-secret', {
           body: { name: 'MAPBOX_PUBLIC_TOKEN' }
         });
         
+        console.log('Function response:', { data, error });
+        
         if (error) {
           console.error('Error fetching Mapbox token:', error);
+          console.log('Using fallback token due to error');
+          setMapboxToken('pk.eyJ1IjoiZ2VuaXVzcmVjb3ZlcnkiLCJhIjoiY21lNjMwbnNvMTFsYjJpcHVyb3NkbTA1ZCJ9.GWZj3Wt68GZa2siKD791AA');
           setIsLoading(false);
           return;
         }
         
         if (data?.value) {
+          console.log('Successfully got token from Supabase secrets');
           setMapboxToken(data.value);
           setIsLoading(false);
         } else {
+          console.log('No token found in secrets, using fallback');
           // Fallback to hardcoded token if secret not found
           setMapboxToken('pk.eyJ1IjoiZ2VuaXVzcmVjb3ZlcnkiLCJhIjoiY21lNjMwbnNvMTFsYjJpcHVyb3NkbTA1ZCJ9.GWZj3Wt68GZa2siKD791AA');
           setIsLoading(false);
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Catch block error:', error);
+        console.log('Using fallback token due to catch block');
         // Fallback to hardcoded token
         setMapboxToken('pk.eyJ1IjoiZ2VuaXVzcmVjb3ZlcnkiLCJhIjoiY21lNjMwbnNvMTFsYjJpcHVyb3NkbTA1ZCJ9.GWZj3Wt68GZa2siKD791AA');
         setIsLoading(false);
