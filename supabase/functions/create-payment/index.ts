@@ -475,11 +475,42 @@ serve(async (req) => {
                 if (value.length >= 2) { value = value.substring(0,2) + '/' + value.substring(2,4); }
                 input.value = value;
             }
+            
+            // Check for error redirect parameters and handle them
+            function checkErrorRedirect() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const response = urlParams.get('response');
+                
+                // If we detect error parameters, redirect to failure page
+                if (response && (response === '2' || response === '3')) {
+                    const baseUrl = '${baseUrl}';
+                    window.location.href = baseUrl + '/payment-failed';
+                    return;
+                }
+            }
+            
+            // Override form submission to handle errors
+            function setupFormHandler() {
+                const form = document.querySelector('.card-form');
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        // Let the form submit normally, but set up a check for errors
+                        setTimeout(function() {
+                            checkErrorRedirect();
+                        }, 1000);
+                    });
+                }
+            }
+            
             setTimeout(function() {
                 const cardInput = document.querySelector('.card-form input[name="ccnumber"]');
                 const expiryInput = document.querySelector('.card-form input[name="ccexp"]');
                 if (cardInput) { cardInput.addEventListener('input', function() { formatCardNumber(this); }); }
                 if (expiryInput) { expiryInput.addEventListener('input', function() { formatExpiryDate(this); }); }
+                
+                // Check for errors on page load
+                checkErrorRedirect();
+                setupFormHandler();
             }, 100);
           </script>
           <form action="https://secure.inchekgateway.com/api/transact.php" method="POST" class="card-form">
