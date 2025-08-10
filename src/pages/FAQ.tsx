@@ -29,10 +29,15 @@ const FAQ = () => {
       document.head.appendChild(canonical);
     }
 
-    // Add FAQ structured data
+    // Add comprehensive FAQ and Organization structured data
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "about": {
+        "@type": "Organization",
+        "name": "Genius Recovery",
+        "description": "Leading addiction recovery support organization providing crisis intervention and treatment resources"
+      },
       "mainEntity": [
         {
           "@type": "Question",
@@ -97,19 +102,81 @@ const FAQ = () => {
             "@type": "Answer",
             "text": "Support your loved one by learning about addiction, attending family therapy, setting healthy boundaries, avoiding enabling behaviors, and taking care of your own mental health."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I expect during detox?",
+          "acceptedAnswer": {
+            "@type": "Answer", 
+            "text": "Detox is the process of safely removing substances from your body. Medical detox provides 24/7 monitoring and medication to manage withdrawal symptoms safely."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is relapse normal during recovery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Relapse is common and doesn't mean failure. Studies show 40-60% of people experience relapse, but it can provide valuable insights for adjusting treatment."
+          }
         }
       ]
     };
 
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(faqSchema);
-    document.head.appendChild(script);
+    const organizationSchema = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Genius Recovery", 
+      "description": "Leading addiction recovery organization providing 24/7 crisis support, treatment referrals, and comprehensive recovery resources",
+      "url": "https://geniusrecovery.org",
+      "logo": "https://geniusrecovery.org/genius-recovery-logo.png",
+      "foundingDate": "2023",
+      "areaServed": "United States",
+      "serviceType": [
+        "Addiction Recovery Support",
+        "Crisis Intervention",
+        "Treatment Referrals", 
+        "Educational Resources",
+        "24/7 AI Support"
+      ],
+      "knowsAbout": [
+        "Substance Use Disorders",
+        "Addiction Treatment",
+        "Mental Health",
+        "Crisis Support",
+        "Recovery Programs"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "988",
+          "contactType": "Crisis Support"
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "1-800-662-4357", 
+          "contactType": "Substance Abuse Support"
+        }
+      ]
+    };
+
+    const faqSchemaScript = document.createElement('script');
+    faqSchemaScript.type = 'application/ld+json';
+    faqSchemaScript.textContent = JSON.stringify(faqSchema);
+    document.head.appendChild(faqSchemaScript);
+
+    const orgSchemaScript = document.createElement('script'); 
+    orgSchemaScript.type = 'application/ld+json';
+    orgSchemaScript.textContent = JSON.stringify(organizationSchema);
+    document.head.appendChild(orgSchemaScript);
 
     return () => {
-      const existingScript = document.querySelector('script[type="application/ld+json"]');
-      if (existingScript) {
-        document.head.removeChild(existingScript);
+      const existingFaqScript = document.querySelector('script[type="application/ld+json"]');
+      const existingOrgScript = document.querySelectorAll('script[type="application/ld+json"]')[1];
+      if (existingFaqScript) {
+        document.head.removeChild(existingFaqScript);
+      }
+      if (existingOrgScript) {
+        document.head.removeChild(existingOrgScript);
       }
     };
   }, []);
