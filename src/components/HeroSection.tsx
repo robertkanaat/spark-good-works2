@@ -34,7 +34,7 @@ const HeroSection = () => {
             
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
               On A Mission To{" "}
-              <span className="text-primary">Heal Addiction Around The World</span>{" "}
+              <span className="text-primary">Change The Way The World Understands & Treats Addiction</span>{" "}
               One Human At A Time
             </h1>
             
