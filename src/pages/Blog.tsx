@@ -58,13 +58,11 @@ const Blog = () => {
       <Header />
       
       {/* Hero Section with Background */}
-      <section className="relative min-h-[80vh] flex items-center">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${blogHeroBg})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
-        </div>
+      <section 
+        className="relative min-h-[80vh] flex items-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${blogHeroBg})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40"></div>
         
         <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center text-white">
