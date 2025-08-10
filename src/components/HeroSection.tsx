@@ -1,21 +1,31 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
-import heroImage from "@/assets/hero-recovery-person.jpg";
+import heroRecoveryPerson from "@/assets/hero-recovery-person.jpg";
+import heroFamilyEmbrace from "@/assets/hero-family-embrace.jpg";
 
 const HeroSection = () => {
   const [selectedAmount, setSelectedAmount] = useState(50);
   const [activeView, setActiveView] = useState<'donate' | 'help' | 'support'>('donate');
+  const [currentHeroImage, setCurrentHeroImage] = useState(heroRecoveryPerson);
   const presetAmounts = [25, 50, 100, 200];
+  
+  const heroImages = [heroRecoveryPerson, heroFamilyEmbrace];
+  
+  useEffect(() => {
+    // Randomly select an image on component mount
+    const randomIndex = Math.floor(Math.random() * heroImages.length);
+    setCurrentHeroImage(heroImages[randomIndex]);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center">
       <div 
-        className="absolute inset-0 bg-cover bg-no-repeat bg-center md:bg-center lg:bg-right-top"
+        className="absolute inset-0 bg-cover bg-no-repeat bg-center md:bg-center lg:bg-right-top transition-all duration-1000"
         style={{ 
-          backgroundImage: `url(${heroImage})`,
+          backgroundImage: `url(${currentHeroImage})`,
           backgroundPosition: 'center 20%'
         }}
       >
