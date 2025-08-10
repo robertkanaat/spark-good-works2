@@ -144,10 +144,19 @@ serve(async (req) => {
         <script>
             function formatCardNumber(input) {
                 let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                
+                // Cap at 16 digits maximum
+                if (value.length > 16) {
+                    value = value.substring(0, 16);
+                }
+                
                 let formattedValue = '';
                 
-                // American Express: 4-6-5 format
+                // American Express: 4-6-5 format (15 digits)
                 if (value.match(/^3[47]/)) {
+                    if (value.length > 15) {
+                        value = value.substring(0, 15);
+                    }
                     for (let i = 0; i < value.length; i++) {
                         if (i === 4 || i === 10) {
                             formattedValue += ' ';
@@ -156,7 +165,7 @@ serve(async (req) => {
                     }
                     input.maxLength = 17;
                 } else {
-                    // All other cards: 4-4-4-4 format
+                    // All other cards: 4-4-4-4 format (16 digits)
                     for (let i = 0; i < value.length; i++) {
                         if (i > 0 && i % 4 === 0) {
                             formattedValue += ' ';
@@ -382,8 +391,17 @@ serve(async (req) => {
           <script>
             function formatCardNumber(input) {
                 let value = input.value.replace(/\\s+/g, '').replace(/[^0-9]/gi, '');
+                
+                // Cap at 16 digits maximum
+                if (value.length > 16) {
+                    value = value.substring(0, 16);
+                }
+                
                 let formattedValue = '';
                 if (value.match(/^3[47]/)) {
+                    if (value.length > 15) {
+                        value = value.substring(0, 15);
+                    }
                     for (let i = 0; i < value.length; i++) {
                         if (i === 4 || i === 10) { formattedValue += ' '; }
                         formattedValue += value[i];
