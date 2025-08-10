@@ -97,6 +97,16 @@ export default function TreatmentCenters() {
   const [selectedState, setSelectedState] = useState<string>("all");
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>("all");
 
+  const scrollToFeaturedCenters = () => {
+    const featuredSection = document.getElementById('featured-centers');
+    if (featuredSection) {
+      featuredSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   const filteredCenters = treatmentCenters.filter(center => {
     if (selectedState !== "all" && center.state !== selectedState) return false;
     if (selectedSpecialty !== "all" && !center.specialties.some(s => 
@@ -172,20 +182,24 @@ export default function TreatmentCenters() {
             </div>
 
             {/* CTA buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300"
+                className="group relative overflow-hidden bg-gradient-to-r from-primary to-primary-glow hover:from-primary-glow hover:to-primary text-primary-foreground shadow-2xl hover:shadow-3xl hover:shadow-primary/30 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 px-8 py-4"
               >
-                <Phone className="h-5 w-5 mr-2" />
-                Get Help Now
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                <Phone className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
+                <span className="relative z-10 font-semibold">Get Help Now</span>
               </Button>
               <Button 
+                onClick={scrollToFeaturedCenters}
                 variant="outline" 
                 size="lg"
-                className="border-border hover:bg-card/50 transition-all duration-300"
+                className="group relative overflow-hidden border-2 border-primary/30 hover:border-primary bg-background/50 hover:bg-primary/5 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 px-8 py-4 backdrop-blur-sm"
               >
-                Browse Centers Below
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <span className="relative z-10 font-semibold group-hover:text-primary transition-colors duration-300">Browse Centers Below</span>
+                <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-primary-glow transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
               </Button>
             </div>
           </div>
@@ -244,7 +258,7 @@ export default function TreatmentCenters() {
       </section>
 
       {/* Treatment Centers Feed */}
-      <section className="py-16 px-4">
+      <section id="featured-centers" className="py-16 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-foreground mb-4">
@@ -348,13 +362,23 @@ export default function TreatmentCenters() {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Our recovery specialists are here to help you find the perfect treatment program for your unique needs.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90">
-              <Phone className="h-5 w-5 mr-2" />
-              Get Help Now
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Button 
+              size="lg" 
+              className="group relative overflow-hidden bg-gradient-to-r from-primary to-primary-glow hover:from-primary-glow hover:to-primary text-primary-foreground shadow-2xl hover:shadow-3xl hover:shadow-primary/30 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 px-8 py-4"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              <Phone className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
+              <span className="relative z-10 font-semibold">Get Help Now</span>
             </Button>
-            <Button variant="outline" size="lg">
-              Chat with AI Companion
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="group relative overflow-hidden border-2 border-primary/30 hover:border-primary bg-background/50 hover:bg-primary/5 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 px-8 py-4 backdrop-blur-sm"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+              <Heart className="h-5 w-5 mr-3 relative z-10 group-hover:text-primary group-hover:animate-pulse transition-colors duration-300" />
+              <span className="relative z-10 font-semibold group-hover:text-primary transition-colors duration-300">Chat with AI Companion</span>
             </Button>
           </div>
           </div>
