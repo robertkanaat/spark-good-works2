@@ -66,6 +66,7 @@ const Footer = () => {
               <li><Link to="/ai-companion" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">AI Recovery Clone</Link></li>
               <li><Link to="/press" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Press</Link></li>
               <li><Link to="/donors" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Donors</Link></li>
+              <li><Link to="/faq" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">FAQ</Link></li>
               <li><Link to="/contact" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Careers</Link></li>
             </ul>
           </div>
