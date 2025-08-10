@@ -234,7 +234,7 @@ const AICompanion = () => {
           </DialogHeader>
           <div className="aspect-video w-full">
             <iframe
-              src="https://player.vimeo.com/video/1076776049?h=b4510e666f&autoplay=1&title=0&byline=0&portrait=0"
+              src="https://player.vimeo.com/video/1063903692?autoplay=1&title=0&byline=0&portrait=0"
               width="100%"
               height="100%"
               frameBorder="0"
