@@ -6,6 +6,7 @@ import StatsSection from "@/components/StatsSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import BlogPreviewSection from "@/components/BlogPreviewSection";
 import OpenLetterPreview from "@/components/OpenLetterPreview";
+import HomeFAQSection from "@/components/HomeFAQSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -19,6 +20,7 @@ const Index = () => {
       <FeaturesSection />
       <BlogPreviewSection />
       <OpenLetterPreview />
+      <HomeFAQSection />
       <Footer />
     </div>
   );
