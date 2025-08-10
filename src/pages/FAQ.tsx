@@ -157,6 +157,36 @@ const FAQ = () => {
     if (!document.querySelector('link[rel="canonical"]')) {
       document.head.appendChild(canonical);
     }
+
+    // Add FAQ Schema to head
+    const faqSchemaScript = document.createElement('script');
+    faqSchemaScript.type = 'application/ld+json';
+    faqSchemaScript.textContent = JSON.stringify(faqSchema);
+    faqSchemaScript.id = 'faq-schema';
+    
+    // Add Organization Schema to head
+    const orgSchemaScript = document.createElement('script');
+    orgSchemaScript.type = 'application/ld+json';
+    orgSchemaScript.textContent = JSON.stringify(organizationSchema);
+    orgSchemaScript.id = 'org-schema';
+
+    // Remove existing schemas if they exist
+    const existingFaqSchema = document.getElementById('faq-schema');
+    const existingOrgSchema = document.getElementById('org-schema');
+    if (existingFaqSchema) existingFaqSchema.remove();
+    if (existingOrgSchema) existingOrgSchema.remove();
+
+    // Add schemas to head
+    document.head.appendChild(faqSchemaScript);
+    document.head.appendChild(orgSchemaScript);
+
+    // Cleanup function
+    return () => {
+      const faqScript = document.getElementById('faq-schema');
+      const orgScript = document.getElementById('org-schema');
+      if (faqScript) faqScript.remove();
+      if (orgScript) orgScript.remove();
+    };
   }, []);
 
   const faqData = [
@@ -228,16 +258,6 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
-      {/* Schema Markup */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      
       <Header />
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
