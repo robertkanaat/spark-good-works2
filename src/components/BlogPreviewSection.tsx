@@ -1,38 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Calendar, ArrowRight, Clock } from "lucide-react";
+import { Calendar, ArrowRight, Clock, BookOpen } from "lucide-react";
+import { useWordPressPosts } from "@/hooks/useWordPressPosts";
 
 const BlogPreviewSection = () => {
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Understanding the Root Causes of Addiction",
-      excerpt: "Exploring the deep connections between trauma, pain, and addictive behaviors in modern society.",
-      date: "December 15, 2024",
-      readTime: "8 min read",
-      category: "Recovery Insights",
-      slug: "understanding-root-causes-addiction"
-    },
-    {
-      id: 2,
-      title: "Building Support Networks for Recovery",
-      excerpt: "How community connections and meaningful relationships play a crucial role in healing from addiction.",
-      date: "December 10, 2024",
-      readTime: "6 min read",
-      category: "Community",
-      slug: "building-support-networks-recovery"
-    },
-    {
-      id: 3,
-      title: "The Science Behind Compassionate Treatment",
-      excerpt: "Research-backed approaches that prioritize understanding and empathy over punishment and shame.",
-      date: "December 5, 2024",
-      readTime: "10 min read",
-      category: "Research",
-      slug: "science-compassionate-treatment"
-    }
-  ];
+  const { posts, loading, error } = useWordPressPosts();
+  
+  // Get the latest 3 posts
+  const latestPosts = posts.slice(0, 3);
 
   return (
     <section className="relative py-24 overflow-hidden">
@@ -66,55 +42,85 @@ const BlogPreviewSection = () => {
           </p>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {[...Array(3)].map((_, index) => (
+              <Card key={index} className="h-64 animate-pulse bg-card/50" />
+            ))}
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Unable to load blog posts at this time.</p>
+          </div>
+        )}
+
         {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {blogPosts.map((post, index) => (
-            <Card 
-              key={post.id} 
-              className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-card/90 backdrop-blur-sm animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              {/* Gradient Border Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-donate/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <CardContent className="relative p-8">
-                {/* Category Badge */}
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-4">
-                  {post.category}
-                </div>
+        {!loading && !error && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {latestPosts.map((post, index) => (
+              <Card 
+                key={post.id} 
+                className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-card/90 backdrop-blur-sm animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {/* Gradient Border Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-donate/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
-                {/* Title */}
-                <h3 className="text-xl font-bold text-foreground mb-4 leading-tight group-hover:text-primary transition-colors duration-300">
-                  {post.title}
-                </h3>
-                
-                {/* Excerpt */}
-                <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-3">
-                  {post.excerpt}
-                </p>
-                
-                {/* Meta Information */}
-                <div className="flex items-center justify-between text-sm text-muted-foreground/80">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      <span>{post.date}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      <span>{post.readTime}</span>
+                <CardContent className="relative p-8 flex flex-col h-full">
+                  {/* Category Badge */}
+                  <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary mb-4 w-fit">
+                    {post.category}
+                  </div>
+                  
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-foreground mb-4 leading-tight group-hover:text-primary transition-colors duration-300">
+                    {post.title}
+                  </h3>
+                  
+                  {/* Excerpt */}
+                  <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-3 flex-grow">
+                    {post.excerpt}
+                  </p>
+                  
+                  {/* Meta Information */}
+                  <div className="flex items-center justify-between text-sm text-muted-foreground/80 mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        <span>{post.date}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        <span>{post.readTime}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                
-                {/* Hover Arrow */}
-                <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-                  <ArrowRight className="w-5 h-5 text-primary" />
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+
+                  {/* Read More Button */}
+                  <Link to={`/blog/${post.slug}`} className="mt-auto">
+                    <Button
+                      variant="outline"
+                      className="w-full group/btn relative overflow-hidden border-primary/20 hover:border-primary bg-transparent hover:bg-primary/5 transition-all duration-300"
+                    >
+                      <span className="relative flex items-center justify-center gap-2 font-semibold">
+                        <BookOpen className="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110" />
+                        Read Full Story
+                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                      </span>
+                      
+                      {/* Animated background effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-donate/10 translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-300" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
 
         {/* CTA Section */}
         <div className="text-center">
