@@ -240,21 +240,177 @@ const Index = () => {
   ];
 
   useEffect(() => {
-    // Set page title and meta description
-    document.title = "Genius Recovery - Addiction Recovery Support & Crisis Intervention";
+    // Set comprehensive SEO metadata
+    document.title = "Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help";
     
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Get immediate addiction recovery support, crisis intervention, and treatment resources. Our AI-powered platform provides 24/7 assistance for individuals and families affected by substance use disorders.');
+    // Meta description
+    const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
+    metaDescription.setAttribute('name', 'description');
+    metaDescription.setAttribute('content', 'Get immediate addiction recovery support, crisis intervention, and treatment resources. Our AI-powered platform provides 24/7 assistance for individuals and families affected by substance use disorders.');
+    if (!document.querySelector('meta[name="description"]')) {
+      document.head.appendChild(metaDescription);
     }
 
-    // Add canonical URL
+    // Keywords
+    const keywords = document.querySelector('meta[name="keywords"]') || document.createElement('meta');
+    keywords.setAttribute('name', 'keywords');
+    keywords.setAttribute('content', 'addiction recovery, substance abuse help, crisis intervention, treatment centers, AI recovery support, 24/7 help, addiction treatment, recovery resources, drug addiction help, alcohol addiction support');
+    if (!document.querySelector('meta[name="keywords"]')) {
+      document.head.appendChild(keywords);
+    }
+
+    // Author
+    const author = document.querySelector('meta[name="author"]') || document.createElement('meta');
+    author.setAttribute('name', 'author');
+    author.setAttribute('content', 'Genius Recovery');
+    if (!document.querySelector('meta[name="author"]')) {
+      document.head.appendChild(author);
+    }
+
+    // Robots
+    const robots = document.querySelector('meta[name="robots"]') || document.createElement('meta');
+    robots.setAttribute('name', 'robots');
+    robots.setAttribute('content', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    if (!document.querySelector('meta[name="robots"]')) {
+      document.head.appendChild(robots);
+    }
+
+    // Language
+    const language = document.querySelector('meta[name="language"]') || document.createElement('meta');
+    language.setAttribute('name', 'language');
+    language.setAttribute('content', 'English');
+    if (!document.querySelector('meta[name="language"]')) {
+      document.head.appendChild(language);
+    }
+
+    // Content type
+    const contentType = document.querySelector('meta[http-equiv="content-type"]') || document.createElement('meta');
+    contentType.setAttribute('http-equiv', 'content-type');
+    contentType.setAttribute('content', 'text/html; charset=UTF-8');
+    if (!document.querySelector('meta[http-equiv="content-type"]')) {
+      document.head.appendChild(contentType);
+    }
+
+    // Viewport (usually already set, but ensuring it's optimized)
+    const viewport = document.querySelector('meta[name="viewport"]') || document.createElement('meta');
+    viewport.setAttribute('name', 'viewport');
+    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0');
+    if (!document.querySelector('meta[name="viewport"]')) {
+      document.head.appendChild(viewport);
+    }
+
+    // Open Graph tags
+    const ogTags = [
+      { property: 'og:title', content: 'Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help' },
+      { property: 'og:description', content: 'Get immediate addiction recovery support, crisis intervention, and treatment resources. Our AI-powered platform provides 24/7 assistance for individuals and families affected by substance use disorders.' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://geniusrecovery.org' },
+      { property: 'og:image', content: 'https://geniusrecovery.org/genius-recovery-logo.png' },
+      { property: 'og:image:alt', content: 'Genius Recovery - Addiction Recovery Support Organization' },
+      { property: 'og:site_name', content: 'Genius Recovery' },
+      { property: 'og:locale', content: 'en_US' }
+    ];
+
+    ogTags.forEach(tag => {
+      const existing = document.querySelector(`meta[property="${tag.property}"]`) || document.createElement('meta');
+      existing.setAttribute('property', tag.property);
+      existing.setAttribute('content', tag.content);
+      if (!document.querySelector(`meta[property="${tag.property}"]`)) {
+        document.head.appendChild(existing);
+      }
+    });
+
+    // Twitter Card tags
+    const twitterTags = [
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help' },
+      { name: 'twitter:description', content: 'Get immediate addiction recovery support, crisis intervention, and treatment resources. Our AI-powered platform provides 24/7 assistance for individuals and families affected by substance use disorders.' },
+      { name: 'twitter:image', content: 'https://geniusrecovery.org/genius-recovery-logo.png' },
+      { name: 'twitter:image:alt', content: 'Genius Recovery - Addiction Recovery Support Organization' },
+      { name: 'twitter:site', content: '@geniusrecovery' },
+      { name: 'twitter:creator', content: '@geniusrecovery' }
+    ];
+
+    twitterTags.forEach(tag => {
+      const existing = document.querySelector(`meta[name="${tag.name}"]`) || document.createElement('meta');
+      existing.setAttribute('name', tag.name);
+      existing.setAttribute('content', tag.content);
+      if (!document.querySelector(`meta[name="${tag.name}"]`)) {
+        document.head.appendChild(existing);
+      }
+    });
+
+    // Additional SEO meta tags
+    const additionalTags = [
+      { name: 'theme-color', content: '#0EA5E9' },
+      { name: 'msapplication-TileColor', content: '#0EA5E9' },
+      { name: 'application-name', content: 'Genius Recovery' },
+      { name: 'apple-mobile-web-app-title', content: 'Genius Recovery' },
+      { name: 'apple-mobile-web-app-capable', content: 'yes' },
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
+      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'HandheldFriendly', content: 'true' },
+      { name: 'MobileOptimized', content: '320' },
+      { name: 'referrer', content: 'no-referrer-when-downgrade' }
+    ];
+
+    additionalTags.forEach(tag => {
+      const existing = document.querySelector(`meta[name="${tag.name}"]`) || document.createElement('meta');
+      existing.setAttribute('name', tag.name);
+      existing.setAttribute('content', tag.content);
+      if (!document.querySelector(`meta[name="${tag.name}"]`)) {
+        document.head.appendChild(existing);
+      }
+    });
+
+    // Canonical URL
     const canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
     canonical.setAttribute('rel', 'canonical');
     canonical.setAttribute('href', 'https://geniusrecovery.org');
     if (!document.querySelector('link[rel="canonical"]')) {
       document.head.appendChild(canonical);
     }
+
+    // Alternate language links
+    const hreflang = document.querySelector('link[rel="alternate"][hreflang="en"]') || document.createElement('link');
+    hreflang.setAttribute('rel', 'alternate');
+    hreflang.setAttribute('hreflang', 'en');
+    hreflang.setAttribute('href', 'https://geniusrecovery.org');
+    if (!document.querySelector('link[rel="alternate"][hreflang="en"]')) {
+      document.head.appendChild(hreflang);
+    }
+
+    // DNS prefetch for performance
+    const dnsPrefetchs = [
+      'https://fonts.googleapis.com',
+      'https://fonts.gstatic.com',
+      'https://www.google-analytics.com'
+    ];
+
+    dnsPrefetchs.forEach(url => {
+      const existing = document.querySelector(`link[rel="dns-prefetch"][href="${url}"]`) || document.createElement('link');
+      existing.setAttribute('rel', 'dns-prefetch');
+      existing.setAttribute('href', url);
+      if (!document.querySelector(`link[rel="dns-prefetch"][href="${url}"]`)) {
+        document.head.appendChild(existing);
+      }
+    });
+
+    // Preconnect for critical resources
+    const preconnects = [
+      'https://fonts.googleapis.com',
+      'https://fonts.gstatic.com'
+    ];
+
+    preconnects.forEach(url => {
+      const existing = document.querySelector(`link[rel="preconnect"][href="${url}"]`) || document.createElement('link');
+      existing.setAttribute('rel', 'preconnect');
+      existing.setAttribute('href', url);
+      existing.setAttribute('crossorigin', '');
+      if (!document.querySelector(`link[rel="preconnect"][href="${url}"]`)) {
+        document.head.appendChild(existing);
+      }
+    });
   }, []);
 
   return (
