@@ -651,13 +651,16 @@ export default function TreatmentCenters() {
               </Link>
             </Button>
             <Button 
+              asChild
               variant="outline" 
               size="lg"
               className="group relative overflow-hidden border-2 border-primary/30 hover:border-primary bg-background/50 hover:bg-primary/5 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 px-8 py-4 backdrop-blur-sm"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-              <Heart className="h-5 w-5 mr-3 relative z-10 group-hover:text-primary group-hover:animate-pulse transition-colors duration-300" />
-              <span className="relative z-10 font-semibold group-hover:text-primary transition-colors duration-300">Chat with AI Companion</span>
+              <Link to="/ai-companion">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <Heart className="h-5 w-5 mr-3 relative z-10 group-hover:text-primary group-hover:animate-pulse transition-colors duration-300" />
+                <span className="relative z-10 font-semibold group-hover:text-primary transition-colors duration-300">Chat with AI Companion</span>
+              </Link>
             </Button>
           </div>
           </div>
