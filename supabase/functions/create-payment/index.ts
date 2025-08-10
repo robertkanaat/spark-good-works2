@@ -272,6 +272,7 @@ serve(async (req) => {
             <input type="hidden" name="orderid" value="${paymentId}">
             <input type="hidden" name="redirect_url" value="${successUrl}">
             <input type="hidden" name="decline_url" value="${failureUrl}">
+            <input type="hidden" name="postback_url" value="${failureUrl}">
             ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
             
             ${isRecurring ? `
@@ -490,6 +491,7 @@ serve(async (req) => {
             <input type="hidden" name="orderid" value="${orderid}">
             <input type="hidden" name="redirect_url" value="${successUrl}">
             <input type="hidden" name="decline_url" value="${failureUrl}">
+            <input type="hidden" name="postback_url" value="${failureUrl}">
             ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
             
             ${isRecurring ? `
