@@ -130,6 +130,7 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
+    // Force redeploy - using verified domain
     console.log("Emails sent successfully:", { emailToDirector, confirmationEmail });
 
     return new Response(
