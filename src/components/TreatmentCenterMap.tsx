@@ -3,8 +3,8 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin, Users, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { supabase } from '@/integrations/supabase/client';
 
 interface TreatmentCenter {
   id: number;
@@ -52,7 +52,6 @@ const treatmentCenters: TreatmentCenter[] = [
     rating: 4.7,
     specialties: ["Luxury Treatment", "Holistic Therapy"]
   },
-  // Additional mock centers for demonstration
   {
     id: 4,
     name: "Caron Treatment Centers",
@@ -80,22 +79,48 @@ const treatmentCenters: TreatmentCenter[] = [
 const TreatmentCenterMap: React.FC = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
-  const [apiKey, setApiKey] = useState<string>('');
-  const [isApiKeySet, setIsApiKeySet] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedCenter, setSelectedCenter] = useState<TreatmentCenter | null>(null);
+  const [mapboxToken, setMapboxToken] = useState<string>('');
 
-  const handleApiKeySubmit = () => {
-    if (apiKey.trim()) {
-      setIsApiKeySet(true);
-      initializeMap();
-    }
-  };
+  // Get Mapbox token from Supabase secrets
+  useEffect(() => {
+    const getMapboxToken = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke('get-secret', {
+          body: { name: 'MAPBOX_PUBLIC_TOKEN' }
+        });
+        
+        if (error) {
+          console.error('Error fetching Mapbox token:', error);
+          setIsLoading(false);
+          return;
+        }
+        
+        if (data?.value) {
+          setMapboxToken(data.value);
+          setIsLoading(false);
+        } else {
+          // Fallback to hardcoded token if secret not found
+          setMapboxToken('pk.eyJ1IjoiZ2VuaXVzcmVjb3ZlcnkiLCJhIjoiY21lNjMwbnNvMTFsYjJpcHVyb3NkbTA1ZCJ9.GWZj3Wt68GZa2siKD791AA');
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        // Fallback to hardcoded token
+        setMapboxToken('pk.eyJ1IjoiZ2VuaXVzcmVjb3ZlcnkiLCJhIjoiY21lNjMwbnNvMTFsYjJpcHVyb3NkbTA1ZCJ9.GWZj3Wt68GZa2siKD791AA');
+        setIsLoading(false);
+      }
+    };
 
-  const initializeMap = () => {
-    if (!mapContainer.current || !apiKey) return;
+    getMapboxToken();
+  }, []);
+
+  useEffect(() => {
+    if (!mapboxToken || !mapContainer.current || isLoading) return;
 
     // Set Mapbox access token
-    mapboxgl.accessToken = apiKey;
+    mapboxgl.accessToken = mapboxToken;
     
     try {
       map.current = new mapboxgl.Map({
@@ -161,71 +186,19 @@ const TreatmentCenterMap: React.FC = () => {
     } catch (error) {
       console.error('Error initializing map:', error);
     }
-  };
 
-  useEffect(() => {
     return () => {
       map.current?.remove();
     };
-  }, []);
+  }, [mapboxToken, isLoading]);
 
-  if (!isApiKeySet) {
+  if (isLoading) {
     return (
       <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50 max-w-6xl mx-auto shadow-lg">
-        <div className="text-center mb-8">
-          <MapPin className="h-16 w-16 text-primary mx-auto mb-4" />
-          <h3 className="text-2xl font-semibold text-foreground mb-4">Interactive Treatment Center Map</h3>
-          <p className="text-muted-foreground mb-6">
-            To display the interactive map, please enter your Mapbox public token below.
-          </p>
-          <p className="text-sm text-muted-foreground mb-6">
-            Get your free token at{' '}
-            <a 
-              href="https://mapbox.com/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              mapbox.com
-            </a>
-          </p>
-        </div>
-
-        <div className="max-w-md mx-auto">
-          <div className="flex gap-2">
-            <Input
-              type="text"
-              placeholder="Enter your Mapbox public token..."
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
-              className="flex-1"
-            />
-            <Button onClick={handleApiKeySubmit} disabled={!apiKey.trim()}>
-              Load Map
-            </Button>
-          </div>
-          <p className="text-xs text-muted-foreground mt-2 text-center">
-            Your token will only be stored locally in your browser
-          </p>
-        </div>
-
-        {/* Preview of what the map will show */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-card/30 rounded-lg p-4 text-center">
-            <Users className="h-8 w-8 text-primary mx-auto mb-2" />
-            <h4 className="font-semibold text-foreground">5+ Centers</h4>
-            <p className="text-sm text-muted-foreground">Mapped nationwide</p>
-          </div>
-          <div className="bg-card/30 rounded-lg p-4 text-center">
-            <Award className="h-8 w-8 text-primary mx-auto mb-2" />
-            <h4 className="font-semibold text-foreground">Verified Facilities</h4>
-            <p className="text-sm text-muted-foreground">Licensed & accredited</p>
-          </div>
-          <div className="bg-card/30 rounded-lg p-4 text-center">
-            <MapPin className="h-8 w-8 text-primary mx-auto mb-2" />
-            <h4 className="font-semibold text-foreground">Interactive Pins</h4>
-            <p className="text-sm text-muted-foreground">Click for details</p>
-          </div>
+        <div className="text-center">
+          <MapPin className="h-16 w-16 text-primary mx-auto mb-4 animate-pulse" />
+          <h3 className="text-2xl font-semibold text-foreground mb-4">Loading Interactive Map...</h3>
+          <p className="text-muted-foreground">Setting up your treatment center map</p>
         </div>
       </div>
     );
