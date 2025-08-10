@@ -13,6 +13,35 @@ serve(async (req) => {
 
   const url = new URL(req.url);
   
+  // Handle payment gateway postback/response
+  if (req.method === "GET" && (url.searchParams.has('response') || url.searchParams.has('responsetext'))) {
+    const response = url.searchParams.get('response');
+    const responseText = url.searchParams.get('responsetext');
+    const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+    
+    // If error response, redirect to failure page
+    if (response === '2' || response === '3' || responseText?.includes('exceed')) {
+      const errorMessage = encodeURIComponent(responseText || 'Payment failed');
+      return new Response(null, {
+        status: 302,
+        headers: {
+          'Location': `${baseUrl}/payment-failed?error=${errorMessage}`
+        }
+      });
+    }
+    
+    // If success response, redirect to success page
+    if (response === '1') {
+      const transactionId = url.searchParams.get('transactionid');
+      return new Response(null, {
+        status: 302,
+        headers: {
+          'Location': `${baseUrl}/payment-success?transaction=${transactionId || ''}`
+        }
+      });
+    }
+  }
+  
   // If requesting payment form directly, serve the HTML
   if (req.method === "GET" && url.searchParams.has('payment_id')) {
     const paymentId = url.searchParams.get('payment_id');
@@ -270,9 +299,9 @@ serve(async (req) => {
             <input type="hidden" name="currency" value="USD">
             <input type="hidden" name="order_description" value="${description}">
             <input type="hidden" name="orderid" value="${paymentId}">
-            <input type="hidden" name="redirect_url" value="${successUrl}">
-            <input type="hidden" name="decline_url" value="${failureUrl}">
-            <input type="hidden" name="postback_url" value="${failureUrl}">
+            <input type="hidden" name="redirect_url" value="${req.url}&amp;status=success">
+            <input type="hidden" name="decline_url" value="${req.url}&amp;status=failed">
+            <input type="hidden" name="postback_url" value="${req.url}&amp;status=postback">
             ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
             
             ${isRecurring ? `
