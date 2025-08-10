@@ -195,7 +195,18 @@ const BlogPost = () => {
               <div className="lg:col-span-3">
                 <Card className="p-8 md:p-12 shadow-elegant">
                   <div 
-                    className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary hover:prose-a:text-primary/80"
+                    className="prose prose-lg xl:prose-xl max-w-none 
+                      prose-headings:text-foreground prose-headings:font-bold prose-headings:leading-tight
+                      prose-h1:text-4xl prose-h1:mb-8 prose-h1:mt-12 prose-h1:first:mt-0
+                      prose-h2:text-3xl prose-h2:mb-6 prose-h2:mt-10 prose-h2:first:mt-0
+                      prose-h3:text-2xl prose-h3:mb-4 prose-h3:mt-8
+                      prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-6 prose-p:text-lg
+                      prose-strong:text-foreground prose-strong:font-semibold
+                      prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary/80 hover:prose-a:underline
+                      prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-foreground prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:rounded-r-lg
+                      prose-ul:mb-6 prose-ol:mb-6 prose-li:mb-2 prose-li:text-muted-foreground prose-li:text-lg
+                      prose-img:rounded-lg prose-img:shadow-md prose-img:my-8
+                      prose-hr:border-border prose-hr:my-12"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   />
                   
