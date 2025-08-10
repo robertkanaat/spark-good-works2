@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { MapPin, Star, Phone, Globe, Users, Award, Heart } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -456,12 +457,15 @@ export default function TreatmentCenters() {
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
+                asChild
                 size="lg" 
                 className="group relative overflow-hidden bg-gradient-to-r from-primary to-primary-glow hover:from-primary-glow hover:to-primary text-primary-foreground shadow-2xl hover:shadow-3xl hover:shadow-primary/30 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 px-8 py-4"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                <Phone className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
-                <span className="relative z-10 font-semibold">Get Help Now</span>
+                <Link to="/help">
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  <Phone className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
+                  <span className="relative z-10 font-semibold">Get Help Now</span>
+                </Link>
               </Button>
               <Button 
                 onClick={scrollToFeaturedCenters}
@@ -636,12 +640,15 @@ export default function TreatmentCenters() {
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button 
+              asChild
               size="lg" 
               className="group relative overflow-hidden bg-gradient-to-r from-primary to-primary-glow hover:from-primary-glow hover:to-primary text-primary-foreground shadow-2xl hover:shadow-3xl hover:shadow-primary/30 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 px-8 py-4"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              <Phone className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
-              <span className="relative z-10 font-semibold">Get Help Now</span>
+              <Link to="/help">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                <Phone className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
+                <span className="relative z-10 font-semibold">Get Help Now</span>
+              </Link>
             </Button>
             <Button 
               variant="outline" 
