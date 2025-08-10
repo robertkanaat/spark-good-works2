@@ -272,18 +272,26 @@ const Emergency = () => {
               Help is available 24/7. Taking action in an emergency can save a life.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl hover:shadow-red-500/30 hover:scale-[1.02] transition-all duration-300 animate-pulse"
+                onClick={() => window.location.href = 'tel:988'}
+              >
                 <Phone className="w-5 h-5 mr-2" />
                 Get Immediate Help
               </Button>
-              <Button size="lg" variant="outline">
-                <MapPin className="w-5 h-5 mr-2" />
-                Find Local Resources
-              </Button>
-              <Button size="lg" variant="outline">
-                <Users className="w-5 h-5 mr-2" />
-                Join Support Community
-              </Button>
+              <Link to="/resources">
+                <Button size="lg" variant="outline" className="hover:scale-[1.02] transition-all duration-300">
+                  <MapPin className="w-5 h-5 mr-2" />
+                  Find Local Resources
+                </Button>
+              </Link>
+              <Link to="/treatment-centers">
+                <Button size="lg" variant="outline" className="hover:scale-[1.02] transition-all duration-300">
+                  <Stethoscope className="w-5 h-5 mr-2" />
+                  Treatment Centers
+                </Button>
+              </Link>
             </div>
           </Card>
         </div>
