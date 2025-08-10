@@ -513,11 +513,20 @@ serve(async (req) => {
                 const responseText = params.get('responsetext');
                 
                 // If we detect ANY error parameters in URL, redirect immediately
-                if (response || responseText || url.includes('response=') || url.includes('responsetext=')) {
+                if (response || responseText || url.includes('response=') || url.includes('responsetext=') || url.includes('Activity limit exceeded')) {
                     const baseUrl = '${baseUrl}';
                     const failureUrl = baseUrl + '/payment-failed?error=' + encodeURIComponent(responseText || 'Payment failed');
                     window.top.location.href = failureUrl;
                     return true;
+                }
+                
+                // Also check if the current page content contains error text
+                if (document.body && document.body.textContent.includes('Activity limit exceeded')) {
+                    const baseUrl = '${baseUrl}';
+                    const failureUrl = baseUrl + '/payment-failed?error=' + encodeURIComponent('Activity limit exceeded');
+                    window.top.location.href = failureUrl;
+                    return true;
+                }
                 }
                 return false;
             }
