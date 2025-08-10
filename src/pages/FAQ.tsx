@@ -13,6 +13,135 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const FAQ = () => {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "about": {
+      "@type": "Organization",
+      "name": "Genius Recovery",
+      "description": "Leading addiction recovery support organization providing crisis intervention and treatment resources"
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is addiction recovery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Addiction recovery is the process of overcoming substance use disorders through treatment, support, and lifestyle changes. It involves addressing both the physical dependence and underlying psychological factors that contribute to addiction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know if I need addiction treatment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Signs you may need treatment include: inability to control substance use, continued use despite negative consequences, withdrawal symptoms, neglecting responsibilities, and failed attempts to quit on your own."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What types of addiction treatment are available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Treatment options include detoxification, inpatient rehabilitation, outpatient programs, counseling, medication-assisted treatment, support groups, and aftercare planning."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is addiction treatment covered by insurance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many insurance plans cover addiction treatment under mental health and substance abuse benefits. Coverage varies by plan, so it's important to verify benefits with your insurance provider."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a crisis hotline and when should I call?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Crisis hotlines provide immediate support for mental health emergencies. Call 988 (Suicide & Crisis Lifeline) or SAMHSA (1-800-662-4357) if you're experiencing suicidal thoughts, severe withdrawal, or need immediate support."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does addiction recovery take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Recovery is a lifelong journey. Initial treatment programs typically last 30-90 days, but ongoing support and maintenance are essential for long-term success."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Genius Recovery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Genius Recovery is a comprehensive platform providing resources, support, and connections to treatment for individuals struggling with addiction and their families."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I support a loved one in recovery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Support your loved one by learning about addiction, attending family therapy, setting healthy boundaries, avoiding enabling behaviors, and taking care of your own mental health."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I expect during detox?",
+        "acceptedAnswer": {
+          "@type": "Answer", 
+          "text": "Detox is the process of safely removing substances from your body. Medical detox provides 24/7 monitoring and medication to manage withdrawal symptoms safely."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is relapse normal during recovery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Relapse is common and doesn't mean failure. Studies show 40-60% of people experience relapse, but it can provide valuable insights for adjusting treatment."
+        }
+      }
+    ]
+  };
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Genius Recovery", 
+    "description": "Leading addiction recovery organization providing 24/7 crisis support, treatment referrals, and comprehensive recovery resources",
+    "url": "https://geniusrecovery.org",
+    "logo": "https://geniusrecovery.org/genius-recovery-logo.png",
+    "foundingDate": "2023",
+    "areaServed": "United States",
+    "serviceType": [
+      "Addiction Recovery Support",
+      "Crisis Intervention",
+      "Treatment Referrals", 
+      "Educational Resources",
+      "24/7 AI Support"
+    ],
+    "knowsAbout": [
+      "Substance Use Disorders",
+      "Addiction Treatment",
+      "Mental Health",
+      "Crisis Support",
+      "Recovery Programs"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "988",
+        "contactType": "Crisis Support"
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "1-800-662-4357", 
+        "contactType": "Substance Abuse Support"
+      }
+    ]
+  };
+
   useEffect(() => {
     // Set page title and meta description
     document.title = "FAQ - Frequently Asked Questions | Genius Recovery";
@@ -28,157 +157,6 @@ const FAQ = () => {
     if (!document.querySelector('link[rel="canonical"]')) {
       document.head.appendChild(canonical);
     }
-
-    // Add comprehensive FAQ and Organization structured data
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "about": {
-        "@type": "Organization",
-        "name": "Genius Recovery",
-        "description": "Leading addiction recovery support organization providing crisis intervention and treatment resources"
-      },
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is addiction recovery?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Addiction recovery is the process of overcoming substance use disorders through treatment, support, and lifestyle changes. It involves addressing both the physical dependence and underlying psychological factors that contribute to addiction."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I know if I need addiction treatment?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Signs you may need treatment include: inability to control substance use, continued use despite negative consequences, withdrawal symptoms, neglecting responsibilities, and failed attempts to quit on your own."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What types of addiction treatment are available?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Treatment options include detoxification, inpatient rehabilitation, outpatient programs, counseling, medication-assisted treatment, support groups, and aftercare planning."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is addiction treatment covered by insurance?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Many insurance plans cover addiction treatment under mental health and substance abuse benefits. Coverage varies by plan, so it's important to verify benefits with your insurance provider."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is a crisis hotline and when should I call?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Crisis hotlines provide immediate support for mental health emergencies. Call 988 (Suicide & Crisis Lifeline) or SAMHSA (1-800-662-4357) if you're experiencing suicidal thoughts, severe withdrawal, or need immediate support."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long does addiction recovery take?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Recovery is a lifelong journey. Initial treatment programs typically last 30-90 days, but ongoing support and maintenance are essential for long-term success."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is Genius Recovery?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Genius Recovery is a comprehensive platform providing resources, support, and connections to treatment for individuals struggling with addiction and their families."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How can I support a loved one in recovery?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Support your loved one by learning about addiction, attending family therapy, setting healthy boundaries, avoiding enabling behaviors, and taking care of your own mental health."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What should I expect during detox?",
-          "acceptedAnswer": {
-            "@type": "Answer", 
-            "text": "Detox is the process of safely removing substances from your body. Medical detox provides 24/7 monitoring and medication to manage withdrawal symptoms safely."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is relapse normal during recovery?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Relapse is common and doesn't mean failure. Studies show 40-60% of people experience relapse, but it can provide valuable insights for adjusting treatment."
-          }
-        }
-      ]
-    };
-
-    const organizationSchema = {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Genius Recovery", 
-      "description": "Leading addiction recovery organization providing 24/7 crisis support, treatment referrals, and comprehensive recovery resources",
-      "url": "https://geniusrecovery.org",
-      "logo": "https://geniusrecovery.org/genius-recovery-logo.png",
-      "foundingDate": "2023",
-      "areaServed": "United States",
-      "serviceType": [
-        "Addiction Recovery Support",
-        "Crisis Intervention",
-        "Treatment Referrals", 
-        "Educational Resources",
-        "24/7 AI Support"
-      ],
-      "knowsAbout": [
-        "Substance Use Disorders",
-        "Addiction Treatment",
-        "Mental Health",
-        "Crisis Support",
-        "Recovery Programs"
-      ],
-      "contactPoint": [
-        {
-          "@type": "ContactPoint",
-          "telephone": "988",
-          "contactType": "Crisis Support"
-        },
-        {
-          "@type": "ContactPoint",
-          "telephone": "1-800-662-4357", 
-          "contactType": "Substance Abuse Support"
-        }
-      ]
-    };
-
-    const faqSchemaScript = document.createElement('script');
-    faqSchemaScript.type = 'application/ld+json';
-    faqSchemaScript.textContent = JSON.stringify(faqSchema);
-    document.head.appendChild(faqSchemaScript);
-
-    const orgSchemaScript = document.createElement('script'); 
-    orgSchemaScript.type = 'application/ld+json';
-    orgSchemaScript.textContent = JSON.stringify(organizationSchema);
-    document.head.appendChild(orgSchemaScript);
-
-    return () => {
-      const existingFaqScript = document.querySelector('script[type="application/ld+json"]');
-      const existingOrgScript = document.querySelectorAll('script[type="application/ld+json"]')[1];
-      if (existingFaqScript) {
-        document.head.removeChild(existingFaqScript);
-      }
-      if (existingOrgScript) {
-        document.head.removeChild(existingOrgScript);
-      }
-    };
   }, []);
 
   const faqData = [
@@ -250,6 +228,16 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+      {/* Schema Markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      
       <Header />
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
