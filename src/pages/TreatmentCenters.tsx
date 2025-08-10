@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TreatmentCenterMap from "@/components/TreatmentCenterMap";
 
 interface TreatmentCenter {
   id: number;
@@ -121,42 +122,69 @@ export default function TreatmentCenters() {
         </head>
 
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-primary via-primary-glow to-accent py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
-        
-        <div className="container mx-auto text-center relative z-10">
-          <div className="flex items-center justify-center mb-6">
-            <Heart className="h-12 w-12 text-white mr-4 animate-pulse" />
-            <h1 className="text-5xl md:text-6xl font-bold text-white">
-              Find Your Path to Recovery
-            </h1>
-          </div>
+        <section className="relative py-24 px-4 overflow-hidden">
+          {/* Background with gradient and pattern */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary-glow/15 to-accent/10"></div>
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
           
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Discover trusted treatment centers across the United States. Every journey to recovery starts with hope and the right support.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <MapPin className="h-10 w-10 text-white mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold text-white mb-2">Nationwide Coverage</h3>
-              <p className="text-white/80">Treatment centers in all 50 states</p>
+          <div className="container mx-auto text-center relative z-10 max-w-5xl">
+            {/* Main heading with icon */}
+            <div className="flex items-center justify-center mb-8">
+              <div className="bg-primary/10 p-4 rounded-full mr-6">
+                <Heart className="h-12 w-12 text-primary animate-pulse" />
+              </div>
+              <div className="text-left">
+                <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-2">
+                  Find Your Path to
+                </h1>
+                <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
+                  Recovery
+                </h1>
+              </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Award className="h-10 w-10 text-white mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold text-white mb-2">Accredited Centers</h3>
-              <p className="text-white/80">Only verified, licensed facilities</p>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <Users className="h-10 w-10 text-white mb-4 mx-auto" />
-              <h3 className="text-xl font-semibold text-white mb-2">Personalized Care</h3>
-              <p className="text-white/80">Programs tailored to your needs</p>
-            </div>
-          </div>
+            <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+              Discover trusted treatment centers across the United States. Every journey to recovery starts with hope and the right support.
+            </p>
 
-          {/* Interactive Map Placeholder */}
+            {/* Feature cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg group">
+                <MapPin className="h-12 w-12 text-primary mb-4 mx-auto group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-semibold text-foreground mb-3">Nationwide Coverage</h3>
+                <p className="text-muted-foreground">Treatment centers in all 50 states with verified locations and contact information</p>
+              </div>
+              
+              <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg group">
+                <Award className="h-12 w-12 text-primary mb-4 mx-auto group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-semibold text-foreground mb-3">Accredited Centers</h3>
+                <p className="text-muted-foreground">Only verified, licensed facilities with proven track records of success</p>
+              </div>
+              
+              <div className="bg-card/50 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg group">
+                <Users className="h-12 w-12 text-primary mb-4 mx-auto group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl font-semibold text-foreground mb-3">Personalized Care</h3>
+                <p className="text-muted-foreground">Programs tailored to your unique needs and recovery goals</p>
+              </div>
+            </div>
+
+            {/* CTA buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300"
+              >
+                <Phone className="h-5 w-5 mr-2" />
+                Get Help Now
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="border-border hover:bg-card/50 transition-all duration-300"
+              >
+                Browse Centers Below
+              </Button>
+            </div>
           </div>
         </section>
 
@@ -172,32 +200,7 @@ export default function TreatmentCenters() {
               </p>
             </div>
 
-            {/* Interactive Map Placeholder */}
-            <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50 max-w-6xl mx-auto shadow-lg">
-              <h3 className="text-2xl font-semibold text-foreground mb-6 text-center">Interactive Treatment Center Map</h3>
-              
-              {/* Map would go here - using placeholder for now */}
-              <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-xl h-96 flex items-center justify-center border border-border/30">
-                <div className="text-center">
-                  <MapPin className="h-16 w-16 text-primary mx-auto mb-4" />
-                  <p className="text-foreground text-lg font-medium">Interactive Map Coming Soon</p>
-                  <p className="text-muted-foreground">Browse cities below to find treatment centers</p>
-                </div>
-              </div>
-
-              {/* Major Cities Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                {majorCities.map((city) => (
-                  <button
-                    key={`${city.name}-${city.state}`}
-                    className="bg-card/50 hover:bg-card/80 rounded-lg p-4 text-left transition-all duration-200 border border-border/30 hover:border-border/60 hover:shadow-md"
-                  >
-                    <h4 className="text-foreground font-semibold">{city.name}, {city.state}</h4>
-                    <p className="text-muted-foreground text-sm">{city.centers} centers</p>
-                  </button>
-                ))}
-              </div>
-            </div>
+            <TreatmentCenterMap />
         </div>
       </section>
 
