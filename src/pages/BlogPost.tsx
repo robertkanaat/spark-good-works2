@@ -13,7 +13,7 @@ import {
   MessageCircle, 
   Share2, 
   BookmarkPlus,
-  Twitter,
+  X,
   Facebook,
   Linkedin,
   Copy,
@@ -51,7 +51,7 @@ const BlogPost = () => {
     let shareUrl = '';
     
     switch (platform) {
-      case 'twitter':
+      case 'x':
         shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
         break;
       case 'facebook':
@@ -247,10 +247,10 @@ const BlogPost = () => {
                         variant="outline" 
                         size="sm" 
                         className="w-full justify-start hover-scale"
-                        onClick={() => handleShare('twitter')}
+                        onClick={() => handleShare('x')}
                       >
-                        <Twitter className="w-4 h-4 mr-2" />
-                        Twitter
+                        <X className="w-4 h-4 mr-2" />
+                        X
                       </Button>
                       <Button 
                         variant="outline" 

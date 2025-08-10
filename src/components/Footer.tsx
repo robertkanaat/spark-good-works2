@@ -30,7 +30,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a href="https://x.com/GeniusRecovery" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-primary transition-colors">
-                <span className="sr-only">X (formerly Twitter)</span>
+                <span className="sr-only">X</span>
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
@@ -62,7 +62,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">About</h3>
             <ul className="space-y-2">
               <li><Link to="/about" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Our Journey</Link></li>
-              <li><Link to="/blog" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Our Story</Link></li>
+              <li><Link to="/about#our-story" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Our Story</Link></li>
               <li><Link to="/ai-companion" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">AI Recovery Clone</Link></li>
               <li><Link to="/press" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Press</Link></li>
               <li><Link to="/donors" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Donors</Link></li>
