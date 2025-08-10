@@ -195,19 +195,23 @@ const BlogPost = () => {
               <div className="lg:col-span-3">
                 <Card className="p-8 md:p-12 shadow-elegant">
                   <div 
-                    className="prose prose-lg xl:prose-xl max-w-none 
-                      prose-headings:text-foreground prose-headings:font-bold prose-headings:leading-tight
-                      prose-h1:text-4xl prose-h1:mb-8 prose-h1:mt-12 prose-h1:first:mt-0
-                      prose-h2:text-3xl prose-h2:mb-6 prose-h2:mt-10 prose-h2:first:mt-0
-                      prose-h3:text-2xl prose-h3:mb-4 prose-h3:mt-8
-                      prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-6 prose-p:text-lg
-                      prose-strong:text-foreground prose-strong:font-semibold
-                      prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary/80 hover:prose-a:underline
-                      prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-foreground prose-blockquote:bg-primary/5 prose-blockquote:py-4 prose-blockquote:rounded-r-lg
-                      prose-ul:mb-6 prose-ol:mb-6 prose-li:mb-2 prose-li:text-muted-foreground prose-li:text-lg
-                      prose-img:rounded-lg prose-img:shadow-md prose-img:my-8
-                      prose-hr:border-border prose-hr:my-12"
-                    dangerouslySetInnerHTML={{ __html: post.content }}
+                    className="space-y-8 text-lg leading-relaxed"
+                    dangerouslySetInnerHTML={{ 
+                      __html: post.content
+                        .replace(/<p>/g, '<p class="mb-8 text-lg text-muted-foreground leading-relaxed">')
+                        .replace(/<h1>/g, '<h1 class="text-4xl font-bold text-foreground mb-6 mt-12 first:mt-0">')
+                        .replace(/<h2>/g, '<h2 class="text-3xl font-bold text-foreground mb-6 mt-10">')
+                        .replace(/<h3>/g, '<h3 class="text-2xl font-bold text-foreground mb-4 mt-8">')
+                        .replace(/<h4>/g, '<h4 class="text-xl font-bold text-foreground mb-4 mt-6">')
+                        .replace(/<blockquote>/g, '<blockquote class="border-l-4 border-primary pl-6 py-4 my-8 bg-primary/5 rounded-r-lg italic text-foreground">')
+                        .replace(/<ul>/g, '<ul class="mb-8 space-y-3 pl-6">')
+                        .replace(/<ol>/g, '<ol class="mb-8 space-y-3 pl-6">')
+                        .replace(/<li>/g, '<li class="text-lg text-muted-foreground">')
+                        .replace(/<a /g, '<a class="text-primary hover:text-primary/80 underline decoration-primary/30 hover:decoration-primary transition-colors" ')
+                        .replace(/<strong>/g, '<strong class="text-foreground font-semibold">')
+                        .replace(/<em>/g, '<em class="text-foreground italic">')
+                        .replace(/<img /g, '<img class="rounded-lg shadow-md my-8 w-full" ')
+                    }}
                   />
                   
                   <Separator className="my-12" />
