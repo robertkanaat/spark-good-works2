@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { MessageCircle, ArrowRight, Sparkles } from "lucide-react";
 
 const HomeFAQSection = () => {
   const faqData = [
@@ -37,28 +37,39 @@ const HomeFAQSection = () => {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-muted/30 via-background to-muted/20 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.1),transparent_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent)/0.1),transparent_50%)] pointer-events-none" />
+      
+      <div className="max-w-4xl mx-auto relative">
+        <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-6">
-            <MessageCircle className="h-10 w-10 text-primary mr-3" />
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            <div className="relative">
+              <MessageCircle className="h-12 w-12 text-primary mr-4 animate-pulse" />
+              <Sparkles className="h-4 w-4 text-accent absolute -top-1 -right-1 animate-pulse delay-300" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
               Frequently Asked Questions
             </h2>
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Get answers to common questions about addiction recovery and treatment options.
           </p>
         </div>
 
-        <div className="mb-8">
-          <Accordion type="single" collapsible className="w-full space-y-4">
+        <div className="mb-12">
+          <Accordion type="single" collapsible className="w-full space-y-6">
             {faqData.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border border-border rounded-lg">
-                <AccordionTrigger className="px-6 py-4 text-left hover:no-underline hover:bg-muted/50 rounded-t-lg [&[data-state=open]]:rounded-b-none">
-                  <span className="text-lg font-semibold text-foreground">{faq.question}</span>
+              <AccordionItem 
+                key={index} 
+                value={`item-${index}`} 
+                className="border border-border/60 rounded-xl bg-card/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:border-primary/30 group"
+              >
+                <AccordionTrigger className="px-8 py-6 text-left hover:no-underline hover:bg-gradient-to-r hover:from-muted/50 hover:to-primary/5 rounded-t-xl [&[data-state=open]]:rounded-b-none transition-all duration-300 group-hover:scale-[1.02]">
+                  <span className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">{faq.question}</span>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-4 text-muted-foreground leading-relaxed">
+                <AccordionContent className="px-8 pb-6 text-muted-foreground leading-relaxed text-base">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -67,10 +78,15 @@ const HomeFAQSection = () => {
         </div>
 
         <div className="text-center">
-          <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-            <Link to="/faq">
-              View All FAQs
-              <ArrowRight className="ml-2 h-5 w-5" />
+          <Button 
+            asChild 
+            size="lg" 
+            className="bg-gradient-to-r from-primary via-primary to-primary/90 hover:from-primary/90 hover:via-primary hover:to-primary text-primary-foreground font-semibold px-8 py-6 rounded-xl shadow-lg hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 hover:-translate-y-1 group relative overflow-hidden"
+          >
+            <Link to="/faq" className="flex items-center relative z-10">
+              <span className="mr-3">View All FAQs</span>
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out" />
             </Link>
           </Button>
         </div>
