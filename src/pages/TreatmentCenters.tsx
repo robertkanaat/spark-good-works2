@@ -80,6 +80,91 @@ const treatmentCenters: TreatmentCenter[] = [
     lat: 34.0259,
     lng: -118.7798,
     accreditation: ["CARF", "LegitScript"]
+  },
+  {
+    id: 4,
+    name: "Caron Treatment Centers",
+    location: "Wernersville, Pennsylvania",
+    city: "Wernersville",
+    state: "PA",
+    rating: 4.6,
+    reviews: 890,
+    phone: "(610) 678-2332",
+    website: "caron.org",
+    specialties: ["Adolescent Treatment", "Adult Programs", "Family Programs", "Alumni Services"],
+    description: "Comprehensive treatment center offering specialized programs for adolescents and adults with over 30 years of experience.",
+    image: treatmentCenter1,
+    lat: 40.3298,
+    lng: -76.0819,
+    accreditation: ["CARF", "Joint Commission"]
+  },
+  {
+    id: 5,
+    name: "The Meadows",
+    location: "Wickenburg, Arizona",
+    city: "Wickenburg",
+    state: "AZ",
+    rating: 4.5,
+    reviews: 750,
+    phone: "(928) 684-3926",
+    website: "themeadows.com",
+    specialties: ["Trauma Therapy", "Sex Addiction", "Eating Disorders", "Mental Health"],
+    description: "Specialized treatment center focusing on trauma-informed care and co-occurring disorders in a peaceful desert setting.",
+    image: treatmentCenter2,
+    lat: 33.9687,
+    lng: -112.7296,
+    accreditation: ["CARF", "Joint Commission"]
+  },
+  {
+    id: 6,
+    name: "Desert Hope Treatment Center",
+    location: "Las Vegas, Nevada",
+    city: "Las Vegas",
+    state: "NV",
+    rating: 4.6,
+    reviews: 820,
+    phone: "(888) 989-9690",
+    website: "deserthopetreatment.com",
+    specialties: ["Alcohol Treatment", "Drug Addiction", "Detoxification", "Family Therapy"],
+    description: "Comprehensive addiction treatment center in the Southwest offering evidence-based therapies and holistic healing approaches.",
+    image: treatmentCenter1,
+    lat: 36.1699,
+    lng: -115.1398,
+    accreditation: ["CARF", "Joint Commission"]
+  },
+  {
+    id: 7,
+    name: "Arizona Addiction Recovery Center",
+    location: "Scottsdale, Arizona",
+    city: "Scottsdale",
+    state: "AZ",
+    rating: 4.7,
+    reviews: 670,
+    phone: "(480) 360-4093",
+    website: "arizonaaddictionrecovery.com",
+    specialties: ["Luxury Treatment", "Executive Programs", "Dual Diagnosis", "PTSD Treatment"],
+    description: "Premier luxury treatment facility in Scottsdale offering personalized care in a serene desert setting with world-class amenities.",
+    image: treatmentCenter2,
+    lat: 33.4942,
+    lng: -111.9261,
+    accreditation: ["CARF", "Joint Commission", "NAATP"]
+  },
+  {
+    id: 8,
+    name: "Phoenix Recovery Center",
+    location: "Phoenix, Arizona", 
+    city: "Phoenix",
+    state: "AZ",
+    rating: 4.5,
+    reviews: 540,
+    phone: "(602) 346-9142",
+    website: "phoenixrecoverycenter.com",
+    specialties: ["Outpatient Treatment", "Intensive Outpatient", "Medication-Assisted Treatment", "Group Therapy"],
+    description: "Modern outpatient facility serving the Phoenix metro area with flexible treatment options and evidence-based care.",
+    image: treatmentCenter3,
+    lat: 33.4484,
+    lng: -112.0740,
+    accreditation: ["CARF", "SAMHSA"]
   }
 ];
 
@@ -509,10 +594,12 @@ export default function TreatmentCenters() {
                 className="bg-background border border-border rounded-md px-3 py-1 text-sm"
               >
                 <option value="all">All States</option>
+                <option value="AZ">Arizona</option>
                 <option value="CA">California</option>
                 <option value="MN">Minnesota</option>
-                <option value="TX">Texas</option>
+                <option value="PA">Pennsylvania</option>
                 <option value="NY">New York</option>
+                <option value="TX">Texas</option>
               </select>
             </div>
             
