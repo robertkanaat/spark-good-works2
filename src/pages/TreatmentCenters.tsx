@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Star, Phone, Globe, Users, Award, Heart } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -333,6 +333,160 @@ const majorCities = [
 ];
 
 export default function TreatmentCenters() {
+  // SEO Meta Tags Management
+  useEffect(() => {
+    // Set document title
+    document.title = "Find Addiction Treatment Centers | Recovery Programs Directory | Genius Recovery";
+    
+    // Update meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 
+        'Find the best addiction treatment centers across the United States. Compare 17+ verified facilities with ratings, specialties, and accreditation. Get help finding the right recovery program today.'
+      );
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Find the best addiction treatment centers across the United States. Compare 17+ verified facilities with ratings, specialties, and accreditation. Get help finding the right recovery program today.';
+      document.head.appendChild(meta);
+    }
+
+    // Update keywords meta tag
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', 
+        'addiction treatment centers, rehab facilities, recovery programs, drug treatment, alcohol treatment, detox centers, inpatient treatment, outpatient treatment, dual diagnosis, addiction recovery, treatment center directory'
+      );
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'keywords';
+      meta.content = 'addiction treatment centers, rehab facilities, recovery programs, drug treatment, alcohol treatment, detox centers, inpatient treatment, outpatient treatment, dual diagnosis, addiction recovery, treatment center directory';
+      document.head.appendChild(meta);
+    }
+
+    // Set canonical URL
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', 'https://geniusrecovery.io/treatment-centers');
+    } else {
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = 'https://geniusrecovery.io/treatment-centers';
+      document.head.appendChild(link);
+    }
+
+    // Add Open Graph meta tags
+    const ogTags = [
+      { property: 'og:title', content: 'Find Addiction Treatment Centers | Recovery Programs Directory' },
+      { property: 'og:description', content: 'Discover trusted addiction treatment centers across the US. Compare verified facilities, read reviews, and find the right recovery program for you or your loved one.' },
+      { property: 'og:url', content: 'https://geniusrecovery.io/treatment-centers' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:image', content: 'https://geniusrecovery.io/genius-recovery-logo.png' },
+      { property: 'og:image:width', content: '1200' },
+      { property: 'og:image:height', content: '630' },
+      { property: 'og:image:alt', content: 'Genius Recovery - Find Addiction Treatment Centers' },
+      { property: 'og:site_name', content: 'Genius Recovery' },
+      { property: 'og:locale', content: 'en_US' }
+    ];
+
+    ogTags.forEach(tag => {
+      let existingTag = document.querySelector(`meta[property="${tag.property}"]`);
+      if (existingTag) {
+        existingTag.setAttribute('content', tag.content);
+      } else {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', tag.property);
+        meta.setAttribute('content', tag.content);
+        document.head.appendChild(meta);
+      }
+    });
+
+    // Add Twitter Card meta tags
+    const twitterTags = [
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Find Addiction Treatment Centers | Recovery Programs Directory' },
+      { name: 'twitter:description', content: 'Discover trusted addiction treatment centers across the US. Compare verified facilities and find the right recovery program.' },
+      { name: 'twitter:image', content: 'https://geniusrecovery.io/genius-recovery-logo.png' },
+      { name: 'twitter:image:alt', content: 'Genius Recovery - Find Addiction Treatment Centers' },
+      { name: 'twitter:site', content: '@GeniusRecovery' }
+    ];
+
+    twitterTags.forEach(tag => {
+      let existingTag = document.querySelector(`meta[name="${tag.name}"]`);
+      if (existingTag) {
+        existingTag.setAttribute('content', tag.content);
+      } else {
+        const meta = document.createElement('meta');
+        meta.setAttribute('name', tag.name);
+        meta.setAttribute('content', tag.content);
+        document.head.appendChild(meta);
+      }
+    });
+
+    // Add additional SEO meta tags
+    const additionalTags = [
+      { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
+      { name: 'googlebot', content: 'index, follow' },
+      { name: 'author', content: 'Genius Recovery' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
+      { httpEquiv: 'Content-Type', content: 'text/html; charset=utf-8' },
+      { name: 'geo.region', content: 'US' },
+      { name: 'geo.placename', content: 'United States' },
+      { name: 'geo.position', content: '39.8283;-98.5795' },
+      { name: 'ICBM', content: '39.8283, -98.5795' },
+      { name: 'language', content: 'en' },
+      { name: 'distribution', content: 'global' },
+      { name: 'revisit-after', content: '7 days' },
+      { name: 'rating', content: 'general' },
+      { name: 'theme-color', content: '#3B82F6' }
+    ];
+
+    additionalTags.forEach(tag => {
+      const selector = tag.httpEquiv ? `meta[http-equiv="${tag.httpEquiv}"]` : `meta[name="${tag.name}"]`;
+      let existingTag = document.querySelector(selector);
+      if (!existingTag) {
+        const meta = document.createElement('meta');
+        if (tag.httpEquiv) {
+          meta.setAttribute('http-equiv', tag.httpEquiv);
+        } else {
+          meta.setAttribute('name', tag.name);
+        }
+        meta.setAttribute('content', tag.content);
+        document.head.appendChild(meta);
+      }
+    });
+
+    // Add breadcrumb JSON-LD
+    const breadcrumbScript = document.createElement('script');
+    breadcrumbScript.type = 'application/ld+json';
+    breadcrumbScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://geniusrecovery.io"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Treatment Centers",
+          "item": "https://geniusrecovery.io/treatment-centers"
+        }
+      ]
+    });
+    document.head.appendChild(breadcrumbScript);
+
+    // Cleanup function
+    return () => {
+      // Remove dynamically added meta tags on component unmount
+      const dynamicTags = document.querySelectorAll('meta[data-dynamic="true"]');
+      dynamicTags.forEach(tag => tag.remove());
+    };
+  }, []);
+
   const [selectedState, setSelectedState] = useState<string>("all");
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>("all");
 
