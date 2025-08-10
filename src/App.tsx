@@ -15,6 +15,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentFailed from "./pages/PaymentFailed";
 import Emergency from "./pages/Emergency";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Shop from "./pages/Shop";
 import Press from "./pages/Press";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -46,6 +47,7 @@ const App = () => (
           <Route path="/emergency" element={<Emergency />} />
           <Route path="/help" element={<Emergency />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/open-letter" element={<OpenLetter />} />
           <Route path="/ai-companion" element={<AICompanion />} />

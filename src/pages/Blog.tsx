@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle, Share2, BookOpen, TrendingUp, Loader2, AlertCircle } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle, Share2, BookOpen, TrendingUp, Loader2, AlertCircle, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -224,11 +224,12 @@ Best regards,`;
                   
                   <Button 
                     size="lg" 
-                    className="self-start bg-primary hover:bg-primary/90 group"
-                    onClick={() => window.open(featuredPost.link, '_blank')}
+                    className="self-start bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-500/90 text-white group hover-scale hover-glow transition-all duration-300 shadow-lg hover:shadow-xl"
+                    onClick={() => window.location.href = `/blog/${featuredPost.slug}`}
                   >
+                    <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
                     Read Full Story
-                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
                 </div>
               </div>
@@ -311,11 +312,12 @@ Best regards,`;
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    className="p-0 h-auto text-primary hover:text-primary/80 font-medium group"
-                    onClick={() => window.open(post.link, '_blank')}
+                    className="p-0 h-auto text-primary hover:text-primary/80 font-medium group hover-scale transition-all duration-300"
+                    onClick={() => window.location.href = `/blog/${post.slug}`}
                   >
+                    <BookOpen className="w-4 h-4 mr-1 group-hover:rotate-6 transition-transform duration-300" />
                     Read More
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
                   <div className="flex gap-2">
                     <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-red-50 hover:text-red-500 transition-colors">
