@@ -66,7 +66,6 @@ const Footer = () => {
               <li><Link to="/ai-companion" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">AI Recovery Clone</Link></li>
               <li><Link to="/press" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Press</Link></li>
               <li><Link to="/donors" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Donors</Link></li>
-              <li><Link to="/faq" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">FAQ</Link></li>
               <li><Link to="/contact" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Careers</Link></li>
             </ul>
           </div>
@@ -103,6 +102,7 @@ const Footer = () => {
               © 2025 Genius Recovery. All rights reserved. 501(c)(3) nonprofit organization.
             </div>
             <div className="flex space-x-6 text-sm">
+              <Link to="/faq" onClick={scrollToTop} className="text-white/60 hover:text-primary transition-colors">FAQ</Link>
               <Link to="/privacy-policy" onClick={scrollToTop} className="text-white/60 hover:text-primary transition-colors">Privacy Policy</Link>
               <Link to="/terms-conditions" onClick={scrollToTop} className="text-white/60 hover:text-primary transition-colors">Terms & Conditions</Link>
               <Link to="/contact" onClick={scrollToTop} className="text-white/60 hover:text-primary transition-colors">Contact Us</Link>
