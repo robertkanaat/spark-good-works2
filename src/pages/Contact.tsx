@@ -40,12 +40,15 @@ const Contact = () => {
       return value.substring(0, maxLengths[field] || 100);
     }
 
-    // Basic sanitization - remove potentially dangerous characters but preserve functionality
-    return DOMPurify.sanitize(value, { 
+    // Basic sanitization - remove potentially dangerous characters but preserve spaces and normal text
+    const sanitized = DOMPurify.sanitize(value, { 
       ALLOWED_TAGS: [],
       ALLOWED_ATTR: [],
       KEEP_CONTENT: true
-    }).trim();
+    });
+
+    // Only trim for email field, preserve spaces for other fields like subject and message
+    return field === 'email' ? sanitized.trim() : sanitized;
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
