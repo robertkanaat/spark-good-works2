@@ -31,8 +31,7 @@ serve(async (req) => {
     
     const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
     const successUrl = `${baseUrl}/payment-success`;
-    const currentFormUrl = `${baseUrl}/api/create-payment?payment_id=${paymentId}&amount=${amount}&recurring=${isRecurring}&email=${encodeURIComponent(customerEmail || '')}`;
-    const failureUrl = currentFormUrl; // Redirect back to form to show error
+    const failureUrl = `${baseUrl}/payment-failed`;
     const description = `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`;
     
     const paymentFormHtml = `
