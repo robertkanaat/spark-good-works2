@@ -524,7 +524,7 @@ serve(async (req) => {
             
             <div style="margin-bottom: 20px;">
               <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #fff;">Credit Card Number</label>
-              <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required 
+              <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required maxlength="19"
                      style="width: 100%; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease;"
                      onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                      onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
