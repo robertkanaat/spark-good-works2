@@ -629,7 +629,7 @@ serve(async (req) => {
                 setInterval(checkAndRedirectOnError, 1000);
             }, 100);
           </script>
-          <form action="${req.url.split('?')[0]}" method="POST" class="card-form">
+          <form action="https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/create-payment" method="POST" class="card-form">
             <input type="hidden" name="type" value="sale">
             <input type="hidden" name="security_key" value="${securityKey}">
             <input type="hidden" name="amount" value="${amount}">
