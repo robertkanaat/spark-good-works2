@@ -32,7 +32,7 @@ const HeroSection = () => {
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-snug sm:leading-tight">
               On A Mission To{" "}
               <span className="text-primary">Change The Way The World Understands & Treats Addiction</span>{" "}
               One Human At A Time
