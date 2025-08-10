@@ -208,9 +208,17 @@ const Resources = () => {
                     </Badge>
                   ))}
                 </div>
-                <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
-                  Explore Resources
-                </Button>
+                {resource.title === "Treatment Centers" ? (
+                  <Link to="/treatment-centers">
+                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
+                      Find Treatment Centers
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
+                    Explore Resources
+                  </Button>
+                )}
               </Card>
             ))}
           </div>
