@@ -83,7 +83,7 @@ const Blog = () => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg group hover-scale transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20"
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg group hover-scale hover-glow transition-all duration-300"
                 onClick={() => {
                   const blogSection = document.querySelector('[data-section="blog-posts"]');
                   if (blogSection) {
@@ -97,7 +97,7 @@ const Blog = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg group hover-scale transition-all duration-300 hover:shadow-2xl hover:shadow-white/10 story-link"
+                className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg group hover-scale transition-all duration-300 hover:shadow-2xl hover:shadow-white/20"
                 onClick={() => {
                   const subject = 'I want to share my recovery story';
                   const body = `Hi Genius Recovery team,
