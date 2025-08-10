@@ -59,10 +59,10 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Send email to director@geniusrecovery.org
+    // Send email to robert@joepolish.com
     const emailToDirector = await resend.emails.send({
       from: "Genius Recovery Contact Form <noreply@geniusrecovery.org>",
-      to: ["director@geniusrecovery.org"],
+      to: ["robert@joepolish.com"],
       subject: `Contact Form: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
