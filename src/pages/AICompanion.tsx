@@ -1,10 +1,21 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Play, MessageCircle, Heart, Star } from "lucide-react";
+import aiCompanionPreview from "@/assets/ai-companion-preview.jpg";
 
 const AICompanion = () => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  
   const testimonials = [
     {
       name: "Anna's Story",
@@ -42,17 +53,53 @@ const AICompanion = () => {
             </p>
             
             {/* Video Section */}
-            <div className="max-w-4xl mx-auto mb-12">
-              <div className="relative bg-card rounded-lg overflow-hidden shadow-2xl">
-                <div className="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mb-4 mx-auto">
-                      <Play className="w-8 h-8 text-primary-foreground ml-1" />
+            <div className="max-w-4xl mx-auto mb-12 relative">
+              {/* Background decoration */}
+              <div className="absolute top-10 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
+              <div className="absolute bottom-10 right-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
+              
+              <div className="relative group cursor-pointer" onClick={() => setIsVideoOpen(true)}>
+                {/* Video thumbnail container */}
+                <div 
+                  className="relative aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-primary/25 group-hover:scale-[1.02] bg-cover bg-center"
+                  style={{ backgroundImage: `url(${aiCompanionPreview})` }}
+                >
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                  
+                  {/* Play button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative">
+                      {/* Pulse rings */}
+                      <div className="absolute inset-0 bg-white/20 rounded-full animate-ping" />
+                      <div className="absolute inset-0 bg-white/10 rounded-full animate-pulse" />
+                      
+                      {/* Main play button */}
+                      <Button
+                        size="lg"
+                        className="w-20 h-20 rounded-full bg-white/90 hover:bg-white text-primary hover:text-primary shadow-2xl transition-all duration-300 group-hover:scale-110"
+                      >
+                        <Play className="w-8 h-8 ml-1" fill="currentColor" />
+                      </Button>
                     </div>
-                    <p className="text-white text-lg mb-2">Genius Recovery AI Companion</p>
-                    <p className="text-white/70">Duration: 2:45</p>
+                  </div>
+
+                  {/* Video info overlay */}
+                  <div className="absolute bottom-6 left-6 right-6 text-white">
+                    <h3 className="text-2xl font-bold mb-2">Genius Recovery AI Companion</h3>
+                    <p className="text-white/90">Discover your personalized recovery support companion</p>
                   </div>
                 </div>
+
+                {/* Decorative elements */}
+                <div className="absolute -top-4 -left-4 w-8 h-8 bg-primary/30 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-accent/30 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              </div>
+
+              <div className="text-center mt-8">
+                <p className="text-muted-foreground">
+                  Click to watch the AI companion introduction
+                </p>
               </div>
             </div>
             
@@ -175,6 +222,29 @@ const AICompanion = () => {
           </div>
         </section>
       </main>
+      
+      {/* Video Modal */}
+      <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+        <DialogContent className="max-w-4xl w-[95vw] p-0 bg-black border-0">
+          <DialogHeader className="sr-only">
+            <DialogTitle>AI Companion Introduction Video</DialogTitle>
+            <DialogDescription>
+              Watch our video introducing the Genius Recovery AI Companion
+            </DialogDescription>
+          </DialogHeader>
+          <div className="aspect-video w-full">
+            <iframe
+              src="https://player.vimeo.com/video/1076776049?h=b4510e666f&autoplay=1&title=0&byline=0&portrait=0"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
       
       <Footer />
     </div>
