@@ -50,7 +50,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/emergency" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Get Help</Link></li>
               <li><Link to="/crisis-support" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Crisis Support</Link></li>
-              <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Treatment Centers</Link></li>
+              <li><Link to="/treatment-centers" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Treatment Centers</Link></li>
               <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Recovery Resources</Link></li>
               <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Support Groups</Link></li>
               <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Family Support</Link></li>

@@ -3,6 +3,8 @@ import { MapPin, Star, Phone, Globe, Users, Award, Heart } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 interface TreatmentCenter {
   id: number;
@@ -104,20 +106,22 @@ export default function TreatmentCenters() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
-      {/* SEO Meta Tags */}
-      <head>
-        <title>Find Treatment Centers | Addiction Recovery Programs | Genius Recovery</title>
-        <meta 
-          name="description" 
-          content="Find the best addiction treatment centers across the United States. Compare ratings, specialties, and programs to find the right recovery center for you or your loved one."
-        />
-        <meta name="keywords" content="treatment centers, addiction treatment, recovery programs, rehab centers, drug treatment, alcohol treatment" />
-        <link rel="canonical" href="https://geniusrecovery.io/treatment-centers" />
-      </head>
+    <>
+      <Header />
+      <main className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+        {/* SEO Meta Tags */}
+        <head>
+          <title>Find Treatment Centers | Addiction Recovery Programs | Genius Recovery</title>
+          <meta 
+            name="description" 
+            content="Find the best addiction treatment centers across the United States. Compare ratings, specialties, and programs to find the right recovery center for you or your loved one."
+          />
+          <meta name="keywords" content="treatment centers, addiction treatment, recovery programs, rehab centers, drug treatment, alcohol treatment" />
+          <link rel="canonical" href="https://geniusrecovery.io/treatment-centers" />
+        </head>
 
-      {/* Hero Section with Map */}
-      <section className="relative bg-gradient-to-r from-primary via-primary-glow to-accent py-20 px-4 overflow-hidden">
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-r from-primary via-primary-glow to-accent py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
         
         <div className="container mx-auto text-center relative z-10">
@@ -153,31 +157,47 @@ export default function TreatmentCenters() {
           </div>
 
           {/* Interactive Map Placeholder */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 max-w-6xl mx-auto">
-            <h3 className="text-2xl font-semibold text-white mb-6">Explore Treatment Centers by Location</h3>
-            
-            {/* Map would go here - using placeholder for now */}
-            <div className="bg-gradient-to-br from-white/20 to-white/10 rounded-xl h-96 flex items-center justify-center border border-white/30">
-              <div className="text-center">
-                <MapPin className="h-16 w-16 text-white mx-auto mb-4" />
-                <p className="text-white text-lg font-medium">Interactive Map Coming Soon</p>
-                <p className="text-white/80">Browse cities below to find treatment centers</p>
-              </div>
+          </div>
+        </section>
+
+        {/* Interactive Map Section */}
+        <section className="py-16 px-4 bg-gradient-to-br from-background/50 to-primary/5">
+          <div className="container mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-foreground mb-4">
+                Explore Treatment Centers by Location
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Find treatment centers near you or explore options in different cities across the United States.
+              </p>
             </div>
 
-            {/* Major Cities Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-              {majorCities.map((city) => (
-                <button
-                  key={`${city.name}-${city.state}`}
-                  className="bg-white/10 hover:bg-white/20 rounded-lg p-4 text-left transition-all duration-200 border border-white/20 hover:border-white/40"
-                >
-                  <h4 className="text-white font-semibold">{city.name}, {city.state}</h4>
-                  <p className="text-white/70 text-sm">{city.centers} centers</p>
-                </button>
-              ))}
+            {/* Interactive Map Placeholder */}
+            <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50 max-w-6xl mx-auto shadow-lg">
+              <h3 className="text-2xl font-semibold text-foreground mb-6 text-center">Interactive Treatment Center Map</h3>
+              
+              {/* Map would go here - using placeholder for now */}
+              <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-xl h-96 flex items-center justify-center border border-border/30">
+                <div className="text-center">
+                  <MapPin className="h-16 w-16 text-primary mx-auto mb-4" />
+                  <p className="text-foreground text-lg font-medium">Interactive Map Coming Soon</p>
+                  <p className="text-muted-foreground">Browse cities below to find treatment centers</p>
+                </div>
+              </div>
+
+              {/* Major Cities Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                {majorCities.map((city) => (
+                  <button
+                    key={`${city.name}-${city.state}`}
+                    className="bg-card/50 hover:bg-card/80 rounded-lg p-4 text-left transition-all duration-200 border border-border/30 hover:border-border/60 hover:shadow-md"
+                  >
+                    <h4 className="text-foreground font-semibold">{city.name}, {city.state}</h4>
+                    <p className="text-muted-foreground text-sm">{city.centers} centers</p>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
         </div>
       </section>
 
@@ -331,8 +351,10 @@ export default function TreatmentCenters() {
               Chat with AI Companion
             </Button>
           </div>
-        </div>
-      </section>
-    </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }
