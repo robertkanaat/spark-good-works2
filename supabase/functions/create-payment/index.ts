@@ -440,6 +440,49 @@ serve(async (req) => {
     });
   }
 
+  // Handle form submission from embedded form
+  if (req.method === "POST" && req.headers.get("content-type")?.includes("application/x-www-form-urlencoded")) {
+    const formData = await req.formData();
+    const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+    
+    // Forward the payment to the actual gateway
+    const gatewayResponse = await fetch("https://secure.inchekgateway.com/api/transact.php", {
+      method: "POST",
+      body: formData
+    });
+    
+    const responseText = await gatewayResponse.text();
+    
+    // Check if response contains error parameters
+    if (responseText.includes('response=2') || responseText.includes('response=3') || responseText.includes('Activity limit exceeded')) {
+      const errorMessage = encodeURIComponent('Activity limit exceeded - Please try again later');
+      return new Response(null, {
+        status: 302,
+        headers: {
+          'Location': `${baseUrl}/payment-failed?error=${errorMessage}`
+        }
+      });
+    }
+    
+    // If success
+    if (responseText.includes('response=1')) {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          'Location': `${baseUrl}/payment-success`
+        }
+      });
+    }
+    
+    // Default to failure page for any unexpected response
+    return new Response(null, {
+      status: 302,
+      headers: {
+        'Location': `${baseUrl}/payment-failed?error=${encodeURIComponent('Payment processing error')}`
+      }
+    });
+  }
+
   try {
     const { amount, currency = "USD", isRecurring = false, customerEmail, embedForm = false } = await req.json();
 
@@ -591,7 +634,7 @@ serve(async (req) => {
                 setInterval(checkAndRedirectOnError, 1000);
             }, 100);
           </script>
-          <form action="https://secure.inchekgateway.com/api/transact.php" method="POST" class="card-form">
+          <form action="${req.url.split('?')[0]}" method="POST" class="card-form">
             <input type="hidden" name="type" value="sale">
             <input type="hidden" name="security_key" value="${securityKey}">
             <input type="hidden" name="amount" value="${amount}">
