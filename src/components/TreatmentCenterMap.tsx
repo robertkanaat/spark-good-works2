@@ -73,6 +73,39 @@ const treatmentCenters: TreatmentCenter[] = [
     lng: -112.7296,
     rating: 4.5,
     specialties: ["Trauma Therapy", "Sex Addiction"]
+  },
+  {
+    id: 6,
+    name: "Desert Hope Treatment Center",
+    location: "Las Vegas, NV",
+    city: "Las Vegas",
+    state: "NV",
+    lat: 36.1699,
+    lng: -115.1398,
+    rating: 4.6,
+    specialties: ["Alcohol Treatment", "Drug Addiction", "Detoxification"]
+  },
+  {
+    id: 7,
+    name: "Arizona Addiction Recovery Center",
+    location: "Scottsdale, AZ",
+    city: "Scottsdale",
+    state: "AZ",
+    lat: 33.4942,
+    lng: -111.9261,
+    rating: 4.7,
+    specialties: ["Luxury Treatment", "Executive Programs", "Dual Diagnosis"]
+  },
+  {
+    id: 8,
+    name: "Phoenix Recovery Center",
+    location: "Phoenix, AZ",
+    city: "Phoenix",
+    state: "AZ",
+    lat: 33.4484,
+    lng: -112.0740,
+    rating: 4.5,
+    specialties: ["Outpatient Treatment", "Intensive Outpatient", "Medication-Assisted Treatment"]
   }
 ];
 
