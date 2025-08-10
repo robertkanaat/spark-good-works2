@@ -132,6 +132,278 @@ export default function TreatmentCenters() {
           />
           <meta name="keywords" content="treatment centers, addiction treatment, recovery programs, rehab centers, drug treatment, alcohol treatment" />
           <link rel="canonical" href="https://geniusrecovery.io/treatment-centers" />
+          
+          {/* Structured Data Schema */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "Treatment Centers Directory",
+              "description": "Find the best addiction treatment centers across the United States with verified locations, ratings, and specialized programs.",
+              "url": "https://geniusrecovery.io/treatment-centers",
+              "mainEntity": {
+                "@type": "ItemList",
+                "name": "Featured Treatment Centers",
+                "description": "Top-rated addiction treatment centers in the United States",
+                "numberOfItems": treatmentCenters.length,
+                "itemListElement": treatmentCenters.map((center, index) => ({
+                  "@type": "ListItem",
+                  "position": index + 1,
+                  "item": {
+                    "@type": ["MedicalOrganization", "LocalBusiness"],
+                    "@id": `https://geniusrecovery.io/treatment-centers/${center.id}`,
+                    "name": center.name,
+                    "description": center.description,
+                    "url": `https://${center.website}`,
+                    "telephone": center.phone,
+                    "address": {
+                      "@type": "PostalAddress",
+                      "addressLocality": center.city,
+                      "addressRegion": center.state,
+                      "addressCountry": "US"
+                    },
+                    "geo": {
+                      "@type": "GeoCoordinates",
+                      "latitude": center.lat,
+                      "longitude": center.lng
+                    },
+                    "aggregateRating": {
+                      "@type": "AggregateRating",
+                      "ratingValue": center.rating,
+                      "bestRating": 5,
+                      "worstRating": 1,
+                      "ratingCount": center.reviews
+                    },
+                    "medicalSpecialty": center.specialties,
+                    "hasCredential": center.accreditation.map(acc => ({
+                      "@type": "EducationalOccupationalCredential",
+                      "credentialCategory": "Accreditation",
+                      "recognizedBy": {
+                        "@type": "Organization",
+                        "name": acc
+                      }
+                    })),
+                    "serviceType": "Addiction Treatment",
+                    "availableService": center.specialties.map(specialty => ({
+                      "@type": "MedicalTherapy",
+                      "name": specialty,
+                      "category": "Addiction Treatment"
+                    })),
+                    "image": center.image,
+                    "priceRange": "$$$$"
+                  }
+                }))
+              },
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://geniusrecovery.io"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Treatment Centers",
+                    "item": "https://geniusrecovery.io/treatment-centers"
+                  }
+                ]
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Genius Recovery",
+                "url": "https://geniusrecovery.io",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://geniusrecovery.io/genius-recovery-logo.png"
+                }
+              },
+              "author": {
+                "@type": "Organization",
+                "name": "Genius Recovery",
+                "url": "https://geniusrecovery.io"
+              },
+              "datePublished": "2024-01-01",
+              "dateModified": new Date().toISOString().split('T')[0],
+              "inLanguage": "en-US"
+            })}
+          </script>
+
+          {/* Additional Schema for Medical Organizations */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "MedicalOrganization",
+              "name": "Treatment Centers Directory",
+              "description": "Comprehensive directory of accredited addiction treatment centers across the United States",
+              "url": "https://geniusrecovery.io/treatment-centers",
+              "medicalSpecialty": [
+                "Addiction Medicine",
+                "Substance Abuse Treatment", 
+                "Alcohol Treatment",
+                "Drug Rehabilitation",
+                "Dual Diagnosis Treatment",
+                "Mental Health Treatment"
+              ],
+              "serviceArea": {
+                "@type": "Country",
+                "name": "United States"
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Treatment Center Services",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Inpatient Treatment",
+                      "description": "24/7 medical supervision and comprehensive addiction treatment"
+                    }
+                  },
+                  {
+                    "@type": "Offer", 
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Outpatient Treatment",
+                      "description": "Flexible treatment programs that allow patients to maintain daily responsibilities"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service", 
+                      "name": "Detoxification Services",
+                      "description": "Medically supervised withdrawal management"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Therapy and Counseling",
+                      "description": "Individual, group, and family therapy sessions"
+                    }
+                  }
+                ]
+              }
+            })}
+          </script>
+
+          {/* Local Business Schema for Featured Centers */}
+          {treatmentCenters.map((center) => (
+            <script key={center.id} type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "MedicalOrganization",
+                "@id": `https://geniusrecovery.io/treatment-centers/${center.id}`,
+                "name": center.name,
+                "description": center.description,
+                "url": `https://${center.website}`,
+                "telephone": center.phone,
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": center.city,
+                  "addressRegion": center.state,
+                  "addressCountry": "US"
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": center.lat,
+                  "longitude": center.lng
+                },
+                "image": center.image,
+                "aggregateRating": {
+                  "@type": "AggregateRating", 
+                  "ratingValue": center.rating,
+                  "bestRating": 5,
+                  "worstRating": 1,
+                  "ratingCount": center.reviews
+                },
+                "review": [
+                  {
+                    "@type": "Review",
+                    "reviewRating": {
+                      "@type": "Rating",
+                      "ratingValue": center.rating,
+                      "bestRating": 5
+                    },
+                    "author": {
+                      "@type": "Organization",
+                      "name": "Genius Recovery"
+                    },
+                    "reviewBody": `${center.name} is a highly rated treatment center specializing in ${center.specialties.join(', ')}. Located in ${center.location}, this facility has earned ${center.rating}/5 stars from ${center.reviews} reviews.`
+                  }
+                ],
+                "medicalSpecialty": center.specialties,
+                "hasCredential": center.accreditation.map(acc => ({
+                  "@type": "EducationalOccupationalCredential",
+                  "credentialCategory": "Accreditation",
+                  "recognizedBy": {
+                    "@type": "Organization",
+                    "name": acc
+                  }
+                })),
+                "availableService": center.specialties.map(specialty => ({
+                  "@type": "MedicalTherapy",
+                  "name": specialty,
+                  "category": "Addiction Treatment",
+                  "provider": {
+                    "@type": "MedicalOrganization",
+                    "name": center.name
+                  }
+                })),
+                "openingHours": "Mo-Su 00:00-23:59",
+                "priceRange": "$$$$",
+                "paymentAccepted": ["Insurance", "Self-Pay", "Financing"],
+                "currenciesAccepted": "USD"
+              })}
+            </script>
+          ))}
+
+          {/* FAQ Schema */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How do I choose the right treatment center?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Consider factors like location, treatment specialties, accreditation, insurance acceptance, and treatment approach. Look for centers that specialize in your specific needs and have proper licensing and accreditation."
+                  }
+                },
+                {
+                  "@type": "Question", 
+                  "name": "What types of addiction treatment programs are available?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Treatment centers offer various programs including inpatient/residential treatment, outpatient programs, intensive outpatient programs (IOP), partial hospitalization programs (PHP), detoxification services, and aftercare planning."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Do treatment centers accept insurance?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Most accredited treatment centers accept various forms of insurance. Coverage varies by provider and plan, so it's important to verify benefits and coverage details with both your insurance company and the treatment center."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What should I expect during treatment?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Treatment typically includes medical detox (if needed), individual and group therapy, educational sessions, recreational activities, family involvement, and discharge planning. Programs are tailored to individual needs and may include specialized therapies."
+                  }
+                }
+              ]
+            })}
+          </script>
         </head>
 
         {/* Hero Section */}
