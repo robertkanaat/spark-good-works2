@@ -2,99 +2,56 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle, Share2, BookOpen, TrendingUp } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle, Share2, BookOpen, TrendingUp, Loader2, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useWordPressPosts } from "@/hooks/useWordPressPosts";
 import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const { posts, loading, error, featuredPost, categories } = useWordPressPosts();
   
-  const categories = ["All", "Recovery Stories", "Mental Health", "Family Support", "Resources", "News"];
-  
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Breaking the Silence: One Woman's Journey from Addiction to Advocacy",
-      excerpt: "Sarah shares her powerful story of overcoming addiction and how she now helps others find their path to recovery.",
-      category: "Recovery Stories",
-      author: "Sarah Martinez",
-      date: "December 5, 2024",
-      readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format",
-      featured: true,
-      likes: 245,
-      comments: 18
-    },
-    {
-      id: 2,
-      title: "Understanding Co-Occurring Disorders: When Mental Health and Addiction Intersect",
-      excerpt: "Exploring the complex relationship between mental health conditions and substance use disorders.",
-      category: "Mental Health",
-      author: "Dr. Michael Chen",
-      date: "December 3, 2024",
-      readTime: "12 min read",
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop&auto=format",
-      likes: 189,
-      comments: 24
-    },
-    {
-      id: 3,
-      title: "Supporting Your Loved One: A Family Guide to Recovery",
-      excerpt: "Practical advice for families navigating the challenges of supporting someone in recovery.",
-      category: "Family Support",
-      author: "Lisa Thompson",
-      date: "December 1, 2024",
-      readTime: "6 min read",
-      image: "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=800&h=400&fit=crop&auto=format",
-      likes: 156,
-      comments: 12
-    },
-    {
-      id: 4,
-      title: "The Science of Addiction: Understanding the Brain's Role",
-      excerpt: "A deep dive into how addiction affects the brain and why recovery is possible with the right support.",
-      category: "Resources",
-      author: "Dr. Emily Rodriguez",
-      date: "November 28, 2024",
-      readTime: "10 min read",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop&auto=format",
-      likes: 298,
-      comments: 31
-    },
-    {
-      id: 5,
-      title: "Finding Hope in Dark Times: Community Support Makes the Difference",
-      excerpt: "How peer support groups and community connections can transform the recovery journey.",
-      category: "Recovery Stories",
-      author: "James Wilson",
-      date: "November 25, 2024",
-      readTime: "7 min read",
-      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=400&fit=crop&auto=format",
-      likes: 167,
-      comments: 15
-    },
-    {
-      id: 6,
-      title: "New Study Shows Promise for Alternative Recovery Therapies",
-      excerpt: "Recent research highlights the effectiveness of art therapy, meditation, and other holistic approaches.",
-      category: "News",
-      author: "Research Team",
-      date: "November 22, 2024",
-      readTime: "5 min read",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop&auto=format",
-      likes: 134,
-      comments: 8
-    }
-  ];
-
   const filteredPosts = selectedCategory === "All" 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === selectedCategory);
+    ? posts 
+    : posts.filter(post => post.category === selectedCategory);
 
-  const featuredPost = blogPosts.find(post => post.featured);
-  const regularPosts = blogPosts.filter(post => !post.featured);
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto px-4 py-20 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <Loader2 className="w-12 h-12 animate-spin text-primary mx-auto mb-4" />
+            <p className="text-xl text-muted-foreground">Loading inspiring stories...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto px-4 py-20 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-4" />
+            <h2 className="text-2xl font-bold mb-2">Unable to Load Stories</h2>
+            <p className="text-muted-foreground mb-4">We're having trouble connecting to our blog. Please try again later.</p>
+            <Button onClick={() => window.location.reload()}>
+              Try Again
+            </Button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -151,7 +108,7 @@ const Blog = () => {
             <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <BookOpen className="w-8 h-8 text-primary" />
             </div>
-            <div className="text-4xl font-bold text-foreground mb-2">500+</div>
+            <div className="text-4xl font-bold text-foreground mb-2">{posts.length}+</div>
             <div className="text-muted-foreground">Recovery Stories</div>
           </div>
           <div className="text-center">
@@ -232,7 +189,11 @@ const Blog = () => {
                     </span>
                   </div>
                   
-                  <Button size="lg" className="self-start bg-primary hover:bg-primary/90 group">
+                  <Button 
+                    size="lg" 
+                    className="self-start bg-primary hover:bg-primary/90 group"
+                    onClick={() => window.open(featuredPost.link, '_blank')}
+                  >
                     Read Full Story
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -264,7 +225,7 @@ const Blog = () => {
 
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
-          {filteredPosts.slice(1).map((post, index) => (
+          {filteredPosts.filter(post => !post.featured).map((post, index) => (
             <Card key={post.id} className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-white to-gray-50/50 animate-fade-in`} style={{ animationDelay: `${index * 0.1}s` }}>
               <div className="relative overflow-hidden">
                 <img 
@@ -314,7 +275,12 @@ const Blog = () => {
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-medium group">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="p-0 h-auto text-primary hover:text-primary/80 font-medium group"
+                    onClick={() => window.open(post.link, '_blank')}
+                  >
                     Read More
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </Button>
