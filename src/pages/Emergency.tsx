@@ -38,11 +38,25 @@ const Emergency = () => {
           
           {/* Quick Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-xl">
+            <Button 
+              size="lg" 
+              className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-xl"
+              onClick={() => window.location.href = 'tel:911'}
+            >
               <Phone className="w-6 h-6 mr-3" />
               Call 911 Now
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-xl">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-xl"
+              onClick={() => {
+                const crisisSection = document.querySelector('[id="crisis-hotlines"]');
+                if (crisisSection) {
+                  crisisSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               <Heart className="w-6 h-6 mr-3" />
               Crisis Hotlines
             </Button>
@@ -204,7 +218,7 @@ const Emergency = () => {
           </Card>
 
           {/* Crisis Resources */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div id="crisis-hotlines" className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             <Card className="p-8 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20">
               <div className="flex items-center mb-6">
                 <Heart className="w-10 h-10 text-purple-500 mr-4" />
