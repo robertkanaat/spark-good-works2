@@ -333,7 +333,7 @@ const Donation = () => {
                     disabled={isProcessing || !email.trim() || !isValidEmail(email.trim())}
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4"
                   >
-                    {isProcessing ? 'PROCESSING...' : `DONATE $${amount} ${isMonthly ? '/mo' : 'NOW'}`}
+                    {isProcessing ? 'PROCESSING...' : `DONATE $${amount} ${isMonthly ? 'MONTHLY' : 'NOW'}`}
                   </Button>
 
                 <p className="text-xs text-muted-foreground text-center">
