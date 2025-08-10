@@ -61,7 +61,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email to robert@joepolish.com
     const emailToDirector = await resend.emails.send({
-      from: "Genius Recovery Contact Form <noreply@geniusrecovery.org>",
+      from: "Genius Recovery Contact Form <onboarding@resend.dev>",
       to: ["robert@joepolish.com"],
       subject: `Contact Form: ${subject}`,
       html: `
@@ -93,7 +93,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to the person who submitted the form
     const confirmationEmail = await resend.emails.send({
-      from: "Genius Recovery <noreply@geniusrecovery.org>",
+      from: "Genius Recovery <onboarding@resend.dev>",
       to: [email],
       subject: "Thank you for contacting Genius Recovery",
       html: `
