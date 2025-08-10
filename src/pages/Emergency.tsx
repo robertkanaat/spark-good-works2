@@ -49,7 +49,7 @@ const Emergency = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-xl"
+              className="bg-white/10 border-white/30 text-white hover:bg-white/90 hover:text-primary hover:border-white hover:shadow-lg hover:shadow-white/20 hover:scale-[1.02] px-8 py-4 text-xl transition-all duration-300 backdrop-blur-sm"
               onClick={() => {
                 const crisisSection = document.querySelector('[id="crisis-hotlines"]');
                 if (crisisSection) {
@@ -57,7 +57,7 @@ const Emergency = () => {
                 }
               }}
             >
-              <Heart className="w-6 h-6 mr-3" />
+              <Heart className="w-6 h-6 mr-3 transition-transform duration-300 group-hover:scale-110" />
               Crisis Hotlines
             </Button>
           </div>
