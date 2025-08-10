@@ -81,12 +81,45 @@ const Blog = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg">
-                <Search className="w-6 h-6 mr-3" />
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-4 text-lg group hover-scale transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20"
+                onClick={() => {
+                  const blogSection = document.querySelector('[data-section="blog-posts"]');
+                  if (blogSection) {
+                    blogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
+                <Search className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform duration-300" />
                 Explore Stories
               </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg">
-                <Heart className="w-6 h-6 mr-3" />
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg group hover-scale transition-all duration-300 hover:shadow-2xl hover:shadow-white/10 story-link"
+                onClick={() => {
+                  const subject = 'I want to share my recovery story';
+                  const body = `Hi Genius Recovery team,
+
+I would like to share my story of recovery and hope to inspire others on their journey.
+
+My story includes:
+- My background and challenges I faced
+- The turning point in my recovery
+- What has helped me in my healing journey
+- Message of hope I want to share
+
+Please let me know the best way to submit my story.
+
+Thank you for all the incredible work you do!
+
+Best regards,`;
+                  
+                  window.location.href = `mailto:stories@geniusrecovery.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                }}
+              >
+                <Heart className="w-6 h-6 mr-3 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300" />
                 Share Your Story
               </Button>
             </div>
@@ -204,7 +237,7 @@ const Blog = () => {
         )}
 
         {/* Category Filter */}
-        <div className="mb-16">
+        <div data-section="blog-posts" className="mb-16">
           <div className="flex flex-wrap gap-4 justify-center">
             {categories.map((category) => (
               <Button
