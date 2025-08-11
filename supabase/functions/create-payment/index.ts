@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -30,9 +31,43 @@ serve(async (req) => {
       });
     }
     
-    // If success response, redirect to success page
+    // If success response, send confirmation email and redirect to success page
     if (response === '1') {
       const transactionId = url.searchParams.get('transactionid');
+      const amount = url.searchParams.get('amount');
+      const email = url.searchParams.get('email');
+      const firstName = url.searchParams.get('firstname');
+      const lastName = url.searchParams.get('lastname');
+      
+      // Send donation confirmation email in background
+      if (email && firstName && amount) {
+        try {
+          const supabase = createClient(
+            Deno.env.get('SUPABASE_URL') ?? '',
+            Deno.env.get('SUPABASE_ANON_KEY') ?? ''
+          );
+          
+          // Trigger email sending function
+          EdgeRuntime.waitUntil(
+            supabase.functions.invoke('send-donation-email', {
+              body: {
+                donor_name: `${firstName} ${lastName || ''}`.trim(),
+                donor_email: email,
+                amount: parseInt(amount) * 100, // Convert to cents
+                currency: 'USD',
+                donation_id: transactionId || `txn-${Date.now()}`,
+                is_recurring: false // Can be enhanced based on the payment type
+              }
+            })
+          );
+          
+          console.log('Donation confirmation email triggered for:', email);
+        } catch (emailError) {
+          console.error('Failed to trigger donation email:', emailError);
+          // Don't fail the payment success flow if email fails
+        }
+      }
+      
       return new Response(null, {
         status: 302,
         headers: {
@@ -466,6 +501,45 @@ serve(async (req) => {
     
     // If success
     if (responseText.includes('response=1')) {
+      // Extract payment details from form data for email
+      const donorEmail = formData.get('email')?.toString();
+      const firstName = formData.get('firstname')?.toString();
+      const lastName = formData.get('lastname')?.toString();
+      const amount = formData.get('amount')?.toString();
+      
+      // Send donation confirmation email in background
+      if (donorEmail && firstName && amount) {
+        try {
+          const supabase = createClient(
+            Deno.env.get('SUPABASE_URL') ?? '',
+            Deno.env.get('SUPABASE_ANON_KEY') ?? ''
+          );
+          
+          // Extract transaction ID from response if available
+          const transactionMatch = responseText.match(/transactionid=([^&]+)/);
+          const transactionId = transactionMatch ? transactionMatch[1] : `txn-${Date.now()}`;
+          
+          // Trigger email sending function
+          EdgeRuntime.waitUntil(
+            supabase.functions.invoke('send-donation-email', {
+              body: {
+                donor_name: `${firstName} ${lastName || ''}`.trim(),
+                donor_email: donorEmail,
+                amount: parseFloat(amount) * 100, // Convert to cents
+                currency: 'USD',
+                donation_id: transactionId,
+                is_recurring: false // Can be enhanced based on the payment type
+              }
+            })
+          );
+          
+          console.log('Donation confirmation email triggered for:', donorEmail);
+        } catch (emailError) {
+          console.error('Failed to trigger donation email:', emailError);
+          // Don't fail the payment success flow if email fails
+        }
+      }
+      
       return new Response(null, {
         status: 302,
         headers: {
