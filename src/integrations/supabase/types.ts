@@ -132,6 +132,23 @@ export type Database = {
       }
     }
     Functions: {
+      admin_get_memories_with_emails: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          id: string
+          name: string
+          email: string
+          title: string
+          story: string
+          category: string
+          relationship: string
+          memorable_date: string
+          is_featured: boolean
+          is_approved: boolean
+          created_at: string
+          updated_at: string
+        }[]
+      }
       get_public_memories: {
         Args: Record<PropertyKey, never>
         Returns: {
