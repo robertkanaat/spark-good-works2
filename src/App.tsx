@@ -26,6 +26,8 @@ import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import OpenLetter from "./pages/OpenLetter";
 import AICompanion from "./pages/AICompanion";
+import Auth from "./pages/Auth";
+import AdminDashboard from "./pages/AdminDashboard";
 import Volunteer from "./pages/Volunteer";
 
 const queryClient = new QueryClient();
@@ -60,6 +62,8 @@ const App = () => (
           <Route path="/treatment-centers" element={<TreatmentCenters />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/volunteer" element={<Volunteer />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/faq" element={<FAQ />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

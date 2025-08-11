@@ -1,11 +1,75 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { User as SupabaseUser, Session } from '@supabase/supabase-js';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [userProfile, setUserProfile] = useState<any>(null);
+
+  useEffect(() => {
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        // Fetch user profile when user logs in
+        if (session?.user) {
+          setTimeout(() => {
+            fetchUserProfile(session.user.id);
+          }, 0);
+        } else {
+          setUserProfile(null);
+        }
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        fetchUserProfile(session.user.id);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const fetchUserProfile = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
+      
+      if (!error) {
+        setUserProfile(data);
+      }
+    } catch (err) {
+      console.error('Error fetching user profile:', err);
+    }
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setIsOpen(false);
+  };
 
   return (
     <header className="bg-background border-b border-border">
@@ -51,6 +115,48 @@ const Header = () => {
 
           {/* Desktop & Mobile Actions */}
           <div className="flex items-center gap-4">
+            {/* User Menu for Desktop */}
+            {user ? (
+              <div className="hidden sm:block">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      <span className="hidden md:inline">
+                        {userProfile?.full_name || user.email?.split('@')[0] || 'User'}
+                      </span>
+                      {userProfile?.role === 'admin' && (
+                        <Shield className="w-4 h-4 text-primary" />
+                      )}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuItem asChild>
+                      <div className="flex flex-col">
+                        <span className="font-medium">{userProfile?.full_name || 'User'}</span>
+                        <span className="text-sm text-muted-foreground">{user.email}</span>
+                        {userProfile?.role === 'admin' && (
+                          <span className="text-xs text-primary font-medium">Administrator</span>
+                        )}
+                      </div>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={handleSignOut}>
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            ) : (
+              <Link to="/auth" className="hidden sm:block">
+                <Button variant="outline">
+                  <User className="w-4 h-4 mr-2" />
+                  Sign In
+                </Button>
+              </Link>
+            )}
+
             {/* Desktop Donate Button */}
             <Link to="/donation" className="hidden sm:block">
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-4 lg:px-6 text-sm relative overflow-hidden group transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
@@ -123,6 +229,41 @@ const Header = () => {
                       CONTACT
                     </Link>
                     
+                    {/* Mobile Auth Section */}
+                    {user ? (
+                      <div className="border-t pt-4 mt-4">
+                        <div className="flex flex-col gap-3">
+                          <div className="px-4 py-3 bg-muted rounded-md">
+                            <div className="font-medium">{userProfile?.full_name || 'User'}</div>
+                            <div className="text-sm text-muted-foreground">{user.email}</div>
+                            {userProfile?.role === 'admin' && (
+                              <div className="text-xs text-primary font-medium flex items-center gap-1 mt-1">
+                                <Shield className="w-3 h-3" />
+                                Administrator
+                              </div>
+                            )}
+                          </div>
+                          <Button 
+                            variant="outline" 
+                            onClick={handleSignOut}
+                            className="w-full justify-start"
+                          >
+                            <LogOut className="w-4 h-4 mr-2" />
+                            Sign Out
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="border-t pt-4 mt-4">
+                        <Link to="/auth" onClick={() => setIsOpen(false)}>
+                          <Button variant="outline" className="w-full justify-start">
+                            <User className="w-4 h-4 mr-2" />
+                            Sign In
+                          </Button>
+                        </Link>
+                      </div>
+                    )}
+
                     {/* Mobile Donate Button */}
                     <Link to="/donation" onClick={() => setIsOpen(false)}>
                       <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 text-lg mt-6">
