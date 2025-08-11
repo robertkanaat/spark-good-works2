@@ -32,6 +32,42 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Handle GET request for email preview (for testing)
+  if (req.method === "GET" && req.url.includes("preview")) {
+    try {
+      console.log("Rendering email preview...");
+      
+      const emailHtml = await renderAsync(
+        React.createElement(DonationConfirmationEmail, {
+          donor_name: "Sarah Johnson",
+          amount: 10000, // $100.00 in cents
+          currency: "USD",
+          donation_id: "preview-12345",
+          donation_date: new Date().toISOString(),
+          is_recurring: false,
+          frequency: "monthly"
+        })
+      );
+
+      return new Response(emailHtml, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          ...corsHeaders,
+        },
+      });
+    } catch (error: any) {
+      console.error("Error rendering email preview:", error);
+      return new Response(
+        JSON.stringify({ error: "Failed to render email preview" }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+  }
+
   try {
     const {
       donor_name,
