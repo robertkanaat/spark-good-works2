@@ -115,8 +115,8 @@ const Header = () => {
 
           {/* Desktop & Mobile Actions */}
           <div className="flex items-center gap-4">
-            {/* User Menu for Desktop */}
-            {user ? (
+            {/* User Menu for Desktop - Hidden for now */}
+            {/* {user ? (
               <div className="hidden sm:block">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -166,7 +166,7 @@ const Header = () => {
                   Sign In
                 </Button>
               </Link>
-            )}
+            )} */}
 
             {/* Desktop Donate Button */}
             <Link to="/donation" className="hidden sm:block">
@@ -240,8 +240,8 @@ const Header = () => {
                       CONTACT
                     </Link>
                     
-                    {/* Mobile Auth Section */}
-                    {user ? (
+                    {/* Mobile Auth Section - Hidden for now */}
+                    {/* {user ? (
                       <div className="border-t pt-4 mt-4">
                         <div className="flex flex-col gap-3">
                           <div className="px-4 py-3 bg-muted rounded-md">
@@ -281,7 +281,7 @@ const Header = () => {
                           </Button>
                         </Link>
                       </div>
-                    )}
+                    )} */}
 
                     {/* Mobile Donate Button */}
                     <Link to="/donation" onClick={() => setIsOpen(false)}>
