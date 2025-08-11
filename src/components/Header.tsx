@@ -17,6 +17,8 @@ const Header = () => {
                 src="/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
                 alt="Genius Recovery" 
                 className="w-[240px] h-auto transition-opacity group-hover:opacity-80"
+                loading="eager"
+                decoding="async"
               />
             </Link>
           </div>
@@ -79,6 +81,8 @@ const Header = () => {
                       src="/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
                       alt="Genius Recovery" 
                       className="w-[200px] h-auto"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   

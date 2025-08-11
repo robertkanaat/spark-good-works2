@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import heroRecoveryPerson from "@/assets/hero-recovery-person.jpg";
 import heroFamilyEmbrace from "@/assets/hero-family-embrace.jpg";
+import LazyBackgroundImage from "@/components/LazyBackgroundImage";
 
 const HeroSection = () => {
   const [selectedAmount, setSelectedAmount] = useState(50);
@@ -22,15 +23,14 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center">
-      <div 
-        className="absolute inset-0 bg-cover bg-no-repeat bg-center md:bg-center lg:bg-right-top transition-all duration-1000"
-        style={{ 
-          backgroundImage: `url(${currentHeroImage})`,
-          backgroundPosition: 'center 20%'
-        }}
+      <LazyBackgroundImage
+        src={currentHeroImage}
+        className="absolute inset-0 transition-all duration-1000"
+        style={{ backgroundPosition: 'center 20%' }}
+        priority={true}
       >
         <div className="absolute inset-0 bg-hero-overlay/60"></div>
-      </div>
+      </LazyBackgroundImage>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

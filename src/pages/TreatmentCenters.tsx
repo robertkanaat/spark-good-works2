@@ -950,6 +950,8 @@ export default function TreatmentCenters() {
                     src={center.image} 
                     alt={center.name}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1">
                     <Star className="h-4 w-4 text-yellow-500 fill-current" />

@@ -16,6 +16,8 @@ const Footer = () => {
                 src="/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
                 alt="Genius Recovery" 
                 className="w-[240px] h-auto brightness-0 invert"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <p className="text-white/80 mb-6 max-w-md">

@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import videoPreview from "@/assets/video-preview-v2.jpg";
+import LazyBackgroundImage from "@/components/LazyBackgroundImage";
 
 const VideoSection = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -33,9 +34,9 @@ const VideoSection = () => {
 
           <div className="relative group cursor-pointer" onClick={() => setIsVideoOpen(true)}>
             {/* Video thumbnail container */}
-            <div 
-              className="relative aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-primary/25 group-hover:scale-[1.02] bg-cover bg-center"
-              style={{ backgroundImage: `url(${videoPreview})` }}
+            <LazyBackgroundImage
+              src={videoPreview}
+              className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:shadow-primary/25 group-hover:scale-[1.02]"
             >
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
@@ -62,7 +63,7 @@ const VideoSection = () => {
                 <h3 className="text-2xl font-bold mb-2">Our Recovery Journey</h3>
                 <p className="text-white/90">Stories of hope, healing, and transformation</p>
               </div>
-            </div>
+            </LazyBackgroundImage>
 
             {/* Decorative elements */}
             <div className="absolute -top-4 -left-4 w-8 h-8 bg-primary/30 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

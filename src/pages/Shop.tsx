@@ -211,6 +211,8 @@ const Shop = () => {
                     src={featuredProduct.image} 
                     alt={featuredProduct.name}
                     className="w-full h-64 object-cover rounded-lg mb-6"
+                    loading="eager"
+                    decoding="async"
                   />
                   <Badge className="bg-red-500 text-white mb-4">
                     {featuredProduct.badge}
@@ -302,6 +304,8 @@ const Shop = () => {
                   src={product.image} 
                   alt={product.name}
                   className="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
                 
                 {/* Overlay Effects */}
