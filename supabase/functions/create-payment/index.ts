@@ -17,7 +17,7 @@ serve(async (req) => {
   if (req.method === "GET" && (url.searchParams.has('response') || url.searchParams.has('responsetext'))) {
     const response = url.searchParams.get('response');
     const responseText = url.searchParams.get('responsetext');
-    const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+    const baseUrl = req.headers.get("referer")?.split('?')[0].replace(/\/[^\/]*$/, '') || "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
     
     // If error response, redirect to failure page
     if (response === '2' || response === '3' || responseText?.includes('exceed')) {
@@ -58,7 +58,7 @@ serve(async (req) => {
       return new Response("Payment gateway not configured", { status: 500 });
     }
     
-    const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+    const baseUrl = req.headers.get("origin") || "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
     const successUrl = `${baseUrl}/payment-success`;
     const failureUrl = `${baseUrl}/payment-failed`;
     const description = `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`;
@@ -443,7 +443,7 @@ serve(async (req) => {
   // Handle form submission from embedded form
   if (req.method === "POST" && req.headers.get("content-type")?.includes("application/x-www-form-urlencoded")) {
     const formData = await req.formData();
-    const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+    const baseUrl = req.headers.get("referer")?.split('?')[0].replace(/\/[^\/]*$/, '') || "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
     
     // Forward the payment to the actual gateway
     const gatewayResponse = await fetch("https://secure.inchekgateway.com/api/transact.php", {
@@ -502,7 +502,7 @@ serve(async (req) => {
     
     if (embedForm) {
       // Return just the form HTML for embedding
-      const baseUrl = "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+      const baseUrl = req.headers.get("origin") || "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
       const successUrl = `${baseUrl}/payment-success`;
       const failureUrl = `${baseUrl}/payment-failed`;
       
