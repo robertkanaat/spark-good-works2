@@ -186,7 +186,7 @@ const Volunteer = () => {
                   <Button 
                     variant="outline" 
                     size="lg" 
-                    className="border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105"
+                    className="border-white text-white hover:bg-white hover:text-foreground px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105"
                     onClick={() => document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     Apply Now
