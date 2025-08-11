@@ -38,8 +38,8 @@ const Header = () => {
                 <span className="relative z-10">BLOG</span>
                 <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
-              <Link to="/open-letter" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
-                <span className="relative z-10">OPEN LETTER</span>
+              <Link to="/about" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+                <span className="relative z-10">ABOUT</span>
                 <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
               <Link to="/contact" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
@@ -109,11 +109,11 @@ const Header = () => {
                       BLOG
                     </Link>
                     <Link 
-                      to="/open-letter" 
+                      to="/about" 
                       className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
-                      OPEN LETTER
+                      ABOUT
                     </Link>
                     <Link 
                       to="/contact" 
