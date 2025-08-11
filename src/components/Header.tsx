@@ -141,6 +141,17 @@ const Header = () => {
                       </div>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
+                    {userProfile?.role === 'admin' && (
+                      <>
+                        <DropdownMenuItem asChild>
+                          <Link to="/admin" className="flex items-center w-full">
+                            <Shield className="w-4 h-4 mr-2" />
+                            Admin Dashboard
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                      </>
+                    )}
                     <DropdownMenuItem onClick={handleSignOut}>
                       <LogOut className="w-4 h-4 mr-2" />
                       Sign Out
@@ -243,10 +254,18 @@ const Header = () => {
                               </div>
                             )}
                           </div>
+                          {userProfile?.role === 'admin' && (
+                            <Link to="/admin" onClick={() => setIsOpen(false)}>
+                              <Button variant="outline" className="w-full justify-start mt-2">
+                                <Shield className="w-4 h-4 mr-2" />
+                                Admin Dashboard
+                              </Button>
+                            </Link>
+                          )}
                           <Button 
                             variant="outline" 
                             onClick={handleSignOut}
-                            className="w-full justify-start"
+                            className="w-full justify-start mt-2"
                           >
                             <LogOut className="w-4 h-4 mr-2" />
                             Sign Out
