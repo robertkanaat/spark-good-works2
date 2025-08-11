@@ -14,13 +14,143 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      email_notifications: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          is_confirmed: boolean
+          name: string
+          reminder_sent: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          is_confirmed?: boolean
+          name: string
+          reminder_sent?: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          is_confirmed?: boolean
+          name?: string
+          reminder_sent?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      memories: {
+        Row: {
+          category: string
+          created_at: string
+          email: string
+          id: string
+          is_approved: boolean
+          is_featured: boolean
+          memorable_date: string | null
+          name: string
+          relationship: string | null
+          story: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          email: string
+          id?: string
+          is_approved?: boolean
+          is_featured?: boolean
+          memorable_date?: string | null
+          name: string
+          relationship?: string | null
+          story: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          email?: string
+          id?: string
+          is_approved?: boolean
+          is_featured?: boolean
+          memorable_date?: string | null
+          name?: string
+          relationship?: string | null
+          story?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      public_memories: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          id: string | null
+          is_featured: boolean | null
+          memorable_date: string | null
+          name: string | null
+          relationship: string | null
+          story: string | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_featured?: boolean | null
+          memorable_date?: string | null
+          name?: string | null
+          relationship?: string | null
+          story?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_featured?: boolean | null
+          memorable_date?: string | null
+          name?: string | null
+          relationship?: string | null
+          story?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      get_public_memories: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          id: string
+          name: string
+          title: string
+          story: string
+          category: string
+          relationship: string
+          memorable_date: string
+          is_featured: boolean
+          created_at: string
+          updated_at: string
+        }[]
+      }
+      is_admin_user: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
