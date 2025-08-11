@@ -91,45 +91,7 @@ export type Database = {
       }
     }
     Views: {
-      public_memories: {
-        Row: {
-          category: string | null
-          created_at: string | null
-          id: string | null
-          is_featured: boolean | null
-          memorable_date: string | null
-          name: string | null
-          relationship: string | null
-          story: string | null
-          title: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          category?: string | null
-          created_at?: string | null
-          id?: string | null
-          is_featured?: boolean | null
-          memorable_date?: string | null
-          name?: string | null
-          relationship?: string | null
-          story?: string | null
-          title?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          category?: string | null
-          created_at?: string | null
-          id?: string | null
-          is_featured?: boolean | null
-          memorable_date?: string | null
-          name?: string | null
-          relationship?: string | null
-          story?: string | null
-          title?: string | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       admin_get_memories_with_emails: {
@@ -150,6 +112,21 @@ export type Database = {
         }[]
       }
       get_public_memories: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          id: string
+          name: string
+          title: string
+          story: string
+          category: string
+          relationship: string
+          memorable_date: string
+          is_featured: boolean
+          created_at: string
+          updated_at: string
+        }[]
+      }
+      get_safe_memories: {
         Args: Record<PropertyKey, never>
         Returns: {
           id: string
