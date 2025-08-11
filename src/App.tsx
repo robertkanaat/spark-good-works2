@@ -26,6 +26,7 @@ import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import OpenLetter from "./pages/OpenLetter";
 import AICompanion from "./pages/AICompanion";
+import Volunteer from "./pages/Volunteer";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => (
           <Route path="/terms-conditions" element={<TermsConditions />} />
           <Route path="/treatment-centers" element={<TreatmentCenters />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/volunteer" element={<Volunteer />} />
           <Route path="/faq" element={<FAQ />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
