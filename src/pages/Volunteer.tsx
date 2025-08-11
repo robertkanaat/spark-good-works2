@@ -10,7 +10,7 @@ import { Heart, Users, MessageCircle, Calendar, MapPin, Clock, Mail, Phone, User
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import LazyBackgroundImage from "@/components/LazyBackgroundImage";
+import LazyBgImage from "@/components/LazyBackgroundImage";
 
 const Volunteer = () => {
   const { toast } = useToast();
@@ -154,12 +154,12 @@ const Volunteer = () => {
       <main>
         {/* Hero Section */}
         <section className="relative min-h-[70vh] flex items-center">
-          <LazyBackgroundImage
+          <LazyBgImage
             src="/assets/hero-family-embrace.jpg"
             className="absolute inset-0 w-full h-full"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
-          </LazyBackgroundImage>
+          </LazyBgImage>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
             <div className="max-w-3xl">
