@@ -336,7 +336,7 @@ export default function TreatmentCenters() {
   // SEO Meta Tags Management
   useEffect(() => {
     // Set document title
-    document.title = "Find Addiction Treatment Centers | Recovery Programs Directory | Genius Recovery";
+    document.title = "Genius Recovery - Find Treatment Centers & Discover Your Path To Recovery";
     
     // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
