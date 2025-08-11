@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,19 @@ import Footer from "@/components/Footer";
 import resourcesHeroBg from "@/assets/resources-hero-bg.jpg";
 
 const Resources = () => {
+  useEffect(() => {
+    document.title = "Recovery Resources & Support Tools | Genius Recovery";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Comprehensive addiction recovery resources including crisis hotlines, treatment centers, support groups, and educational materials. Find the help you need today.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Comprehensive addiction recovery resources including crisis hotlines, treatment centers, support groups, and educational materials. Find the help you need today.';
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   const emergencyResources = [
     {
       title: "988 Suicide & Crisis Lifeline",

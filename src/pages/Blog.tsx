@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +10,19 @@ import { useWordPressPosts } from "@/hooks/useWordPressPosts";
 import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 
 const Blog = () => {
+  useEffect(() => {
+    document.title = "Recovery Stories & Inspiration Blog | Genius Recovery";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Read inspiring recovery stories, expert insights, and helpful resources on our blog. Find hope, motivation, and practical guidance for your addiction recovery journey.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Read inspiring recovery stories, expert insights, and helpful resources on our blog. Find hope, motivation, and practical guidance for your addiction recovery journey.';
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   const [selectedCategory, setSelectedCategory] = useState("All");
   const { posts, loading, error, featuredPost, categories } = useWordPressPosts();
   

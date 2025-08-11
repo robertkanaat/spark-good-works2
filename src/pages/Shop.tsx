@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +12,19 @@ import backpackImg from "@/assets/backpack.jpg";
 import mugImg from "@/assets/mug.jpg";
 
 const Shop = () => {
+  useEffect(() => {
+    document.title = "Recovery Shop - Support Your Journey | Genius Recovery";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Shop meaningful recovery products including recovery kits, apparel, and accessories. Every purchase supports addiction recovery programs and resources.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Shop meaningful recovery products including recovery kits, apparel, and accessories. Every purchase supports addiction recovery programs and resources.';
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
   

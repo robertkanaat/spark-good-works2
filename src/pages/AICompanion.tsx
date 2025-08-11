@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,19 @@ import { Play, MessageCircle, Heart, Star } from "lucide-react";
 import aiCompanionPreview from "@/assets/ai-companion-preview.jpg";
 
 const AICompanion = () => {
+  useEffect(() => {
+    document.title = "AI Companion - 24/7 Recovery Support & Guidance | Genius Recovery";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Meet your AI recovery companion. Get 24/7 personalized support, guidance, and resources on your addiction recovery journey. Always available when you need help most.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Meet your AI recovery companion. Get 24/7 personalized support, guidance, and resources on your addiction recovery journey. Always available when you need help most.';
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   
   const testimonials = [

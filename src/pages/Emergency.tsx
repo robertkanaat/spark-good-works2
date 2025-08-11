@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Phone, AlertTriangle, Heart, Shield, Users, Clock, MapPin, Stethoscope } from "lucide-react";
@@ -8,6 +8,19 @@ import Footer from "@/components/Footer";
 import emergencyHeroBg from "@/assets/emergency-hero-bg.jpg";
 
 const Emergency = () => {
+  useEffect(() => {
+    document.title = "Emergency Crisis Support - Immediate Help Available | Genius Recovery";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Get immediate emergency crisis support. Access 24/7 hotlines, emergency resources, and life-saving information for mental health and addiction emergencies.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Get immediate emergency crisis support. Access 24/7 hotlines, emergency resources, and life-saving information for mental health and addiction emergencies.';
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Header />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -13,6 +13,19 @@ import resourcesHeroImage from "@/assets/resources-hero-bg.jpg";
 import DOMPurify from "dompurify";
 
 const Contact = () => {
+  useEffect(() => {
+    document.title = "Contact Us - Get Support & Recovery Help | Genius Recovery";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Contact Genius Recovery for addiction support, recovery resources, or general inquiries. Our compassionate team is here to help you or your loved ones find the path to recovery.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Contact Genius Recovery for addiction support, recovery resources, or general inquiries. Our compassionate team is here to help you or your loved ones find the path to recovery.';
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",

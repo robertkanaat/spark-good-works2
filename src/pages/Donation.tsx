@@ -19,6 +19,19 @@ import championBg from "@/assets/donation-bg-champion.jpg";
 import heroBg from "@/assets/donation-bg-hero.jpg";
 
 const Donation = () => {
+  useEffect(() => {
+    document.title = "Support Recovery - Donate to Genius Recovery";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Support addiction recovery efforts with a donation to Genius Recovery. Your contribution helps provide life-saving resources and support to those struggling with addiction.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Support addiction recovery efforts with a donation to Genius Recovery. Your contribution helps provide life-saving resources and support to those struggling with addiction.';
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   const [searchParams] = useSearchParams();
   const [donationAmount, setDonationAmount] = useState([50]);
   const [customAmount, setCustomAmount] = useState("");

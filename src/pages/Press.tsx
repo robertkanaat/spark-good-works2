@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,6 +7,19 @@ import { Button } from "@/components/ui/button";
 import { FileText, Download, Calendar, Mail, Phone, Newspaper, ArrowRight, Users, CheckCircle } from "lucide-react";
 
 const Press = () => {
+  useEffect(() => {
+    document.title = "Press & Media Center - Latest News | Genius Recovery";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Access Genius Recovery press releases, media kit, and latest news. Connect with our team for media inquiries about addiction recovery innovation and support.');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = 'Access Genius Recovery press releases, media kit, and latest news. Connect with our team for media inquiries about addiction recovery innovation and support.';
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   const pressReleases = [
     {
       title: "Genius Recovery Launches AI-Powered 24/7 Recovery Support Platform",
