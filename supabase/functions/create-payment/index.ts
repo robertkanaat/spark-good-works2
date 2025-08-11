@@ -48,18 +48,22 @@ serve(async (req) => {
           );
           
           // Trigger email sending function
-          EdgeRuntime.waitUntil(
-            supabase.functions.invoke('send-donation-email', {
-              body: {
-                donor_name: `${firstName} ${lastName || ''}`.trim(),
-                donor_email: email,
-                amount: parseInt(amount) * 100, // Convert to cents
-                currency: 'USD',
-                donation_id: transactionId || `txn-${Date.now()}`,
-                is_recurring: false // Can be enhanced based on the payment type
-              }
-            })
-          );
+          const emailResult = await supabase.functions.invoke('send-donation-email', {
+            body: {
+              donor_name: `${firstName} ${lastName || ''}`.trim(),
+              donor_email: email,
+              amount: parseInt(amount) * 100, // Convert to cents
+              currency: 'USD',
+              donation_id: transactionId || `txn-${Date.now()}`,
+              is_recurring: false // Can be enhanced based on the payment type
+            }
+          });
+          
+          if (emailResult.error) {
+            console.error('Email sending failed:', emailResult.error);
+          } else {
+            console.log('Donation confirmation email sent successfully to:', email);
+          }
           
           console.log('Donation confirmation email triggered for:', email);
         } catch (emailError) {
@@ -520,18 +524,22 @@ serve(async (req) => {
           const transactionId = transactionMatch ? transactionMatch[1] : `txn-${Date.now()}`;
           
           // Trigger email sending function
-          EdgeRuntime.waitUntil(
-            supabase.functions.invoke('send-donation-email', {
-              body: {
-                donor_name: `${firstName} ${lastName || ''}`.trim(),
-                donor_email: donorEmail,
-                amount: parseFloat(amount) * 100, // Convert to cents
-                currency: 'USD',
-                donation_id: transactionId,
-                is_recurring: false // Can be enhanced based on the payment type
-              }
-            })
-          );
+          const emailResult = await supabase.functions.invoke('send-donation-email', {
+            body: {
+              donor_name: `${firstName} ${lastName || ''}`.trim(),
+              donor_email: donorEmail,
+              amount: parseFloat(amount) * 100, // Convert to cents
+              currency: 'USD',
+              donation_id: transactionId,
+              is_recurring: false // Can be enhanced based on the payment type
+            }
+          });
+          
+          if (emailResult.error) {
+            console.error('Email sending failed:', emailResult.error);
+          } else {
+            console.log('Donation confirmation email sent successfully to:', donorEmail);
+          }
           
           console.log('Donation confirmation email triggered for:', donorEmail);
         } catch (emailError) {
