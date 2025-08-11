@@ -10,6 +10,10 @@ const PaymentSuccess = () => {
   const { toast } = useToast();
 
   useEffect(() => {
+    console.log("Payment Success page loaded");
+    console.log("Current URL:", window.location.href);
+    console.log("URL params:", new URLSearchParams(window.location.search).toString());
+    
     toast({
       title: "Thank you for your donation!",
       description: "Your contribution will make a real difference in recovery communities.",
