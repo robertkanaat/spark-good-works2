@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle, Home, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 const PaymentSuccess = () => {
   const { toast } = useToast();
@@ -22,6 +23,7 @@ const PaymentSuccess = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-primary/10">
+      <Header />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <Card className="p-8 text-center">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
