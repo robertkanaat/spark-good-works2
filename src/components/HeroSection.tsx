@@ -289,7 +289,21 @@ const HeroSection = () => {
           </div>
         </div>
         
-        <div className="text-center mt-16 text-white/80">
+        {/* Trust Logos Section */}
+        <div className="text-center mt-16">
+          <div className="text-white/60 text-sm mb-6 tracking-wider uppercase">
+            Trusted By Organizations Worldwide
+          </div>
+          <div className="flex justify-center items-center mb-8">
+            <img 
+              src="/lovable-uploads/652d2a71-1ff9-41f1-9dfc-c50ab54c0e81.png" 
+              alt="Trusted partner organizations and certifications"
+              className="max-h-16 opacity-80 hover:opacity-100 transition-opacity duration-300"
+            />
+          </div>
+        </div>
+        
+        <div className="text-center text-white/80">
           Join thousands of people around the world who are supporting recovery, healing, and hope for those affected by addiction.
         </div>
         
