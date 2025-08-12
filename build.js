@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 
 console.log('Building application...');
-execSync('npm run build:dev', { stdio: 'inherit' });
+execSync('vite build', { stdio: 'inherit' });
 
 console.log('Pre-rendering with react-snap...');
 try {
