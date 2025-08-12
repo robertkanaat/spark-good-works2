@@ -56,94 +56,39 @@ serve(async (req) => {
             donation_id: transactionId 
           });
           
-          // Send emails directly using Resend
-          console.log('Sending donation confirmation emails...');
-          const resendApiKey = Deno.env.get("RESEND_API_KEY");
-          console.log('Resend API key available:', !!resendApiKey);
-          
-          if (!resendApiKey) {
-            console.error('RESEND_API_KEY is not set');
-            return new Response('redirect', {
-              status: 302,
-              headers: { ...corsHeaders, Location: `${origin}/payment-success` }
-            });
-          }
-          
-          const resend = new Resend(resendApiKey);
-          
+          // Log payment details to database
+          console.log('Logging payment details to database...');
           const donorName = `${firstName} ${lastName || ''}`.trim();
           const donationAmount = parseFloat(amount);
           
-          // Send confirmation email to donor
           try {
-            console.log(`Sending confirmation email to donor: ${email}`);
-            const donorEmailResult = await resend.emails.send({
-              from: "onboarding@resend.dev",
-              to: [email],
-              subject: "Thank you for your donation to Genius Recovery",
-              html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-                  <h1 style="color: #2563eb; text-align: center;">Thank You for Your Donation!</h1>
-                  
-                  <p>Dear ${donorName},</p>
-                  
-                  <p>Thank you so much for your generous donation of <strong>$${donationAmount.toFixed(2)}</strong> to Genius Recovery.</p>
-                  
-                  <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="margin: 0 0 10px 0; color: #374151;">Donation Details:</h3>
-                    <p style="margin: 5px 0;"><strong>Amount:</strong> $${donationAmount.toFixed(2)}</p>
-                    <p style="margin: 5px 0;"><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
-                    <p style="margin: 5px 0;"><strong>Transaction ID:</strong> ${transactionId}</p>
-                  </div>
-                  
-                  <p>Your support helps us continue our mission to provide resources and support for addiction recovery. Every donation makes a real difference in someone's journey to recovery.</p>
-                  
-                  <p>If you have any questions about your donation, please don't hesitate to contact us at hello@geniusrecovery.org.</p>
-                  
-                  <p>With gratitude,<br>The Genius Recovery Team</p>
-                  
-                  <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
-                    <p style="color: #6b7280; font-size: 14px;">
-                      This email confirms your donation. Please keep it for your records.
-                    </p>
-                  </div>
-                </div>
-              `,
-            });
+            const { data: paymentRecord, error: insertError } = await supabase
+              .from('payments')
+              .insert({
+                stripe_session_id: transactionId,
+                donor_email: email,
+                donor_name: donorName,
+                amount: donationAmount,
+                currency: 'USD',
+                status: 'completed',
+                metadata: {
+                  firstName,
+                  lastName,
+                  source: 'inchek',
+                  gateway_response: response,
+                  created_at: new Date().toISOString()
+                }
+              })
+              .select()
+              .single();
             
-            console.log("Donor email sent successfully:", JSON.stringify(donorEmailResult));
-          } catch (donorEmailError) {
-            console.error("Failed to send donor email:", JSON.stringify(donorEmailError));
-          }
-
-          // Send notification email to admin
-          try {
-            console.log("Sending notification email to admin...");
-            const adminEmailResult = await resend.emails.send({
-              from: "onboarding@resend.dev",
-              to: ["hello@geniusrecovery.org"],
-              subject: `New donation received: $${donationAmount.toFixed(2)}`,
-              html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-                  <h2 style="color: #dc2626;">New Donation Received</h2>
-                  
-                  <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981;">
-                    <h3 style="margin: 0 0 15px 0; color: #374151;">Donation Details:</h3>
-                    <p style="margin: 5px 0;"><strong>Donor:</strong> ${donorName}</p>
-                    <p style="margin: 5px 0;"><strong>Email:</strong> ${email}</p>
-                    <p style="margin: 5px 0;"><strong>Amount:</strong> $${donationAmount.toFixed(2)}</p>
-                    <p style="margin: 5px 0;"><strong>Transaction ID:</strong> ${transactionId}</p>
-                    <p style="margin: 5px 0;"><strong>Date:</strong> ${new Date().toISOString()}</p>
-                  </div>
-                  
-                  <p style="margin-top: 20px;">This donation has been processed successfully and a confirmation email has been sent to the donor.</p>
-                </div>
-              `,
-            });
-            
-            console.log("Admin email sent successfully:", adminEmailResult);
-          } catch (adminEmailError) {
-            console.error("Failed to send admin email:", adminEmailError);
+            if (insertError) {
+              console.error('Failed to log payment to database:', insertError);
+            } else {
+              console.log('Payment logged successfully:', paymentRecord);
+            }
+          } catch (dbError) {
+            console.error('Database error:', dbError);
           }
           
           console.log('Donation confirmation email triggered for:', email);
