@@ -55,7 +55,7 @@ const Footer = () => {
               <li><Link to="/treatment-centers" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Treatment Centers</Link></li>
               <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Recovery Resources</Link></li>
               <li><Link to="/volunteer" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Volunteer</Link></li>
-              <li><Link to="/resources" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Family Support</Link></li>
+              
             </ul>
           </div>
 
@@ -68,7 +68,7 @@ const Footer = () => {
               <li><Link to="/ai-companion" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">AI Recovery Clone</Link></li>
               <li><Link to="/press" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Press</Link></li>
               <li><Link to="/donors" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Donors</Link></li>
-              <li><Link to="/contact" onClick={scrollToTop} className="text-white/70 hover:text-primary transition-colors">Careers</Link></li>
+              
             </ul>
           </div>
         </div>
