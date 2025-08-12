@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -202,12 +203,16 @@ const TestimonialsSection = () => {
               Join thousands of people who have found hope, healing, and lasting recovery through our platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8">
-                Get Support Now
-              </Button>
-              <Button variant="outline" size="lg" className="px-8">
-                Share Your Story
-              </Button>
+              <Link to="/emergency">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 hover-scale animate-fade-in">
+                  Get Support Now
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="px-8 hover-scale animate-fade-in hover:shadow-lg transition-all duration-300">
+                  Share Your Story
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
