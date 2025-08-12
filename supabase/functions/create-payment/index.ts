@@ -48,11 +48,18 @@ serve(async (req) => {
           );
           
           // Trigger email sending function
+          console.log('Sending donation email for:', { 
+            donor_name: `${firstName} ${lastName || ''}`.trim(),
+            donor_email: email,
+            amount: parseFloat(amount) * 100, // Convert dollars to cents
+            donation_id: transactionId 
+          });
+          
           const emailResult = await supabase.functions.invoke('send-donation-email', {
             body: {
               donor_name: `${firstName} ${lastName || ''}`.trim(),
               donor_email: email,
-              amount: parseInt(amount) * 100, // Convert to cents
+              amount: Math.round(parseFloat(amount) * 100), // Convert to cents properly
               currency: 'USD',
               donation_id: transactionId || `txn-${Date.now()}`,
               is_recurring: false // Can be enhanced based on the payment type
