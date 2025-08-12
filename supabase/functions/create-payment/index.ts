@@ -492,8 +492,11 @@ serve(async (req) => {
     
     const responseText = await gatewayResponse.text();
     
+    console.log("Gateway response received:", responseText);
+    
     // Check if response contains error parameters
     if (responseText.includes('response=2') || responseText.includes('response=3') || responseText.includes('Activity limit exceeded')) {
+      console.log("Payment failed with gateway error");
       const errorMessage = encodeURIComponent('Activity limit exceeded - Please try again later');
       return new Response(null, {
         status: 302,
@@ -505,6 +508,7 @@ serve(async (req) => {
     
     // If success
     if (responseText.includes('response=1')) {
+      console.log("Payment successful, processing confirmation email");
       // Extract payment details from form data for email
       const donorEmail = formData.get('email')?.toString();
       const firstName = formData.get('firstname')?.toString();
@@ -557,6 +561,7 @@ serve(async (req) => {
     }
     
     // Default to failure page for any unexpected response
+    console.log("Payment failed - unexpected response format:", responseText);
     return new Response(null, {
       status: 302,
       headers: {
