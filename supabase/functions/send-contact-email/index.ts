@@ -109,7 +109,7 @@ const handler = async (req: Request): Promise<Response> => {
               font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; 
               line-height: 1.6; 
               color: #1c1917; 
-              background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+              background: #f8fafc;
               margin: 0;
               padding: 20px;
             }
@@ -122,16 +122,16 @@ const handler = async (req: Request): Promise<Response> => {
               box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.15);
             }
             .header {
-              background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+              background: #ffffff;
               padding: 40px 30px;
               text-align: center;
-              color: white;
+              color: #1c1917;
+              border-bottom: 1px solid #e5e7eb;
             }
             .logo {
-              font-size: 28px;
-              font-weight: bold;
+              max-width: 200px;
+              height: auto;
               margin-bottom: 10px;
-              text-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
             .header-subtitle {
               font-size: 16px;
@@ -227,7 +227,7 @@ const handler = async (req: Request): Promise<Response> => {
         <body>
           <div class="container">
             <div class="header">
-              <div class="logo">🌟 Genius Recovery</div>
+              <img src="https://geniusrecovery.org/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" alt="Genius Recovery" class="logo">
               <div class="header-subtitle">On A Mission To Heal Addiction Around The World</div>
             </div>
             
