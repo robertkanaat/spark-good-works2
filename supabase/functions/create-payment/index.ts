@@ -528,6 +528,7 @@ serve(async (req) => {
           const transactionId = transactionMatch ? transactionMatch[1] : `txn-${Date.now()}`;
           
           // Trigger email sending function
+          console.log("Sending donation confirmation email to:", donorEmail);
           const emailResult = await supabase.functions.invoke('send-donation-email', {
             body: {
               donor_name: `${firstName} ${lastName || ''}`.trim(),
@@ -538,6 +539,8 @@ serve(async (req) => {
               is_recurring: false // Can be enhanced based on the payment type
             }
           });
+          
+          console.log("Email result:", emailResult);
           
           if (emailResult.error) {
             console.error('Email sending failed:', emailResult.error);
