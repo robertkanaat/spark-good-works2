@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { execSync } from 'child_process';
-import path from 'path';
 
 console.log('🚀 Building application...');
 try {
