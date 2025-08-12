@@ -55,36 +55,33 @@ serve(async (req) => {
             donation_id: transactionId 
           });
           
-          // Call send-donation-email function
-          const response = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/send-donation-email`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${Deno.env.get('SUPABASE_ANON_KEY')}`
-            },
-            body: JSON.stringify({
+          // Call send-donation-email function using Supabase client
+          const supabaseClient = createClient(
+            Deno.env.get('SUPABASE_URL') ?? '',
+            Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+          );
+
+          const { data: emailResult, error: emailError } = await supabaseClient.functions.invoke('send-donation-email', {
+            body: {
               donor_name: `${firstName} ${lastName || ''}`.trim(),
               donor_email: email,
               amount: Math.round(parseFloat(amount) * 100),
               currency: 'USD',
               donation_id: transactionId || `txn-${Date.now()}`,
               is_recurring: false
-            })
+            }
           });
-          
-          const emailResult = await response.json();
-          console.log('Email function response status:', response.status);
           console.log('Email function response:', emailResult);
           
-          if (!response.ok) {
-            console.error('Email sending failed:', emailResult);
+          if (emailError) {
+            console.error('Email sending failed:', emailError);
           } else {
             console.log('Donation confirmation email sent successfully to:', email);
           }
           
           console.log('Donation confirmation email triggered for:', email);
-        } catch (emailError) {
-          console.error('Failed to trigger donation email:', emailError);
+        } catch (emailException) {
+          console.error('Failed to trigger donation email:', emailException);
           // Don't fail the payment success flow if email fails
         }
       }
