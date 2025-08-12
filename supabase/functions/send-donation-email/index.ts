@@ -69,6 +69,12 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    console.log("Request method:", req.method);
+    console.log("Request headers:", Object.fromEntries(req.headers.entries()));
+    
+    const body = await req.json();
+    console.log("Request body received:", body);
+    
     const {
       donor_name,
       donor_email,
@@ -77,7 +83,7 @@ const handler = async (req: Request): Promise<Response> => {
       donation_id,
       is_recurring = false,
       frequency = "monthly"
-    }: DonationEmailData = await req.json();
+    }: DonationEmailData = body;
 
     console.log("Processing donation email for:", { donor_name, donor_email, amount, donation_id });
 
