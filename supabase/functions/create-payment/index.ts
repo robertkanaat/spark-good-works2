@@ -58,7 +58,18 @@ serve(async (req) => {
           
           // Send emails directly using Resend
           console.log('Sending donation confirmation emails...');
-          const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+          const resendApiKey = Deno.env.get("RESEND_API_KEY");
+          console.log('Resend API key available:', !!resendApiKey);
+          
+          if (!resendApiKey) {
+            console.error('RESEND_API_KEY is not set');
+            return new Response('redirect', {
+              status: 302,
+              headers: { ...corsHeaders, Location: `${origin}/payment-success` }
+            });
+          }
+          
+          const resend = new Resend(resendApiKey);
           
           const donorName = `${firstName} ${lastName || ''}`.trim();
           const donationAmount = parseFloat(amount);
@@ -67,7 +78,7 @@ serve(async (req) => {
           try {
             console.log(`Sending confirmation email to donor: ${email}`);
             const donorEmailResult = await resend.emails.send({
-              from: "Genius Recovery <hello@geniusrecovery.org>",
+              from: "onboarding@resend.dev",
               to: [email],
               subject: "Thank you for your donation to Genius Recovery",
               html: `
@@ -100,16 +111,16 @@ serve(async (req) => {
               `,
             });
             
-            console.log("Donor email sent successfully:", donorEmailResult);
+            console.log("Donor email sent successfully:", JSON.stringify(donorEmailResult));
           } catch (donorEmailError) {
-            console.error("Failed to send donor email:", donorEmailError);
+            console.error("Failed to send donor email:", JSON.stringify(donorEmailError));
           }
 
           // Send notification email to admin
           try {
             console.log("Sending notification email to admin...");
             const adminEmailResult = await resend.emails.send({
-              from: "Genius Recovery <hello@geniusrecovery.org>",
+              from: "onboarding@resend.dev",
               to: ["hello@geniusrecovery.org"],
               subject: `New donation received: $${donationAmount.toFixed(2)}`,
               html: `
