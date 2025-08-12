@@ -89,6 +89,57 @@ export type Database = {
         }
         Relationships: []
       }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          donor_email: string
+          donor_name: string
+          email_sent: boolean
+          email_sent_at: string | null
+          id: string
+          inchek_customer_id: string | null
+          inchek_payment_id: string | null
+          inchek_session_id: string | null
+          metadata: Json | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string
+          donor_email: string
+          donor_name: string
+          email_sent?: boolean
+          email_sent_at?: string | null
+          id?: string
+          inchek_customer_id?: string | null
+          inchek_payment_id?: string | null
+          inchek_session_id?: string | null
+          metadata?: Json | null
+          status: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          donor_email?: string
+          donor_name?: string
+          email_sent?: boolean
+          email_sent_at?: string | null
+          id?: string
+          inchek_customer_id?: string | null
+          inchek_payment_id?: string | null
+          inchek_session_id?: string | null
+          metadata?: Json | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
