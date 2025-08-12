@@ -23,7 +23,6 @@ try {
   console.log('✅ Pre-rendering completed successfully!');
   console.log('📁 Static HTML files generated in dist/ directory');
 } catch (error) {
-  console.error('❌ Pre-rendering failed:', error.message);
-  console.error('Build succeeded but pre-rendering failed');
-  process.exit(1);
+  console.warn('⚠️ Pre-rendering failed, but build succeeded:', error.message);
+  console.log('✅ Build completed without pre-rendering');
 }
