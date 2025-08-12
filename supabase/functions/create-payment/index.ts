@@ -56,25 +56,32 @@ serve(async (req) => {
           });
           
           // Call send-donation-email function using Supabase client
+          console.log('About to call send-donation-email function...');
           const supabaseClient = createClient(
             Deno.env.get('SUPABASE_URL') ?? '',
             Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
           );
 
+          const emailPayload = {
+            donor_name: `${firstName} ${lastName || ''}`.trim(),
+            donor_email: email,
+            amount: Math.round(parseFloat(amount) * 100),
+            currency: 'USD',
+            donation_id: transactionId || `txn-${Date.now()}`,
+            is_recurring: false
+          };
+          
+          console.log('Email payload:', emailPayload);
+
           const { data: emailResult, error: emailError } = await supabaseClient.functions.invoke('send-donation-email', {
-            body: {
-              donor_name: `${firstName} ${lastName || ''}`.trim(),
-              donor_email: email,
-              amount: Math.round(parseFloat(amount) * 100),
-              currency: 'USD',
-              donation_id: transactionId || `txn-${Date.now()}`,
-              is_recurring: false
-            }
+            body: emailPayload
           });
-          console.log('Email function response:', emailResult);
+          
+          console.log('Email function response data:', emailResult);
+          console.log('Email function error:', emailError);
           
           if (emailError) {
-            console.error('Email sending failed:', emailError);
+            console.error('Email sending failed with error:', emailError);
           } else {
             console.log('Donation confirmation email sent successfully to:', email);
           }
