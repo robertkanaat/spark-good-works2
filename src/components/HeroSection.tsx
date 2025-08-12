@@ -185,7 +185,7 @@ const HeroSection = () => {
                   </p>
                   
                   <div className="text-center mb-4">
-                    <a href="#" className="text-primary hover:underline text-sm">Learn about our programs</a>
+                    <Link to="/about" className="text-primary hover:underline text-sm">Learn about our programs</Link>
                   </div>
                   
                   <div className="text-xs text-muted-foreground text-center">
