@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 
 const testimonials = [
@@ -119,11 +120,15 @@ const TestimonialsSection = () => {
                         </blockquote>
                         
                         <div className="flex flex-col items-center">
-                          <img
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                            className="w-16 h-16 rounded-full object-cover mb-4 border-4 border-primary/20"
-                          />
+                          <Avatar className="w-16 h-16 mb-4 border-4 border-primary/20">
+                            <AvatarImage 
+                              src={testimonial.image} 
+                              alt={testimonial.name}
+                            />
+                            <AvatarFallback className="text-lg font-semibold bg-primary/10 text-primary">
+                              {testimonial.name.split(' ').map(n => n[0]).join('')}
+                            </AvatarFallback>
+                          </Avatar>
                           <div className="text-center">
                             <div className="font-semibold text-lg text-foreground">{testimonial.name}</div>
                             <div className="text-muted-foreground">{testimonial.role}</div>
