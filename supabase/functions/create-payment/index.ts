@@ -693,8 +693,32 @@ serve(async (req) => {
                             submitBtn.disabled = true;
                         }
                         
-                        // Submit the form
-                        form.submit();
+                        // Submit the form using fetch to avoid page navigation
+                        const formData = new FormData(form);
+                        
+                        fetch(form.action, {
+                            method: 'POST',
+                            body: formData
+                        }).then(response => {
+                            if (response.redirected) {
+                                // Follow the redirect
+                                window.top.location.href = response.url;
+                            } else {
+                                return response.text();
+                            }
+                        }).then(responseText => {
+                            if (responseText) {
+                                // Handle response here if needed
+                                console.log('Form response:', responseText);
+                            }
+                        }).catch(error => {
+                            console.error('Form submission error:', error);
+                            alert('Payment processing error. Please try again.');
+                            if (submitBtn) {
+                                submitBtn.innerHTML = 'Complete Donation';
+                                submitBtn.disabled = false;
+                            }
+                        });
                     });
                 }
             }
