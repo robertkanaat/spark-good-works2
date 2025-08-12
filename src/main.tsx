@@ -11,5 +11,13 @@ lazyPreloadImages();
 
 const rootElement = document.getElementById("root")!;
 
-// Standard React rendering
-createRoot(rootElement).render(<App />);
+// Check if content was pre-rendered by react-snap
+const isPrerendered = rootElement.hasChildNodes();
+
+if (isPrerendered) {
+  // Use hydration for pre-rendered content (preserves SEO HTML)
+  hydrateRoot(rootElement, <App />);
+} else {
+  // Use standard rendering for client-side navigation
+  createRoot(rootElement).render(<App />);
+}
