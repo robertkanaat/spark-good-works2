@@ -48,26 +48,36 @@ serve(async (req) => {
           );
           
           // Trigger email sending function
-          console.log('Sending donation email for:', { 
+          console.log('Preparing to send donation email for:', { 
             donor_name: `${firstName} ${lastName || ''}`.trim(),
             donor_email: email,
-            amount: parseFloat(amount) * 100, // Convert dollars to cents
+            amount: parseFloat(amount) * 100,
             donation_id: transactionId 
           });
           
-          const emailResult = await supabase.functions.invoke('send-donation-email', {
-            body: {
+          // Call send-donation-email function
+          const response = await fetch(`${Deno.env.get('SUPABASE_URL')}/functions/v1/send-donation-email`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${Deno.env.get('SUPABASE_ANON_KEY')}`
+            },
+            body: JSON.stringify({
               donor_name: `${firstName} ${lastName || ''}`.trim(),
               donor_email: email,
-              amount: Math.round(parseFloat(amount) * 100), // Convert to cents properly
+              amount: Math.round(parseFloat(amount) * 100),
               currency: 'USD',
               donation_id: transactionId || `txn-${Date.now()}`,
-              is_recurring: false // Can be enhanced based on the payment type
-            }
+              is_recurring: false
+            })
           });
           
-          if (emailResult.error) {
-            console.error('Email sending failed:', emailResult.error);
+          const emailResult = await response.json();
+          console.log('Email function response status:', response.status);
+          console.log('Email function response:', emailResult);
+          
+          if (!response.ok) {
+            console.error('Email sending failed:', emailResult);
           } else {
             console.log('Donation confirmation email sent successfully to:', email);
           }
