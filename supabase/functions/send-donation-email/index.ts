@@ -152,7 +152,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send confirmation email to donor
     console.log("Sending donation confirmation email...");
     const emailResponse = await resend.emails.send({
-      from: "Genius Recovery <noreply@geniusrecovery.org>",
+      from: "Genius Recovery <onboarding@resend.dev>",
       to: [donor_email],
       subject: `Thank you for your ${formattedAmount} donation to Genius Recovery! 🙏`,
       html: emailHtml,
@@ -164,7 +164,7 @@ const handler = async (req: Request): Promise<Response> => {
     try {
       console.log("Sending admin notification...");
       const adminNotification = await resend.emails.send({
-        from: "Genius Recovery Donations <noreply@geniusrecovery.org>",
+        from: "Genius Recovery Donations <onboarding@resend.dev>",
         to: ["denise.mcintyre@joepolish.com"],
         subject: `New ${is_recurring ? `${frequency} ` : ''}donation received: ${formattedAmount}`,
         html: `
