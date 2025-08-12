@@ -65,7 +65,7 @@ serve(async (req) => {
             const { data: paymentRecord, error: insertError } = await supabase
               .from('payments')
               .insert({
-                stripe_session_id: transactionId,
+                inchek_session_id: transactionId,
                 donor_email: email,
                 donor_name: donorName,
                 amount: donationAmount,
