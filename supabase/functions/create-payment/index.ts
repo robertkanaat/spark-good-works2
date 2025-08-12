@@ -543,6 +543,12 @@ serve(async (req) => {
           console.log("Email result:", emailResult);
           
           if (emailResult.error) {
+            console.error("Email sending failed:", emailResult.error);
+          } else {
+            console.log("Email sent successfully:", emailResult.data);
+          }
+          
+          if (emailResult.error) {
             console.error('Email sending failed:', emailResult.error);
           } else {
             console.log('Donation confirmation email sent successfully to:', donorEmail);
