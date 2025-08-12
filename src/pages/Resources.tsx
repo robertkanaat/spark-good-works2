@@ -107,14 +107,6 @@ const Resources = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-hero-overlay/80 to-primary/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4 mb-8">
-            <Link to="/">
-              <Button variant="outline" size="sm" className="bg-card/80 backdrop-blur-sm border-primary/20 hover:bg-card/90">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back Home
-              </Button>
-            </Link>
-          </div>
           
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-primary/80 to-donate bg-clip-text text-transparent mb-6 animate-fade-in">
