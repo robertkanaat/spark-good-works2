@@ -64,7 +64,7 @@ serve(async (req) => {
                 <h3 style="margin: 0 0 10px 0; color: #374151;">Donation Details:</h3>
                 <p style="margin: 5px 0;"><strong>Amount:</strong> $${payment.amount.toFixed(2)}</p>
                 <p style="margin: 5px 0;"><strong>Date:</strong> ${new Date(payment.created_at).toLocaleDateString()}</p>
-                <p style="margin: 5px 0;"><strong>Transaction ID:</strong> ${payment.stripe_session_id}</p>
+                <p style="margin: 5px 0;"><strong>Transaction ID:</strong> ${payment.inchek_session_id}</p>
               </div>
               
               <p>Your support helps us continue our mission to provide resources and support for addiction recovery. Every donation makes a real difference in someone's journey to recovery.</p>
@@ -96,7 +96,7 @@ serve(async (req) => {
                 <p style="margin: 5px 0;"><strong>Donor:</strong> ${payment.donor_name}</p>
                 <p style="margin: 5px 0;"><strong>Email:</strong> ${payment.donor_email}</p>
                 <p style="margin: 5px 0;"><strong>Amount:</strong> $${payment.amount.toFixed(2)}</p>
-                <p style="margin: 5px 0;"><strong>Transaction ID:</strong> ${payment.stripe_session_id}</p>
+                <p style="margin: 5px 0;"><strong>Transaction ID:</strong> ${payment.inchek_session_id}</p>
                 <p style="margin: 5px 0;"><strong>Date:</strong> ${new Date(payment.created_at).toISOString()}</p>
               </div>
               
