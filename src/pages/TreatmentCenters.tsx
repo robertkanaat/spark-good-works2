@@ -996,11 +996,21 @@ export default function TreatmentCenters() {
                   </div>
                   
                   <div className="flex gap-2 pt-4">
-                    <Button variant="outline" size="sm" className="flex-1">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => window.open(`tel:${center.phone}`, '_self')}
+                    >
                       <Phone className="h-4 w-4 mr-2" />
                       Call
                     </Button>
-                    <Button variant="secondary" size="sm" className="flex-1">
+                    <Button 
+                      variant="secondary" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => window.open(`https://${center.website}`, '_blank', 'noopener,noreferrer')}
+                    >
                       <Globe className="h-4 w-4 mr-2" />
                       Visit
                     </Button>
