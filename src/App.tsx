@@ -28,6 +28,7 @@ import AICompanion from './pages/AICompanion';
 import Auth from './pages/Auth';
 import AdminDashboard from './pages/AdminDashboard';
 import Volunteer from './pages/Volunteer';
+import BookDownload from './pages/BookDownload';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -73,6 +74,7 @@ const App = () => {
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/book-download" element={<BookDownload />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
