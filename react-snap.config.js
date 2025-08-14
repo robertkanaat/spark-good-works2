@@ -32,5 +32,12 @@ module.exports = {
   cacheAjaxRequests: false,
   preconnectThirdParty: false,
   asyncScriptTags: true,
-  preloadImages: true
+  preloadImages: true,
+  // Custom function to use about.html for /about route
+  beforeFetch: async (page, route, basename) => {
+    if (route === '/about') {
+      await page.goto('file://' + require('path').resolve(__dirname, 'about.html'));
+      return { html: await page.content() };
+    }
+  }
 };
