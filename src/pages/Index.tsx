@@ -240,7 +240,7 @@ const Index = () => {
   ];
 
   useEffect(() => {
-    console.log('Index.tsx useEffect running for SEO tags'); // Debug log
+    console.log('Index.tsx: useEffect running for SEO tags'); // Debug log
 
     // Remove existing meta/link/script tags to prevent duplicates
     const selectors = [
