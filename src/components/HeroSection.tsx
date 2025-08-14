@@ -313,7 +313,7 @@ const HeroSection = () => {
               GET HELP NOW
             </Button>
           </Link>
-          <Link to="/about">
+          <Link to="/book-download">
             <Button variant="hero">
               LEARN MORE
             </Button>
