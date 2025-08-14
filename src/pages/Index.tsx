@@ -259,11 +259,11 @@ const Index = () => {
         <meta name="MobileOptimized" content="320" />
         <meta name="referrer" content="no-referrer-when-downgrade" />
         <link rel="canonical" href="https://geniusrecovery.io" />
-        <link rel="alternate" hreflang="en" href="https://geniusrecovery.io" />
+        <link rel="alternate" hrefLang="en" href="https://geniusrecovery.io" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {[
           organizationSchema,
           websiteSchema,
