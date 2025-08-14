@@ -151,10 +151,7 @@ const Press = () => {
                   size="lg" 
                   className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-2xl hover:shadow-primary/30 group"
                   onClick={() => {
-                    document.getElementById('media-kit')?.scrollIntoView({ 
-                      behavior: 'smooth',
-                      block: 'start' 
-                    });
+                    window.open('https://lhwxxzxdsrykvznrtigf.supabase.co/storage/v1/object/public/press-materials/Genius%20Recovery%20Media%20Kit.pdf', '_blank');
                   }}
                 >
                   <span className="relative">
@@ -274,6 +271,33 @@ const Press = () => {
             </p>
           </div>
 
+          {/* Complete Media Kit Download */}
+          <div className="mb-12">
+            <Card className="p-8 text-center bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Download className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="text-2xl font-bold text-foreground mb-4">
+                Complete Media Kit
+              </h3>
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                Download our comprehensive media kit containing logos, brand guidelines, fact sheets, 
+                executive photos, and everything you need for your story.
+              </p>
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-4 gap-3 hover:scale-105 transition-all duration-300"
+                onClick={() => {
+                  window.open('https://lhwxxzxdsrykvznrtigf.supabase.co/storage/v1/object/public/press-materials/Genius%20Recovery%20Media%20Kit.pdf', '_blank');
+                }}
+              >
+                <Download className="w-5 h-5" />
+                Download Media Kit (PDF)
+              </Button>
+            </Card>
+          </div>
+
+          {/* Individual Asset Downloads */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {mediaKit.map((item, index) => (
               <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow duration-300">
