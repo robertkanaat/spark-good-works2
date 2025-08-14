@@ -9,6 +9,11 @@ import { Download, BookOpen, Users, Heart, Quote, Star, CheckCircle, ArrowRight,
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import joePolishAvatar from '@/assets/experts/joe-polish.jpg';
+import gaborMateAvatar from '@/assets/experts/gabor-mate.jpg';
+import patrickCarnesAvatar from '@/assets/experts/patrick-carnes.jpg';
+import kenWellsAvatar from '@/assets/experts/ken-wells.jpg';
+import guruPremAvatar from '@/assets/experts/guru-prem.jpg';
 
 const BookDownload = () => {
   const [formData, setFormData] = useState({
@@ -90,31 +95,36 @@ const BookDownload = () => {
       name: "Joe Polish",
       title: "Host & Creator",
       description: "Entrepreneur, addiction recovery advocate, and founder of Genius Network. Joe's personal journey through addiction recovery drives his mission to change how the world views and treats addiction.",
-      expertise: "Recovery Advocacy"
+      expertise: "Recovery Advocacy",
+      avatar: joePolishAvatar
     },
     {
       name: "Dr. Gabor Maté",
       title: "Physician & Author",
       description: "Renowned physician and bestselling author specializing in addiction, stress, and trauma. His compassionate approach emphasizes the connection between emotional pain and addictive behaviors.",
-      expertise: "Addiction Medicine"
+      expertise: "Addiction Medicine",
+      avatar: gaborMateAvatar
     },
     {
       name: "Dr. Patrick Carnes",
       title: "Clinical Psychologist",
       description: "Pioneer in the field of sexual addiction and trauma recovery. His groundbreaking work has helped millions understand the nature of addictive behaviors and the path to healing.",
-      expertise: "Behavioral Addiction"
+      expertise: "Behavioral Addiction",
+      avatar: patrickCarnesAvatar
     },
     {
       name: "Ken Wells",
       title: "Recovery Expert",
       description: "Long-time recovery advocate and expert in addiction treatment modalities. His practical approach to recovery has helped countless individuals find their path to lasting sobriety.",
-      expertise: "Treatment Strategies"
+      expertise: "Treatment Strategies",
+      avatar: kenWellsAvatar
     },
     {
       name: "Guru Prem",
       title: "Spiritual Teacher",
       description: "Spiritual guide and teacher specializing in the integration of mindfulness and meditation practices in addiction recovery. Brings ancient wisdom to modern recovery challenges.",
-      expertise: "Spiritual Recovery"
+      expertise: "Spiritual Recovery",
+      avatar: guruPremAvatar
     }
   ];
 
@@ -279,9 +289,19 @@ const BookDownload = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-donate/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   <CardHeader className="relative pb-4">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-donate/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <Users className="w-7 h-7 text-primary" />
+                    <div className="flex items-center gap-4 mb-4">
+                      {/* Expert Avatar */}
+                      <div className="relative">
+                        <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-primary/20 group-hover:border-primary/40 transition-colors duration-300">
+                          <img 
+                            src={expert.avatar} 
+                            alt={`${expert.name} headshot`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gradient-to-br from-primary/20 to-donate/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <Users className="w-3 h-3 text-primary" />
+                        </div>
                       </div>
                       <div className="text-sm font-bold text-primary bg-gradient-to-r from-primary/10 to-donate/10 px-4 py-2 rounded-full border border-primary/20">
                         {expert.expertise}
