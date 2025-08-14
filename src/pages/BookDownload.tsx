@@ -10,6 +10,8 @@ import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+// Force re-compile - avatars replaced with icons
+
 const BookDownload = () => {
   const [formData, setFormData] = useState({
     firstName: '',
