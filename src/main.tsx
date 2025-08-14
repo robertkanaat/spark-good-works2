@@ -1,25 +1,22 @@
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
+import App from './App.tsx';
 import './index.css';
 import { preloadCriticalImages, lazyPreloadImages } from './utils/imagePreloader.ts';
 
-// Dynamic import to avoid SSR issues
-import('./App.tsx').then(({ default: App }) => {
-  // Debug log to confirm rendering
-  console.log('main.tsx: Initializing React app');
+// Debug log to confirm rendering
+console.log('main.tsx: Initializing React app');
 
-  // Preload critical images immediately
-  preloadCriticalImages();
+// Preload critical images
+preloadCriticalImages();
 
-  // Lazy preload other images
-  lazyPreloadImages();
+// Lazy preload other images
+lazyPreloadImages();
 
-  const rootElement = document.getElementById('root');
-  if (!rootElement) {
-    console.error('main.tsx: Root element not found');
-    return;
-  }
-
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  console.error('main.tsx: Root element not found');
+} else {
   try {
     createRoot(rootElement).render(
       <HelmetProvider>
@@ -29,6 +26,4 @@ import('./App.tsx').then(({ default: App }) => {
   } catch (error) {
     console.error('main.tsx: Error rendering app:', error);
   }
-}).catch(error => {
-  console.error('main.tsx: Failed to load App:', error);
-});
+}
