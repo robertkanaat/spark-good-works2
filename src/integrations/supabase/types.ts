@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "13.0.4"
@@ -175,59 +175,59 @@ export type Database = {
       admin_get_email_notifications: {
         Args: Record<PropertyKey, never>
         Returns: {
-          id: string
-          name: string
-          email: string
-          is_confirmed: boolean
-          reminder_sent: boolean
           created_at: string
+          email: string
+          id: string
+          is_confirmed: boolean
+          name: string
+          reminder_sent: boolean
           updated_at: string
         }[]
       }
       admin_get_memories_with_emails: {
         Args: Record<PropertyKey, never>
         Returns: {
-          id: string
-          name: string
-          email: string
-          title: string
-          story: string
           category: string
-          relationship: string
-          memorable_date: string
-          is_featured: boolean
-          is_approved: boolean
           created_at: string
+          email: string
+          id: string
+          is_approved: boolean
+          is_featured: boolean
+          memorable_date: string
+          name: string
+          relationship: string
+          story: string
+          title: string
           updated_at: string
         }[]
       }
       get_public_memories: {
         Args: Record<PropertyKey, never>
         Returns: {
-          id: string
-          name: string
-          title: string
-          story: string
           category: string
-          relationship: string
-          memorable_date: string
-          is_featured: boolean
           created_at: string
+          id: string
+          is_featured: boolean
+          memorable_date: string
+          name: string
+          relationship: string
+          story: string
+          title: string
           updated_at: string
         }[]
       }
       get_safe_memories: {
         Args: Record<PropertyKey, never>
         Returns: {
-          id: string
-          name: string
-          title: string
-          story: string
           category: string
-          relationship: string
-          memorable_date: string
-          is_featured: boolean
           created_at: string
+          id: string
+          is_featured: boolean
+          memorable_date: string
+          name: string
+          relationship: string
+          story: string
+          title: string
           updated_at: string
         }[]
       }
