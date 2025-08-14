@@ -9,11 +9,11 @@ import { Download, BookOpen, Users, Heart, Quote, Star, CheckCircle, ArrowRight,
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import joePolishAvatar from '@/assets/experts/joe-polish.jpg';
-import gaborMateAvatar from '@/assets/experts/gabor-mate.jpg';
+import joePolishAvatar from '@/assets/experts/joe-polish.png';
+import gaborMateAvatar from '@/assets/experts/gabor-mate.png';
 import patrickCarnesAvatar from '@/assets/experts/patrick-carnes.jpg';
 import kenWellsAvatar from '@/assets/experts/ken-wells.jpg';
-import guruPremAvatar from '@/assets/experts/guru-prem.jpg';
+import guruPremAvatar from '@/assets/experts/guru-prem.png';
 
 const BookDownload = () => {
   const [formData, setFormData] = useState({
