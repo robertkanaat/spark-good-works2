@@ -5,15 +5,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { Download, BookOpen, Users, Heart, Quote, Star, CheckCircle, ArrowRight, Sparkles, Crown, Award, Zap } from 'lucide-react';
+import { Download, BookOpen, Users, Heart, Quote, Star, CheckCircle, ArrowRight, Sparkles, Crown, Award, Zap, Mic, Brain, UserCheck, Lightbulb, Flower2 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import joePolishAvatar from '@/assets/experts/joe-polish.png';
-import gaborMateAvatar from '@/assets/experts/gabor-mate.png';
-import patrickCarnesAvatar from '@/assets/experts/patrick-carnes.png';
-import kenWellsAvatar from '@/assets/experts/ken-wells.png';
-import guruPremAvatar from '@/assets/experts/guru-prem.png';
 
 const BookDownload = () => {
   const [formData, setFormData] = useState({
@@ -96,35 +91,35 @@ const BookDownload = () => {
       title: "Host & Creator",
       description: "Entrepreneur, addiction recovery advocate, and founder of Genius Network. Joe's personal journey through addiction recovery drives his mission to change how the world views and treats addiction.",
       expertise: "Recovery Advocacy",
-      avatar: joePolishAvatar
+      icon: Mic
     },
     {
       name: "Dr. Gabor Maté",
       title: "Physician & Author",
       description: "Renowned physician and bestselling author specializing in addiction, stress, and trauma. His compassionate approach emphasizes the connection between emotional pain and addictive behaviors.",
       expertise: "Addiction Medicine",
-      avatar: gaborMateAvatar
+      icon: Brain
     },
     {
       name: "Dr. Patrick Carnes",
       title: "Clinical Psychologist",
       description: "Pioneer in the field of sexual addiction and trauma recovery. His groundbreaking work has helped millions understand the nature of addictive behaviors and the path to healing.",
       expertise: "Behavioral Addiction",
-      avatar: patrickCarnesAvatar
+      icon: UserCheck
     },
     {
       name: "Ken Wells",
       title: "Recovery Expert",
       description: "Long-time recovery advocate and expert in addiction treatment modalities. His practical approach to recovery has helped countless individuals find their path to lasting sobriety.",
       expertise: "Treatment Strategies",
-      avatar: kenWellsAvatar
+      icon: Lightbulb
     },
     {
       name: "Guru Prem",
       title: "Spiritual Teacher",
       description: "Spiritual guide and teacher specializing in the integration of mindfulness and meditation practices in addiction recovery. Brings ancient wisdom to modern recovery challenges.",
       expertise: "Spiritual Recovery",
-      avatar: guruPremAvatar
+      icon: Flower2
     }
   ];
 
@@ -290,14 +285,10 @@ const BookDownload = () => {
                   
                   <CardHeader className="relative pb-4">
                     <div className="flex items-center gap-4 mb-4">
-                      {/* Expert Avatar */}
+                      {/* Expert Icon */}
                       <div className="relative">
-                        <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-primary/20 group-hover:border-primary/40 transition-colors duration-300">
-                          <img 
-                            src={expert.avatar} 
-                            alt={`${expert.name} headshot`}
-                            className="w-full h-full object-cover"
-                          />
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-donate/10 border-2 border-primary/20 group-hover:border-primary/40 transition-colors duration-300 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                          <expert.icon className="w-8 h-8 text-primary" />
                         </div>
                         <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gradient-to-br from-primary/20 to-donate/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <Users className="w-3 h-3 text-primary" />
