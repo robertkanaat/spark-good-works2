@@ -9,54 +9,30 @@ import { useEffect } from "react";
 import { ArrowRight, Heart, Users, BookOpen } from "lucide-react";
 
 const About = () => {
-  useEffect(() => {
-    const title = "About Us - Our Journey from Pain to Purpose | Genius Recovery";
-    const description = "Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support.";
-
-    document.title = title;
-
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute("content", description);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute("href", window.location.origin + "/about");
-
-    // Structured data: Organization
-    const scriptId = "jsonld-about";
-    const existing = document.getElementById(scriptId);
-    if (existing) existing.remove();
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Genius Recovery",
-      description,
-      url: window.location.href,
-      foundingDate: "2024",
-      founder: {
-        "@type": "Person",
-        name: "Joe Polish"
-      },
-      mission: "To change the global conversation around addiction through compassion, education, and connection."
-    };
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.id = scriptId;
-    script.text = JSON.stringify(jsonLd);
-    document.head.appendChild(script);
-  }, []);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Genius Recovery",
+    description: "Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support.",
+    url: "https://geniusrecovery.org/about",
+    foundingDate: "2024",
+    founder: {
+      "@type": "Person",
+      name: "Joe Polish"
+    },
+    mission: "To change the global conversation around addiction through compassion, education, and connection."
+  };
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="About Us - Our Journey from Pain to Purpose | Genius Recovery"
+        description="Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support."
+        keywords="addiction recovery, Genius Recovery, addiction support, recovery mission, Joe Polish, compassion-based recovery"
+        ogType="website"
+        canonicalUrl="https://geniusrecovery.org/about"
+        structuredData={structuredData}
+      />
       <Header />
       <main>
         {/* Hero Section */}
