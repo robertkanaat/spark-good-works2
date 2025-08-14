@@ -98,7 +98,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title={`${post.title} | Recovery Stories | Genius Recovery`}
+        title={`${post.title} | Genius Recovery`}
         description={post.excerpt}
         keywords={`recovery story, addiction recovery, ${post.category}, ${post.author}, inspiration, hope, healing`}
         ogType="article"

@@ -58,7 +58,7 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Recovery Stories & Inspiration Blog | Genius Recovery"
+        title="Blog | Genius Recovery"
         description="Read inspiring recovery stories, expert insights, and helpful resources on our blog. Find hope, motivation, and practical guidance for your addiction recovery journey."
         keywords="recovery stories, addiction recovery, recovery blog, hope, healing, inspiration, recovery resources, personal stories, expert insights"
         ogImage={blogHeroBg}
