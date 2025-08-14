@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -6,24 +6,34 @@ import { ShoppingCart, Star, Heart, Truck, Shield, RotateCcw, Search, Filter, Sp
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import shopHeroBg from "@/assets/shop-hero-bg.jpg";
 import hoodieImg from "@/assets/hoodie.jpg";
 import backpackImg from "@/assets/backpack.jpg";
 import mugImg from "@/assets/mug.jpg";
 
 const Shop = () => {
-  useEffect(() => {
-    document.title = "Recovery Shop - Support Your Journey | Genius Recovery";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Shop meaningful recovery products including recovery kits, apparel, and accessories. Every purchase supports addiction recovery programs and resources.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Shop meaningful recovery products including recovery kits, apparel, and accessories. Every purchase supports addiction recovery programs and resources.';
-      document.head.appendChild(meta);
+  // SEO configuration for this page
+  const seoData = {
+    title: "Recovery Shop - Meaningful Products Supporting Your Journey | Genius Recovery",
+    description: "Shop meaningful recovery products including recovery kits, apparel, and accessories. Every purchase supports addiction recovery programs and resources worldwide.",
+    keywords: "recovery shop, addiction recovery products, recovery kits, recovery apparel, sober merchandise, recovery gifts, addiction support products",
+    ogImage: "https://yoursite.com/images/shop-og-image.jpg", // Update with actual image URL
+    canonicalUrl: "https://geniusrecovery.org/shop",
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Genius Recovery Shop",
+      "description": "Shop meaningful recovery products that support addiction recovery journeys",
+      "url": "https://geniusrecovery.org/shop",
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "lowPrice": "14.99",
+        "highPrice": "79.99"
+      }
     }
-  }, []);
+  };
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
@@ -165,6 +175,7 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead {...seoData} />
       <Header />
       
       {/* Hero Section with Background */}
