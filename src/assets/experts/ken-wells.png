@@ -1,1 +1,77 @@
-/lovable-uploads/cff1339c-b989-4606-b4ea-1c5e4af4fdd5.png
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Genius Recovery</title>
+
+    <!-- Basic meta tags - React Helmet will override these dynamically -->
+    <meta name="description" content="Genius Recovery - Addiction Recovery Support & Crisis Intervention" />
+    <meta name="keywords" content="addiction recovery, substance abuse help, crisis intervention" />
+
+    <!-- Author -->
+    <meta name="author" content="Genius Recovery" />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Language -->
+    <meta name="language" content="English" />
+
+    <!-- Content type -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <!-- Open Graph tags - React Helmet will override these -->
+    <meta property="og:title" content="Genius Recovery" />
+    <meta property="og:description" content="Genius Recovery" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://geniusrecovery.io" />
+    <meta property="og:image" content="https://geniusrecovery.io/genius-recovery-logo.png" />
+
+    <!-- Twitter Card tags - React Helmet will override these -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Genius Recovery" />
+    <meta name="twitter:description" content="Genius Recovery" />
+    <meta name="twitter:image" content="https://geniusrecovery.io/genius-recovery-logo.png" />
+
+    <!-- Additional SEO meta tags -->
+    <meta name="theme-color" content="#0EA5E9" />
+    <meta name="msapplication-TileColor" content="#0EA5E9" />
+    <meta name="application-name" content="Genius Recovery" />
+    <meta name="apple-mobile-web-app-title" content="Genius Recovery" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+    <!-- Canonical URL - React Helmet will override this -->
+    <link rel="canonical" href="https://geniusrecovery.io" />
+
+    <!-- Alternate language links - React Helmet will override this -->
+    <link rel="alternate" hreflang="en" href="https://geniusrecovery.io" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/lovable-uploads/cff1339c-b989-4606-b4ea-1c5e4af4fdd5.png" type="image/png">
+
+    <!-- Performance optimizations -->
+    <link rel="preload" href="https://geniusrecovery.io/genius-recovery-logo.png" as="image" type="image/png" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- React Helmet will add structured data -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx?t=1755204469794"></script>
+  </body>
+</html>
