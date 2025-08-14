@@ -232,6 +232,7 @@ const BlogPost = () => {
                     className="space-y-8 text-lg leading-relaxed"
                     dangerouslySetInnerHTML={{ 
                       __html: post.content
+                        .replace(/READ IT TO ME:.*?Click play to listen to this post\./gi, '')
                         .replace(/<p>/g, '<p class="mb-8 text-lg text-muted-foreground leading-relaxed">')
                         .replace(/<h1>/g, '<h1 class="text-4xl font-bold text-foreground mb-6 mt-12 first:mt-0">')
                         .replace(/<h2>/g, '<h2 class="text-3xl font-bold text-foreground mb-6 mt-10">')
