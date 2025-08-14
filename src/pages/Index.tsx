@@ -240,8 +240,7 @@ const Index = () => {
   ];
 
   useEffect(() => {
-    // Set page title
-    document.title = "Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help";
+    console.log('Index.tsx useEffect running for SEO tags'); // Debug log
 
     // Remove existing meta/link/script tags to prevent duplicates
     const selectors = [
@@ -265,7 +264,7 @@ const Index = () => {
       'meta[name="MobileOptimized"]',
       'meta[name="referrer"]',
       'link[rel="canonical"]',
-      'link[rel="alternate"][hreflang="en"]',
+      'link[rel="alternate"]',
       'link[rel="dns-prefetch"]',
       'link[rel="preconnect"]',
       'script[type="application/ld+json"]'
@@ -273,6 +272,9 @@ const Index = () => {
     selectors.forEach(selector => {
       document.querySelectorAll(selector).forEach(el => el.remove());
     });
+
+    // Set comprehensive SEO metadata
+    document.title = "Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help";
 
     // Meta description
     const metaDescription = document.createElement('meta');
@@ -423,7 +425,7 @@ const Index = () => {
       console.error('Failed to serialize structured data:', error);
     }
 
-    // Cleanup function to remove added tags on unmount
+    // Cleanup
     return () => {
       selectors.forEach(selector => {
         document.querySelectorAll(selector).forEach(el => el.remove());
