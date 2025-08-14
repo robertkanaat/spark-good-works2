@@ -20,6 +20,7 @@ const SEOHead = ({
   structuredData
 }: SEOHeadProps) => {
   useEffect(() => {
+    console.log('SEOHead props:', { title, description, keywords, ogImage, ogType, canonicalUrl, structuredData });
     // Set page title
     document.title = title;
 
