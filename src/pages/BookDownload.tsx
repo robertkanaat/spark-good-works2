@@ -11,8 +11,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import joePolishAvatar from '@/assets/experts/joe-polish.png';
 import gaborMateAvatar from '@/assets/experts/gabor-mate.png';
-import patrickCarnesAvatar from '@/assets/experts/patrick-carnes.jpg';
-import kenWellsAvatar from '@/assets/experts/ken-wells.jpg';
+import patrickCarnesAvatar from '@/assets/experts/patrick-carnes.png';
+import kenWellsAvatar from '@/assets/experts/ken-wells.png';
 import guruPremAvatar from '@/assets/experts/guru-prem.png';
 
 const BookDownload = () => {
