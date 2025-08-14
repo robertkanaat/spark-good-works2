@@ -33,11 +33,17 @@ module.exports = {
   preconnectThirdParty: false,
   asyncScriptTags: true,
   preloadImages: true,
-  // Custom function to use about.html for /about route
+  // Custom function to use specific HTML templates for routes
   beforeFetch: async (page, route, basename) => {
     if (route === '/about') {
-      await page.goto('file://' + require('path').resolve(__dirname, 'about.html'));
-      return { html: await page.content() };
+      // Use about.html as the base template for /about route
+      const aboutHtmlPath = require('path').resolve(__dirname, 'dist', 'about.html');
+      if (require('fs').existsSync(aboutHtmlPath)) {
+        await page.goto('file://' + aboutHtmlPath);
+        return { html: await page.content() };
+      }
     }
+    // For index route, use the default index.html from dist
+    return null;
   }
 };
