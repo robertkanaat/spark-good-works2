@@ -1,44 +1,49 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ScrollToTop from "@/components/ScrollToTop";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Support from "./pages/Support";
-import CrisisSupport from "./pages/CrisisSupport";
-import Donors from "./pages/Donors";
-import Donation from "./pages/Donation";
-import Resources from "./pages/Resources";
-import PaymentSuccess from "./pages/PaymentSuccess";
-import PaymentFailed from "./pages/PaymentFailed";
-import Emergency from "./pages/Emergency";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import Shop from "./pages/Shop";
-import Press from "./pages/Press";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsConditions from "./pages/TermsConditions";
-import TreatmentCenters from "./pages/TreatmentCenters";
-import Contact from "./pages/Contact";
-import FAQ from "./pages/FAQ";
-import NotFound from "./pages/NotFound";
-import OpenLetter from "./pages/OpenLetter";
-import AICompanion from "./pages/AICompanion";
-import Auth from "./pages/Auth";
-import AdminDashboard from "./pages/AdminDashboard";
-import Volunteer from "./pages/Volunteer";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from '@/components/ui/sonner'; // Use sonner as the primary toaster
+import { TooltipProvider } from '@/components/ui/tooltip';
+import ScrollToTop from '@/components/ScrollToTop';
+import Index from './pages/Index';
+import About from './pages/About';
+import Support from './pages/Support';
+import CrisisSupport from './pages/CrisisSupport';
+import Donors from './pages/Donors';
+import Donation from './pages/Donation';
+import Resources from './pages/Resources';
+import PaymentSuccess from './pages/PaymentSuccess';
+import PaymentFailed from './pages/PaymentFailed';
+import Emergency from './pages/Emergency';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import Shop from './pages/Shop';
+import Press from './pages/Press';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
+import TreatmentCenters from './pages/TreatmentCenters';
+import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
+import NotFound from './pages/NotFound';
+import OpenLetter from './pages/OpenLetter';
+import AICompanion from './pages/AICompanion';
+import Auth from './pages/Auth';
+import AdminDashboard from './pages/AdminDashboard';
+import Volunteer from './pages/Volunteer';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      retry: 1,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <Toaster />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
@@ -66,7 +71,6 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/faq" element={<FAQ />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
