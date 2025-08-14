@@ -17,9 +17,13 @@ const rootElement = document.getElementById('root');
 if (!rootElement) {
   console.error('main.tsx: Root element not found');
 } else {
-  createRoot(rootElement).render(
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>
-  );
+  try {
+    createRoot(rootElement).render(
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
+    );
+  } catch (error) {
+    console.error('main.tsx: Error rendering app:', error);
+  }
 }
