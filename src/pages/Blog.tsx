@@ -6,22 +6,11 @@ import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { useWordPressPosts } from "@/hooks/useWordPressPosts";
 import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 
 const Blog = () => {
-  useEffect(() => {
-    document.title = "Recovery Stories & Inspiration Blog | Genius Recovery";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Read inspiring recovery stories, expert insights, and helpful resources on our blog. Find hope, motivation, and practical guidance for your addiction recovery journey.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Read inspiring recovery stories, expert insights, and helpful resources on our blog. Find hope, motivation, and practical guidance for your addiction recovery journey.';
-      document.head.appendChild(meta);
-    }
-  }, []);
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const { posts, loading, error, featuredPost, categories } = useWordPressPosts();
@@ -68,6 +57,40 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Recovery Stories & Inspiration Blog | Genius Recovery"
+        description="Read inspiring recovery stories, expert insights, and helpful resources on our blog. Find hope, motivation, and practical guidance for your addiction recovery journey."
+        keywords="recovery stories, addiction recovery, recovery blog, hope, healing, inspiration, recovery resources, personal stories, expert insights"
+        ogImage={blogHeroBg}
+        canonicalUrl="https://geniusrecovery.org/blog"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          "name": "Genius Recovery Blog",
+          "description": "Recovery stories, expert insights, and resources for addiction recovery",
+          "url": "https://geniusrecovery.org/blog",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Genius Recovery",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://geniusrecovery.org/genius-recovery-logo.png"
+            }
+          },
+          "blogPost": posts.slice(0, 5).map(post => ({
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.excerpt,
+            "image": post.image,
+            "author": {
+              "@type": "Person",
+              "name": post.author
+            },
+            "datePublished": post.date,
+            "url": `https://geniusrecovery.org/blog/${post.slug}`
+          }))
+        }}
+      />
       <Header />
       
       {/* Hero Section with Background */}

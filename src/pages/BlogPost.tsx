@@ -97,6 +97,39 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={`${post.title} | Recovery Stories | Genius Recovery`}
+        description={post.excerpt}
+        keywords={`recovery story, addiction recovery, ${post.category}, ${post.author}, inspiration, hope, healing`}
+        ogType="article"
+        ogImage={post.image}
+        canonicalUrl={`https://geniusrecovery.org/blog/${post.slug}`}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": post.title,
+          "description": post.excerpt,
+          "image": post.image,
+          "author": {
+            "@type": "Person",
+            "name": post.author
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Genius Recovery",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://geniusrecovery.org/genius-recovery-logo.png"
+            }
+          },
+          "datePublished": post.date,
+          "dateModified": post.date,
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://geniusrecovery.org/blog/${post.slug}`
+          }
+        }}
+      />
       <Header />
       
       {/* Hero Section - Above the fold for SEO */}
