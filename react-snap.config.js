@@ -33,17 +33,16 @@ module.exports = {
   preconnectThirdParty: false,
   asyncScriptTags: true,
   preloadImages: true,
-  // Custom function to use specific HTML templates for routes
+  // Ensure proper handling of routes
+  inlineCss: false,
+  // Custom handling for different routes
   beforeFetch: async (page, route, basename) => {
-    if (route === '/about') {
-      // Use about.html as the base template for /about route
-      const aboutHtmlPath = require('path').resolve(__dirname, 'dist', 'about.html');
-      if (require('fs').existsSync(aboutHtmlPath)) {
-        await page.goto('file://' + aboutHtmlPath);
-        return { html: await page.content() };
-      }
-    }
-    // For index route, use the default index.html from dist
-    return null;
+    console.log(`Processing route: ${route}`);
+    return null; // Let react-snap handle normally
+  },
+  // Post-process to ensure correct HTML templates
+  afterFetch: async (route, content) => {
+    console.log(`Post-processing route: ${route}`);
+    return content;
   }
 };

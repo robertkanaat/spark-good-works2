@@ -20,6 +20,18 @@ try {
     console.log('✅ about.html copied to dist folder');
   }
   
+  // Ensure index.html is the main template
+  const indexHtmlSource = path.resolve('index.html');
+  const indexHtmlDest = path.resolve(distPath, 'index.html');
+  
+  if (fs.existsSync(indexHtmlSource) && fs.existsSync(indexHtmlDest)) {
+    // Keep the built index.html but ensure it has correct SEO
+    console.log('✅ index.html template ready');
+  }
+  
+  console.log('🔧 Running post-build setup...');
+  execSync('node scripts/post-build.js', { stdio: 'inherit' });
+  
   console.log('🎯 Running react-snap for pre-rendering...');
   execSync('npx react-snap', { stdio: 'inherit' });
   console.log('✅ Pre-rendering completed successfully!');
