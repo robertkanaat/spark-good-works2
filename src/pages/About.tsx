@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import ClientOnly from '@/components/ClientOnly';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -9,101 +8,9 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Heart, Users, BookOpen } from 'lucide-react';
 
 const About = () => {
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Genius Recovery',
-    description:
-      'Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support.',
-    url: 'https://geniusrecovery.io/about',
-    foundingDate: '2023', // Updated to match Index.tsx
-    founder: {
-      '@type': 'Person',
-      name: 'Joe Polish',
-    },
-    mission:
-      'To change the global conversation around addiction through compassion, education, and connection.',
-  };
-
-  const webPageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'About Genius Recovery - Our Mission & Team',
-    description:
-      'Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support.',
-    url: 'https://geniusrecovery.io/about',
-    isPartOf: { '@type': 'WebSite', name: 'Genius Recovery', url: 'https://geniusrecovery.io' },
-    datePublished: '2023-01-01',
-    dateModified: new Date().toISOString().split('T')[0],
-    author: { '@type': 'Organization', name: 'Genius Recovery' },
-  };
-
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geniusrecovery.io' },
-      { '@type': 'ListItem', position: 2, name: 'About', item: 'https://geniusrecovery.io/about' },
-    ],
-  };
-
   return (
     <ClientOnly>
-      <Helmet>
-        <title>About Us - Our Journey from Pain to Purpose | Genius Recovery</title>
-        <meta
-          name="description"
-          content="Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support."
-        />
-        <meta
-          name="keywords"
-          content="addiction recovery, Genius Recovery, addiction support, recovery mission, Joe Polish, compassion-based recovery"
-        />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="About Us - Our Journey from Pain to Purpose | Genius Recovery" />
-        <meta
-          property="og:description"
-          content="Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://geniusrecovery.io/about" />
-        <meta property="og:image" content="https://geniusrecovery.io/genius-recovery-logo.png" />
-        <meta property="og:image:alt" content="Genius Recovery - Addiction Recovery Support Organization" />
-        <meta property="og:site_name" content="Genius Recovery" />
-        <meta property="og:locale" content="en_US" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="About Us - Our Journey from Pain to Purpose | Genius Recovery"
-        />
-        <meta
-          name="twitter:description"
-          content="Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support."
-        />
-        <meta name="twitter:image" content="https://geniusrecovery.io/genius-recovery-logo.png" />
-        <meta name="twitter:image:alt" content="Genius Recovery - Addiction Recovery Support Organization" />
-        <meta name="twitter:site" content="@GeniusRecovery" />
-        <meta name="twitter:creator" content="@GeniusRecovery" />
-        <meta name="theme-color" content="#0EA5E9" />
-        <meta name="msapplication-TileColor" content="#0EA5E9" />
-        <meta name="application-name" content="Genius Recovery" />
-        <meta name="apple-mobile-web-app-title" content="Genius Recovery" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="HandheldFriendly" content="true" />
-        <meta name="MobileOptimized" content="320" />
-        <meta name="referrer" content="no-referrer-when-downgrade" />
-        <link rel="canonical" href="https://geniusrecovery.io/about" />
-        <link rel="alternate" hrefLang="en" href="https://geniusrecovery.io/about" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(webPageSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
-      </Helmet>
+      {/* SEO handled by about.html template */}
       <div className="min-h-screen bg-background">
         <Header />
         <main>
