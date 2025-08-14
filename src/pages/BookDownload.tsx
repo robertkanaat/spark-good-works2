@@ -133,10 +133,10 @@ const BookDownload = () => {
         {/* Hero Section - Stunning Visual Impact */}
         <section className="relative min-h-screen flex items-center overflow-hidden">
           {/* Dynamic Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-hero-bg via-background to-muted/20">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)]"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(var(--donate)/0.15),transparent_50%)]"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,hsl(var(--secondary)/0.1),transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/30 to-background">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.15),transparent_70%)]"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(var(--donate)/0.25),transparent_50%)]"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,hsl(var(--secondary)/0.15),transparent_50%)]"></div>
           </div>
           
           {/* Animated Glow Effects */}
@@ -364,7 +364,7 @@ const BookDownload = () => {
         </section>
 
         {/* Download Form Section - Stunning Design */}
-        <section className="py-20 relative overflow-hidden" id="download-form">
+        <section className="py-16 relative overflow-hidden -mt-20 relative z-20" id="download-form">
           {/* Background Effects */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-donate/5"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.1),transparent_70%)]"></div>
