@@ -19,4 +19,15 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  ssgOptions: {
+    script: 'async',
+    formatting: 'minify',
+    crittersOptions: {
+      reduceInlineStyles: false,
+    },
+    includedRoutes(paths: string[]) {
+      // Include all your routes for pre-rendering
+      return paths.filter((i: string) => !i.includes('404'))
+    },
+  },
 }));
