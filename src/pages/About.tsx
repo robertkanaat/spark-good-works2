@@ -5,7 +5,7 @@ import OurStorySection from "@/components/OurStorySection";
 import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+
 import { ArrowRight, Heart, Users, BookOpen } from "lucide-react";
 
 const About = () => {
