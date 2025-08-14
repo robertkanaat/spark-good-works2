@@ -10,6 +10,7 @@ import { User, Session } from '@supabase/supabase-js';
 import { Shield, Mail, Users, RefreshCw, Download, CheckCircle, XCircle } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 
 interface EmailNotification {
   id: string;

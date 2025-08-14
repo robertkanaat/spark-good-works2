@@ -5,6 +5,7 @@ import { ArrowLeft, Phone, AlertTriangle, Heart, Shield, Users, Clock, MapPin, S
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import emergencyHeroBg from "@/assets/emergency-hero-bg.jpg";
 
 const Emergency = () => {

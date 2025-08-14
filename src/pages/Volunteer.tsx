@@ -10,6 +10,7 @@ import { Heart, Users, MessageCircle, Calendar, MapPin, Clock, Mail, Phone, User
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import LazyBgImage from "@/components/LazyBackgroundImage";
 
 const Volunteer = () => {

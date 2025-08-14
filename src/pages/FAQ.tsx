@@ -11,6 +11,7 @@ import {
 import { Phone, MessageCircle, Heart, Users, Shield, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 const FAQ = () => {
   const faqSchema = {

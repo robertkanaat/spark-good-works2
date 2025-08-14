@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
 import { Eye, EyeOff, ArrowLeft, Shield } from 'lucide-react';
+import SEOHead from '@/components/SEOHead';
 
 const Auth = () => {
   const [user, setUser] = useState<User | null>(null);

@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import basicBg from "@/assets/donation-bg-basic.jpg";
 import supporterBg from "@/assets/donation-bg-supporter.jpg";
 import championBg from "@/assets/donation-bg-champion.jpg";

@@ -9,6 +9,7 @@ import BlogPreviewSection from "@/components/BlogPreviewSection";
 import OpenLetterPreview from "@/components/OpenLetterPreview";
 import HomeFAQSection from "@/components/HomeFAQSection";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 
 const Index = () => {
   const organizationSchema = {

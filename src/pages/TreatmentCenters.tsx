@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import TreatmentCenterMap from "@/components/TreatmentCenterMap";
 import treatmentCenter1 from "@/assets/treatment-center-1.jpg";
 import treatmentCenter2 from "@/assets/treatment-center-2.jpg";

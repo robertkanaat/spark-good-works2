@@ -6,6 +6,7 @@ import { CheckCircle, Home, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import SEOHead from "@/components/SEOHead";
 
 const PaymentSuccess = () => {
   const { toast } = useToast();

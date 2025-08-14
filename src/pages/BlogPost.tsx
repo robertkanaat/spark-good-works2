@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { useWordPressPosts } from "@/hooks/useWordPressPosts";
 import { toast } from "@/components/ui/use-toast";
 
