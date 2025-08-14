@@ -27,9 +27,14 @@ if (fs.existsSync(builtIndexPath)) {
     const scriptMatches = builtHead.match(/<script[^>]*>[\s\S]*?<\/script>|<script[^>]*\/>/gi) || [];
     const linkMatches = builtHead.match(/<link[^>]*\/?>|<link[^>]*>[\s\S]*?<\/link>/gi) || [];
     
-    // Get vite assets (js/css files)
+    // Get vite assets (js/css files) - filter for actual asset imports
     const viteAssets = [...scriptMatches, ...linkMatches]
-      .filter(tag => tag.includes('.js') || tag.includes('.css') || tag.includes('modulepreload'));
+      .filter(tag => 
+        tag.includes('type="module"') || 
+        tag.includes('.css') || 
+        tag.includes('modulepreload') ||
+        tag.includes('crossorigin')
+      );
     
     // Replace the head content in about.html template with SEO + vite assets
     const aboutTemplateHead = aboutTemplate.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
