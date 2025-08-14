@@ -351,7 +351,7 @@ const Press = () => {
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-primary" />
                   <div>
-                    <div className="font-medium">(555) 123-PRESS</div>
+                    <div className="font-medium">(480) 858-0008</div>
                     <div className="text-sm text-muted-foreground">Media hotline</div>
                   </div>
                 </div>
