@@ -8,7 +8,6 @@ module.exports = {
   crawlFrom: "/",
   include: [
     "/",
-    "/about",
     "/support", 
     "/crisis-support",
     "/donors",
