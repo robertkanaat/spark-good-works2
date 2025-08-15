@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
+import { ToastProvider, ToastViewport } from '@/components/ui/toast';
 import App from './App.tsx';
 import './index.css';
 import { preloadCriticalImages, lazyPreloadImages } from './utils/imagePreloader.ts';
@@ -9,7 +10,6 @@ console.log('main.tsx: Initializing React app');
 
 // Preload critical images
 preloadCriticalImages();
-
 // Lazy preload other images
 lazyPreloadImages();
 
@@ -20,7 +20,10 @@ if (!rootElement) {
   try {
     createRoot(rootElement).render(
       <HelmetProvider>
-        <App />
+        <ToastProvider>
+          <App />
+          <ToastViewport />
+        </ToastProvider>
       </HelmetProvider>
     );
   } catch (error) {
