@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Heart, Users, MessageCircle, Calendar, MapPin, Clock, Mail, Phone, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -108,7 +109,24 @@ const Volunteer = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    if (name === "phone") {
+      // Format phone number as user types
+      const cleaned = value.replace(/\D/g, '');
+      let formatted = cleaned;
+      
+      if (cleaned.length >= 6) {
+        formatted = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
+      } else if (cleaned.length >= 3) {
+        formatted = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
+      } else if (cleaned.length > 0) {
+        formatted = cleaned;
+      }
+      
+      setFormData(prev => ({ ...prev, [name]: formatted }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSelectChange = (name: string, value: string) => {
@@ -490,6 +508,7 @@ const Volunteer = () => {
         </section>
       </main>
       <Footer />
+      <Toaster />
     </>
   );
 };
