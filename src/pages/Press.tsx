@@ -344,7 +344,7 @@ const Press = () => {
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-primary" />
                   <div>
-                    <div className="font-medium">press@geniusrecovery.org</div>
+                    <div className="font-medium">directory@geniusrecovery.org</div>
                     <div className="text-sm text-muted-foreground">General media inquiries</div>
                   </div>
                 </div>
@@ -366,7 +366,7 @@ const Press = () => {
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-primary" />
                   <div>
-                    <div className="font-medium">interviews@geniusrecovery.org</div>
+                    <div className="font-medium">directory@geniusrecovery.org</div>
                     <div className="text-sm text-muted-foreground">CEO & leadership interviews</div>
                   </div>
                 </div>
