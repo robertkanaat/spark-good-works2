@@ -120,9 +120,27 @@ const Volunteer = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Submit to Zapier webhook
+      const webhookUrl = "https://hooks.zapier.com/hooks/catch/155028/u6j9txh/";
       
+      console.log("Submitting volunteer application to Zapier:", formData);
+      
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors", // Handle CORS for Zapier webhooks
+        body: JSON.stringify({
+          ...formData,
+          timestamp: new Date().toISOString(),
+          source: "Genius Recovery Volunteer Application",
+          page_url: window.location.href
+        }),
+      });
+
+      // Since we're using no-cors, we can't check response status
+      // So we'll assume success and show confirmation
       toast({
         title: "Application Submitted!",
         description: "Thank you for your interest in volunteering. We'll be in touch within 48 hours.",
@@ -139,6 +157,7 @@ const Volunteer = () => {
         message: ""
       });
     } catch (error) {
+      console.error("Error submitting volunteer application:", error);
       toast({
         variant: "destructive",
         title: "Submission Failed",
