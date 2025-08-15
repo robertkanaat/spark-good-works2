@@ -102,8 +102,17 @@ const Contact = () => {
     const { data, error } = await supabase.functions.invoke('send-contact-email', {
       body: formData,
     });
-    console.log("Supabase response:", { data, error }); // Add logging
-    if (!error && data?.success) {
+    
+    console.log("Supabase response:", { data, error });
+    
+    // Check for successful response
+    if (error) {
+      console.error("Supabase error:", error);
+      throw new Error(error.message || 'Failed to send message');
+    }
+    
+    // Check if the function executed successfully
+    if (data && data.success) {
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you as soon as possible.",
@@ -119,7 +128,8 @@ const Contact = () => {
         message: ""
       });
     } else {
-      throw new Error(error?.message || 'Failed to send message');
+      console.error("Function returned unsuccessful response:", data);
+      throw new Error(data?.error || 'Failed to send message');
     }
   } catch (error) {
     console.error("Form submission error:", error);
