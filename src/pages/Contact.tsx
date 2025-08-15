@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle, Heart, ArrowRight } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import resourcesHeroImage from "@/assets/resources-hero-bg.jpg";
 import DOMPurify from "dompurify";
@@ -35,7 +35,7 @@ const Contact = () => {
     subject: "",
     message: ""
   });
-  const { toast } = useToast();
+  
 
   // Enhanced input validation and sanitization
   const validateInput = (value: string, field: string): string => {
@@ -113,10 +113,8 @@ const Contact = () => {
     
     // Check if the function executed successfully
     if (data && data.success) {
-      toast({
-        title: "Message sent successfully!",
+      toast.success("Message sent successfully!", {
         description: "We'll get back to you as soon as possible.",
-        className: "bg-green-50 border-green-200 text-green-800",
       });
       // Reset form
       setFormData({
@@ -133,10 +131,8 @@ const Contact = () => {
     }
   } catch (error) {
     console.error("Form submission error:", error);
-    toast({
-      title: "Error sending message",
+    toast.error("Error sending message", {
       description: error instanceof Error ? error.message : "Please try again or contact us directly.",
-      variant: "destructive",
     });
   } finally {
     setIsSubmitting(false);
