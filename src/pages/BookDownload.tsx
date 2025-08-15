@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -22,6 +23,7 @@ const BookDownload = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -59,21 +61,33 @@ const BookDownload = () => {
       });
 
       if (response.ok) {
-        toast({
-          title: "Request Submitted Successfully!",
-          description: "We'll send you the download link shortly. Check your email.",
-        });
-        
-        // Reset form
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          message: ''
-        });
+        // Send to Zapier webhook
+        try {
+          await fetch('https://hooks.zapier.com/hooks/catch/155028/u6nq5z8/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            mode: 'no-cors',
+            body: JSON.stringify({
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              email: formData.email,
+              phone: formData.phone,
+              message: formData.message,
+              timestamp: new Date().toISOString(),
+              source: 'Addiction Recovery Book Download'
+            }),
+          });
+        } catch (zapierError) {
+          console.log('Zapier webhook error:', zapierError);
+          // Continue with the flow even if Zapier fails
+        }
+
+        // Navigate to confirmation page
+        navigate('/addiction-recovery-book-download');
       } else {
-        throw new Error('Failed to submit request');
+        throw new Error('Failed to submit form');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -131,7 +145,7 @@ const BookDownload = () => {
         title="Free Book Download - Understanding Addiction And Recovery | Genius Recovery"
         description="Download your free copy of 'Understanding Addiction And Recovery' by Joe Polish. Expert insights on addiction treatment and recovery support."
         keywords="free book download, addiction recovery book, Joe Polish interviews, understanding addiction, recovery resources"
-        canonicalUrl="https://geniusrecovery.org/book-download"
+        canonicalUrl="https://geniusrecovery.org/addiction-recovery-book"
       />
       
       <Header />
