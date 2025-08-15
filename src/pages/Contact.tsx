@@ -104,6 +104,8 @@ const Contact = () => {
     });
     
     console.log("Supabase response:", { data, error });
+    console.log("Data type:", typeof data);
+    console.log("Data keys:", data ? Object.keys(data) : 'null');
     
     // Check for successful response
     if (error) {
@@ -112,7 +114,8 @@ const Contact = () => {
     }
     
     // Check if the function executed successfully
-    if (data && data.success) {
+    // The edge function returns { success: true, message: "..." }
+    if (data?.success === true) {
       toast.success("Message sent successfully!", {
         description: "We'll get back to you as soon as possible.",
       });
