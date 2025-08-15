@@ -87,54 +87,51 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // Additional validation before submission
-      if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.message.trim()) {
-        throw new Error('Please fill in all required fields');
-      }
-
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-        throw new Error('Please enter a valid email address');
-      }
-
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData,
-      });
-
-      if (!error) {
-        toast({
-          title: "Message sent successfully!",
-          description: "We'll get back to you as soon as possible.",
-          className: "bg-green-50 border-green-200 text-green-800",
-        });
-        
-        // Reset form
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          phone: "",
-          subject: "",
-          message: ""
-        });
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch (error) {
-      toast({
-        title: "Error sending message",
-        description: error instanceof Error ? error.message : "Please try again or contact us directly.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+  e.preventDefault();
+  setIsSubmitting(true);
+  try {
+    // Additional validation before submission
+    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.message.trim()) {
+      throw new Error('Please fill in all required fields');
     }
-  };
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      throw new Error('Please enter a valid email address');
+    }
+    const { data, error } = await supabase.functions.invoke('send-contact-email', {
+      body: formData,
+    });
+    console.log("Supabase response:", { data, error }); // Add logging
+    if (!error && data?.success) {
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you as soon as possible.",
+        className: "bg-green-50 border-green-200 text-green-800",
+      });
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: ""
+      });
+    } else {
+      throw new Error(error?.message || 'Failed to send message');
+    }
+  } catch (error) {
+    console.error("Form submission error:", error);
+    toast({
+      title: "Error sending message",
+      description: error instanceof Error ? error.message : "Please try again or contact us directly.",
+      variant: "destructive",
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   return (
     <div className="min-h-screen bg-background">
       <Header />
