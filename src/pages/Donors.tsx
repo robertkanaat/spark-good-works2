@@ -263,9 +263,9 @@ const Donors = () => {
           <div className="space-y-16">
             {waysToDonate.map((way, index) => {
               const getButtonAction = (title: string) => {
-                if (title.includes('Time')) return () => scrollToSection('volunteer-signup');
+                if (title.includes('Time')) return '/volunteer';
                 if (title.includes('Talent')) return () => scrollToSection('talent-areas');
-                if (title.includes('Treasures')) return () => window.open('/donation', '_blank');
+                if (title.includes('Treasures')) return '/donation';
                 return () => {};
               };
 
@@ -301,16 +301,30 @@ const Donors = () => {
                       ))}
                     </ul>
                     
-                    <Button 
-                      size="lg" 
-                      className={`${
-                        way.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700' :
-                        way.color === 'purple' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-green-600 hover:bg-green-700'
-                      } text-white hover-scale transition-all duration-300`}
-                      onClick={getButtonAction(way.title)}
-                    >
-                      {way.buttonText}
-                    </Button>
+                    {typeof getButtonAction(way.title) === 'string' ? (
+                      <Link to={getButtonAction(way.title) as string}>
+                        <Button 
+                          size="lg" 
+                          className={`${
+                            way.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700' :
+                            way.color === 'purple' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-green-600 hover:bg-green-700'
+                          } text-white hover-scale transition-all duration-300 w-full`}
+                        >
+                          {way.buttonText}
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Button 
+                        size="lg" 
+                        className={`${
+                          way.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700' :
+                          way.color === 'purple' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-green-600 hover:bg-green-700'
+                        } text-white hover-scale transition-all duration-300`}
+                        onClick={getButtonAction(way.title) as () => void}
+                      >
+                        {way.buttonText}
+                      </Button>
+                    )}
                   </div>
                   
                   <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
@@ -419,9 +433,10 @@ const Donors = () => {
                   variant="outline" 
                   size="sm"
                   className="hover-scale"
-                  onClick={() => window.open('/volunteer', '_blank')}
                 >
-                  Get Involved
+                  <Link to="/volunteer" className="flex items-center">
+                    Get Involved
+                  </Link>
                 </Button>
               </Card>
             ))}
@@ -440,23 +455,25 @@ const Donors = () => {
               Join our community of volunteers and start making an impact today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="text-lg px-8 py-4 h-auto hover-scale"
-                onClick={() => window.open('/volunteer', '_blank')}
-              >
-                <Users className="w-5 h-5 mr-2" />
-                Become a Volunteer
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="text-lg px-8 py-4 h-auto hover-scale"
-                onClick={() => window.open('/contact', '_blank')}
-              >
-                <Megaphone className="w-5 h-5 mr-2" />
-                Contact Us
-              </Button>
+              <Link to="/volunteer">
+                <Button 
+                  size="lg" 
+                  className="text-lg px-8 py-4 h-auto hover-scale w-full"
+                >
+                  <Users className="w-5 h-5 mr-2" />
+                  Become a Volunteer
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="text-lg px-8 py-4 h-auto hover-scale w-full"
+                >
+                  <Megaphone className="w-5 h-5 mr-2" />
+                  Contact Us
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
