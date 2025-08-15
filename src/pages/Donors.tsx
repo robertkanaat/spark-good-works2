@@ -19,8 +19,20 @@ import {
   Code,
   PenTool,
   Briefcase,
-  Gift
+  Gift,
+  ArrowDown
 } from "lucide-react";
+
+// Smooth scroll function
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+};
 
 const Donors = () => {
   useEffect(() => {
@@ -202,13 +214,34 @@ const Donors = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-4 h-auto animate-fade-in hover-scale"
+                onClick={() => scrollToSection('ways-to-help')}
+              >
                 <Heart className="w-5 h-5 mr-2" />
                 Start Giving Today
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-4 h-auto">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-8 py-4 h-auto animate-fade-in hover-scale"
+                onClick={() => scrollToSection('impact-stories')}
+              >
                 <Users className="w-5 h-5 mr-2" />
-                Join Our Community
+                See Our Impact
+              </Button>
+            </div>
+            
+            {/* Scroll indicator */}
+            <div className="mt-12 animate-fade-in">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => scrollToSection('ways-to-help')}
+                className="animate-pulse hover-scale"
+              >
+                <ArrowDown className="w-5 h-5" />
               </Button>
             </div>
           </div>
@@ -216,9 +249,9 @@ const Donors = () => {
       </section>
 
       {/* How You Can Make a Difference */}
-      <section className="py-20 bg-muted/30">
+      <section id="ways-to-help" className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               How You Can Make a Difference
             </h2>
@@ -228,72 +261,82 @@ const Donors = () => {
           </div>
           
           <div className="space-y-16">
-            {waysToDonate.map((way, index) => (
-              <div key={index} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
-                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                      way.color === 'blue' ? 'bg-blue-500/10' :
-                      way.color === 'purple' ? 'bg-purple-500/10' : 'bg-green-500/10'
-                    }`}>
-                      <way.icon className={`w-8 h-8 ${
-                        way.color === 'blue' ? 'text-blue-600' :
-                        way.color === 'purple' ? 'text-purple-600' : 'text-green-600'
-                      }`} />
+            {waysToDonate.map((way, index) => {
+              const getButtonAction = (title: string) => {
+                if (title.includes('Time')) return () => scrollToSection('volunteer-signup');
+                if (title.includes('Talent')) return () => scrollToSection('talent-areas');
+                if (title.includes('Treasures')) return () => window.open('/donation', '_blank');
+                return () => {};
+              };
+
+              return (
+                <div key={index} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''} animate-fade-in`}>
+                  <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className={`w-16 h-16 rounded-full flex items-center justify-center hover-scale transition-all duration-300 ${
+                        way.color === 'blue' ? 'bg-blue-500/10' :
+                        way.color === 'purple' ? 'bg-purple-500/10' : 'bg-green-500/10'
+                      }`}>
+                        <way.icon className={`w-8 h-8 ${
+                          way.color === 'blue' ? 'text-blue-600' :
+                          way.color === 'purple' ? 'text-purple-600' : 'text-green-600'
+                        }`} />
+                      </div>
+                      <h3 className="text-3xl font-bold">{way.title}</h3>
                     </div>
-                    <h3 className="text-3xl font-bold">{way.title}</h3>
+                    
+                    <blockquote className="text-lg text-muted-foreground italic mb-8 border-l-4 border-primary pl-6 animate-fade-in">
+                      "{way.quote}"
+                    </blockquote>
+                    
+                    <ul className="space-y-4 mb-8">
+                      {way.items.map((item, itemIndex) => (
+                        <li key={itemIndex} className="flex items-start gap-3 animate-fade-in" style={{ animationDelay: `${itemIndex * 0.1}s` }}>
+                          <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
+                            way.color === 'blue' ? 'bg-blue-600' :
+                            way.color === 'purple' ? 'bg-purple-600' : 'bg-green-600'
+                          }`}></div>
+                          <span className="text-muted-foreground leading-relaxed">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <Button 
+                      size="lg" 
+                      className={`${
+                        way.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700' :
+                        way.color === 'purple' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-green-600 hover:bg-green-700'
+                      } text-white hover-scale transition-all duration-300`}
+                      onClick={getButtonAction(way.title)}
+                    >
+                      {way.buttonText}
+                    </Button>
                   </div>
                   
-                  <blockquote className="text-lg text-muted-foreground italic mb-8 border-l-4 border-primary pl-6">
-                    "{way.quote}"
-                  </blockquote>
-                  
-                  <ul className="space-y-4 mb-8">
-                    {way.items.map((item, itemIndex) => (
-                      <li key={itemIndex} className="flex items-start gap-3">
-                        <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
-                          way.color === 'blue' ? 'bg-blue-600' :
-                          way.color === 'purple' ? 'bg-purple-600' : 'bg-green-600'
-                        }`}></div>
-                        <span className="text-muted-foreground leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <Button 
-                    size="lg" 
-                    className={`${
-                      way.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700' :
-                      way.color === 'purple' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-green-600 hover:bg-green-700'
-                    } text-white`}
-                  >
-                    {way.buttonText}
-                  </Button>
+                  <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
+                    <Card className="p-8 h-full bg-gradient-to-br from-muted/50 to-background hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                      <div className="grid grid-cols-2 gap-4">
+                        {talentCategories.slice(index * 2, (index * 2) + 2).map((category, catIndex) => (
+                          <div key={catIndex} className="text-center p-4 rounded-lg bg-background/50 hover:bg-background/80 transition-all duration-300 hover-scale">
+                            <category.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
+                            <h4 className="font-semibold text-sm mb-2">{category.title}</h4>
+                            <p className="text-xs text-muted-foreground">{category.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </Card>
+                  </div>
                 </div>
-                
-                <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
-                  <Card className="p-8 h-full bg-gradient-to-br from-muted/50 to-background">
-                    <div className="grid grid-cols-2 gap-4">
-                      {talentCategories.slice(index * 2, (index * 2) + 2).map((category, catIndex) => (
-                        <div key={catIndex} className="text-center p-4 rounded-lg bg-background/50">
-                          <category.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
-                          <h4 className="font-semibold text-sm mb-2">{category.title}</h4>
-                          <p className="text-xs text-muted-foreground">{category.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </Card>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Real Stories of Hope */}
-      <section className="py-20">
+      <section id="impact-stories" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 italic">
               Real Stories of Hope and Recovery
             </h2>
@@ -306,9 +349,9 @@ const Donors = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {impactStories.map((story, index) => (
-              <Card key={index} className="p-8 hover:shadow-lg transition-all duration-300">
+              <Card key={index} className="p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in" style={{ animationDelay: `${index * 0.2}s` }}>
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 hover-scale">
                     <story.icon className="w-6 h-6 text-primary" />
                   </div>
                   <h4 className="text-2xl font-bold">{story.name}</h4>
@@ -323,7 +366,7 @@ const Donors = () => {
       {/* Why Your Contribution Matters */}
       <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Why Your Contribution Matters
             </h2>
@@ -334,8 +377,8 @@ const Donors = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {impactAreas.map((area, index) => (
-              <Card key={index} className="p-8 text-center hover:shadow-lg transition-all duration-300">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Card key={index} className="p-8 text-center hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 hover-scale">
                   <area.icon className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{area.title}</h3>
@@ -344,10 +387,77 @@ const Donors = () => {
             ))}
           </div>
           
-          <div className="text-center">
+          <div className="text-center animate-fade-in">
             <p className="text-2xl font-semibold text-primary mb-8">
               Your support is more than a donation; it's an investment in lives, hope, and healing.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Talent Areas Section */}
+      <section id="talent-areas" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ways to Share Your Talent
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Your unique skills and expertise can make a real difference in our mission to support recovery.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {talentCategories.map((category, index) => (
+              <Card key={index} className="p-6 text-center hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 hover-scale">
+                  <category.icon className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
+                <p className="text-muted-foreground leading-relaxed mb-6">{category.description}</p>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="hover-scale"
+                  onClick={() => window.open('/volunteer', '_blank')}
+                >
+                  Get Involved
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Volunteer Signup Section */}
+      <section id="volunteer-signup" className="py-20 bg-muted/30">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to Make a Difference?
+            </h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Join our community of volunteers and start making an impact today.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-4 h-auto hover-scale"
+                onClick={() => window.open('/volunteer', '_blank')}
+              >
+                <Users className="w-5 h-5 mr-2" />
+                Become a Volunteer
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-8 py-4 h-auto hover-scale"
+                onClick={() => window.open('/contact', '_blank')}
+              >
+                <Megaphone className="w-5 h-5 mr-2" />
+                Contact Us
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -356,21 +466,37 @@ const Donors = () => {
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-orange-500/10 to-primary/10"></div>
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 animate-fade-in">
             Thank you for helping us create a world where recovery and hope are possible for everyone.
           </h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <Button size="lg" variant="outline" className="text-lg px-6 py-4 h-auto">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-6 py-4 h-auto hover-scale animate-fade-in"
+              onClick={() => scrollToSection('volunteer-signup')}
+              style={{ animationDelay: '0.1s' }}
+            >
               <Clock className="w-5 h-5 mr-2" />
               Donate Your Time
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-6 py-4 h-auto">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-6 py-4 h-auto hover-scale animate-fade-in"
+              onClick={() => scrollToSection('talent-areas')}
+              style={{ animationDelay: '0.2s' }}
+            >
               <Star className="w-5 h-5 mr-2" />
               Give Your Talent
             </Button>
             <Link to="/donation">
-              <Button size="lg" className="text-lg px-6 py-4 h-auto w-full">
+              <Button 
+                size="lg" 
+                className="text-lg px-6 py-4 h-auto w-full hover-scale animate-fade-in"
+                style={{ animationDelay: '0.3s' }}
+              >
                 <DollarSign className="w-5 h-5 mr-2" />
                 Donate Treasure
               </Button>
