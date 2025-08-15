@@ -275,7 +275,7 @@ const Resources = () => {
       </section>
 
       {/* Our Mission Section */}
-      <section className="py-24 relative bg-gradient-to-br from-hero-bg via-primary/10 to-donate/5 overflow-hidden">
+      <section className="py-24 relative bg-gradient-to-br from-muted/20 via-primary/5 to-donate/5 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,hsl(var(--primary)/0.1),transparent_50%)] opacity-50"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--donate)/0.1),transparent_50%)] opacity-50"></div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
