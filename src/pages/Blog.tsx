@@ -8,12 +8,21 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useWordPressPosts } from "@/hooks/useWordPressPosts";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 
 const Blog = () => {
 
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const { posts, loading, error, featuredPost, categories } = useWordPressPosts();
+  const { posts, loading, error, featuredPost, categories, totalPages, currentPage, fetchPage } = useWordPressPosts();
   
   const filteredPosts = selectedCategory === "All" 
     ? posts 
@@ -367,6 +376,106 @@ Best regards,`;
           ))}
         </div>
 
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="mb-20">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (currentPage > 1) {
+                        fetchPage(currentPage - 1);
+                      }
+                    }}
+                    className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+
+                {/* First page */}
+                <PaginationItem>
+                  <PaginationLink
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      fetchPage(1);
+                    }}
+                    isActive={currentPage === 1}
+                  >
+                    1
+                  </PaginationLink>
+                </PaginationItem>
+
+                {/* Ellipsis before current page if needed */}
+                {currentPage > 3 && (
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem>
+                )}
+
+                {/* Page numbers around current page */}
+                {Array.from({ length: Math.min(3, totalPages) }, (_, i) => {
+                  const pageNum = Math.max(2, Math.min(currentPage - 1, totalPages - 2)) + i;
+                  if (pageNum === 1 || pageNum === totalPages || pageNum < 1) return null;
+                  
+                  return (
+                    <PaginationItem key={pageNum}>
+                      <PaginationLink
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          fetchPage(pageNum);
+                        }}
+                        isActive={currentPage === pageNum}
+                      >
+                        {pageNum}
+                      </PaginationLink>
+                    </PaginationItem>
+                  );
+                })}
+
+                {/* Ellipsis after current page if needed */}
+                {currentPage < totalPages - 2 && (
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem>
+                )}
+
+                {/* Last page */}
+                {totalPages > 1 && (
+                  <PaginationItem>
+                    <PaginationLink
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        fetchPage(totalPages);
+                      }}
+                      isActive={currentPage === totalPages}
+                    >
+                      {totalPages}
+                    </PaginationLink>
+                  </PaginationItem>
+                )}
+
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (currentPage < totalPages) {
+                        fetchPage(currentPage + 1);
+                      }
+                    }}
+                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        )}
+
         {/* Newsletter Signup */}
         <Card className="p-16 text-center bg-gradient-to-br from-primary/10 via-background to-orange-500/10 border-0 shadow-2xl">
           <div className="max-w-3xl mx-auto">
@@ -378,10 +487,17 @@ Best regards,`;
               Get the latest recovery stories, expert insights, and life-changing resources delivered directly to your inbox. 
               Join our community of hope and healing.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 px-8 py-4 text-lg group">
-                <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Subscribe to Newsletter
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <input 
+                type="email" 
+                placeholder="Enter your email" 
+                className="flex-1 px-6 py-4 rounded-full border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
+              />
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-full font-medium hover-scale hover-glow transition-all duration-300"
+              >
+                Subscribe
               </Button>
             </div>
           </div>

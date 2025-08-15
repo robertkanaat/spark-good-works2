@@ -68,6 +68,9 @@ interface UseWordPressPostsReturn {
   error: string | null;
   featuredPost: TransformedPost | null;
   categories: string[];
+  totalPages: number;
+  currentPage: number;
+  fetchPage: (page: number) => Promise<void>;
 }
 
 const WORDPRESS_API_URL = 'https://geniusrecovery.org/wp-json/wp/v2/posts';
@@ -135,61 +138,78 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
   const [posts, setPosts] = useState<TransformedPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [allPosts, setAllPosts] = useState<TransformedPost[]>([]);
+
+  const fetchPage = async (page: number) => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Fetch posts with embedded data for authors, featured media, and categories
+      const response = await fetch(
+        `${WORDPRESS_API_URL}?_embed&per_page=9&page=${page}&orderby=date&order=desc`,
+        {
+          headers: {
+            'Accept': 'application/json',
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch posts: ${response.status}`);
+      }
+
+      const wordpressPosts: WordPressPost[] = await response.json();
+      
+      // Get total pages from response headers
+      const totalPagesHeader = response.headers.get('X-WP-TotalPages');
+      if (totalPagesHeader) {
+        setTotalPages(parseInt(totalPagesHeader));
+      }
+
+      // Transform WordPress posts to match our interface
+      const transformedPosts: TransformedPost[] = wordpressPosts.map((post, index) => ({
+        id: post.id,
+        title: stripHtml(post.title.rendered),
+        excerpt: stripHtml(post.excerpt.rendered),
+        content: post.content.rendered,
+        category: getCategoryName(post),
+        author: getAuthorName(post),
+        date: formatDate(post.date),
+        readTime: calculateReadTime(post.content.rendered),
+        image: getFeaturedImage(post),
+        featured: page === 1 && index === 0, // Make the first post of first page featured
+        likes: Math.floor(Math.random() * 300) + 50, // Mock engagement data
+        comments: Math.floor(Math.random() * 50) + 5,
+        slug: post.slug,
+        link: post.link,
+      }));
+
+      setPosts(transformedPosts);
+      setCurrentPage(page);
+      
+      // Keep track of all posts for categories
+      if (page === 1) {
+        setAllPosts(transformedPosts);
+      } else {
+        setAllPosts(prev => [...prev, ...transformedPosts]);
+      }
+    } catch (err) {
+      console.error('Error fetching WordPress posts:', err);
+      setError(err instanceof Error ? err.message : 'Failed to load posts');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // Fetch posts with embedded data for authors, featured media, and categories
-        const response = await fetch(
-          `${WORDPRESS_API_URL}?_embed&per_page=20&orderby=date&order=desc`,
-          {
-            headers: {
-              'Accept': 'application/json',
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch posts: ${response.status}`);
-        }
-
-        const wordpressPosts: WordPressPost[] = await response.json();
-
-        // Transform WordPress posts to match our interface
-        const transformedPosts: TransformedPost[] = wordpressPosts.map((post, index) => ({
-          id: post.id,
-          title: stripHtml(post.title.rendered),
-          excerpt: stripHtml(post.excerpt.rendered),
-          content: post.content.rendered,
-          category: getCategoryName(post),
-          author: getAuthorName(post),
-          date: formatDate(post.date),
-          readTime: calculateReadTime(post.content.rendered),
-          image: getFeaturedImage(post),
-          featured: index === 0, // Make the first post featured
-          likes: Math.floor(Math.random() * 300) + 50, // Mock engagement data
-          comments: Math.floor(Math.random() * 50) + 5,
-          slug: post.slug,
-          link: post.link,
-        }));
-
-        setPosts(transformedPosts);
-      } catch (err) {
-        console.error('Error fetching WordPress posts:', err);
-        setError(err instanceof Error ? err.message : 'Failed to load posts');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
+    fetchPage(1);
   }, []);
 
-  // Get unique categories
-  const categories = ['All', ...Array.from(new Set(posts.map(post => post.category)))];
+  // Get unique categories from all posts
+  const categories = ['All', ...Array.from(new Set(allPosts.map(post => post.category)))];
   
   // Get featured post
   const featuredPost = posts.find(post => post.featured) || null;
@@ -200,5 +220,8 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
     error,
     featuredPost,
     categories,
+    totalPages,
+    currentPage,
+    fetchPage,
   };
 };
