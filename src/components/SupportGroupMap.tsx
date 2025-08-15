@@ -231,10 +231,10 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
               <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">Enable Interactive Map</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                To view the interactive map, please enter your Mapbox public token. 
+                To view the interactive map with support group locations, please enter your Mapbox public token. 
                 You can get one free at{' '}
-                <a href="https://mapbox.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                  mapbox.com
+                <a href="https://account.mapbox.com/access-tokens/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                  mapbox.com/account/access-tokens
                 </a>
               </p>
             </div>
