@@ -369,7 +369,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div>
+            <div id="contact-form">
               <Card className="p-10 bg-gradient-to-br from-background to-muted/50 border-2 border-primary/10 shadow-2xl">
                 <div className="text-center mb-8">
                   <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20 mb-4">
