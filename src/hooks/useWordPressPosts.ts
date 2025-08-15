@@ -173,7 +173,7 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
       const transformedPosts: TransformedPost[] = wordpressPosts.map((post, index) => ({
         id: post.id,
         title: stripHtml(post.title.rendered),
-        excerpt: stripHtml(post.excerpt.rendered),
+        excerpt: stripHtml(post.excerpt.rendered).replace(/READ IT TO ME:.*?Click play to listen to this post\./gi, '').trim(),
         content: post.content.rendered,
         category: getCategoryName(post),
         author: getAuthorName(post),
