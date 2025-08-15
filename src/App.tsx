@@ -20,6 +20,7 @@ import Press from './pages/Press';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
 import TreatmentCenters from './pages/TreatmentCenters';
+import SupportGroups from './pages/SupportGroups';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import NotFound from './pages/NotFound';
@@ -70,6 +71,7 @@ const App = () => {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
             <Route path="/treatment-centers" element={<TreatmentCenters />} />
+            <Route path="/support-groups" element={<SupportGroups />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/volunteer" element={<Volunteer />} />
             <Route path="/auth" element={<Auth />} />

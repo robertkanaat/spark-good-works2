@@ -220,6 +220,12 @@ const Resources = () => {
                       Find Treatment Centers
                     </Button>
                   </Link>
+                ) : resource.title === "Support Groups" ? (
+                  <Link to="/support-groups">
+                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
+                      Find Support Groups
+                    </Button>
+                  </Link>
                 ) : (
                   <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
                     Explore Resources
