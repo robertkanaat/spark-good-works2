@@ -40,14 +40,40 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
 
   // Check for Mapbox token on component mount
   useEffect(() => {
-    // In a real implementation, you would get this from Supabase Edge Function secrets
-    // For now, we'll show an input for the user to enter their token
-    const token = localStorage.getItem('mapbox_token');
-    if (token) {
-      setMapboxToken(token);
-    } else {
-      setShowTokenInput(true);
-    }
+    const fetchMapboxToken = async () => {
+      try {
+        // First check localStorage for cached token
+        const cachedToken = localStorage.getItem('mapbox_token');
+        if (cachedToken) {
+          setMapboxToken(cachedToken);
+          return;
+        }
+
+        // Fetch from Supabase secrets via edge function
+        const response = await fetch('/api/get-secret', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: 'MAPBOX_PUBLIC_TOKEN' }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const token = data.value;
+          setMapboxToken(token);
+          localStorage.setItem('mapbox_token', token);
+        } else {
+          // If edge function fails, show input
+          setShowTokenInput(true);
+        }
+      } catch (error) {
+        console.error('Failed to fetch Mapbox token:', error);
+        setShowTokenInput(true);
+      }
+    };
+
+    fetchMapboxToken();
   }, []);
 
   const handleTokenSubmit = () => {
