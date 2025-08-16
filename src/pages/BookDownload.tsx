@@ -10,6 +10,7 @@ import { Download, BookOpen, Users, Heart, Quote, Star, CheckCircle, ArrowRight,
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { supabase } from '@/integrations/supabase/client';
 
 // Force re-compile - avatars replaced with icons
 
@@ -48,48 +49,43 @@ const BookDownload = () => {
     setIsSubmitting(true);
 
     try {
-      // Call Supabase edge function directly
-      const response = await fetch('https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/send-contact-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxod3h4enhkc3J5a3Z6bnJ0aWdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1MDQ1NzEsImV4cCI6MjA3MDA4MDU3MX0.EF6mcd5BG3n_wngVu2g9fCzS2nnNG-xzbQxcOslR5vk`
-        },
-        body: JSON.stringify({
+      // Use Supabase client to call edge function
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
           ...formData,
           subject: 'Book Download Request - Understanding Addiction And Recovery',
           message: `Book Download Request:\n\nName: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage: ${formData.message}`
-        }),
+        }
       });
 
-      if (response.ok) {
-        // Send to Zapier webhook
-        try {
-          await fetch('https://hooks.zapier.com/hooks/catch/155028/u6nq5z8/', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              firstName: formData.firstName,
-              lastName: formData.lastName,
-              email: formData.email,
-              phone: formData.phone,
-              message: formData.message,
-              timestamp: new Date().toISOString(),
-              source: 'Addiction Recovery Book Download'
-            }),
-          });
-        } catch (zapierError) {
-          console.log('Zapier webhook error:', zapierError);
-          // Continue with the flow even if Zapier fails
-        }
-
-        // Navigate to confirmation page
-        navigate('/addiction-recovery-book-download');
-      } else {
-        throw new Error('Failed to submit form');
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw new Error(error.message || 'Failed to submit form');
       }
+      // Send to Zapier webhook
+      try {
+        await fetch('https://hooks.zapier.com/hooks/catch/155028/u6nq5z8/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            message: formData.message,
+            timestamp: new Date().toISOString(),
+            source: 'Addiction Recovery Book Download'
+          }),
+        });
+      } catch (zapierError) {
+        console.log('Zapier webhook error:', zapierError);
+        // Continue with the flow even if Zapier fails
+      }
+
+      // Navigate to confirmation page
+      navigate('/addiction-recovery-book-download');
     } catch (error) {
       console.error('Error submitting form:', error);
       toast({
