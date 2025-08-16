@@ -45,10 +45,12 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
         // First check localStorage for cached token
         const cachedToken = localStorage.getItem('mapbox_token');
         if (cachedToken) {
+          console.log('Using cached Mapbox token');
           setMapboxToken(cachedToken);
           return;
         }
 
+        console.log('Fetching Mapbox token from Supabase...');
         // Fetch from Supabase secrets via edge function
         const response = await fetch('/api/get-secret', {
           method: 'POST',
@@ -61,9 +63,11 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
         if (response.ok) {
           const data = await response.json();
           const token = data.value;
+          console.log('Mapbox token fetched successfully');
           setMapboxToken(token);
           localStorage.setItem('mapbox_token', token);
         } else {
+          console.log('Failed to fetch token from edge function, showing input');
           // If edge function fails, show input
           setShowTokenInput(true);
         }
@@ -85,8 +89,16 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
 
   // Initialize map
   useEffect(() => {
-    if (!mapContainer.current || !mapboxToken || showTokenInput) return;
+    if (!mapContainer.current || !mapboxToken || showTokenInput) {
+      console.log('Map initialization skipped:', { 
+        hasContainer: !!mapContainer.current, 
+        hasToken: !!mapboxToken, 
+        showTokenInput 
+      });
+      return;
+    }
 
+    console.log('Initializing Mapbox map...');
     mapboxgl.accessToken = mapboxToken;
     
     map.current = new mapboxgl.Map({
@@ -97,6 +109,10 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
     });
 
     map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    
+    map.current.on('load', () => {
+      console.log('Mapbox map loaded successfully');
+    });
 
     return () => {
       if (map.current) {
@@ -107,7 +123,15 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
 
   // Add markers for support groups
   useEffect(() => {
-    if (!map.current || !groups.length) return;
+    if (!map.current || !groups.length) {
+      console.log('Markers not added:', { 
+        hasMap: !!map.current, 
+        groupsLength: groups.length 
+      });
+      return;
+    }
+
+    console.log(`Adding ${groups.length} markers to map...`);
 
     // Clear existing markers
     markersRef.current.forEach(marker => marker.remove());
