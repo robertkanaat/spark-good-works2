@@ -68,7 +68,6 @@ const BookDownload = () => {
             headers: {
               'Content-Type': 'application/json',
             },
-            mode: 'no-cors',
             body: JSON.stringify({
               firstName: formData.firstName,
               lastName: formData.lastName,
