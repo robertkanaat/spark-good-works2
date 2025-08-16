@@ -62,29 +62,7 @@ const BookDownload = () => {
         console.error('Supabase function error:', error);
         throw new Error(error.message || 'Failed to submit form');
       }
-      // Send to Zapier webhook
-      try {
-        await fetch('https://hooks.zapier.com/hooks/catch/155028/u6nq5z8/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            phone: formData.phone,
-            message: formData.message,
-            timestamp: new Date().toISOString(),
-            source: 'Addiction Recovery Book Download'
-          }),
-        });
-      } catch (zapierError) {
-        console.log('Zapier webhook error:', zapierError);
-        // Continue with the flow even if Zapier fails
-      }
-
-      // Navigate to confirmation page
+      // Navigate to confirmation page (Zapier call is now handled in the edge function)
       navigate('/addiction-recovery-book-download');
     } catch (error) {
       console.error('Error submitting form:', error);

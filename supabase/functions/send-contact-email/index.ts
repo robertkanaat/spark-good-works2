@@ -280,6 +280,31 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
+    // Send to Zapier webhook if it's a book download request
+    if (subject.includes('Book Download Request')) {
+      try {
+        await fetch('https://hooks.zapier.com/hooks/catch/155028/u6nq5z8/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            phone,
+            message,
+            timestamp: new Date().toISOString(),
+            source: 'Addiction Recovery Book Download'
+          }),
+        });
+        console.log('Zapier webhook called successfully');
+      } catch (zapierError) {
+        console.error('Zapier webhook error:', zapierError);
+        // Continue with the flow even if Zapier fails
+      }
+    }
+
     // Force redeploy - using verified domain
     console.log("Emails sent successfully:", { emailToDirector, confirmationEmail });
 
