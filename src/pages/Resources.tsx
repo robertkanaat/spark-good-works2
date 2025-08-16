@@ -260,10 +260,12 @@ const Resources = () => {
                   <div className="flex-1">
                     <h3 className="font-bold text-xl mb-3 text-foreground">{resource.title}</h3>
                     <p className="text-muted-foreground mb-6 leading-relaxed">{resource.description}</p>
-                    <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                      Learn More
-                      <ExternalLink className="w-5 h-5 ml-2" />
-                    </Button>
+                    <Link to="/education">
+                      <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                        Learn More
+                        <ExternalLink className="w-5 h-5 ml-2" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </Card>
