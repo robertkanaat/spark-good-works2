@@ -73,22 +73,22 @@ const Resources = () => {
     {
       title: "Understanding Addiction",
       description: "Learn about the science and psychology behind addiction",
-      link: "#"
+      link: "/education#understanding-addiction"
     },
     {
       title: "Recovery Stages",
       description: "Navigate the different phases of recovery with confidence",
-      link: "#"
+      link: "/education#recovery-stages"
     },
     {
       title: "Harm Reduction",
       description: "Practical strategies to reduce risks and promote safety",
-      link: "#"
+      link: "/education#harm-reduction"
     },
     {
       title: "Mental Health",
       description: "Address co-occurring mental health conditions",
-      link: "#"
+      link: "/education#mental-health"
     }
   ];
 
@@ -260,7 +260,7 @@ const Resources = () => {
                   <div className="flex-1">
                     <h3 className="font-bold text-xl mb-3 text-foreground">{resource.title}</h3>
                     <p className="text-muted-foreground mb-6 leading-relaxed">{resource.description}</p>
-                    <Link to="/education">
+                    <Link to={resource.link}>
                       <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:translate-x-2 transition-transform duration-300">
                         Learn More
                         <ExternalLink className="w-5 h-5 ml-2" />

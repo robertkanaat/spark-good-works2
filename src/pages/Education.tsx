@@ -176,7 +176,7 @@ const Education = () => {
       </section>
 
       {/* Understanding Addiction Section */}
-      <section className="py-20 relative">
+      <section id="understanding-addiction" className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -266,7 +266,7 @@ const Education = () => {
       <Separator className="my-0" />
 
       {/* Recovery Stages Section */}
-      <section className="py-20 relative bg-gradient-to-br from-accent/5 to-muted/10">
+      <section id="recovery-stages" className="py-20 relative bg-gradient-to-br from-accent/5 to-muted/10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,hsl(var(--accent)/0.1),transparent_50%)]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -362,7 +362,7 @@ const Education = () => {
       <Separator className="my-0" />
 
       {/* Harm Reduction Section */}
-      <section className="py-20 relative">
+      <section id="harm-reduction" className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-destructive/5 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -470,7 +470,7 @@ const Education = () => {
       <Separator className="my-0" />
 
       {/* Mental Health Section */}
-      <section className="py-20 relative bg-gradient-to-br from-primary/5 to-accent/5">
+      <section id="mental-health" className="py-20 relative bg-gradient-to-br from-primary/5 to-accent/5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--primary)/0.1),transparent_50%)]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
