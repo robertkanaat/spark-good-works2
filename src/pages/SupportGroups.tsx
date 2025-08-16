@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Star, Phone, Globe, Users, Award, Heart, Clock, Calendar, MessageCircle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -244,6 +244,7 @@ const supportGroups: SupportGroup[] = [
 export default function SupportGroups() {
   const [selectedGroup, setSelectedGroup] = useState<SupportGroup | null>(null);
   const [filterType, setFilterType] = useState<string>("All");
+  const mapSectionRef = useRef<HTMLElement>(null);
 
   // SEO Meta Tags Management
   useEffect(() => {
@@ -342,7 +343,7 @@ export default function SupportGroups() {
       </section>
 
       {/* Map Section */}
-      <section className="py-16">
+      <section ref={mapSectionRef} className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">
@@ -460,7 +461,13 @@ export default function SupportGroups() {
                   </div>
 
                   <Button 
-                    onClick={() => setSelectedGroup(group)}
+                    onClick={() => {
+                      setSelectedGroup(group);
+                      mapSectionRef.current?.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }}
                     className="w-full mt-6 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 transition-all duration-300"
                   >
                     View on Map
