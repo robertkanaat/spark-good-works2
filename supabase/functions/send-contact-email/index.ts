@@ -22,6 +22,10 @@ interface ContactFormData {
 }
 
 const handler = async (req: Request): Promise<Response> => {
+  console.log("send-contact-email function called");
+  console.log("Method:", req.method);
+  console.log("RESEND_API_KEY exists:", !!Deno.env.get("RESEND_API_KEY"));
+  
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
