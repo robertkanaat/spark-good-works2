@@ -48,10 +48,12 @@ const BookDownload = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/send-contact-email', {
+      // Call Supabase edge function directly
+      const response = await fetch('https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/send-contact-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxod3h4enhkc3J5a3Z6bnJ0aWdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1MDQ1NzEsImV4cCI6MjA3MDA4MDU3MX0.EF6mcd5BG3n_wngVu2g9fCzS2nnNG-xzbQxcOslR5vk`
         },
         body: JSON.stringify({
           ...formData,
