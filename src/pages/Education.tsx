@@ -606,8 +606,8 @@ const Education = () => {
                   <p className="text-sm text-muted-foreground">Multiple providers working together with shared treatment goals</p>
                 </div>
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Brain className="w-8 h-8 text-accent" />
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Brain className="w-8 h-8 text-blue-500" />
                   </div>
                   <h4 className="font-semibold mb-2">Evidence-Based</h4>
                   <p className="text-sm text-muted-foreground">Therapies and medications proven effective for dual diagnosis</p>
