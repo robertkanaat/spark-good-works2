@@ -57,7 +57,7 @@ const treatmentCenters: TreatmentCenter[] = [
     rating: 4.9,
     reviews: 980,
     phone: "(760) 773-4100",
-    website: "bettyfordcenter.org",
+    website: "hazeldenbettyford.org/locations/rancho-mirage",
     specialties: ["Alcohol Treatment", "Prescription Drug Addiction", "Family Programs"],
     description: "World-renowned treatment center known for its comprehensive family-centered approach to addiction recovery.",
     image: treatmentCenter2,
