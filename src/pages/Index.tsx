@@ -216,7 +216,7 @@ const Index = () => {
   };
 
   return (
-    <ClientOnly>
+    <>
       <SEOHead 
         title="Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help"
         description="Get immediate addiction recovery support, crisis intervention, and treatment resources. Our AI-powered platform provides 24/7 assistance for individuals and families affected by substance use disorders."
@@ -237,7 +237,7 @@ const Index = () => {
         <HomeFAQSection />
         <Footer />
       </div>
-    </ClientOnly>
+    </>
   );
 };
 
