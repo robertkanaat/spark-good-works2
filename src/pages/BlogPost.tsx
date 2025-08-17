@@ -250,19 +250,46 @@ const BlogPost = () => {
                   
                   <Separator className="my-12" />
                   
-                  {/* Original Article Link */}
-                  <div className="text-center">
-                    <p className="text-muted-foreground mb-4">
-                      This story was originally published on our blog
-                    </p>
-                    <Button 
-                      variant="outline" 
-                      className="hover-scale group"
-                      onClick={() => window.open(post.link, '_blank')}
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" />
-                      View Original Article
-                    </Button>
+                  {/* Author Information */}
+                  <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-lg p-6 border border-primary/10">
+                    <h3 className="text-lg font-semibold mb-4 text-foreground">About the Author</h3>
+                    <div className="flex items-start gap-4">
+                      {/* Author Avatar */}
+                      <div className="flex-shrink-0">
+                        <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                          <User className="w-8 h-8 text-white" />
+                        </div>
+                      </div>
+                      
+                      {/* Author Details */}
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-foreground mb-2">{post.author || 'Genius Recovery Team'}</h4>
+                        <p className="text-muted-foreground text-sm leading-relaxed mb-3">
+                          {post.author === 'Genius Recovery' || !post.author ? 
+                            'Our dedicated team of addiction recovery specialists, mental health professionals, and peer recovery advocates work together to provide evidence-based resources and support for individuals and families affected by substance use disorders. With years of combined experience in the field, we are committed to sharing knowledge that empowers recovery journeys.' :
+                            `${post.author} is a contributing writer for Genius Recovery, bringing valuable insights and expertise to help individuals and families navigate the path to recovery. Their work focuses on providing practical, evidence-based guidance for overcoming addiction and building lasting wellness.`
+                          }
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          <Badge variant="secondary" className="text-xs">
+                            Recovery Specialist
+                          </Badge>
+                          <Badge variant="secondary" className="text-xs">
+                            Mental Health Advocate
+                          </Badge>
+                          <Badge variant="secondary" className="text-xs">
+                            Author
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Optional: Link to more articles by this author */}
+                    <div className="mt-4 pt-4 border-t border-border">
+                      <p className="text-xs text-muted-foreground">
+                        Published on {post.date} • {post.readTime}
+                      </p>
+                    </div>
                   </div>
                 </Card>
               </div>
