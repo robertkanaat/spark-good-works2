@@ -56,8 +56,6 @@ interface TransformedPost {
   readTime: string;
   image: string;
   featured: boolean;
-  likes: number;
-  comments: number;
   slug: string;
   link: string;
 }
@@ -181,8 +179,6 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
         readTime: calculateReadTime(post.content.rendered),
         image: getFeaturedImage(post),
         featured: page === 1 && index === 0, // Make the first post of first page featured
-        likes: Math.floor(Math.random() * 300) + 50, // Mock engagement data
-        comments: Math.floor(Math.random() * 50) + 5,
         slug: post.slug,
         link: post.link,
       }));
