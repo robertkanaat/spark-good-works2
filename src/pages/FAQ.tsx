@@ -214,6 +214,10 @@ const FAQ = () => {
     }
   ];
 
+  
+  // Debug log to verify structured data creation
+  console.log('FAQ: Created structured data:', structuredData);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       <SEOHead 

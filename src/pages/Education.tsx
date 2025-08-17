@@ -142,6 +142,10 @@ const Education = () => {
     ]
   };
 
+  
+  // Debug log to verify structured data creation
+  console.log('Education: Created structured data:', structuredData);
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead 
