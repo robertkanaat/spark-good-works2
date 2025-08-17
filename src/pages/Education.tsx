@@ -289,7 +289,7 @@ const Education = () => {
                 <TrendingUp className="w-8 h-8 text-accent" />
               </div>
               <div>
-                <h2 className="text-4xl font-bold bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent">
+                <h2 className="text-4xl font-bold text-foreground mb-2">
                   Recovery Stages
                 </h2>
                 <p className="text-muted-foreground">Navigate Your Journey with Confidence</p>
