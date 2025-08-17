@@ -19,6 +19,13 @@ const SEOHead = ({
   canonicalUrl,
   structuredData
 }: SEOHeadProps) => {
+  // Debug log to check if structured data is being passed
+  if (structuredData) {
+    console.log('SEOHead: Structured data received:', structuredData);
+  } else {
+    console.log('SEOHead: No structured data provided');
+  }
+
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -49,7 +56,7 @@ const SEOHead = ({
       {/* Structured Data */}
       {structuredData && (
         <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
+          {JSON.stringify(structuredData, null, 2)}
         </script>
       )}
     </Helmet>

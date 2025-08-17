@@ -1,4 +1,3 @@
-import ClientOnly from '@/components/ClientOnly';
 import Header from '@/components/Header';
 import SEOHead from '@/components/SEOHead';
 import HeroSection from '@/components/HeroSection';
@@ -214,6 +213,9 @@ const Index = () => {
       ...serviceSchemas,
     ]
   };
+
+  // Debug log to verify structured data creation
+  console.log('Index: Created structured data:', allStructuredData);
 
   return (
     <>
