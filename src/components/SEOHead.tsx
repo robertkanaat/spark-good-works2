@@ -21,8 +21,20 @@ const SEOHead = ({
   structuredData
 }: SEOHeadProps) => {
   // Debug logging
-  console.log('SEOHead: Received structured data:', structuredData);
+  console.log('SEOHead: Component called with title:', title);
+  console.log('SEOHead: Received structured data:', !!structuredData, structuredData);
   console.log('SEOHead: Component rendering');
+
+  // Simple test injection
+  useEffect(() => {
+    console.log('SEOHead: useEffect running');
+    // Test injection
+    const testScript = document.createElement('script');
+    testScript.type = 'application/ld+json';
+    testScript.textContent = '{"@context":"https://schema.org","@type":"WebSite","name":"Test"}';
+    document.head.appendChild(testScript);
+    console.log('SEOHead: Test script injected');
+  }, []);
 
   // Direct injection of structured data as fallback
   useEffect(() => {

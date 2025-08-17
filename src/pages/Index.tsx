@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
-import SEOHead from '@/components/SEOHead';
 import HeroSection from '@/components/HeroSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import VideoSection from '@/components/VideoSection';
@@ -218,16 +219,50 @@ const Index = () => {
   console.log('Index: Created structured data:', allStructuredData);
   console.log('Index: Component is rendering');
 
+  
+  // Direct injection approach
+  useEffect(() => {
+    console.log('Index: Direct injection useEffect running');
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(allStructuredData, null, 2);
+    script.id = 'structured-data-home';
+    document.head.appendChild(script);
+    console.log('Index: Structured data injected directly');
+    
+    return () => {
+      const existingScript = document.getElementById('structured-data-home');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, [allStructuredData]);
+
   return (
     <>
-      <SEOHead 
-        title="Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help"
-        description="Get immediate addiction recovery support, crisis intervention, and treatment resources. Our AI-powered platform provides 24/7 assistance for individuals and families affected by substance use disorders."
-        keywords="addiction recovery, substance abuse help, crisis intervention, treatment centers, AI recovery support, 24/7 help, addiction treatment, recovery resources, drug addiction help, alcohol addiction support"
-        ogImage="https://geniusrecovery.org/genius-recovery-logo.png"
-        canonicalUrl="https://geniusrecovery.org"
-        structuredData={allStructuredData}
-      />
+      <Helmet>
+        <title>Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help</title>
+        <meta
+          name="description"
+          content="Get immediate addiction recovery support, crisis intervention, and treatment resources. Our AI-powered platform provides 24/7 assistance for individuals and families affected by substance use disorders."
+        />
+        <meta
+          name="keywords"
+          content="addiction recovery, substance abuse help, crisis intervention, treatment centers, AI recovery support, 24/7 help, addiction treatment, recovery resources, drug addiction help, alcohol addiction support"
+        />
+        <meta property="og:title" content="Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help" />
+        <meta property="og:description" content="Get immediate addiction recovery support, crisis intervention, and treatment resources. Our AI-powered platform provides 24/7 assistance for individuals and families affected by substance use disorders." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://geniusrecovery.org" />
+        <meta property="og:image" content="https://geniusrecovery.org/genius-recovery-logo.png" />
+        <meta property="og:site_name" content="Genius Recovery" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help" />
+        <meta name="twitter:description" content="Get immediate addiction recovery support, crisis intervention, and treatment resources. Our AI-powered platform provides 24/7 assistance for individuals and families affected by substance use disorders." />
+        <meta name="twitter:image" content="https://geniusrecovery.org/genius-recovery-logo.png" />
+        <meta name="twitter:site" content="@geniusrecovery" />
+        <link rel="canonical" href="https://geniusrecovery.org" />
+      </Helmet>
       <div className="min-h-screen">
         <Header />
         <HeroSection />
