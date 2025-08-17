@@ -285,11 +285,11 @@ const Education = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-accent/10 rounded-2xl flex items-center justify-center mr-4">
-                <TrendingUp className="w-8 h-8 text-accent" />
+              <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center mr-4">
+                <TrendingUp className="w-8 h-8 text-primary" />
               </div>
               <div>
-                <h2 className="text-4xl font-bold text-foreground mb-2">
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent mb-2">
                   Recovery Stages
                 </h2>
                 <p className="text-muted-foreground">Navigate Your Journey with Confidence</p>
@@ -338,10 +338,25 @@ const Education = () => {
             ].map((stage, index) => (
               <Card key={index} className="group p-6 bg-gradient-to-br from-card to-card/80 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-accent/20">
                 <div className="mb-4">
-                  <div className={`w-12 h-12 bg-gradient-to-br from-${stage.color}/20 to-${stage.color}/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <Clock className={`w-6 h-6 text-${stage.color}`} />
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 ${
+                    stage.color === 'destructive' ? 'bg-gradient-to-br from-destructive/20 to-destructive/10' :
+                    stage.color === 'primary' ? 'bg-gradient-to-br from-primary/20 to-primary/10' :
+                    stage.color === 'accent' ? 'bg-gradient-to-br from-accent/20 to-accent/10' :
+                    'bg-gradient-to-br from-primary/20 to-primary/10'
+                  }`}>
+                    <Clock className={`w-6 h-6 ${
+                      stage.color === 'destructive' ? 'text-destructive' :
+                      stage.color === 'primary' ? 'text-primary' :
+                      stage.color === 'accent' ? 'text-accent' :
+                      'text-primary'
+                    }`} />
                   </div>
-                  <Badge variant="outline" className={`text-xs mb-2 border-${stage.color}/20 bg-${stage.color}/5`}>
+                  <Badge variant="outline" className={`text-xs mb-2 ${
+                    stage.color === 'destructive' ? 'border-destructive/20 bg-destructive/5' :
+                    stage.color === 'primary' ? 'border-primary/20 bg-primary/5' :
+                    stage.color === 'accent' ? 'border-accent/20 bg-accent/5' :
+                    'border-primary/20 bg-primary/5'
+                  }`}>
                     {stage.timeframe}
                   </Badge>
                   <h3 className="font-bold text-lg mb-2 text-foreground">{stage.stage}</h3>
@@ -353,7 +368,12 @@ const Education = () => {
                   <h4 className="font-semibold text-sm text-foreground">Key Activities:</h4>
                   {stage.keyActivities.map((activity, activityIndex) => (
                     <div key={activityIndex} className="flex items-center gap-2">
-                      <div className={`w-1.5 h-1.5 bg-${stage.color} rounded-full`}></div>
+                      <div className={`w-1.5 h-1.5 rounded-full ${
+                        stage.color === 'destructive' ? 'bg-destructive' :
+                        stage.color === 'primary' ? 'bg-primary' :
+                        stage.color === 'accent' ? 'bg-accent' :
+                        'bg-primary'
+                      }`}></div>
                       <span className="text-xs text-muted-foreground">{activity}</span>
                     </div>
                   ))}
