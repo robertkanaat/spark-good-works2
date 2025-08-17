@@ -342,20 +342,20 @@ const Education = () => {
                     stage.color === 'destructive' ? 'bg-gradient-to-br from-destructive/20 to-destructive/10' :
                     stage.color === 'primary' ? 'bg-gradient-to-br from-primary/20 to-primary/10' :
                     stage.color === 'accent' ? 'bg-gradient-to-br from-accent/20 to-accent/10' :
-                    'bg-gradient-to-br from-primary/20 to-primary/10'
+                    'bg-gradient-to-br from-emerald-500/20 to-emerald-500/10'
                   }`}>
                     <Clock className={`w-6 h-6 ${
                       stage.color === 'destructive' ? 'text-destructive' :
                       stage.color === 'primary' ? 'text-primary' :
                       stage.color === 'accent' ? 'text-accent' :
-                      'text-primary'
+                      'text-emerald-500'
                     }`} />
                   </div>
                   <Badge variant="outline" className={`text-xs mb-2 ${
                     stage.color === 'destructive' ? 'border-destructive/20 bg-destructive/5' :
                     stage.color === 'primary' ? 'border-primary/20 bg-primary/5' :
                     stage.color === 'accent' ? 'border-accent/20 bg-accent/5' :
-                    'border-primary/20 bg-primary/5'
+                    'border-emerald-500/20 bg-emerald-500/5'
                   }`}>
                     {stage.timeframe}
                   </Badge>
@@ -368,12 +368,12 @@ const Education = () => {
                   <h4 className="font-semibold text-sm text-foreground">Key Activities:</h4>
                   {stage.keyActivities.map((activity, activityIndex) => (
                     <div key={activityIndex} className="flex items-center gap-2">
-                      <div className={`w-1.5 h-1.5 rounded-full ${
-                        stage.color === 'destructive' ? 'bg-destructive' :
-                        stage.color === 'primary' ? 'bg-primary' :
-                        stage.color === 'accent' ? 'bg-accent' :
-                        'bg-primary'
-                      }`}></div>
+                       <div className={`w-1.5 h-1.5 rounded-full ${
+                         stage.color === 'destructive' ? 'bg-destructive' :
+                         stage.color === 'primary' ? 'bg-primary' :
+                         stage.color === 'accent' ? 'bg-accent' :
+                         'bg-emerald-500'
+                       }`}></div>
                       <span className="text-xs text-muted-foreground">{activity}</span>
                     </div>
                   ))}
