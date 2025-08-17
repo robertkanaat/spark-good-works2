@@ -92,26 +92,26 @@ const RecoveryTools = () => {
       androidLink: "https://play.google.com/store/apps/details?id=com.spotlightsix.zentimerlite2"
     },
     {
-      title: "Recovery Dharma App",
-      description: "Buddhist-inspired recovery tools and community support",
+      title: "I Am Sober",
+      description: "Simple and effective sobriety counter with motivational features",
       icon: Heart,
       platform: "iOS & Android",
-      cost: "Free",
-      features: ["Daily readings", "Meditation guidance", "Community connection", "Recovery wisdom"],
-      category: "Spiritual",
-      iosLink: "https://recoverydharma.community/",
-      androidLink: "https://recoverydharma.community/"
+      cost: "Free with Premium",
+      features: ["Sobriety counter", "Motivational quotes", "Pledge system", "Community support"],
+      category: "Recovery Support",
+      iosLink: "https://apps.apple.com/app/i-am-sober/id672904239",
+      androidLink: "https://play.google.com/store/apps/details?id=com.thehungryturtle.iamsober"
     },
     {
-      title: "Sanvello (Anxiety & Depression)",
-      description: "Mental health support with mood tracking and coping tools",
+      title: "Calm - Meditation & Sleep",
+      description: "Popular meditation app with anxiety and stress management tools",
       icon: Activity,
       platform: "iOS & Android",
       cost: "Free with Premium",
-      features: ["Mood tracking", "Coping toolbox", "Progress insights", "Professional support"],
+      features: ["Guided meditations", "Sleep stories", "Anxiety programs", "Daily mindfulness"],
       category: "Mental Health",
-      iosLink: "https://apps.apple.com/app/sanvello/id922968861",
-      androidLink: "https://play.google.com/store/apps/details?id=com.pacificalabs.pacifica"
+      iosLink: "https://apps.apple.com/app/calm/id571800810",
+      androidLink: "https://play.google.com/store/apps/details?id=com.calm.android"
     }
   ];
 
