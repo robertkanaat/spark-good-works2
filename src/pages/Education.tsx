@@ -4,15 +4,29 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight, Brain, TrendingUp, Shield, Heart, BookOpen, Users, MessageCircle, Phone, ExternalLink, Clock, CheckCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
 const Education = () => {
+  const location = useLocation();
+
   useEffect(() => {
     document.title = "Addiction Recovery Education Hub | Evidence-Based Learning | Genius Recovery";
   }, []);
+
+  useEffect(() => {
+    // Handle anchor link scrolling
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location]);
 
   const structuredData = {
     "@context": "https://schema.org",
