@@ -27,7 +27,7 @@ const FAQ = () => {
         "name": "What is addiction recovery?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Addiction recovery is the process of overcoming substance use disorders through treatment, support, and lifestyle changes. It involves addressing both the physical dependence and underlying psychological factors that contribute to addiction."
+          "text": "Addiction recovery is the process of overcoming substance use disorders through treatment, support, and lifestyle changes. It involves addressing both the physical dependence and underlying psychological factors that contribute to addiction. Recovery is a personal journey that looks different for everyone and often includes multiple stages of treatment and ongoing support."
         }
       },
       {
@@ -35,7 +35,7 @@ const FAQ = () => {
         "name": "How do I know if I need addiction treatment?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Signs you may need treatment include: inability to control substance use, continued use despite negative consequences, withdrawal symptoms, neglecting responsibilities, and failed attempts to quit on your own."
+          "text": "Signs you may need treatment include: inability to control substance use, continued use despite negative consequences, withdrawal symptoms when not using, neglecting work or family responsibilities, relationship problems caused by substance use, and failed attempts to quit on your own. If you're questioning whether you need help, it's worth speaking with a professional."
         }
       },
       {
@@ -43,7 +43,7 @@ const FAQ = () => {
         "name": "What types of addiction treatment are available?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Treatment options include detoxification, inpatient rehabilitation, outpatient programs, counseling, medication-assisted treatment, support groups, and aftercare planning."
+          "text": "Treatment options include: detoxification (medical withdrawal management), inpatient rehabilitation (24/7 care), outpatient programs (flexible scheduling), individual and group counseling, medication-assisted treatment (MAT), 12-step programs, SMART Recovery, family therapy, and aftercare planning. The best approach depends on your specific needs and circumstances."
         }
       },
       {
@@ -51,7 +51,7 @@ const FAQ = () => {
         "name": "Is addiction treatment covered by insurance?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Many insurance plans cover addiction treatment under mental health and substance abuse benefits. Coverage varies by plan, so it's important to verify benefits with your insurance provider."
+          "text": "Many insurance plans cover addiction treatment under mental health and substance abuse benefits, thanks to the Mental Health Parity and Addiction Equity Act. Coverage varies by plan and may include detox, inpatient care, outpatient therapy, and medications. Contact your insurance provider to verify your specific benefits and any pre-authorization requirements."
         }
       },
       {
@@ -59,7 +59,7 @@ const FAQ = () => {
         "name": "What is a crisis hotline and when should I call?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Crisis hotlines provide immediate support for mental health emergencies. Call 988 (Suicide & Crisis Lifeline) or SAMHSA (1-800-662-4357) if you're experiencing suicidal thoughts, severe withdrawal, or need immediate support."
+          "text": "Crisis hotlines provide immediate, confidential support for mental health emergencies. Call 988 (Suicide & Crisis Lifeline) if you're experiencing suicidal thoughts, or SAMHSA's National Helpline (1-800-662-4357) for substance abuse crises. These services are available 24/7 and can provide immediate support, resources, and referrals to local treatment."
         }
       },
       {
@@ -67,7 +67,7 @@ const FAQ = () => {
         "name": "How long does addiction recovery take?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Recovery is a lifelong journey. Initial treatment programs typically last 30-90 days, but ongoing support and maintenance are essential for long-term success."
+          "text": "Recovery is a lifelong journey rather than a destination. Initial treatment programs typically last 30-90 days, but many people benefit from longer-term care. The first year is often the most challenging, but with proper support, the risk of relapse decreases over time. Ongoing support through counseling, support groups, or aftercare programs is essential for long-term success."
         }
       },
       {
@@ -75,7 +75,7 @@ const FAQ = () => {
         "name": "What is Genius Recovery?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Genius Recovery is a comprehensive platform providing resources, support, and connections to treatment for individuals struggling with addiction and their families."
+          "text": "Genius Recovery is a comprehensive platform dedicated to supporting individuals and families affected by addiction. We provide educational resources, crisis support connections, treatment center referrals, and a supportive community. Our mission is to bridge the gap between those seeking help and the resources they need for successful recovery."
         }
       },
       {
@@ -83,7 +83,7 @@ const FAQ = () => {
         "name": "How can I support a loved one in recovery?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Support your loved one by learning about addiction, attending family therapy, setting healthy boundaries, avoiding enabling behaviors, and taking care of your own mental health."
+          "text": "Supporting a loved one includes: educating yourself about addiction, attending family therapy or Al-Anon meetings, setting healthy boundaries, avoiding enabling behaviors, celebrating milestones, being patient with the recovery process, and taking care of your own mental health. Remember that you can't control their recovery, but you can provide a supportive environment."
         }
       },
       {
@@ -91,15 +91,63 @@ const FAQ = () => {
         "name": "What should I expect during detox?",
         "acceptedAnswer": {
           "@type": "Answer", 
-          "text": "Detox is the process of safely removing substances from your body. Medical detox provides 24/7 monitoring and medication to manage withdrawal symptoms safely."
+          "text": "Detox is the process of safely removing substances from your body. Withdrawal symptoms vary by substance but may include anxiety, depression, nausea, sweating, and cravings. Medical detox provides 24/7 monitoring and medication to manage symptoms safely. Detox typically lasts 3-7 days but can vary based on the substance and individual factors."
         }
       },
       {
         "@type": "Question",
-        "name": "Is relapse normal during recovery?",
+        "name": "Is it normal to relapse during recovery?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Relapse is common and doesn't mean failure. Studies show 40-60% of people experience relapse, but it can provide valuable insights for adjusting treatment."
+          "text": "Relapse is common and doesn't mean failure. Studies show that 40-60% of people in recovery experience at least one relapse. It's often part of the learning process and can provide valuable insights for adjusting treatment approaches. The key is to view relapse as a temporary setback and quickly re-engage with treatment and support systems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is medication-assisted treatment (MAT)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MAT combines FDA-approved medications with counseling and behavioral therapies to treat substance use disorders. Common medications include methadone, buprenorphine, and naltrexone for opioid addiction, and naltrexone or acamprosate for alcohol addiction. MAT has been shown to improve treatment outcomes and reduce the risk of overdose."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I choose the right treatment program?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Consider factors like: the severity of your addiction, your support system, work/family obligations, insurance coverage, location preferences, and any co-occurring mental health conditions. Speak with addiction professionals who can assess your needs and recommend appropriate treatment levels and settings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens after completing treatment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Aftercare is crucial for maintaining sobriety. This may include: ongoing counseling, support group participation, sober living arrangements, regular check-ins with healthcare providers, lifestyle changes, and developing healthy coping strategies. Many people benefit from step-down levels of care as they transition back to daily life."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I access treatment if I can't afford it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Options for affordable treatment include: sliding-scale payment programs, state-funded treatment centers, nonprofit organizations, SAMHSA's treatment locator for low-cost options, Medicaid coverage, and scholarship programs offered by some treatment centers. Don't let financial concerns prevent you from seeking help."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What role does family play in recovery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Family support is crucial for successful recovery. Addiction affects the entire family system, and healing often involves everyone. Family therapy can help improve communication, set healthy boundaries, address enabling behaviors, and create a supportive home environment. Family members may also benefit from their own counseling or support groups."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I handle triggers and cravings?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Effective strategies include: identifying your specific triggers, developing healthy coping mechanisms, practicing mindfulness and stress management, having a support network to call, removing triggers from your environment when possible, and having a relapse prevention plan. Professional counseling can help you develop personalized strategies."
         }
       }
     ]
