@@ -232,6 +232,12 @@ const Resources = () => {
                       Family Support Resources
                     </Button>
                   </Link>
+                ) : resource.title === "Recovery Tools" ? (
+                  <Link to="/recovery-tools">
+                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
+                      Recovery Tools & Apps
+                    </Button>
+                  </Link>
                 ) : (
                   <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
                     Explore Resources
