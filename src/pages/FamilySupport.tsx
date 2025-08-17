@@ -33,7 +33,8 @@ const FamilySupport = () => {
       icon: Users,
       features: ["In-person meetings", "Online meetings", "Phone meetings", "Literature resources"],
       availability: "Worldwide",
-      cost: "Free"
+      cost: "Free",
+      link: "https://al-anon.org"
     },
     {
       title: "Nar-Anon Family Groups",
@@ -41,7 +42,8 @@ const FamilySupport = () => {
       icon: Heart,
       features: ["Weekly meetings", "Step programs", "Sponsorship", "Family recovery tools"],
       availability: "Global network",
-      cost: "Free"
+      cost: "Free",
+      link: "https://www.nar-anon.org"
     },
     {
       title: "Family Therapy Programs",
@@ -49,7 +51,8 @@ const FamilySupport = () => {
       icon: MessageCircle,
       features: ["Individual sessions", "Group therapy", "Crisis intervention", "Treatment planning"],
       availability: "Licensed therapists",
-      cost: "Insurance accepted"
+      cost: "Insurance accepted",
+      link: "https://www.psychologytoday.com/us/therapists/family-addiction"
     },
     {
       title: "CRAFT Training",
@@ -57,7 +60,8 @@ const FamilySupport = () => {
       icon: BookOpen,
       features: ["Behavior change techniques", "Communication skills", "Self-care strategies", "Professional guidance"],
       availability: "Certified trainers",
-      cost: "Varies"
+      cost: "Varies",
+      link: "https://www.robertjmeyersphd.com/craft.html"
     }
   ];
 
@@ -246,9 +250,12 @@ const FamilySupport = () => {
                       </div>
                     </div>
 
-                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
-                      Learn More
-                    </Button>
+                    <a href={program.link} target="_blank" rel="noopener noreferrer" className="block">
+                      <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
+                        Learn More
+                        <ExternalLink className="w-4 h-4 ml-2" />
+                      </Button>
+                    </a>
                   </div>
                 </div>
               </Card>
