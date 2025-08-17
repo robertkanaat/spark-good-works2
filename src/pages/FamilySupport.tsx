@@ -131,12 +131,6 @@ const FamilySupport = () => {
       <section className="relative bg-gradient-to-br from-primary/10 via-background to-muted/20 py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-8">
-            <Link to="/resources" className="inline-flex items-center text-primary hover:text-primary/80 transition-colors duration-200">
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to Resources
-            </Link>
-          </div>
           
           <div className="text-center max-w-4xl mx-auto">
             <div className="relative inline-block mb-8">
