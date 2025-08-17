@@ -92,15 +92,15 @@ const RecoveryTools = () => {
       androidLink: "https://play.google.com/store/apps/details?id=com.spotlightsix.zentimerlite2"
     },
     {
-      title: "I Am Sober",
-      description: "Simple and effective sobriety counter with motivational features",
+      title: "Nomo - Sobriety Clocks",
+      description: "Beautiful sobriety counter with multiple addiction tracking",
       icon: Heart,
       platform: "iOS & Android",
       cost: "Free with Premium",
-      features: ["Sobriety counter", "Motivational quotes", "Pledge system", "Community support"],
+      features: ["Multiple counters", "Motivational quotes", "Milestone celebrations", "Progress widgets"],
       category: "Recovery Support",
-      iosLink: "https://apps.apple.com/app/i-am-sober/id672904239",
-      androidLink: "https://play.google.com/store/apps/details?id=com.thehungryturtle.iamsober"
+      iosLink: "https://apps.apple.com/app/nomo-sobriety-clocks/id1362617749",
+      androidLink: "https://play.google.com/store/apps/details?id=com.nomosobrietyapp"
     },
     {
       title: "Calm - Meditation & Sleep",
