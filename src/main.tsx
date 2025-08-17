@@ -1,5 +1,4 @@
 import { createRoot } from 'react-dom/client';
-import { HelmetProvider } from 'react-helmet-async';
 import { ToastProvider, ToastViewport } from '@/components/ui/toast';
 import App from './App.tsx';
 import './index.css';
@@ -19,12 +18,10 @@ if (!rootElement) {
 } else {
   try {
     createRoot(rootElement).render(
-      <HelmetProvider>
-        <ToastProvider>
-          <App />
-          <ToastViewport />
-        </ToastProvider>
-      </HelmetProvider>
+      <ToastProvider>
+        <App />
+        <ToastViewport />
+      </ToastProvider>
     );
   } catch (error) {
     console.error('main.tsx: Error rendering app:', error);
