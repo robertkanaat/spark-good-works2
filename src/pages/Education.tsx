@@ -309,7 +309,7 @@ const Education = () => {
                 focus: "Building Awareness & Motivation",
                 description: "Recognizing problems, overcoming denial, and building motivation for change",
                 keyActivities: ["Problem recognition", "Motivational interviewing", "Goal setting", "Support system building"],
-                color: "destructive"
+                color: "red"
               },
               {
                 stage: "Early Recovery",
@@ -317,7 +317,7 @@ const Education = () => {
                 focus: "Stabilization & Foundation",
                 description: "Managing withdrawal, establishing routines, and learning basic coping skills",
                 keyActivities: ["Medical detox", "Intensive treatment", "Routine building", "Crisis management"],
-                color: "primary"
+                color: "blue"
               },
               {
                 stage: "Sustained Recovery",
@@ -325,7 +325,7 @@ const Education = () => {
                 focus: "Skill Building & Growth",
                 description: "Developing deeper recovery skills and addressing underlying issues",
                 keyActivities: ["Therapy work", "Skill development", "Relationship building", "Lifestyle changes"],
-                color: "accent"
+                color: "emerald"
               },
               {
                 stage: "Long-term Recovery",
@@ -333,29 +333,29 @@ const Education = () => {
                 focus: "Maintenance & Purpose",
                 description: "Maintaining sobriety while building meaningful life and helping others",
                 keyActivities: ["Continued growth", "Mentoring others", "Career development", "Life enrichment"],
-                color: "donate"
+                color: "purple"
               }
             ].map((stage, index) => (
               <Card key={index} className="group p-6 bg-gradient-to-br from-card to-card/80 hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-accent/20">
                 <div className="mb-4">
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 ${
-                    stage.color === 'destructive' ? 'bg-gradient-to-br from-destructive/20 to-destructive/10' :
-                    stage.color === 'primary' ? 'bg-gradient-to-br from-primary/20 to-primary/10' :
-                    stage.color === 'accent' ? 'bg-gradient-to-br from-accent/20 to-accent/10' :
-                    'bg-gradient-to-br from-emerald-500/20 to-emerald-500/10'
+                    stage.color === 'red' ? 'bg-gradient-to-br from-red-500/20 to-red-500/10' :
+                    stage.color === 'blue' ? 'bg-gradient-to-br from-blue-500/20 to-blue-500/10' :
+                    stage.color === 'emerald' ? 'bg-gradient-to-br from-emerald-500/20 to-emerald-500/10' :
+                    'bg-gradient-to-br from-purple-500/20 to-purple-500/10'
                   }`}>
                     <Clock className={`w-6 h-6 ${
-                      stage.color === 'destructive' ? 'text-destructive' :
-                      stage.color === 'primary' ? 'text-primary' :
-                      stage.color === 'accent' ? 'text-accent' :
-                      'text-emerald-500'
+                      stage.color === 'red' ? 'text-red-500' :
+                      stage.color === 'blue' ? 'text-blue-500' :
+                      stage.color === 'emerald' ? 'text-emerald-500' :
+                      'text-purple-500'
                     }`} />
                   </div>
                   <Badge variant="outline" className={`text-xs mb-2 ${
-                    stage.color === 'destructive' ? 'border-destructive/20 bg-destructive/5' :
-                    stage.color === 'primary' ? 'border-primary/20 bg-primary/5' :
-                    stage.color === 'accent' ? 'border-accent/20 bg-accent/5' :
-                    'border-emerald-500/20 bg-emerald-500/5'
+                    stage.color === 'red' ? 'border-red-500/20 bg-red-500/5' :
+                    stage.color === 'blue' ? 'border-blue-500/20 bg-blue-500/5' :
+                    stage.color === 'emerald' ? 'border-emerald-500/20 bg-emerald-500/5' :
+                    'border-purple-500/20 bg-purple-500/5'
                   }`}>
                     {stage.timeframe}
                   </Badge>
@@ -369,10 +369,10 @@ const Education = () => {
                   {stage.keyActivities.map((activity, activityIndex) => (
                     <div key={activityIndex} className="flex items-center gap-2">
                        <div className={`w-1.5 h-1.5 rounded-full ${
-                         stage.color === 'destructive' ? 'bg-destructive' :
-                         stage.color === 'primary' ? 'bg-primary' :
-                         stage.color === 'accent' ? 'bg-accent' :
-                         'bg-emerald-500'
+                         stage.color === 'red' ? 'bg-red-500' :
+                         stage.color === 'blue' ? 'bg-blue-500' :
+                         stage.color === 'emerald' ? 'bg-emerald-500' :
+                         'bg-purple-500'
                        }`}></div>
                       <span className="text-xs text-muted-foreground">{activity}</span>
                     </div>
