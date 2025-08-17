@@ -19,6 +19,10 @@ const SEOHead = ({
   canonicalUrl,
   structuredData
 }: SEOHeadProps) => {
+  // Debug logging
+  console.log('SEOHead: Received structured data:', structuredData);
+  console.log('SEOHead: Component rendering');
+
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -48,9 +52,12 @@ const SEOHead = ({
       
       {/* Structured Data */}
       {structuredData && (
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData, null, 2)}
-        </script>
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData, null, 2)
+          }}
+        />
       )}
     </Helmet>
   );
