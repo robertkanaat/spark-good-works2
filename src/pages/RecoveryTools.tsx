@@ -144,7 +144,7 @@ const RecoveryTools = () => {
       title: "Mindfulness in Recovery Guide",
       description: "Evidence-based mindfulness practices for addiction recovery",
       icon: Brain,
-      downloadLink: "https://www.mindfulnessrecovery.org/",
+      downloadLink: "/resources", // Internal link to resources page
       type: "PDF Guide",
       topics: ["Meditation techniques", "Mindful awareness", "Stress reduction", "Emotional regulation"]
     }

@@ -233,7 +233,7 @@ const HeroSection = () => {
                   </p>
                   
                   <div className="text-center mb-4">
-                    <a href="https://geniusrecovery.org/recovery-support-hub/" className="text-primary hover:underline text-sm">Learn more about recovery support</a>
+                    <Link to="/resources" className="text-primary hover:underline text-sm">Learn more about recovery support</Link>
                   </div>
                 </>
               )}
@@ -281,7 +281,7 @@ const HeroSection = () => {
                   </p>
                   
                   <div className="text-center mb-4">
-                    <a href="https://geniusrecovery.org/caregiver-support-hub/" className="text-primary hover:underline text-sm">Learn more about caregiver support</a>
+                    <Link to="/family-support" className="text-primary hover:underline text-sm">Learn more about family support</Link>
                   </div>
                 </>
               )}
