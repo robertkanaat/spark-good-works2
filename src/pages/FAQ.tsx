@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -106,89 +105,47 @@ const FAQ = () => {
     ]
   };
 
-  const organizationSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Genius Recovery", 
-    "description": "Leading addiction recovery organization providing 24/7 crisis support, treatment referrals, and comprehensive recovery resources",
-    "url": "https://geniusrecovery.org",
-    "logo": "https://geniusrecovery.org/genius-recovery-logo.png",
-    "foundingDate": "2023",
-    "areaServed": "United States",
-    "serviceType": [
-      "Addiction Recovery Support",
-      "Crisis Intervention",
-      "Treatment Referrals", 
-      "Educational Resources",
-      "24/7 AI Support"
-    ],
-    "knowsAbout": [
-      "Substance Use Disorders",
-      "Addiction Treatment",
-      "Mental Health",
-      "Crisis Support",
-      "Recovery Programs"
-    ],
-    "contactPoint": [
+    "@graph": [
+      faqSchema,
       {
-        "@type": "ContactPoint",
-        "telephone": "988",
-        "contactType": "Crisis Support"
-      },
-      {
-        "@type": "ContactPoint",
-        "telephone": "1-800-662-4357", 
-        "contactType": "Substance Abuse Support"
+        "@type": "Organization",
+        "name": "Genius Recovery", 
+        "description": "Leading addiction recovery organization providing 24/7 crisis support, treatment referrals, and comprehensive recovery resources",
+        "url": "https://geniusrecovery.org",
+        "logo": "https://geniusrecovery.org/genius-recovery-logo.png",
+        "foundingDate": "2023",
+        "areaServed": "United States",
+        "serviceType": [
+          "Addiction Recovery Support",
+          "Crisis Intervention",
+          "Treatment Referrals", 
+          "Educational Resources",
+          "24/7 AI Support"
+        ],
+        "knowsAbout": [
+          "Substance Use Disorders",
+          "Addiction Treatment",
+          "Mental Health",
+          "Crisis Support",
+          "Recovery Programs"
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "988",
+            "contactType": "Crisis Support"
+          },
+          {
+            "@type": "ContactPoint",
+            "telephone": "1-800-662-4357", 
+            "contactType": "Substance Abuse Support"
+          }
+        ]
       }
     ]
   };
-
-  useEffect(() => {
-    // Set page title and meta description
-    document.title = "FAQ - Frequently Asked Questions | Genius Recovery";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Find answers to frequently asked questions about addiction recovery, treatment options, crisis support, and Genius Recovery services. Get the help you need today.');
-    }
-
-    // Add canonical URL
-    const canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
-    canonical.setAttribute('rel', 'canonical');
-    canonical.setAttribute('href', window.location.href);
-    if (!document.querySelector('link[rel="canonical"]')) {
-      document.head.appendChild(canonical);
-    }
-
-    // Add FAQ Schema to head
-    const faqSchemaScript = document.createElement('script');
-    faqSchemaScript.type = 'application/ld+json';
-    faqSchemaScript.textContent = JSON.stringify(faqSchema);
-    faqSchemaScript.id = 'faq-schema';
-    
-    // Add Organization Schema to head
-    const orgSchemaScript = document.createElement('script');
-    orgSchemaScript.type = 'application/ld+json';
-    orgSchemaScript.textContent = JSON.stringify(organizationSchema);
-    orgSchemaScript.id = 'org-schema';
-
-    // Remove existing schemas if they exist
-    const existingFaqSchema = document.getElementById('faq-schema');
-    const existingOrgSchema = document.getElementById('org-schema');
-    if (existingFaqSchema) existingFaqSchema.remove();
-    if (existingOrgSchema) existingOrgSchema.remove();
-
-    // Add schemas to head
-    document.head.appendChild(faqSchemaScript);
-    document.head.appendChild(orgSchemaScript);
-
-    // Cleanup function
-    return () => {
-      const faqScript = document.getElementById('faq-schema');
-      const orgScript = document.getElementById('org-schema');
-      if (faqScript) faqScript.remove();
-      if (orgScript) orgScript.remove();
-    };
-  }, []);
 
   const faqData = [
     {
@@ -259,6 +216,13 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+      <SEOHead 
+        title="FAQ - Frequently Asked Questions | Genius Recovery"
+        description="Find answers to frequently asked questions about addiction recovery, treatment options, crisis support, and Genius Recovery services. Get the help you need today."
+        keywords="FAQ, addiction recovery, treatment questions, crisis support, recovery help, Genius Recovery"
+        structuredData={structuredData}
+        canonicalUrl="https://geniusrecovery.org/faq"
+      />
       <Header />
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">

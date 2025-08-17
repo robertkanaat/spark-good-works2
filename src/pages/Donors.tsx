@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -35,48 +35,13 @@ const scrollToSection = (sectionId: string) => {
 };
 
 const Donors = () => {
-  useEffect(() => {
-    document.title = "Donors - Be Part of the Solution | Genius Recovery";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Join Genius Recovery as a donor and be part of the solution. Give your time, talent, or treasure to help those struggling with addiction find hope and recovery.');
-    }
-
-    // Add canonical URL
-    const existingCanonical = document.querySelector('link[rel="canonical"]');
-    if (existingCanonical) {
-      existingCanonical.setAttribute('href', window.location.origin + '/donors');
-    } else {
-      const canonical = document.createElement('link');
-      canonical.rel = 'canonical';
-      canonical.href = window.location.origin + '/donors';
-      document.head.appendChild(canonical);
-    }
-
-    // Add structured data
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Donors - Be Part of the Solution",
-      "description": "Join Genius Recovery as a donor and be part of the solution. Give your time, talent, or treasure to help those struggling with addiction find hope and recovery.",
-      "url": window.location.origin + '/donors',
-      "provider": {
-        "@type": "Organization",
-        "name": "Genius Recovery"
-      }
-    };
-
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(structuredData);
-    document.head.appendChild(script);
-
-    return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, []);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "Genius Recovery",
+    "description": "Non-profit organization dedicated to addiction recovery support with transparent donor recognition and impact reporting.",
+    "url": "https://geniusrecovery.org/donors"
+  };
 
   const waysToDonate = [
     {
@@ -183,6 +148,13 @@ const Donors = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Donor Recognition & Transparency | Genius Recovery"
+        description="Transparent donor recognition and impact reporting. See how your donations support addiction recovery programs and help save lives. Join our mission today."
+        keywords="donor recognition, donation transparency, nonprofit impact, addiction recovery donations, charitable giving"
+        structuredData={structuredData}
+        canonicalUrl="https://geniusrecovery.org/donors"
+      />
       <Header />
       
       {/* Hero Section */}

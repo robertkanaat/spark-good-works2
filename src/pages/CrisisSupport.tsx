@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,48 +19,16 @@ import {
 } from "lucide-react";
 
 const CrisisSupport = () => {
-  useEffect(() => {
-    document.title = "Crisis Support & Emergency Resources - Genius Recovery";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Find immediate crisis support resources, emergency hotlines, and life-saving information for mental health emergencies and addiction crises.');
-    }
-
-    // Add canonical URL
-    const existingCanonical = document.querySelector('link[rel="canonical"]');
-    if (existingCanonical) {
-      existingCanonical.setAttribute('href', window.location.origin + '/crisis-support');
-    } else {
-      const canonical = document.createElement('link');
-      canonical.rel = 'canonical';
-      canonical.href = window.location.origin + '/crisis-support';
-      document.head.appendChild(canonical);
-    }
-
-    // Add structured data
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Crisis Support & Emergency Resources",
-      "description": "Find immediate crisis support resources, emergency hotlines, and life-saving information for mental health emergencies and addiction crises.",
-      "url": window.location.origin + '/crisis-support',
-      "provider": {
-        "@type": "Organization",
-        "name": "Genius Recovery"
-      }
-    };
-
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(structuredData);
-    document.head.appendChild(script);
-
-    return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, []);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": "Genius Recovery Crisis Support",
+    "description": "24/7 crisis intervention services providing immediate support for mental health emergencies, suicide prevention, and addiction crises.",
+    "url": "https://geniusrecovery.org/crisis-support",
+    "telephone": ["988", "1-800-662-4357"],
+    "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59",
+    "areaServed": "United States"
+  };
 
   const emergencyHotlines = [
     {
@@ -150,6 +118,13 @@ const CrisisSupport = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="24/7 Crisis Support | Immediate Help Available | Genius Recovery"
+        description="Get immediate crisis support 24/7. Connect with trained professionals for suicide prevention, mental health emergencies, and addiction crises. Help is always available."
+        keywords="crisis support, suicide prevention, mental health emergency, addiction crisis, 24/7 help, immediate support"
+        structuredData={structuredData}
+        canonicalUrl="https://geniusrecovery.org/crisis-support"
+      />
       <Header />
       
       {/* Hero Section */}

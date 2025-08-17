@@ -20,48 +20,13 @@ import {
 } from "lucide-react";
 
 const Support = () => {
-  useEffect(() => {
-    document.title = "Caregiver Support Hub - Genius Recovery";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Supporting someone with addiction is challenging. Get expert guidance, resources, and community support for caregivers and families affected by addiction.');
-    }
-
-    // Add canonical URL
-    const existingCanonical = document.querySelector('link[rel="canonical"]');
-    if (existingCanonical) {
-      existingCanonical.setAttribute('href', window.location.origin + '/support');
-    } else {
-      const canonical = document.createElement('link');
-      canonical.rel = 'canonical';
-      canonical.href = window.location.origin + '/support';
-      document.head.appendChild(canonical);
-    }
-
-    // Add structured data
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Caregiver Support Hub",
-      "description": "Supporting someone with addiction is challenging. Get expert guidance, resources, and community support for caregivers and families affected by addiction.",
-      "url": window.location.origin + '/support',
-      "provider": {
-        "@type": "Organization",
-        "name": "Genius Recovery"
-      }
-    };
-
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(structuredData);
-    document.head.appendChild(script);
-
-    return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, []);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalOrganization",
+    "name": "Genius Recovery Support Services",
+    "description": "Comprehensive addiction recovery support services including crisis intervention, treatment referrals, and educational resources.",
+    "url": "https://geniusrecovery.org/support"
+  };
 
   const features = [
     {
@@ -124,6 +89,13 @@ const Support = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Recovery Support Services | Get Help Today | Genius Recovery"
+        description="Comprehensive addiction recovery support services including crisis intervention, treatment referrals, educational resources, and ongoing support. Get help today."
+        keywords="recovery support, addiction help, crisis intervention, treatment referrals, support services"
+        structuredData={structuredData}
+        canonicalUrl="https://geniusrecovery.org/support"
+      />
       <Header />
       
       {/* Hero Section */}
