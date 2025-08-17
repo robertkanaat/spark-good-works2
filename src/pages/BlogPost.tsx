@@ -9,15 +9,12 @@ import {
   Calendar, 
   Clock, 
   User, 
-  Heart, 
-  MessageCircle, 
   Share2, 
   BookmarkPlus,
   X,
   Facebook,
   Linkedin,
-  Copy,
-  ExternalLink
+  Copy
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -30,7 +27,6 @@ const BlogPost = () => {
   const navigate = useNavigate();
   const { posts, loading } = useWordPressPosts();
   const [post, setPost] = useState<any>(null);
-  const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
@@ -178,23 +174,6 @@ const BlogPost = () => {
 
               {/* Engagement Actions */}
               <div className="flex items-center justify-center gap-4 mb-8">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className={`hover-scale transition-all duration-300 ${isLiked ? 'bg-red-50 text-red-600 border-red-200' : ''}`}
-                  onClick={() => setIsLiked(!isLiked)}
-                >
-                  <Heart className={`w-4 h-4 mr-2 transition-all duration-300 ${isLiked ? 'fill-red-500 text-red-500 scale-110' : ''}`} />
-                  {post.likes + (isLiked ? 1 : 0)}
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="hover-scale"
-                >
-                  <MessageCircle className="w-4 h-4 mr-2" />
-                  {post.comments}
-                </Button>
                 <Button
                   variant="outline"
                   size="sm"
