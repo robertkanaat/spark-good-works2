@@ -48,26 +48,26 @@ const RecoveryTools = () => {
 
   const digitalTools = [
     {
-      title: "Sober Time - Sobriety Counter",
-      description: "Track your sobriety milestones with detailed statistics and motivational features",
+      title: "Quit Now - Stop Smoking",
+      description: "Track your sobriety from any addiction with detailed statistics and savings calculator",
       icon: Calendar,
       platform: "iOS & Android",
       cost: "Free with Premium",
-      features: ["Day counter", "Milestone celebrations", "Money saved calculator", "Achievement badges"],
+      features: ["Day counter", "Money saved tracker", "Health improvements", "Achievement system"],
       category: "Tracking",
-      iosLink: "https://apps.apple.com/app/sober-time/id1045126110",
-      androidLink: "https://play.google.com/store/apps/details?id=com.sobertime"
+      iosLink: "https://apps.apple.com/app/quit-now/id483994930",
+      androidLink: "https://play.google.com/store/apps/details?id=com.fewlaps.quitnow"
     },
     {
-      title: "Headspace - Meditation & Sleep",
-      description: "Guided meditation and mindfulness exercises specifically for addiction recovery",
+      title: "Ten Percent Happier",
+      description: "Meditation app designed for skeptics with practical mindfulness courses",
       icon: Brain,
-      platform: "iOS & Android",
-      cost: "Subscription",
-      features: ["Recovery-focused meditations", "Sleep stories", "Mindfulness exercises", "Progress tracking"],
+      platform: "iOS & Android", 
+      cost: "Free with Premium",
+      features: ["Guided meditations", "Sleep content", "Anxiety courses", "Expert teachers"],
       category: "Mental Health",
-      iosLink: "https://apps.apple.com/app/headspace/id493145008",
-      androidLink: "https://play.google.com/store/apps/details?id=com.headspace.android"
+      iosLink: "https://apps.apple.com/app/ten-percent-happier/id992210239",
+      androidLink: "https://play.google.com/store/apps/details?id=com.changecollective.tenpercenthappier"
     },
     {
       title: "SMART Recovery Toolbox",
