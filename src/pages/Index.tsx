@@ -96,7 +96,7 @@ const Index = () => {
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.8',
-      reviewCount: '500+',
+      reviewCount: '444',
       description: 'Highly rated recovery support organization',
     },
   };
