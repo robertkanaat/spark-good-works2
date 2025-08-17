@@ -216,6 +216,7 @@ const Index = () => {
 
   // Debug log to verify structured data creation
   console.log('Index: Created structured data:', allStructuredData);
+  console.log('Index: Component is rendering');
 
   return (
     <>
