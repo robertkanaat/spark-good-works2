@@ -70,25 +70,29 @@ const FamilySupport = () => {
       title: "Understanding Addiction as a Family Disease",
       description: "Learn how addiction affects the entire family system and dynamics",
       topics: ["Family roles", "Codependency", "Enabling behaviors", "Healthy boundaries"],
-      icon: Brain
+      icon: Brain,
+      link: "/education#understanding-addiction"
     },
     {
       title: "Communication Strategies",
       description: "Effective ways to communicate with your loved one during recovery",
       topics: ["Active listening", "Non-judgmental language", "Setting boundaries", "Conflict resolution"],
-      icon: MessageCircle
+      icon: MessageCircle,
+      link: "/education#supporting-recovery"
     },
     {
       title: "Self-Care for Family Members",
       description: "Essential self-care practices for maintaining your own well-being",
       topics: ["Stress management", "Support systems", "Personal boundaries", "Mental health"],
-      icon: Heart
+      icon: Heart,
+      link: "/education#holistic-approaches"
     },
     {
       title: "Supporting Recovery",
       description: "How to be supportive without enabling during the recovery process",
       topics: ["Encouragement vs enabling", "Recovery milestones", "Relapse prevention", "Long-term support"],
-      icon: HandHeart
+      icon: HandHeart,
+      link: "/education#supporting-recovery"
     }
   ];
 
@@ -299,10 +303,12 @@ const FamilySupport = () => {
                       </div>
                     </div>
 
-                    <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                      Explore Resource
-                      <ExternalLink className="w-5 h-5 ml-2" />
-                    </Button>
+                    <Link to={resource.link}>
+                      <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                        Explore Resource
+                        <ExternalLink className="w-5 h-5 ml-2" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </Card>
