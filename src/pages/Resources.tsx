@@ -226,6 +226,12 @@ const Resources = () => {
                       Find Support Groups
                     </Button>
                   </Link>
+                ) : resource.title === "Family Support" ? (
+                  <Link to="/family-support">
+                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
+                      Family Support Resources
+                    </Button>
+                  </Link>
                 ) : (
                   <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
                     Explore Resources

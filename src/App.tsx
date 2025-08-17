@@ -32,6 +32,7 @@ import Volunteer from './pages/Volunteer';
 import BookDownload from './pages/BookDownload';
 import BookDownloadConfirmation from './pages/BookDownloadConfirmation';
 import Education from './pages/Education';
+import FamilySupport from './pages/FamilySupport';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -79,6 +80,7 @@ const App = () => {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/education" element={<Education />} />
+            <Route path="/family-support" element={<FamilySupport />} />
             <Route path="/addiction-recovery-book" element={<BookDownload />} />
             <Route path="/addiction-recovery-book-download" element={<BookDownloadConfirmation />} />
             <Route path="*" element={<NotFound />} />
