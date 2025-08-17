@@ -54,7 +54,9 @@ const RecoveryTools = () => {
       platform: "iOS & Android",
       cost: "Free with Premium",
       features: ["Day counter", "Milestone celebrations", "Money saved calculator", "Achievement badges"],
-      category: "Tracking"
+      category: "Tracking",
+      iosLink: "https://apps.apple.com/app/sober-time/id1045126110",
+      androidLink: "https://play.google.com/store/apps/details?id=com.sobertime"
     },
     {
       title: "Headspace - Meditation & Sleep",
@@ -63,7 +65,9 @@ const RecoveryTools = () => {
       platform: "iOS & Android",
       cost: "Subscription",
       features: ["Recovery-focused meditations", "Sleep stories", "Mindfulness exercises", "Progress tracking"],
-      category: "Mental Health"
+      category: "Mental Health",
+      iosLink: "https://apps.apple.com/app/headspace/id493145008",
+      androidLink: "https://play.google.com/store/apps/details?id=com.headspace.android"
     },
     {
       title: "SMART Recovery Toolbox",
@@ -72,7 +76,9 @@ const RecoveryTools = () => {
       platform: "Web & Mobile",
       cost: "Free",
       features: ["SMART tools", "Change plan worksheet", "Cost-benefit analysis", "Meeting finder"],
-      category: "Recovery Support"
+      category: "Recovery Support",
+      iosLink: "https://www.smartrecovery.org/smart-recovery-toolbox/",
+      androidLink: "https://www.smartrecovery.org/smart-recovery-toolbox/"
     },
     {
       title: "Insight Timer",
@@ -81,7 +87,9 @@ const RecoveryTools = () => {
       platform: "iOS & Android",
       cost: "Free with Premium",
       features: ["Free meditations", "Timer with bells", "Community features", "Sleep content"],
-      category: "Mental Health"
+      category: "Mental Health",
+      iosLink: "https://apps.apple.com/app/insight-timer/id337472899",
+      androidLink: "https://play.google.com/store/apps/details?id=com.spotlightsix.zentimerlite2"
     },
     {
       title: "Recovery Dharma App",
@@ -90,7 +98,9 @@ const RecoveryTools = () => {
       platform: "iOS & Android",
       cost: "Free",
       features: ["Daily readings", "Meditation guidance", "Community connection", "Recovery wisdom"],
-      category: "Spiritual"
+      category: "Spiritual",
+      iosLink: "https://recoverydharma.community/",
+      androidLink: "https://recoverydharma.community/"
     },
     {
       title: "Sanvello (Anxiety & Depression)",
@@ -99,7 +109,9 @@ const RecoveryTools = () => {
       platform: "iOS & Android",
       cost: "Free with Premium",
       features: ["Mood tracking", "Coping toolbox", "Progress insights", "Professional support"],
-      category: "Mental Health"
+      category: "Mental Health",
+      iosLink: "https://apps.apple.com/app/sanvello/id922968861",
+      androidLink: "https://play.google.com/store/apps/details?id=com.pacificalabs.pacifica"
     }
   ];
 
@@ -329,10 +341,20 @@ const RecoveryTools = () => {
                   </div>
                 </div>
 
-                <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300">
-                  <Download className="w-4 h-4 mr-2" />
-                  Download App
-                </Button>
+                <div className="flex gap-2">
+                  <a href={tool.iosLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300 text-sm">
+                      <Download className="w-4 h-4 mr-2" />
+                      iOS
+                    </Button>
+                  </a>
+                  <a href={tool.androidLink} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300 text-sm">
+                      <Download className="w-4 h-4 mr-2" />
+                      Android
+                    </Button>
+                  </a>
+                </div>
               </Card>
             ))}
           </div>
