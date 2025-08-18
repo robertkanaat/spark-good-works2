@@ -96,15 +96,12 @@ const About = () => {
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <script 
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [organizationSchema, webPageSchema, breadcrumbSchema]
-            }, null, 2)
-          }}
-        />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [organizationSchema, webPageSchema, breadcrumbSchema]
+          }, null, 2)}
+        </script>
       </Helmet>
       <div className="min-h-screen bg-background">
         <Header />
