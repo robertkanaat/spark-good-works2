@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
@@ -215,28 +215,6 @@ const Index = () => {
     ]
   };
 
-  // Debug log to verify structured data creation
-  console.log('Index: Created structured data:', allStructuredData);
-  console.log('Index: Component is rendering');
-
-  
-  // Direct injection approach
-  useEffect(() => {
-    console.log('Index: Direct injection useEffect running');
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(allStructuredData, null, 2);
-    script.id = 'structured-data-home';
-    document.head.appendChild(script);
-    console.log('Index: Structured data injected directly');
-    
-    return () => {
-      const existingScript = document.getElementById('structured-data-home');
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
-  }, [allStructuredData]);
 
   return (
     <>
@@ -262,6 +240,14 @@ const Index = () => {
         <meta name="twitter:image" content="https://geniusrecovery.org/genius-recovery-logo.png" />
         <meta name="twitter:site" content="@geniusrecovery" />
         <link rel="canonical" href="https://geniusrecovery.org" />
+        
+        {/* Structured Data */}
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(allStructuredData, null, 2)
+          }}
+        />
       </Helmet>
       <div className="min-h-screen">
         <Header />

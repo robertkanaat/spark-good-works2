@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 interface SEOHeadProps {
@@ -20,50 +19,6 @@ const SEOHead = ({
   canonicalUrl,
   structuredData
 }: SEOHeadProps) => {
-  // Debug logging
-  console.log('SEOHead: Component called with title:', title);
-  console.log('SEOHead: Received structured data:', !!structuredData, structuredData);
-  console.log('SEOHead: Component rendering');
-
-  // Simple test injection
-  useEffect(() => {
-    console.log('SEOHead: useEffect running');
-    // Test injection
-    const testScript = document.createElement('script');
-    testScript.type = 'application/ld+json';
-    testScript.textContent = '{"@context":"https://schema.org","@type":"WebSite","name":"Test"}';
-    document.head.appendChild(testScript);
-    console.log('SEOHead: Test script injected');
-  }, []);
-
-  // Direct injection of structured data as fallback
-  useEffect(() => {
-    if (structuredData) {
-      console.log('SEOHead: Injecting structured data directly');
-      
-      // Remove any existing structured data scripts
-      const existingScripts = document.querySelectorAll('script[type="application/ld+json"]');
-      existingScripts.forEach(script => script.remove());
-      
-      // Create and inject new script
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.textContent = JSON.stringify(structuredData, null, 2);
-      document.head.appendChild(script);
-      
-      console.log('SEOHead: Structured data injected into head');
-      
-      // Cleanup function
-      return () => {
-        const scripts = document.querySelectorAll('script[type="application/ld+json"]');
-        scripts.forEach(s => {
-          if (s.textContent === JSON.stringify(structuredData, null, 2)) {
-            s.remove();
-          }
-        });
-      };
-    }
-  }, [structuredData]);
 
   return (
     <Helmet>

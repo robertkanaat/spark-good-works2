@@ -38,10 +38,49 @@ const Support = () => {
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "MedicalOrganization",
-    "name": "Genius Recovery Support Services",
-    "description": "Comprehensive addiction recovery support services including crisis intervention, treatment referrals, and educational resources.",
-    "url": "https://geniusrecovery.org/support"
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "Recovery Support Services",
+        "description": "Comprehensive addiction recovery support services including crisis intervention, treatment referrals, and educational resources.",
+        "url": "https://geniusrecovery.org/support",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Genius Recovery",
+          "url": "https://geniusrecovery.org"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://geniusrecovery.org"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Support",
+              "item": "https://geniusrecovery.org/support"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "MedicalOrganization",
+        "name": "Genius Recovery Support Services",
+        "description": "Comprehensive addiction recovery support services including crisis intervention, treatment referrals, and educational resources.",
+        "url": "https://geniusrecovery.org/support",
+        "medicalSpecialty": "Addiction Medicine",
+        "serviceType": [
+          "Crisis Intervention",
+          "Treatment Referrals", 
+          "Recovery Support",
+          "Caregiver Support"
+        ]
+      }
+    ]
   };
 
   const features = [
