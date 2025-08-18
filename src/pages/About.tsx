@@ -46,16 +46,29 @@ const About = () => {
 
   return (
     <>
-      <SEOHead 
-        title="About Us - Our Journey from Pain to Purpose | Genius Recovery"
-        description="Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support."
-        keywords="addiction recovery, Genius Recovery, addiction support, recovery mission, Joe Polish, compassion-based recovery"
-        ogImage="https://geniusrecovery.io/genius-recovery-logo.png"
-        ogType="website"
-        canonicalUrl="https://geniusrecovery.io/about"
-        structuredData={{
-          "@context": "https://schema.org",
-          "@graph": [organizationSchema, webPageSchema, breadcrumbSchema]
+      <Helmet>
+        <title>About Us - Our Journey from Pain to Purpose | Genius Recovery</title>
+        <meta name="description" content="Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support." />
+        <meta name="keywords" content="addiction recovery, Genius Recovery, addiction support, recovery mission, Joe Polish, compassion-based recovery" />
+        <meta property="og:title" content="About Us - Our Journey from Pain to Purpose | Genius Recovery" />
+        <meta property="og:description" content="Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://geniusrecovery.io/about" />
+        <meta property="og:image" content="https://geniusrecovery.io/genius-recovery-logo.png" />
+        <meta property="og:site_name" content="Genius Recovery" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Us - Our Journey from Pain to Purpose | Genius Recovery" />
+        <meta name="twitter:description" content="Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support." />
+        <meta name="twitter:image" content="https://geniusrecovery.io/genius-recovery-logo.png" />
+        <link rel="canonical" href="https://geniusrecovery.io/about" />
+      </Helmet>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [organizationSchema, webPageSchema, breadcrumbSchema]
+          })
         }}
       />
       <div className="min-h-screen bg-background">
