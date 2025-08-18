@@ -1,7 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -20,6 +27,15 @@ import {
 } from "lucide-react";
 
 const Support = () => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "MedicalOrganization",
@@ -124,11 +140,20 @@ const Support = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-4 h-auto"
+                onClick={() => scrollToSection('support-resources')}
+              >
                 <Heart className="w-5 h-5 mr-2" />
                 Get the Support YOU Need
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-4 h-auto">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-8 py-4 h-auto"
+                onClick={() => setIsVideoOpen(true)}
+              >
                 <PlayCircle className="w-5 h-5 mr-2" />
                 Watch Introduction Video
               </Button>
@@ -164,7 +189,7 @@ const Support = () => {
       </section>
 
       {/* What You Get Section */}
-      <section className="py-20">
+      <section id="support-resources" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -262,6 +287,29 @@ const Support = () => {
       </section>
 
       <Footer />
+      
+      {/* Video Modal */}
+      <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+        <DialogContent className="max-w-4xl w-[95vw] p-0 bg-black border-0">
+          <DialogHeader className="sr-only">
+            <DialogTitle>Recovery Impact Video</DialogTitle>
+            <DialogDescription>
+              Watch our video showcasing the impact of our recovery support programs
+            </DialogDescription>
+          </DialogHeader>
+          <div className="aspect-video w-full">
+            <iframe
+              src="https://player.vimeo.com/video/1076776049?h=b4510e666f&autoplay=1&title=0&byline=0&portrait=0"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
