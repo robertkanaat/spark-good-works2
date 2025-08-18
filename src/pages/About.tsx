@@ -50,9 +50,9 @@ const About = () => {
         title="About Us - Our Journey from Pain to Purpose | Genius Recovery"
         description="Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support."
         keywords="addiction recovery, Genius Recovery, addiction support, recovery mission, Joe Polish, compassion-based recovery"
-        ogImage="https://geniusrecovery.io/genius-recovery-logo.png"
+        ogImage="https://new.geniusrecovery.org/genius-recovery-logo.png"
         ogType="website"
-        canonicalUrl="https://geniusrecovery.io/about"
+        canonicalUrl="https://new.geniusrecovery.org/about"
         structuredData={{
           "@context": "https://schema.org",
           "@graph": [organizationSchema, webPageSchema, breadcrumbSchema]
