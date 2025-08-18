@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async';
-import ClientOnly from '@/components/ClientOnly';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import OurMissionSection from '@/components/OurMissionSection';
@@ -10,50 +9,47 @@ import { ArrowRight, Heart, Users, BookOpen } from 'lucide-react';
 
 const About = () => {
   const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Genius Recovery',
-    description:
-      'Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support.',
-    url: 'https://geniusrecovery.io/about',
-    foundingDate: '2023', // Updated to match Index.tsx
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Genius Recovery",
+    description: "Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support.",
+    url: "https://geniusrecovery.io/about",
+    foundingDate: "2023",
     founder: {
-      '@type': 'Person',
-      name: 'Joe Polish',
+      "@type": "Person",
+      name: "Joe Polish",
     },
-    mission:
-      'To change the global conversation around addiction through compassion, education, and connection.',
+    mission: "To change the global conversation around addiction through compassion, education, and connection.",
   };
 
   const webPageSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'About Genius Recovery - Our Mission & Team',
-    description:
-      'Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support.',
-    url: 'https://geniusrecovery.io/about',
-    isPartOf: { '@type': 'WebSite', name: 'Genius Recovery', url: 'https://geniusrecovery.io' },
-    datePublished: '2023-01-01',
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "About Genius Recovery - Our Mission & Team",
+    description: "Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support.",
+    url: "https://geniusrecovery.io/about",
+    isPartOf: { "@type": "WebSite", name: "Genius Recovery", url: "https://geniusrecovery.io" },
+    datePublished: "2023-01-01",
     dateModified: new Date().toISOString().split('T')[0],
-    author: { '@type': 'Organization', name: 'Genius Recovery' },
+    author: { "@type": "Organization", name: "Genius Recovery" },
   };
 
   const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://geniusrecovery.io' },
-      { '@type': 'ListItem', position: 2, name: 'About', item: 'https://geniusrecovery.io/about' },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://geniusrecovery.io" },
+      { "@type": "ListItem", position: 2, name: "About", item: "https://geniusrecovery.io/about" },
     ],
   };
 
   return (
-    <ClientOnly>
+    <>
       <Helmet>
         <title>About Us - Our Journey from Pain to Purpose | Genius Recovery</title>
         <meta
           name="description"
-          content="Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support."
+          content="Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support."
         />
         <meta
           name="keywords"
@@ -63,7 +59,7 @@ const About = () => {
         <meta property="og:title" content="About Us - Our Journey from Pain to Purpose | Genius Recovery" />
         <meta
           property="og:description"
-          content="Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support."
+          content="Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://geniusrecovery.io/about" />
@@ -78,7 +74,7 @@ const About = () => {
         />
         <meta
           name="twitter:description"
-          content="Learn about Genius Recovery’s mission to change how the world understands addiction through compassion, education, and community support."
+          content="Learn about Genius Recovery's mission to change how the world understands addiction through compassion, education, and community support."
         />
         <meta name="twitter:image" content="https://geniusrecovery.io/genius-recovery-logo.png" />
         <meta name="twitter:image:alt" content="Genius Recovery - Addiction Recovery Support Organization" />
@@ -254,7 +250,7 @@ const About = () => {
         </main>
         <Footer />
       </div>
-    </ClientOnly>
+    </>
   );
 };
 
