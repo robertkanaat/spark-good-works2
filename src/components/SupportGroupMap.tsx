@@ -51,11 +51,12 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
         }
 
         console.log('Fetching Mapbox token from Supabase...');
-        // Fetch from Supabase secrets via edge function
-        const response = await fetch('/api/get-secret', {
+        // Fetch from Supabase secrets via edge function with correct URL
+        const response = await fetch('https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/get-secret', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxod3h4enhkc3J5a3Z6bnJ0aWdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1MDQ1NzEsImV4cCI6MjA3MDA4MDU3MX0.EF6mcd5BG3n_wngVu2g9fCzS2nnNG-xzbQxcOslR5vk`,
           },
           body: JSON.stringify({ name: 'MAPBOX_PUBLIC_TOKEN' }),
         });
