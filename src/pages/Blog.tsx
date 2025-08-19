@@ -290,7 +290,14 @@ Best regards,`;
             
             <Card className="overflow-hidden bg-gradient-to-br from-primary/5 via-background to-orange-500/5 border-0 shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                <Link to={`/blog/${featuredPost.slug}`} className="relative h-80 lg:h-auto overflow-hidden cursor-pointer block">
+                <Link 
+                  to={`/blog/${featuredPost.slug}`} 
+                  className="relative h-80 lg:h-auto overflow-hidden cursor-pointer block"
+                  onClick={() => {
+                    // Store current page for back navigation
+                    sessionStorage.setItem('blogReferrerPage', currentPage.toString());
+                  }}
+                >
                   <img 
                     src={featuredPost.image} 
                     alt={featuredPost.title}
@@ -344,7 +351,13 @@ Best regards,`;
                     className="self-start bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-500/90 text-white group hover-scale hover-glow transition-all duration-300 shadow-lg hover:shadow-xl"
                     asChild
                   >
-                    <Link to={`/blog/${featuredPost.slug}`}>
+                    <Link 
+                      to={`/blog/${featuredPost.slug}`}
+                      onClick={() => {
+                        // Store current page for back navigation
+                        sessionStorage.setItem('blogReferrerPage', currentPage.toString());
+                      }}
+                    >
                       <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
                       Read Full Story
                       <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -380,7 +393,14 @@ Best regards,`;
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
           {filteredPosts.filter(post => !post.featured).map((post, index) => (
             <Card key={post.id} className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-white to-gray-50/50 animate-fade-in`} style={{ animationDelay: `${index * 0.1}s` }}>
-              <Link to={`/blog/${post.slug}`} className="relative overflow-hidden cursor-pointer block">
+              <Link 
+                to={`/blog/${post.slug}`} 
+                className="relative overflow-hidden cursor-pointer block"
+                onClick={() => {
+                  // Store current page for back navigation
+                  sessionStorage.setItem('blogReferrerPage', currentPage.toString());
+                }}
+              >
                 <img 
                   src={post.image} 
                   alt={post.title}
@@ -430,7 +450,13 @@ Best regards,`;
                     className="p-0 h-auto text-primary hover:text-primary/80 font-medium group hover-scale transition-all duration-300"
                     asChild
                   >
-                    <Link to={`/blog/${post.slug}`}>
+                    <Link 
+                      to={`/blog/${post.slug}`}
+                      onClick={() => {
+                        // Store current page for back navigation
+                        sessionStorage.setItem('blogReferrerPage', currentPage.toString());
+                      }}
+                    >
                       <BookOpen className="w-4 h-4 mr-1 group-hover:rotate-6 transition-transform duration-300" />
                       Read More
                       <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />

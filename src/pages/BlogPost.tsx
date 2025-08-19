@@ -141,7 +141,17 @@ const BlogPost = () => {
             <Button 
               variant="ghost" 
               className="mb-8 hover-scale group"
-              onClick={() => navigate('/blog')}
+              onClick={() => {
+                // Check if we have a stored referrer page
+                const referrerPage = sessionStorage.getItem('blogReferrerPage');
+                if (referrerPage && referrerPage !== '1') {
+                  navigate(`/blog?page=${referrerPage}`);
+                } else {
+                  navigate('/blog');
+                }
+                // Clean up the stored referrer
+                sessionStorage.removeItem('blogReferrerPage');
+              }}
             >
               <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
               Back to Stories
@@ -313,7 +323,17 @@ const BlogPost = () => {
                     <Button 
                       size="sm" 
                       className="w-full hover-scale"
-                      onClick={() => navigate('/blog')}
+                      onClick={() => {
+                        // Check if we have a stored referrer page
+                        const referrerPage = sessionStorage.getItem('blogReferrerPage');
+                        if (referrerPage && referrerPage !== '1') {
+                          navigate(`/blog?page=${referrerPage}`);
+                        } else {
+                          navigate('/blog');
+                        }
+                        // Clean up the stored referrer
+                        sessionStorage.removeItem('blogReferrerPage');
+                      }}
                     >
                       Explore Stories
                     </Button>
