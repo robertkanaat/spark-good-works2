@@ -193,7 +193,7 @@ const RecoveryTools = () => {
       description: "Science-based recovery meetings and tools online",
       icon: Brain,
       platform: "Web-based",
-      link: "https://www.smartrecovery.org/community/",
+      link: "https://meetings.smartrecovery.org/",
       features: ["Interactive tools", "Facilitator-led", "Evidence-based", "Flexible approach"]
     },
     {
@@ -201,7 +201,7 @@ const RecoveryTools = () => {
       description: "Peer support through online forums and discussion groups",
       icon: Globe,
       platform: "Web-based",
-      link: "https://www.recoverydharma.community/",
+      link: "https://www.reddit.com/r/recovery/",
       features: ["24/7 access", "Anonymous posting", "Moderated discussions", "Resource sharing"]
     }
   ];
