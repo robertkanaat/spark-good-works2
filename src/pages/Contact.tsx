@@ -383,7 +383,7 @@ const Contact = () => {
                     <span className="text-sm font-medium text-primary">Send Message</span>
                   </div>
                   <h3 className="text-3xl font-bold text-foreground bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    Share Your Story
+                    Contact Us
                   </h3>
                   <p className="text-muted-foreground mt-2">We're listening and ready to help</p>
                 </div>
