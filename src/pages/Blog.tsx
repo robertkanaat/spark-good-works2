@@ -26,14 +26,7 @@ const Blog = () => {
   
   const filteredPosts = selectedCategory === "All" 
     ? posts 
-    : posts.filter(post => {
-        console.log('Filtering post:', post.title, 'Category:', post.category, 'Selected:', selectedCategory, 'Match:', post.category === selectedCategory);
-        return post.category === selectedCategory;
-      });
-
-  console.log('Available categories:', categories);
-  console.log('Selected category:', selectedCategory);
-  console.log('Total posts:', posts.length, 'Filtered posts:', filteredPosts.length);
+    : posts.filter(post => post.category === selectedCategory);
 
   // Show loading state
   if (loading) {
@@ -289,14 +282,6 @@ Best regards,`;
 
         {/* Category Filter */}
         <div data-section="blog-posts" className="mb-16">
-          {/* Temporary debugging display */}
-          <div className="mb-4 p-4 bg-gray-100 rounded text-sm">
-            <strong>Debug Info:</strong><br/>
-            Available categories: {JSON.stringify(categories)}<br/>
-            Total posts: {posts.length}<br/>
-            Sample post categories: {JSON.stringify(posts.slice(0, 3).map(p => ({ title: p.title, category: p.category })))}
-          </div>
-          
           <div className="flex flex-wrap gap-4 justify-center">
             {categories.map((category) => (
               <Button
