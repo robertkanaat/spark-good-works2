@@ -94,9 +94,10 @@ const Header = () => {
                 <span className="relative z-10">ABOUT</span>
                 <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
-              <Link to="/emergency" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
-                <span className="relative z-10">EMERGENCY</span>
-                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              <Link to="/emergency" className="text-muted-foreground hover:text-red-600 px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-110 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-md relative overflow-hidden group hover:shadow-lg hover:shadow-red-500/25">
+                <span className="relative z-10 font-semibold">EMERGENCY</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div className="absolute inset-0 animate-pulse bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
               <Link to="/resources" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
                 <span className="relative z-10">RESOURCES</span>
@@ -213,10 +214,11 @@ const Header = () => {
                     </Link>
                     <Link 
                       to="/emergency" 
-                      className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
+                      className="text-lg font-semibold text-foreground hover:text-red-600 px-4 py-3 rounded-md hover:bg-red-50 dark:hover:bg-red-950/20 transition-all duration-300 hover:scale-105 hover:shadow-md hover:shadow-red-500/25 relative overflow-hidden group"
                       onClick={() => setIsOpen(false)}
                     >
-                      EMERGENCY
+                      <span className="relative z-10">EMERGENCY</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                     </Link>
                     <Link 
                       to="/resources" 
