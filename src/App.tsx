@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from '@/components/ui/sonner';
+import ExitIntentPopup from '@/components/ExitIntentPopup';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import ScrollToTop from '@/components/ScrollToTop';
 import Index from './pages/Index';
@@ -54,6 +55,7 @@ const App = () => {
         <BrowserRouter>
           <ScrollToTop />
           <Toaster />
+          <ExitIntentPopup />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
