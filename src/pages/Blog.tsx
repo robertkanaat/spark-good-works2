@@ -289,6 +289,14 @@ Best regards,`;
 
         {/* Category Filter */}
         <div data-section="blog-posts" className="mb-16">
+          {/* Temporary debugging display */}
+          <div className="mb-4 p-4 bg-gray-100 rounded text-sm">
+            <strong>Debug Info:</strong><br/>
+            Available categories: {JSON.stringify(categories)}<br/>
+            Total posts: {posts.length}<br/>
+            Sample post categories: {JSON.stringify(posts.slice(0, 3).map(p => ({ title: p.title, category: p.category })))}
+          </div>
+          
           <div className="flex flex-wrap gap-4 justify-center">
             {categories.map((category) => (
               <Button
