@@ -122,13 +122,10 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
     };
   }, [mapboxToken, showTokenInput]);
 
-  // Add markers for support groups
+  // Add markers for support groups on map load
   useEffect(() => {
-    if (!map.current || !groups.length) {
-      console.log('Markers not added:', { 
-        hasMap: !!map.current, 
-        groupsLength: groups.length 
-      });
+    if (!map.current) {
+      console.log('Map not ready for markers');
       return;
     }
 
@@ -138,7 +135,7 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
     markersRef.current.forEach(marker => marker.remove());
     markersRef.current = [];
 
-    // Add new markers
+    // Add new markers for all groups
     groups.forEach((group) => {
       // Create custom marker element
       const markerElement = document.createElement('div');
@@ -260,7 +257,7 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
       }
     };
 
-  }, [groups, onGroupSelect]);
+  }, [map.current, groups, onGroupSelect]);
 
   // Handle selected group changes
   useEffect(() => {
