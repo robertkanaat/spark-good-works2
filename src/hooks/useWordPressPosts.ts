@@ -139,28 +139,8 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [allPosts, setAllPosts] = useState<TransformedPost[]>([]);
-  const [availableCategories, setAvailableCategories] = useState<string[]>([]);
+  
 
-  // Fetch categories from WordPress
-  const fetchCategories = async () => {
-    try {
-      const response = await fetch('https://geniusrecovery.org/wp-json/wp/v2/categories?per_page=100', {
-        headers: {
-          'Accept': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const categories = await response.json();
-        const categoryNames = categories
-          .filter((cat: any) => cat.name !== 'Uncategorized' && cat.count > 0)
-          .map((cat: any) => cat.name);
-        setAvailableCategories(categoryNames);
-      }
-    } catch (err) {
-      console.error('Error fetching categories:', err);
-    }
-  };
 
   const fetchPage = async (page: number) => {
     try {
@@ -223,13 +203,13 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
   };
 
   useEffect(() => {
-    fetchCategories();
     fetchPage(1);
   }, []);
 
-  // Use fetched categories from WordPress, fallback to post categories if needed
-  const postCategories = Array.from(new Set(allPosts.map(post => post.category)));
-  const categories = ['All', ...(availableCategories.length > 0 ? availableCategories : postCategories)];
+  // Get unique categories from posts that have been fetched and filter out generic ones
+  const postCategories = Array.from(new Set(allPosts.map(post => post.category)))
+    .filter(category => category !== 'General' && category !== 'Uncategorized');
+  const categories = ['All', ...postCategories];
   
   // Get featured post
   const featuredPost = posts.find(post => post.featured) || null;
