@@ -315,7 +315,7 @@ const HeroSection = () => {
           </Link>
           <Link to="/addiction-recovery-book">
             <Button variant="hero">
-              LEARN MORE
+              GET FREE BOOK
             </Button>
           </Link>
         </div>
