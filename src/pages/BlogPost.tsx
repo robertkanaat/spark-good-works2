@@ -15,7 +15,10 @@ import {
   X,
   Facebook,
   Linkedin,
-  Copy
+  Copy,
+  BookOpen,
+  Download,
+  CheckCircle
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -260,6 +263,43 @@ const BlogPost = () => {
                       >
                         <Copy className="w-4 h-4 mr-2" />
                         Copy Link
+                      </Button>
+                    </div>
+                  </Card>
+
+                  {/* Free Book Download */}
+                  <Card className="p-6 bg-gradient-to-br from-secondary/10 to-primary/10 border border-primary/20">
+                    <div className="text-center space-y-4">
+                      <div className="flex justify-center">
+                        <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                          <BookOpen className="w-6 h-6 text-primary" />
+                        </div>
+                      </div>
+                      
+                      <h3 className="font-bold text-foreground">Free Recovery Guide</h3>
+                      
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        Get expert insights from Joe Polish's interviews with world-renowned recovery specialists
+                      </p>
+                      
+                      <div className="space-y-2 text-xs">
+                        <div className="flex items-center gap-2 justify-center">
+                          <CheckCircle className="w-3 h-3 text-primary flex-shrink-0" />
+                          <span className="text-muted-foreground">Dr. Gabor Maté interviews</span>
+                        </div>
+                        <div className="flex items-center gap-2 justify-center">
+                          <CheckCircle className="w-3 h-3 text-primary flex-shrink-0" />
+                          <span className="text-muted-foreground">100% free download</span>
+                        </div>
+                      </div>
+                      
+                      <Button 
+                        size="sm" 
+                        className="w-full hover-scale bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+                        onClick={() => navigate('/addiction-recovery-book')}
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Download Now
                       </Button>
                     </div>
                   </Card>
