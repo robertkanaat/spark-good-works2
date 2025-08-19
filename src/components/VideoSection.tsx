@@ -24,7 +24,7 @@ const VideoSection = () => {
         
         <div className="container mx-auto max-w-4xl relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent drop-shadow-sm">
               See Our Impact in Action
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
