@@ -161,7 +161,7 @@ const About = () => {
                       size="lg"
                       className="border-primary/30 text-foreground hover:bg-primary/10 hover:text-foreground px-8 py-6 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-white/20"
                     >
-                      Join Our Mission
+                      Support Our Cause
                     </Button>
                   </Link>
                 </div>
