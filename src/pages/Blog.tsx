@@ -275,7 +275,7 @@ Best regards,`;
             
             <Card className="overflow-hidden bg-gradient-to-br from-primary/5 via-background to-orange-500/5 border-0 shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                <div className="relative h-80 lg:h-auto overflow-hidden">
+                <div className="relative h-80 lg:h-auto overflow-hidden cursor-pointer" onClick={() => window.location.href = `/blog/${featuredPost.slug}`}>
                   <img 
                     src={featuredPost.image} 
                     alt={featuredPost.title}
