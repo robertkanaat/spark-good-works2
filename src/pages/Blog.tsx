@@ -275,7 +275,7 @@ Best regards,`;
             
             <Card className="overflow-hidden bg-gradient-to-br from-primary/5 via-background to-orange-500/5 border-0 shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                <div className="relative h-80 lg:h-auto overflow-hidden cursor-pointer" onClick={() => window.location.href = `/blog/${featuredPost.slug}`}>
+                <Link to={`/blog/${featuredPost.slug}`} className="relative h-80 lg:h-auto overflow-hidden cursor-pointer block">
                   <img 
                     src={featuredPost.image} 
                     alt={featuredPost.title}
@@ -299,7 +299,7 @@ Best regards,`;
                       </span>
                     </div>
                   </div>
-                </div>
+                </Link>
                 
                 <div className="p-12 flex flex-col justify-center">
                   <h3 className="text-3xl lg:text-4xl font-bold mb-6 leading-tight">
@@ -327,11 +327,13 @@ Best regards,`;
                   <Button 
                     size="lg" 
                     className="self-start bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-500/90 text-white group hover-scale hover-glow transition-all duration-300 shadow-lg hover:shadow-xl"
-                    onClick={() => window.location.href = `/blog/${featuredPost.slug}`}
+                    asChild
                   >
-                    <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
-                    Read Full Story
-                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                    <Link to={`/blog/${featuredPost.slug}`}>
+                      <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
+                      Read Full Story
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
                   </Button>
                 </div>
               </div>
@@ -363,7 +365,7 @@ Best regards,`;
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
           {filteredPosts.filter(post => !post.featured).map((post, index) => (
             <Card key={post.id} className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-white to-gray-50/50 animate-fade-in`} style={{ animationDelay: `${index * 0.1}s` }}>
-              <div className="relative overflow-hidden cursor-pointer" onClick={() => window.location.href = `/blog/${post.slug}`}>
+              <Link to={`/blog/${post.slug}`} className="relative overflow-hidden cursor-pointer block">
                 <img 
                   src={post.image} 
                   alt={post.title}
@@ -385,7 +387,7 @@ Best regards,`;
                     </span>
                   </div>
                 </div>
-              </div>
+              </Link>
               
               <div className="p-8">
                 <h3 className="text-xl font-bold mb-4 line-clamp-2 group-hover:text-primary transition-colors duration-300">
@@ -411,11 +413,13 @@ Best regards,`;
                     variant="ghost" 
                     size="sm" 
                     className="p-0 h-auto text-primary hover:text-primary/80 font-medium group hover-scale transition-all duration-300"
-                    onClick={() => window.location.href = `/blog/${post.slug}`}
+                    asChild
                   >
-                    <BookOpen className="w-4 h-4 mr-1 group-hover:rotate-6 transition-transform duration-300" />
-                    Read More
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                    <Link to={`/blog/${post.slug}`}>
+                      <BookOpen className="w-4 h-4 mr-1 group-hover:rotate-6 transition-transform duration-300" />
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
                   </Button>
                   <div className="flex gap-2">
                     <Button 
