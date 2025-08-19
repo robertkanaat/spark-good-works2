@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle, Share2, BookOpen, TrendingUp, Loader2, AlertCircle, Sparkles, X, Facebook, Linkedin, Copy } from "lucide-react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -26,13 +26,14 @@ import {
 import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 
 const Blog = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { pageNumber } = useParams<{ pageNumber: string }>();
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
   const { posts, loading, error, featuredPost, categories, totalPages, currentPage, fetchPage, totalPostsCount } = useWordPressPosts();
   
   // Get page from URL params, default to 1
-  const pageFromUrl = parseInt(searchParams.get('page') || '1', 10);
+  const pageFromUrl = pageNumber ? parseInt(pageNumber, 10) : 1;
   
   const filteredPosts = selectedCategory === "All" 
     ? posts 
@@ -68,7 +69,11 @@ const Blog = () => {
   };
 
   const handlePageChange = (page: number) => {
-    setSearchParams({ page: page.toString() });
+    if (page === 1) {
+      navigate('/blog');
+    } else {
+      navigate(`/blog/page/${page}`);
+    }
     fetchPage(page);
   };
 
@@ -293,10 +298,6 @@ Best regards,`;
                 <Link 
                   to={`/blog/${featuredPost.slug}`} 
                   className="relative h-80 lg:h-auto overflow-hidden cursor-pointer block"
-                  onClick={() => {
-                    // Store current page for back navigation
-                    sessionStorage.setItem('blogReferrerPage', currentPage.toString());
-                  }}
                 >
                   <img 
                     src={featuredPost.image} 
@@ -351,13 +352,7 @@ Best regards,`;
                     className="self-start bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-500/90 text-white group hover-scale hover-glow transition-all duration-300 shadow-lg hover:shadow-xl"
                     asChild
                   >
-                    <Link 
-                      to={`/blog/${featuredPost.slug}`}
-                      onClick={() => {
-                        // Store current page for back navigation
-                        sessionStorage.setItem('blogReferrerPage', currentPage.toString());
-                      }}
-                    >
+                    <Link to={`/blog/${featuredPost.slug}`}>
                       <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
                       Read Full Story
                       <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -396,10 +391,6 @@ Best regards,`;
               <Link 
                 to={`/blog/${post.slug}`} 
                 className="relative overflow-hidden cursor-pointer block"
-                onClick={() => {
-                  // Store current page for back navigation
-                  sessionStorage.setItem('blogReferrerPage', currentPage.toString());
-                }}
               >
                 <img 
                   src={post.image} 
@@ -450,13 +441,7 @@ Best regards,`;
                     className="p-0 h-auto text-primary hover:text-primary/80 font-medium group hover-scale transition-all duration-300"
                     asChild
                   >
-                    <Link 
-                      to={`/blog/${post.slug}`}
-                      onClick={() => {
-                        // Store current page for back navigation
-                        sessionStorage.setItem('blogReferrerPage', currentPage.toString());
-                      }}
-                    >
+                    <Link to={`/blog/${post.slug}`}>
                       <BookOpen className="w-4 h-4 mr-1 group-hover:rotate-6 transition-transform duration-300" />
                       Read More
                       <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
