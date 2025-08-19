@@ -12,6 +12,10 @@ const ExitIntentPopup = () => {
   useEffect(() => {
     console.log('ExitIntentPopup mounted');
     
+    // TEMPORARY: Clear localStorage for testing
+    localStorage.removeItem('exitIntentPopupShown');
+    console.log('Cleared localStorage for testing');
+    
     // Check if popup has been shown before
     const popupShown = localStorage.getItem('exitIntentPopupShown');
     console.log('Popup shown before:', popupShown);
