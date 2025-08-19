@@ -5,7 +5,7 @@ import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import heroBg from "@/assets/open-letter-hero-bg.jpg";
+
 
 const OpenLetter = () => {
   useEffect(() => {
@@ -56,23 +56,23 @@ const OpenLetter = () => {
       <main>
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center overflow-hidden">
-          {/* Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
-            style={{ 
-              backgroundImage: `url(${heroBg})`,
-              backgroundPosition: 'center center'
-            }}
-          >
-            {/* Bright overlay for better text contrast while keeping image visible */}
-            <div className="absolute inset-0 bg-white/20"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-white/10 to-primary/20"></div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/30"></div>
+          {/* Elegant Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-donate/10">
+            {/* Geometric overlay patterns */}
+            <div className="absolute inset-0">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-primary/10 via-transparent to-donate/10 opacity-60"></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-background/80 via-transparent to-primary/20"></div>
+            </div>
+            
+            {/* Subtle geometric shapes */}
+            <div className="absolute top-20 right-20 w-32 h-32 border border-primary/20 rounded-full opacity-20"></div>
+            <div className="absolute bottom-40 left-20 w-24 h-24 border border-donate/20 rounded-full opacity-30"></div>
+            <div className="absolute top-1/2 right-1/3 w-16 h-16 bg-primary/10 rounded-lg rotate-45 opacity-40"></div>
           </div>
           
-          {/* Animated Glow Effects */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse opacity-40" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-donate/10 rounded-full blur-3xl animate-pulse delay-1000 opacity-30" />
+          {/* Soft Floating Elements */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse opacity-60" />
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-donate/5 rounded-full blur-3xl animate-pulse delay-1000 opacity-50" />
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
