@@ -9,6 +9,7 @@ import FeaturesSection from '@/components/FeaturesSection';
 import BlogPreviewSection from '@/components/BlogPreviewSection';
 import OpenLetterPreview from '@/components/OpenLetterPreview';
 import HomeFAQSection from '@/components/HomeFAQSection';
+import VolunteerCTA from '@/components/VolunteerCTA';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -258,6 +259,7 @@ const Index = () => {
         <FeaturesSection />
         <BlogPreviewSection />
         <OpenLetterPreview />
+        <VolunteerCTA />
         <HomeFAQSection />
         <Footer />
       </div>
