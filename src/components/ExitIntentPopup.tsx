@@ -17,6 +17,15 @@ const ExitIntentPopup = () => {
       return;
     }
 
+    // TEMPORARY: Show popup after 3 seconds for testing
+    const timer = setTimeout(() => {
+      if (!hasShown && !isVisible) {
+        setIsVisible(true);
+        setHasShown(true);
+        localStorage.setItem('exitIntentPopupShown', 'true');
+      }
+    }, 3000);
+
     let mouseLeaveCount = 0;
     
     const handleMouseLeave = (e: MouseEvent) => {
