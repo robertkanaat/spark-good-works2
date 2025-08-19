@@ -105,12 +105,10 @@ const getCategoryName = (post: WordPressPost): string => {
     const categories = post._embedded['wp:term'][0];
     for (const category of categories) {
       if (category.taxonomy === 'category' && category.name !== 'Uncategorized') {
-        console.log('✓ Category found for post:', post.title.rendered, 'Category:', category.name);
         return category.name;
       }
     }
   }
-  console.log('✗ No valid category found for post:', post.title.rendered, 'Using fallback: Blog');
   return 'Blog';
 };
 
@@ -149,24 +147,47 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
   const [allPosts, setAllPosts] = useState<TransformedPost[]>([]);
   const [allCategories, setAllCategories] = useState<string[]>([]);
 
-  // Function to fetch all categories from WordPress
-  const fetchAllCategories = async () => {
+  // Function to fetch posts from all categories to ensure we have representative content
+  const fetchPostsFromAllCategories = async () => {
     try {
-      const response = await fetch('https://geniusrecovery.org/wp-json/wp/v2/categories?per_page=100', {
-        headers: {
-          'Accept': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const categories = await response.json();
-        const categoryNames = categories
-          .filter((cat: any) => cat.count > 0 && cat.name !== 'Uncategorized')
-          .map((cat: any) => cat.name);
-        setAllCategories(categoryNames);
+      // Fetch a larger sample from multiple pages to get posts from different categories
+      const promises = [];
+      for (let page = 1; page <= 3; page++) {
+        promises.push(
+          fetch(`${WORDPRESS_API_URL}?_embed&per_page=20&page=${page}&orderby=date&order=desc`, {
+            headers: { 'Accept': 'application/json' },
+          })
+        );
       }
+
+      const responses = await Promise.all(promises);
+      const allWordPressPosts: WordPressPost[] = [];
+
+      for (const response of responses) {
+        if (response.ok) {
+          const posts = await response.json();
+          allWordPressPosts.push(...posts);
+        }
+      }
+
+      const transformedPosts: TransformedPost[] = allWordPressPosts.map((post) => ({
+        id: post.id,
+        title: stripHtml(post.title.rendered),
+        excerpt: stripHtml(post.excerpt.rendered).replace(/READ IT TO ME:.*?Click play to listen to this post\./gi, '').trim(),
+        content: post.content.rendered,
+        category: getCategoryName(post),
+        author: getAuthorName(post),
+        date: formatDate(post.date),
+        readTime: calculateReadTime(post.content.rendered),
+        image: getFeaturedImage(post),
+        featured: false,
+        slug: post.slug,
+        link: post.link,
+      }));
+
+      setAllPosts(transformedPosts);
     } catch (err) {
-      console.error('Error fetching categories:', err);
+      console.error('Error fetching posts from all categories:', err);
     }
   };
 
@@ -232,12 +253,12 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
   };
 
   useEffect(() => {
-    fetchAllCategories(); // Fetch all categories from WordPress
+    fetchPostsFromAllCategories(); // Fetch posts from multiple pages/categories
     fetchPage(1);
   }, []);
 
-  // Use WordPress categories that have posts, fallback to extracted categories
-  const categories = ['All', ...(allCategories.length > 0 ? allCategories : Array.from(new Set(allPosts.map(post => post.category))).filter(category => category !== 'General' && category !== 'Uncategorized'))];
+  // Use categories extracted from all fetched posts
+  const categories = ['All', ...Array.from(new Set(allPosts.map(post => post.category))).filter(category => category !== 'General' && category !== 'Uncategorized')];
   
   // Get featured post
   const featuredPost = posts.find(post => post.featured) || null;
