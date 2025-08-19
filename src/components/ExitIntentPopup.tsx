@@ -10,32 +10,13 @@ const ExitIntentPopup = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('ExitIntentPopup mounted');
-    
-    // TEMPORARY: Clear localStorage for testing
-    localStorage.removeItem('exitIntentPopupShown');
-    console.log('Cleared localStorage for testing');
-    
     // Check if popup has been shown before
     const popupShown = localStorage.getItem('exitIntentPopupShown');
-    console.log('Popup shown before:', popupShown);
-    
     if (popupShown) {
       setHasShown(true);
       return;
     }
 
-    // TEMPORARY: Show popup after 3 seconds for testing
-    console.log('Setting up 3 second timer');
-    const timer = setTimeout(() => {
-      console.log('Timer fired, showing popup');
-      if (!hasShown && !isVisible) {
-        setIsVisible(true);
-        setHasShown(true);
-        localStorage.setItem('exitIntentPopupShown', 'true');
-      }
-    }, 3000);
-    
     let mouseLeaveCount = 0;
     const handleMouseLeave = (e: MouseEvent) => {
       // Only trigger if mouse is leaving from the top of the page and popup hasn't been shown
