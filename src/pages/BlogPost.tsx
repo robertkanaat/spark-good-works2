@@ -26,6 +26,63 @@ import SEOHead from "@/components/SEOHead";
 import { useWordPressPosts } from "@/hooks/useWordPressPosts";
 import { toast } from "@/components/ui/use-toast";
 
+// Helper functions for post transformation
+const stripHtml = (html: string): string => {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return div.textContent || div.innerText || '';
+};
+
+const calculateReadTime = (content: string): string => {
+  const wordsPerMinute = 200;
+  const words = stripHtml(content).split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
+};
+
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+const getCategoryName = (post: any): string => {
+  if (post._embedded?.['wp:term']?.[0]) {
+    const categories = post._embedded['wp:term'][0];
+    for (const category of categories) {
+      if (category.taxonomy === 'category' && category.name !== 'Uncategorized') {
+        return category.name;
+      }
+    }
+  }
+  return 'Blog';
+};
+
+const getAuthorName = (post: any): string => {
+  if (post._embedded?.author?.[0]) {
+    return post._embedded.author[0].name;
+  }
+  return 'Genius Recovery';
+};
+
+const getFeaturedImage = (post: any): string => {
+  if (post._embedded?.['wp:featuredmedia']?.[0]) {
+    const media = post._embedded['wp:featuredmedia'][0];
+    const sizes = media.media_details?.sizes;
+    if (sizes?.medium_large) {
+      return sizes.medium_large.source_url;
+    }
+    if (sizes?.large) {
+      return sizes.large.source_url;
+    }
+    return media.source_url;
+  }
+  return 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format';
+};
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -34,18 +91,77 @@ const BlogPost = () => {
   const [post, setPost] = useState<any>(null);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (posts.length > 0 && slug) {
-      const foundPost = posts.find(p => p.slug === slug);
-      if (foundPost) {
-        setPost(foundPost);
-      } else {
-        // If post not found, redirect to blog
+    const fetchPost = async () => {
+      if (!slug) return;
+      
+      try {
+        setIsLoading(true);
+        setError(null);
+        
+        // First try to find in already loaded posts
+        const foundPost = posts.find(p => p.slug === slug);
+        if (foundPost) {
+          setPost(foundPost);
+          setIsLoading(false);
+          return;
+        }
+        
+        // If not found, fetch directly from WordPress API
+        const response = await fetch(
+          `https://geniusrecovery.org/wp-json/wp/v2/posts?_embed&slug=${slug}`,
+          {
+            headers: {
+              'Accept': 'application/json',
+            },
+          }
+        );
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch post: ${response.status}`);
+        }
+        
+        const wordpressPosts = await response.json();
+        
+        if (wordpressPosts.length === 0) {
+          // Post not found, redirect to blog
+          navigate('/blog');
+          return;
+        }
+        
+        const wordpressPost = wordpressPosts[0];
+        
+        // Transform WordPress post to match our interface
+        const transformedPost = {
+          id: wordpressPost.id,
+          title: stripHtml(wordpressPost.title.rendered),
+          excerpt: stripHtml(wordpressPost.excerpt.rendered).replace(/READ IT TO ME:.*?Click play to listen to this post\./gi, '').trim(),
+          content: wordpressPost.content.rendered,
+          category: getCategoryName(wordpressPost),
+          author: getAuthorName(wordpressPost),
+          date: formatDate(wordpressPost.date),
+          readTime: calculateReadTime(wordpressPost.content.rendered),
+          image: getFeaturedImage(wordpressPost),
+          featured: false,
+          slug: wordpressPost.slug,
+          link: wordpressPost.link,
+        };
+        
+        setPost(transformedPost);
+      } catch (err) {
+        console.error('Error fetching WordPress post:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load post');
         navigate('/blog');
+      } finally {
+        setIsLoading(false);
       }
-    }
-  }, [posts, slug, navigate]);
+    };
+    
+    fetchPost();
+  }, [slug, posts, navigate]);
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
@@ -77,7 +193,7 @@ const BlogPost = () => {
     }
   };
 
-  if (loading || !post) {
+  if (isLoading || !post) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
@@ -90,6 +206,24 @@ const BlogPost = () => {
               <div className="h-4 bg-muted rounded w-5/6"></div>
               <div className="h-4 bg-muted rounded w-4/6"></div>
             </div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto px-4 py-20 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-2">Post Not Found</h2>
+            <p className="text-muted-foreground mb-4">The blog post you're looking for doesn't exist.</p>
+            <Button onClick={() => navigate('/blog')}>
+              Back to Blog
+            </Button>
           </div>
         </div>
         <Footer />
