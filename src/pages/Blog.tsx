@@ -304,7 +304,7 @@ Best regards,`;
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
           {filteredPosts.filter(post => !post.featured).map((post, index) => (
             <Card key={post.id} className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-white to-gray-50/50 animate-fade-in`} style={{ animationDelay: `${index * 0.1}s` }}>
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden cursor-pointer" onClick={() => window.location.href = `/blog/${post.slug}`}>
                 <img 
                   src={post.image} 
                   alt={post.title}
@@ -359,10 +359,38 @@ Best regards,`;
                     <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
                   <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-red-50 hover:text-red-500 transition-colors">
-                      <Heart className="w-4 h-4" />
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-9 w-9 p-0 hover:bg-red-50 hover:text-red-500 transition-all duration-300 group/heart"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Add heart animation
+                        const heartButton = e.currentTarget;
+                        heartButton.classList.add('animate-pulse');
+                        setTimeout(() => heartButton.classList.remove('animate-pulse'), 600);
+                      }}
+                    >
+                      <Heart className="w-4 h-4 group-hover/heart:scale-110 group-hover/heart:fill-red-500 transition-all duration-300" />
                     </Button>
-                    <Button variant="ghost" size="sm" className="h-9 w-9 p-0 hover:bg-blue-50 hover:text-blue-500 transition-colors">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-9 w-9 p-0 hover:bg-blue-50 hover:text-blue-500 transition-colors"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (navigator.share) {
+                          navigator.share({
+                            title: post.title,
+                            text: post.excerpt,
+                            url: `${window.location.origin}/blog/${post.slug}`
+                          });
+                        } else {
+                          navigator.clipboard.writeText(`${window.location.origin}/blog/${post.slug}`);
+                          // You could add a toast notification here
+                        }
+                      }}
+                    >
                       <Share2 className="w-4 h-4" />
                     </Button>
                   </div>
