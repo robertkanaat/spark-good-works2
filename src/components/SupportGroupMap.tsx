@@ -113,6 +113,132 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
     
     map.current.on('load', () => {
       console.log('Mapbox map loaded successfully');
+      
+      // Add markers for support groups immediately after map loads
+      if (groups.length > 0) {
+        console.log(`Adding ${groups.length} markers to map after load...`);
+        
+        groups.forEach((group) => {
+          // Create custom marker element
+          const markerElement = document.createElement('div');
+          markerElement.className = 'support-group-marker';
+          markerElement.style.cssText = `
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: hsl(var(--primary));
+            border: 3px solid white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+          `;
+
+          // Add Users icon
+          const icon = document.createElement('div');
+          icon.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>`;
+          markerElement.appendChild(icon);
+
+          // Add hover effects
+          markerElement.addEventListener('mouseenter', () => {
+            markerElement.style.transform = 'scale(1.1)';
+            markerElement.style.boxShadow = '0 6px 20px rgba(0,0,0,0.25)';
+          });
+
+          markerElement.addEventListener('mouseleave', () => {
+            markerElement.style.transform = 'scale(1)';
+            markerElement.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+          });
+
+          // Create popup content
+          const popupContent = document.createElement('div');
+          popupContent.className = 'p-0 m-0';
+          popupContent.innerHTML = `
+            <div class="p-4 max-w-sm">
+              <h3 class="font-bold text-lg mb-2 text-foreground">${group.name}</h3>
+              <p class="text-sm text-muted-foreground mb-3 flex items-center">
+                <svg width="16" height="16" class="mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                ${group.location}
+              </p>
+              <p class="text-sm text-muted-foreground mb-3">${group.description}</p>
+              <div class="flex items-center gap-2 mb-3">
+                <div class="flex items-center">
+                  <svg width="16" height="16" class="text-yellow-400 fill-current mr-1" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                  <span class="font-semibold text-sm">${group.rating}</span>
+                  <span class="text-muted-foreground text-sm">(${group.reviews})</span>
+                </div>
+                <span class="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-medium">${group.cost}</span>
+              </div>
+              <div class="space-y-2">
+                <div class="flex items-center text-sm text-muted-foreground">
+                  <svg width="16" height="16" class="mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12,6 12,12 16,14"/>
+                  </svg>
+                  ${group.schedule}
+                </div>
+                <div class="flex items-center text-sm text-muted-foreground">
+                  <svg width="16" height="16" class="mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                  ${group.format.join(", ")}
+                </div>
+              </div>
+              <button onclick="window.selectSupportGroup(${group.id})" class="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                View Details
+              </button>
+            </div>
+          `;
+
+          // Create popup
+          const popup = new mapboxgl.Popup({
+            offset: 25,
+            closeButton: true,
+            closeOnClick: false,
+            className: 'support-group-popup'
+          }).setDOMContent(popupContent);
+
+          // Create marker
+          const marker = new mapboxgl.Marker(markerElement)
+            .setLngLat([group.lng, group.lat])
+            .setPopup(popup)
+            .addTo(map.current!);
+
+          markersRef.current.push(marker);
+
+          // Handle marker click
+          markerElement.addEventListener('click', () => {
+            onGroupSelect(group);
+            map.current?.flyTo({
+              center: [group.lng, group.lat],
+              zoom: 12,
+              duration: 1000
+            });
+          });
+        });
+
+        // Add global function for popup button clicks
+        (window as any).selectSupportGroup = (groupId: number) => {
+          const group = groups.find(g => g.id === groupId);
+          if (group) {
+            onGroupSelect(group);
+          }
+        };
+      }
     });
 
     return () => {
@@ -120,144 +246,7 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
         map.current.remove();
       }
     };
-  }, [mapboxToken, showTokenInput]);
-
-  // Add markers for support groups on map load
-  useEffect(() => {
-    if (!map.current) {
-      console.log('Map not ready for markers');
-      return;
-    }
-
-    console.log(`Adding ${groups.length} markers to map...`);
-
-    // Clear existing markers
-    markersRef.current.forEach(marker => marker.remove());
-    markersRef.current = [];
-
-    // Add new markers for all groups
-    groups.forEach((group) => {
-      // Create custom marker element
-      const markerElement = document.createElement('div');
-      markerElement.className = 'support-group-marker';
-      markerElement.style.cssText = `
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: hsl(var(--primary));
-        border: 3px solid white;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        transition: all 0.3s ease;
-      `;
-
-      // Add Users icon
-      const icon = document.createElement('div');
-      icon.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>`;
-      markerElement.appendChild(icon);
-
-      // Add hover effects
-      markerElement.addEventListener('mouseenter', () => {
-        markerElement.style.transform = 'scale(1.1)';
-        markerElement.style.boxShadow = '0 6px 20px rgba(0,0,0,0.25)';
-      });
-
-      markerElement.addEventListener('mouseleave', () => {
-        markerElement.style.transform = 'scale(1)';
-        markerElement.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-      });
-
-      // Create popup content
-      const popupContent = document.createElement('div');
-      popupContent.className = 'p-0 m-0';
-      popupContent.innerHTML = `
-        <div class="p-4 max-w-sm">
-          <h3 class="font-bold text-lg mb-2 text-foreground">${group.name}</h3>
-          <p class="text-sm text-muted-foreground mb-3 flex items-center">
-            <svg width="16" height="16" class="mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            ${group.location}
-          </p>
-          <p class="text-sm text-muted-foreground mb-3">${group.description}</p>
-          <div class="flex items-center gap-2 mb-3">
-            <div class="flex items-center">
-              <svg width="16" height="16" class="text-yellow-400 fill-current mr-1" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              <span class="font-semibold text-sm">${group.rating}</span>
-              <span class="text-muted-foreground text-sm">(${group.reviews})</span>
-            </div>
-            <span class="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-medium">${group.cost}</span>
-          </div>
-          <div class="space-y-2">
-            <div class="flex items-center text-sm text-muted-foreground">
-              <svg width="16" height="16" class="mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12,6 12,12 16,14"/>
-              </svg>
-              ${group.schedule}
-            </div>
-            <div class="flex items-center text-sm text-muted-foreground">
-              <svg width="16" height="16" class="mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-              ${group.format.join(", ")}
-            </div>
-          </div>
-          <button onclick="window.selectSupportGroup(${group.id})" class="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md text-sm font-medium transition-colors">
-            View Details
-          </button>
-        </div>
-      `;
-
-      // Create popup
-      const popup = new mapboxgl.Popup({
-        offset: 25,
-        closeButton: true,
-        closeOnClick: false,
-        className: 'support-group-popup'
-      }).setDOMContent(popupContent);
-
-      // Create marker
-      const marker = new mapboxgl.Marker(markerElement)
-        .setLngLat([group.lng, group.lat])
-        .setPopup(popup)
-        .addTo(map.current!);
-
-      markersRef.current.push(marker);
-
-      // Handle marker click
-      markerElement.addEventListener('click', () => {
-        onGroupSelect(group);
-        map.current?.flyTo({
-          center: [group.lng, group.lat],
-          zoom: 12,
-          duration: 1000
-        });
-      });
-    });
-
-    // Add global function for popup button clicks
-    (window as any).selectSupportGroup = (groupId: number) => {
-      const group = groups.find(g => g.id === groupId);
-      if (group) {
-        onGroupSelect(group);
-      }
-    };
-
-  }, [map.current, groups, onGroupSelect]);
+  }, [mapboxToken, showTokenInput, groups, onGroupSelect]);
 
   // Handle selected group changes
   useEffect(() => {
@@ -269,6 +258,7 @@ const SupportGroupMap: React.FC<SupportGroupMapProps> = ({ groups, selectedGroup
       duration: 1000
     });
   }, [selectedGroup]);
+
 
   if (showTokenInput) {
     return (
