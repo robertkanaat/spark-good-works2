@@ -104,6 +104,18 @@ const About = () => {
                   Genius Recovery was born out of a mission to change the way the world understands and supports
                   addiction recovery through compassion, education, and connection.
                 </p>
+                
+                {/* Mission Statement */}
+                <div className="mb-12 max-w-5xl mx-auto">
+                  <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-orange-500/10 rounded-2xl p-8 border border-primary/20">
+                    <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">Our Mission</h2>
+                    <p className="text-lg md:text-xl text-foreground leading-relaxed">
+                      Our mission is to change the global conversation around addiction through compassion, education, and connection. 
+                      At Genius Recovery, we provide trusted resources, expert insights, and a supportive community for addicts, 
+                      caregivers, and advocates. Together, we're creating a world that views recovery with understanding and hope.
+                    </p>
+                  </div>
+                </div>
                 {/* Core Values Preview */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto animate-fade-in">
                   <div className="flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-primary/20">
@@ -162,6 +174,107 @@ const About = () => {
               </div>
             </div>
           </section>
+          
+          {/* Vision & Values Section */}
+          <section className="relative py-24 overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-orange-500/5 to-background" />
+            
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Vision */}
+              <div className="text-center mb-20">
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-card/80 backdrop-blur-sm rounded-full border border-primary/20 mb-6">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                  <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+                    Our Vision
+                  </span>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-black text-foreground mb-8 leading-tight">
+                  A World That Views Recovery with{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-500 to-primary">
+                    Understanding & Hope
+                  </span>
+                </h2>
+                
+                <div className="max-w-4xl mx-auto">
+                  <p className="text-xl text-foreground/90 leading-relaxed mb-8">
+                    We envision a world where addiction is understood not as a moral failing, but as a response to pain. 
+                    A world where those struggling find compassion instead of judgment, connection instead of isolation, 
+                    and hope instead of despair.
+                  </p>
+                  
+                  {/* Joe Polish Quote */}
+                  <div className="relative p-8 bg-gradient-to-r from-primary/10 via-primary/5 to-orange-500/10 rounded-2xl border border-primary/20">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <span className="text-primary-foreground text-lg font-bold">"</span>
+                      </div>
+                    </div>
+                    <blockquote className="text-lg md:text-xl italic text-foreground leading-relaxed mb-4">
+                      "Addiction isn't a failure—it's a response to pain. When we address the trauma, 
+                      we unlock the potential for true healing."
+                    </blockquote>
+                    <cite className="text-primary font-semibold">— Joe Polish, Founder</cite>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Values */}
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-card/80 backdrop-blur-sm rounded-full border border-primary/20 mb-6">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                  <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+                    Our Values
+                  </span>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-black text-foreground mb-12 leading-tight">
+                  What Drives Our{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500">
+                    Mission
+                  </span>
+                </h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                  <div className="text-center p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/20 hover:shadow-lg transition-all duration-300">
+                    <Heart className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <h3 className="text-lg font-bold text-foreground mb-3">Compassion</h3>
+                    <p className="text-sm text-muted-foreground">Approaching addiction with understanding and empathy, not judgment</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/20 hover:shadow-lg transition-all duration-300">
+                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="w-6 h-6 bg-primary rounded-full"></div>
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-3">Empowerment</h3>
+                    <p className="text-sm text-muted-foreground">Providing tools and knowledge to help people reclaim their lives</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/20 hover:shadow-lg transition-all duration-300">
+                    <BookOpen className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <h3 className="text-lg font-bold text-foreground mb-3">Education</h3>
+                    <p className="text-sm text-muted-foreground">Sharing research-backed insights and expert knowledge</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/20 hover:shadow-lg transition-all duration-300">
+                    <Users className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <h3 className="text-lg font-bold text-foreground mb-3">Community</h3>
+                    <p className="text-sm text-muted-foreground">Building supportive networks for healing and connection</p>
+                  </div>
+                  
+                  <div className="text-center p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/20 hover:shadow-lg transition-all duration-300">
+                    <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="w-8 h-8 border-2 border-primary rounded-full border-dashed animate-spin"></div>
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground mb-3">Healing</h3>
+                    <p className="text-sm text-muted-foreground">Creating pathways to address root causes of addiction and trauma</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
           {/* Our Story Section */}
           <OurStorySection />
           {/* Our Mission Section */}
