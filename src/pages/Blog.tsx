@@ -29,7 +29,7 @@ const Blog = () => {
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
-  const { posts, loading, error, featuredPost, categories, totalPages, currentPage, fetchPage } = useWordPressPosts();
+  const { posts, loading, error, featuredPost, categories, totalPages, currentPage, fetchPage, totalPostsCount } = useWordPressPosts();
   
   const filteredPosts = selectedCategory === "All" 
     ? posts 
@@ -243,7 +243,7 @@ Best regards,`;
             <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <BookOpen className="w-8 h-8 text-primary" />
             </div>
-            <div className="text-4xl font-bold text-foreground mb-2">{posts.length}+</div>
+            <div className="text-4xl font-bold text-foreground mb-2">{totalPostsCount}+</div>
             <div className="text-muted-foreground">Recovery Stories</div>
           </div>
           <div className="text-center">

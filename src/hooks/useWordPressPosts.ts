@@ -69,6 +69,7 @@ interface UseWordPressPostsReturn {
   totalPages: number;
   currentPage: number;
   fetchPage: (page: number) => Promise<void>;
+  totalPostsCount: number;
 }
 
 const WORDPRESS_API_URL = 'https://geniusrecovery.org/wp-json/wp/v2/posts';
@@ -272,5 +273,6 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
     totalPages,
     currentPage,
     fetchPage,
+    totalPostsCount: allPosts.length,
   };
 };
