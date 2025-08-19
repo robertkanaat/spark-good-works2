@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -29,6 +29,7 @@ import { toast } from "@/components/ui/use-toast";
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const { posts, loading } = useWordPressPosts();
   const [post, setPost] = useState<any>(null);
   const [isLiked, setIsLiked] = useState(false);
@@ -142,8 +143,17 @@ const BlogPost = () => {
               variant="ghost" 
               className="mb-8 hover-scale group"
               onClick={() => {
-                // Navigate back using browser history to preserve the exact page state
-                window.history.back();
+                // Check if we have a referrer from React Router state
+                if (location.state?.from) {
+                  navigate(location.state.from);
+                } else {
+                  // Fallback to browser history
+                  if (window.history.length > 1) {
+                    window.history.back();
+                  } else {
+                    navigate('/blog');
+                  }
+                }
               }}
             >
               <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />

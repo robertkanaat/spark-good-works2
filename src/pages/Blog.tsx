@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle, Share2, BookOpen, TrendingUp, Loader2, AlertCircle, Sparkles, X, Facebook, Linkedin, Copy } from "lucide-react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -28,6 +28,7 @@ import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 const Blog = () => {
   const { pageNumber } = useParams<{ pageNumber: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
   const { posts, loading, error, featuredPost, categories, totalPages, currentPage, fetchPage, totalPostsCount } = useWordPressPosts();
@@ -296,7 +297,8 @@ Best regards,`;
             <Card className="overflow-hidden bg-gradient-to-br from-primary/5 via-background to-orange-500/5 border-0 shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 <Link 
-                  to={`/blog/${featuredPost.slug}`} 
+                  to={`/blog/${featuredPost.slug}`}
+                  state={{ from: location.pathname + location.search }}
                   className="relative h-80 lg:h-auto overflow-hidden cursor-pointer block"
                 >
                   <img 
@@ -352,7 +354,10 @@ Best regards,`;
                     className="self-start bg-gradient-to-r from-primary to-orange-500 hover:from-primary/90 hover:to-orange-500/90 text-white group hover-scale hover-glow transition-all duration-300 shadow-lg hover:shadow-xl"
                     asChild
                   >
-                    <Link to={`/blog/${featuredPost.slug}`}>
+                    <Link 
+                      to={`/blog/${featuredPost.slug}`}
+                      state={{ from: location.pathname + location.search }}
+                    >
                       <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
                       Read Full Story
                       <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -389,7 +394,8 @@ Best regards,`;
           {filteredPosts.filter(post => !post.featured).map((post, index) => (
             <Card key={post.id} className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-white to-gray-50/50 animate-fade-in`} style={{ animationDelay: `${index * 0.1}s` }}>
               <Link 
-                to={`/blog/${post.slug}`} 
+                to={`/blog/${post.slug}`}
+                state={{ from: location.pathname + location.search }}
                 className="relative overflow-hidden cursor-pointer block"
               >
                 <img 
@@ -441,7 +447,10 @@ Best regards,`;
                     className="p-0 h-auto text-primary hover:text-primary/80 font-medium group hover-scale transition-all duration-300"
                     asChild
                   >
-                    <Link to={`/blog/${post.slug}`}>
+                    <Link 
+                      to={`/blog/${post.slug}`}
+                      state={{ from: location.pathname + location.search }}
+                    >
                       <BookOpen className="w-4 h-4 mr-1 group-hover:rotate-6 transition-transform duration-300" />
                       Read More
                       <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" />
