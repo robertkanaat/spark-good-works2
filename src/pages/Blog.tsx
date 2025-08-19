@@ -28,11 +28,34 @@ import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 const Blog = () => {
 
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
   const { posts, loading, error, featuredPost, categories, totalPages, currentPage, fetchPage } = useWordPressPosts();
   
   const filteredPosts = selectedCategory === "All" 
     ? posts 
     : posts.filter(post => post.category === selectedCategory);
+
+  // Load liked posts from localStorage on component mount
+  useEffect(() => {
+    const savedLikes = localStorage.getItem('likedPosts');
+    if (savedLikes) {
+      setLikedPosts(new Set(JSON.parse(savedLikes)));
+    }
+  }, []);
+
+  const toggleLike = (postId: number) => {
+    setLikedPosts(prev => {
+      const newLikedPosts = new Set(prev);
+      if (newLikedPosts.has(postId)) {
+        newLikedPosts.delete(postId);
+      } else {
+        newLikedPosts.add(postId);
+      }
+      // Save to localStorage
+      localStorage.setItem('likedPosts', JSON.stringify(Array.from(newLikedPosts)));
+      return newLikedPosts;
+    });
+  };
 
   const handleShare = (platform: string, post: any) => {
     const url = `${window.location.origin}/blog/${post.slug}`;
@@ -398,16 +421,25 @@ Best regards,`;
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="h-9 w-9 p-0 hover:bg-red-50 hover:text-red-500 transition-all duration-300 group/heart"
+                      className={`h-9 w-9 p-0 transition-all duration-300 group/heart ${
+                        likedPosts.has(post.id) 
+                          ? 'text-red-500 hover:text-red-600' 
+                          : 'hover:bg-red-50 hover:text-red-500'
+                      }`}
                       onClick={(e) => {
                         e.stopPropagation();
+                        toggleLike(post.id);
                         // Add heart animation
                         const heartButton = e.currentTarget;
                         heartButton.classList.add('animate-pulse');
                         setTimeout(() => heartButton.classList.remove('animate-pulse'), 600);
                       }}
                     >
-                      <Heart className="w-4 h-4 group-hover/heart:scale-110 group-hover/heart:fill-red-500 transition-all duration-300" />
+                      <Heart 
+                        className={`w-4 h-4 group-hover/heart:scale-110 transition-all duration-300 ${
+                          likedPosts.has(post.id) ? 'fill-current' : ''
+                        }`} 
+                      />
                     </Button>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
