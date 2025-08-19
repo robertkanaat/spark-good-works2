@@ -105,12 +105,12 @@ const getCategoryName = (post: WordPressPost): string => {
     const categories = post._embedded['wp:term'][0];
     for (const category of categories) {
       if (category.taxonomy === 'category' && category.name !== 'Uncategorized') {
-        console.log('Category found for post:', post.title.rendered, 'Category:', category.name);
+        console.log('✓ Category found for post:', post.title.rendered, 'Category:', category.name);
         return category.name;
       }
     }
   }
-  console.log('No valid category found for post:', post.title.rendered, 'Using fallback: Blog');
+  console.log('✗ No valid category found for post:', post.title.rendered, 'Using fallback: Blog');
   return 'Blog';
 };
 

@@ -26,7 +26,20 @@ const Blog = () => {
   
   const filteredPosts = selectedCategory === "All" 
     ? posts 
-    : posts.filter(post => post.category === selectedCategory);
+    : posts.filter(post => {
+        const matches = post.category === selectedCategory;
+        console.log(`🔍 Filtering: "${post.title}" | Post category: "${post.category}" | Selected: "${selectedCategory}" | Match: ${matches}`);
+        return matches;
+      });
+
+  console.log(`📊 Categories available: [${categories.join(', ')}]`);
+  console.log(`📋 Total posts: ${posts.length}, Filtered posts: ${filteredPosts.length}`);
+  console.log(`🎯 Selected category: "${selectedCategory}"`);
+  
+  // Show post categories for debugging
+  if (posts.length > 0) {
+    console.log('📝 Post categories:', posts.map(p => `"${p.title}" -> "${p.category}"`));
+  }
 
   // Show loading state
   if (loading) {
