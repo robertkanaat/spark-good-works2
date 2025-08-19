@@ -14,7 +14,7 @@ const Footer = () => {
           <div className="col-span-1 lg:col-span-2">
             <div className="flex items-center mb-4">
               <img 
-                src="/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
+                src="/genius-recovery-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
                 alt="Genius Recovery" 
                 className="w-[240px] h-auto brightness-0 invert"
                 loading="lazy"

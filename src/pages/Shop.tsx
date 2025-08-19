@@ -48,7 +48,7 @@ const Shop = () => {
       price: 24.99,
       originalPrice: 34.99,
       category: "Recovery Kits",
-      image: "/lovable-uploads/3e7570fb-81cb-420b-9f97-79f46edfba7b.png",
+      image: "/genius-recovery-uploads/3e7570fb-81cb-420b-9f97-79f46edfba7b.png",
       rating: 4.9,
       reviews: 127,
       badge: "Best Seller",

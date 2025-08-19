@@ -78,7 +78,7 @@ const Header = () => {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center group">
               <img 
-                src="/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
+                src="/genius-recovery-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png"
                 alt="Genius Recovery" 
                 className="w-[240px] h-auto transition-opacity group-hover:opacity-80"
                 loading="eager"
@@ -196,7 +196,7 @@ const Header = () => {
                 <nav className="flex flex-col gap-4">
                   <div className="flex items-center justify-between mb-6">
                     <img 
-                      src="/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
+                      src="/genius-recovery-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" 
                       alt="Genius Recovery" 
                       className="w-[200px] h-auto"
                       loading="lazy"

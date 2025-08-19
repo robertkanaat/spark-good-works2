@@ -75,7 +75,7 @@ const Press = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
           style={{ 
-            backgroundImage: `url('/lovable-uploads/411b8a25-5350-48b3-a3b5-b01e67d05ea2.png')`,
+            backgroundImage: `url('/genius-recovery-uploads/411b8a25-5350-48b3-a3b5-b01e67d05ea2.png')`,
             backgroundPosition: 'center 15%'
           }}
         >

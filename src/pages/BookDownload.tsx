@@ -224,7 +224,7 @@ const BookDownload = () => {
                   <div className="absolute -inset-12 bg-gradient-to-r from-primary/20 via-donate/20 to-secondary/20 rounded-3xl blur-3xl opacity-60 animate-pulse"></div>
                   <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 shadow-2xl">
                     <img 
-                      src="/lovable-uploads/879915a0-9251-4cd3-8f03-11b3f3a07f1d.png" 
+                      src="/genius-recovery-uploads/879915a0-9251-4cd3-8f03-11b3f3a07f1d.png" 
                       alt="Understanding Addiction And Recovery book cover by Joe Polish"
                       className="w-full max-w-sm mx-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
                     />

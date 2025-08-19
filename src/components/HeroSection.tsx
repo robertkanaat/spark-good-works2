@@ -296,7 +296,7 @@ const HeroSection = () => {
           </div>
           <div className="flex justify-center items-center mb-8">
             <img 
-              src="/lovable-uploads/652d2a71-1ff9-41f1-9dfc-c50ab54c0e81.png" 
+              src="/genius-recovery-uploads/652d2a71-1ff9-41f1-9dfc-c50ab54c0e81.png" 
               alt="Trusted partner organizations and certifications"
               className="max-h-16 opacity-80 hover:opacity-100 transition-opacity duration-300"
             />

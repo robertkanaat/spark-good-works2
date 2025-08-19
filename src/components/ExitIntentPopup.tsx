@@ -109,7 +109,7 @@ const ExitIntentPopup = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur-xl opacity-60" />
                 <img 
-                  src="/lovable-uploads/879915a0-9251-4cd3-8f03-11b3f3a07f1d.png" 
+                  src="/genius-recovery-uploads/879915a0-9251-4cd3-8f03-11b3f3a07f1d.png" 
                   alt="Understanding Addiction And Recovery book cover"
                   className="relative w-40 h-auto rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
                 />
