@@ -257,9 +257,9 @@ const Index = () => {
         <VideoSection />
         <StatsSection />
         <FeaturesSection />
+        <VolunteerCTA />
         <BlogPreviewSection />
         <OpenLetterPreview />
-        <VolunteerCTA />
         <HomeFAQSection />
         <Footer />
       </div>
