@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle, Share2, BookOpen, TrendingUp, Loader2, AlertCircle, Sparkles, X, Facebook, Linkedin, Copy } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
@@ -26,10 +26,13 @@ import {
 import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 
 const Blog = () => {
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
   const { posts, loading, error, featuredPost, categories, totalPages, currentPage, fetchPage, totalPostsCount } = useWordPressPosts();
+  
+  // Get page from URL params, default to 1
+  const pageFromUrl = parseInt(searchParams.get('page') || '1', 10);
   
   const filteredPosts = selectedCategory === "All" 
     ? posts 
@@ -43,6 +46,13 @@ const Blog = () => {
     }
   }, []);
 
+  // Handle page changes from URL
+  useEffect(() => {
+    if (pageFromUrl !== currentPage && pageFromUrl >= 1 && pageFromUrl <= totalPages) {
+      fetchPage(pageFromUrl);
+    }
+  }, [pageFromUrl, currentPage, totalPages, fetchPage]);
+
   const toggleLike = (postId: number) => {
     setLikedPosts(prev => {
       const newLikedPosts = new Set(prev);
@@ -55,6 +65,11 @@ const Blog = () => {
       localStorage.setItem('likedPosts', JSON.stringify(Array.from(newLikedPosts)));
       return newLikedPosts;
     });
+  };
+
+  const handlePageChange = (page: number) => {
+    setSearchParams({ page: page.toString() });
+    fetchPage(page);
   };
 
   const handleShare = (platform: string, post: any) => {
@@ -493,7 +508,7 @@ Best regards,`;
                     onClick={(e) => {
                       e.preventDefault();
                       if (currentPage > 1) {
-                        fetchPage(currentPage - 1);
+                        handlePageChange(currentPage - 1);
                       }
                     }}
                     className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
@@ -506,7 +521,7 @@ Best regards,`;
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      fetchPage(1);
+                      handlePageChange(1);
                     }}
                     isActive={currentPage === 1}
                   >
@@ -532,7 +547,7 @@ Best regards,`;
                         href="#"
                         onClick={(e) => {
                           e.preventDefault();
-                          fetchPage(pageNum);
+                          handlePageChange(pageNum);
                         }}
                         isActive={currentPage === pageNum}
                       >
@@ -556,7 +571,7 @@ Best regards,`;
                       href="#"
                       onClick={(e) => {
                         e.preventDefault();
-                        fetchPage(totalPages);
+                        handlePageChange(totalPages);
                       }}
                       isActive={currentPage === totalPages}
                     >
@@ -571,7 +586,7 @@ Best regards,`;
                     onClick={(e) => {
                       e.preventDefault();
                       if (currentPage < totalPages) {
-                        fetchPage(currentPage + 1);
+                        handlePageChange(currentPage + 1);
                       }
                     }}
                     className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
