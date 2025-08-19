@@ -92,31 +92,11 @@ const OpenLetter = () => {
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-foreground mb-8 leading-tight animate-fade-in">
                   Open Letter to{" "}
                   <br />
-                  <span 
-                    className="font-black"
-                    style={{ 
-                      background: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD23F 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      textShadow: '2px 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(255,107,53,0.5)'
-                    }}
-                  >
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-donate to-primary">
                     Anyone Struggling
                   </span>{" "}
                   <br />
-                  <span 
-                    className="font-black"
-                    style={{ 
-                      background: 'linear-gradient(135deg, #E74C3C 0%, #C0392B 50%, #A93226 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      textShadow: '2px 2px 4px rgba(0,0,0,0.4), 0 0 15px rgba(231,76,60,0.6)'
-                    }}
-                  >
-                    with Addiction
-                  </span>
+                  <span className="text-primary">with Addiction</span>
                 </h1>
                 
                 {/* Subheadline */}
