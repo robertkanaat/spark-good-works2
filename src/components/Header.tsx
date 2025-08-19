@@ -90,6 +90,10 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-6">
+              <Link to="/about" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+                <span className="relative z-10">ABOUT</span>
+                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </Link>
               <Link to="/emergency" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
                 <span className="relative z-10">GET HELP</span>
                 <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -100,10 +104,6 @@ const Header = () => {
               </Link>
               <Link to="/blog" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
                 <span className="relative z-10">BLOG</span>
-                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-              </Link>
-              <Link to="/about" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
-                <span className="relative z-10">ABOUT</span>
                 <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
               <Link to="/contact" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
@@ -205,6 +205,13 @@ const Header = () => {
                   
                   <div className="flex flex-col gap-3">
                     <Link 
+                      to="/about" 
+                      className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      ABOUT
+                    </Link>
+                    <Link 
                       to="/emergency" 
                       className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
                       onClick={() => setIsOpen(false)}
@@ -224,13 +231,6 @@ const Header = () => {
                       onClick={() => setIsOpen(false)}
                     >
                       BLOG
-                    </Link>
-                    <Link 
-                      to="/about" 
-                      className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      ABOUT
                     </Link>
                     <Link 
                       to="/contact" 
