@@ -100,10 +100,18 @@ const formatDate = (dateString: string): string => {
 
 // Function to get category name
 const getCategoryName = (post: WordPressPost): string => {
-  if (post._embedded?.['wp:term']?.[0]?.[0]) {
-    return post._embedded['wp:term'][0][0].name;
+  if (post._embedded?.['wp:term']?.[0]) {
+    // Get the first category that isn't "Uncategorized"
+    const categories = post._embedded['wp:term'][0];
+    for (const category of categories) {
+      if (category.taxonomy === 'category' && category.name !== 'Uncategorized') {
+        console.log('Category found for post:', post.title.rendered, 'Category:', category.name);
+        return category.name;
+      }
+    }
   }
-  return 'General';
+  console.log('No valid category found for post:', post.title.rendered, 'Using fallback: Blog');
+  return 'Blog';
 };
 
 // Function to get author name
@@ -139,7 +147,42 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [allPosts, setAllPosts] = useState<TransformedPost[]>([]);
-  
+
+  // Function to fetch posts for category discovery
+  const fetchPostsForCategories = async () => {
+    try {
+      // Fetch more posts to get a better picture of available categories
+      const response = await fetch(
+        `${WORDPRESS_API_URL}?_embed&per_page=50&orderby=date&order=desc`,
+        {
+          headers: {
+            'Accept': 'application/json',
+          },
+        }
+      );
+
+      if (response.ok) {
+        const wordpressPosts: WordPressPost[] = await response.json();
+        const transformedPosts: TransformedPost[] = wordpressPosts.map((post) => ({
+          id: post.id,
+          title: stripHtml(post.title.rendered),
+          excerpt: stripHtml(post.excerpt.rendered).replace(/READ IT TO ME:.*?Click play to listen to this post\./gi, '').trim(),
+          content: post.content.rendered,
+          category: getCategoryName(post),
+          author: getAuthorName(post),
+          date: formatDate(post.date),
+          readTime: calculateReadTime(post.content.rendered),
+          image: getFeaturedImage(post),
+          featured: false,
+          slug: post.slug,
+          link: post.link,
+        }));
+        setAllPosts(transformedPosts);
+      }
+    } catch (err) {
+      console.error('Error fetching posts for categories:', err);
+    }
+  };
 
 
   const fetchPage = async (page: number) => {
@@ -203,12 +246,15 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
   };
 
   useEffect(() => {
+    fetchPostsForCategories(); // Fetch larger sample for categories
     fetchPage(1);
   }, []);
 
   // Get unique categories from posts that have been fetched and filter out generic ones
   const postCategories = Array.from(new Set(allPosts.map(post => post.category)))
     .filter(category => category !== 'General' && category !== 'Uncategorized');
+  console.log('Available categories from posts:', postCategories);
+  console.log('All posts with categories:', allPosts.map(p => ({ title: p.title, category: p.category })));
   const categories = ['All', ...postCategories];
   
   // Get featured post

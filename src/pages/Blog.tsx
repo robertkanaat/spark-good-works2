@@ -26,7 +26,14 @@ const Blog = () => {
   
   const filteredPosts = selectedCategory === "All" 
     ? posts 
-    : posts.filter(post => post.category === selectedCategory);
+    : posts.filter(post => {
+        console.log('Filtering post:', post.title, 'Category:', post.category, 'Selected:', selectedCategory, 'Match:', post.category === selectedCategory);
+        return post.category === selectedCategory;
+      });
+
+  console.log('Available categories:', categories);
+  console.log('Selected category:', selectedCategory);
+  console.log('Total posts:', posts.length, 'Filtered posts:', filteredPosts.length);
 
   // Show loading state
   if (loading) {
