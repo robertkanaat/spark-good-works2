@@ -215,8 +215,74 @@ const BlogPost = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-              {/* Main Content */}
-              <div className="lg:col-span-3">
+              {/* Sidebar - Now on the left */}
+              <div className="lg:col-span-1 lg:order-1">
+                <div className="sticky top-8 space-y-8">
+                  {/* Share Options */}
+                  <Card className="p-6">
+                    <h3 className="font-bold mb-4 flex items-center gap-2">
+                      <Share2 className="w-5 h-5" />
+                      Share This Story
+                    </h3>
+                    <div className="space-y-3">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full justify-start hover-scale"
+                        onClick={() => handleShare('x')}
+                      >
+                        <X className="w-4 h-4 mr-2" />
+                        X
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full justify-start hover-scale"
+                        onClick={() => handleShare('facebook')}
+                      >
+                        <Facebook className="w-4 h-4 mr-2" />
+                        Facebook
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full justify-start hover-scale"
+                        onClick={() => handleShare('linkedin')}
+                      >
+                        <Linkedin className="w-4 h-4 mr-2" />
+                        LinkedIn
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full justify-start hover-scale"
+                        onClick={() => handleShare('copy')}
+                      >
+                        <Copy className="w-4 h-4 mr-2" />
+                        Copy Link
+                      </Button>
+                    </div>
+                  </Card>
+
+                  {/* Related Stories CTA */}
+                  <Card className="p-6 bg-gradient-to-br from-primary/10 to-orange-500/10">
+                    <h3 className="font-bold mb-4">More Inspiring Stories</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Discover more journeys of hope and recovery
+                    </p>
+                    <Button 
+                      size="sm" 
+                      className="w-full hover-scale"
+                      onClick={() => navigate('/blog')}
+                    >
+                      Explore Stories
+                    </Button>
+                  </Card>
+                </div>
+              </div>
+
+              {/* Main Content - Now on the right */}
+              <div className="lg:col-span-3 lg:order-2">
                 <Card className="p-8 md:p-12 shadow-elegant">
                   <div 
                     className="space-y-8 text-lg leading-relaxed"
@@ -284,71 +350,6 @@ const BlogPost = () => {
                 </Card>
               </div>
 
-              {/* Sidebar */}
-              <div className="lg:col-span-1">
-                <div className="sticky top-8 space-y-8">
-                  {/* Share Options */}
-                  <Card className="p-6">
-                    <h3 className="font-bold mb-4 flex items-center gap-2">
-                      <Share2 className="w-5 h-5" />
-                      Share This Story
-                    </h3>
-                    <div className="space-y-3">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="w-full justify-start hover-scale"
-                        onClick={() => handleShare('x')}
-                      >
-                        <X className="w-4 h-4 mr-2" />
-                        X
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="w-full justify-start hover-scale"
-                        onClick={() => handleShare('facebook')}
-                      >
-                        <Facebook className="w-4 h-4 mr-2" />
-                        Facebook
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="w-full justify-start hover-scale"
-                        onClick={() => handleShare('linkedin')}
-                      >
-                        <Linkedin className="w-4 h-4 mr-2" />
-                        LinkedIn
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="w-full justify-start hover-scale"
-                        onClick={() => handleShare('copy')}
-                      >
-                        <Copy className="w-4 h-4 mr-2" />
-                        Copy Link
-                      </Button>
-                    </div>
-                  </Card>
-
-                  {/* Related Stories CTA */}
-                  <Card className="p-6 bg-gradient-to-br from-primary/10 to-orange-500/10">
-                    <h3 className="font-bold mb-4">More Inspiring Stories</h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Discover more journeys of hope and recovery
-                    </p>
-                    <Button 
-                      size="sm" 
-                      className="w-full hover-scale"
-                      onClick={() => navigate('/blog')}
-                    >
-                      Explore Stories
-                    </Button>
-                  </Card>
-                </div>
-              </div>
             </div>
           </div>
         </div>
