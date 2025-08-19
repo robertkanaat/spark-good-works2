@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle, Share2, BookOpen, TrendingUp, Loader2, AlertCircle, Sparkles } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight, Search, Filter, Heart, MessageCircle, Share2, BookOpen, TrendingUp, Loader2, AlertCircle, Sparkles, X, Facebook, Linkedin, Copy } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -17,6 +17,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import blogHeroBg from "@/assets/blog-hero-bg.jpg";
 
 const Blog = () => {
@@ -27,6 +33,36 @@ const Blog = () => {
   const filteredPosts = selectedCategory === "All" 
     ? posts 
     : posts.filter(post => post.category === selectedCategory);
+
+  const handleShare = (platform: string, post: any) => {
+    const url = `${window.location.origin}/blog/${post.slug}`;
+    const title = post.title;
+    
+    let shareUrl = '';
+    
+    switch (platform) {
+      case 'x':
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+        break;
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        break;
+      case 'linkedin':
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+        break;
+      case 'copy':
+        navigator.clipboard.writeText(url).then(() => {
+          // Could add toast notification here
+        });
+        return;
+      default:
+        return;
+    }
+    
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+  };
 
   // Show loading state
   if (loading) {
@@ -373,26 +409,36 @@ Best regards,`;
                     >
                       <Heart className="w-4 h-4 group-hover/heart:scale-110 group-hover/heart:fill-red-500 transition-all duration-300" />
                     </Button>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="h-9 w-9 p-0 hover:bg-blue-50 hover:text-blue-500 transition-colors"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (navigator.share) {
-                          navigator.share({
-                            title: post.title,
-                            text: post.excerpt,
-                            url: `${window.location.origin}/blog/${post.slug}`
-                          });
-                        } else {
-                          navigator.clipboard.writeText(`${window.location.origin}/blog/${post.slug}`);
-                          // You could add a toast notification here
-                        }
-                      }}
-                    >
-                      <Share2 className="w-4 h-4" />
-                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-9 w-9 p-0 hover:bg-blue-50 hover:text-blue-500 transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Share2 className="w-4 h-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-48">
+                        <DropdownMenuItem onClick={() => handleShare('x', post)}>
+                          <X className="w-4 h-4 mr-2" />
+                          Share on X
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleShare('facebook', post)}>
+                          <Facebook className="w-4 h-4 mr-2" />
+                          Share on Facebook
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleShare('linkedin', post)}>
+                          <Linkedin className="w-4 h-4 mr-2" />
+                          Share on LinkedIn
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleShare('copy', post)}>
+                          <Copy className="w-4 h-4 mr-2" />
+                          Copy Link
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 </div>
               </div>
