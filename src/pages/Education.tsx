@@ -517,7 +517,7 @@ const Education = () => {
                 <Heart className="w-8 h-8 text-primary" />
               </div>
               <div>
-                <h2 className="text-4xl font-bold text-foreground drop-shadow-lg">
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Mental Health & Recovery
                 </h2>
                 <p className="text-muted-foreground">Addressing Co-Occurring Conditions</p>
@@ -649,8 +649,14 @@ const Education = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)]"></div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-16">
-            <h2 className="text-5xl font-bold text-foreground mb-8 drop-shadow-lg">
-              Ready to Take the Next Step?
+            <h2 className="text-5xl font-bold text-foreground mb-8 relative">
+              <span className="bg-gradient-to-r from-primary via-accent to-primary/80 bg-clip-text text-transparent">
+                Ready to Take the Next Step?
+              </span>
+              {/* Fallback text for better contrast */}
+              <span className="absolute inset-0 text-foreground opacity-20 -z-10">
+                Ready to Take the Next Step?
+              </span>
             </h2>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-4xl mx-auto">
               Knowledge is just the beginning. Turn what you've learned into action with our comprehensive 
