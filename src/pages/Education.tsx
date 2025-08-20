@@ -707,8 +707,8 @@ const Education = () => {
               </Button>
             </Link>
             <Link to="/donation">
-              <Button className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white px-8 py-4 text-lg font-semibold">
-                Support Our Mission
+              <Button className="bg-gradient-to-r from-purple-500 via-primary to-orange-500 hover:from-purple-600 hover:via-primary/90 hover:to-orange-600 text-white px-8 py-4 text-lg font-semibold">
+                Donate Now
                 <Heart className="w-4 h-4 ml-2" />
               </Button>
             </Link>
