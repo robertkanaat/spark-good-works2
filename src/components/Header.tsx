@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X, User, LogOut, Settings, Shield } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 import {
@@ -18,6 +18,15 @@ const Header = () => {
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [userProfile, setUserProfile] = useState<any>(null);
+  const location = useLocation();
+
+  // Helper function to check if a route is active
+  const isActiveRoute = (path: string) => {
+    if (path === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(path);
+  };
 
   useEffect(() => {
     // Set up auth state listener
@@ -90,26 +99,73 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-6">
-              <Link to="/about" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+              <Link 
+                to="/about" 
+                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group ${
+                  isActiveRoute('/about') 
+                    ? 'text-primary bg-primary/5 scale-105' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
                 <span className="relative z-10">ABOUT</span>
-                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div className={`absolute inset-0 bg-primary/10 transition-transform duration-300 origin-left ${
+                  isActiveRoute('/about') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}></div>
               </Link>
-              <Link to="/emergency" className="text-muted-foreground hover:text-red-600 px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-110 hover:bg-red-50 dark:hover:bg-red-950/20 rounded-md relative overflow-hidden group hover:shadow-lg hover:shadow-red-500/25">
+              <Link 
+                to="/emergency" 
+                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-110 rounded-md relative overflow-hidden group hover:shadow-lg hover:shadow-red-500/25 ${
+                  isActiveRoute('/emergency')
+                    ? 'text-red-600 bg-red-50 dark:bg-red-950/20 scale-110 shadow-lg shadow-red-500/25'
+                    : 'text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20'
+                }`}
+              >
                 <span className="relative z-10 font-semibold">EMERGENCY</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                <div className="absolute inset-0 animate-pulse bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className={`absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 transition-transform duration-300 origin-left ${
+                  isActiveRoute('/emergency') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}></div>
+                <div className={`absolute inset-0 animate-pulse bg-red-500/5 transition-opacity duration-300 ${
+                  isActiveRoute('/emergency') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}></div>
               </Link>
-              <Link to="/resources" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+              <Link 
+                to="/resources" 
+                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group ${
+                  isActiveRoute('/resources') 
+                    ? 'text-primary bg-primary/5 scale-105' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
                 <span className="relative z-10">RESOURCES</span>
-                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div className={`absolute inset-0 bg-primary/10 transition-transform duration-300 origin-left ${
+                  isActiveRoute('/resources') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}></div>
               </Link>
-              <Link to="/blog" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+              <Link 
+                to="/blog" 
+                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group ${
+                  isActiveRoute('/blog') 
+                    ? 'text-primary bg-primary/5 scale-105' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
                 <span className="relative z-10">BLOG</span>
-                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div className={`absolute inset-0 bg-primary/10 transition-transform duration-300 origin-left ${
+                  isActiveRoute('/blog') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}></div>
               </Link>
-              <Link to="/contact" className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group">
+              <Link 
+                to="/contact" 
+                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group ${
+                  isActiveRoute('/contact') 
+                    ? 'text-primary bg-primary/5 scale-105' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
                 <span className="relative z-10">CONTACT</span>
-                <div className="absolute inset-0 bg-primary/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div className={`absolute inset-0 bg-primary/10 transition-transform duration-300 origin-left ${
+                  isActiveRoute('/contact') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}></div>
               </Link>
             </div>
           </nav>
@@ -204,43 +260,65 @@ const Header = () => {
                     />
                   </div>
                   
-                  <div className="flex flex-col gap-3">
-                    <Link 
-                      to="/about" 
-                      className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      ABOUT
-                    </Link>
-                    <Link 
-                      to="/emergency" 
-                      className="text-lg font-semibold text-foreground hover:text-red-600 px-4 py-3 rounded-md hover:bg-red-50 dark:hover:bg-red-950/20 transition-all duration-300 hover:scale-105 hover:shadow-md hover:shadow-red-500/25 relative overflow-hidden group"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <span className="relative z-10">EMERGENCY</span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                    </Link>
-                    <Link 
-                      to="/resources" 
-                      className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      RESOURCES
-                    </Link>
-                    <Link 
-                      to="/blog" 
-                      className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      BLOG
-                    </Link>
-                    <Link 
-                      to="/contact" 
-                      className="text-lg font-medium text-foreground hover:text-primary px-4 py-3 rounded-md hover:bg-muted transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      CONTACT
-                    </Link>
+                   <div className="flex flex-col gap-3">
+                     <Link 
+                       to="/about" 
+                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
+                         isActiveRoute('/about')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       ABOUT
+                     </Link>
+                     <Link 
+                       to="/emergency" 
+                       className={`text-lg font-semibold px-4 py-3 rounded-md transition-all duration-300 hover:scale-105 hover:shadow-md hover:shadow-red-500/25 relative overflow-hidden group ${
+                         isActiveRoute('/emergency')
+                           ? 'text-red-600 bg-red-50 dark:bg-red-950/20 scale-105 shadow-md shadow-red-500/25'
+                           : 'text-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       <span className="relative z-10">EMERGENCY</span>
+                       <div className={`absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 transition-transform duration-300 origin-left ${
+                         isActiveRoute('/emergency') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                       }`}></div>
+                     </Link>
+                     <Link 
+                       to="/resources" 
+                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
+                         isActiveRoute('/resources')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       RESOURCES
+                     </Link>
+                     <Link 
+                       to="/blog" 
+                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
+                         isActiveRoute('/blog')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       BLOG
+                     </Link>
+                     <Link 
+                       to="/contact" 
+                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
+                         isActiveRoute('/contact')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       CONTACT
+                     </Link>
                     
                     {/* Mobile Auth Section - Hidden for now */}
                     {/* {user ? (
