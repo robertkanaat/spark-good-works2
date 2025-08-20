@@ -277,6 +277,118 @@ const About = () => {
           
           {/* Our Story Section */}
           <OurStorySection />
+          
+          {/* Meet Andre Norman Section */}
+          <section className="relative py-24 overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse opacity-30" />
+            <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse delay-1000 opacity-40" />
+            
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-card/80 backdrop-blur-sm rounded-full border border-primary/20 mb-6">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                  <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+                    Leadership Team
+                  </span>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-black text-foreground mb-8 leading-tight">
+                  Meet{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-primary to-orange-500">
+                    Andre Norman
+                  </span>
+                </h2>
+                
+                <p className="text-xl text-foreground/90 leading-relaxed max-w-3xl mx-auto mb-12">
+                  From Maximum Security Prison to Harvard University - Andre's incredible transformation story 
+                  embodies the power of second chances and redemption.
+                </p>
+              </div>
+              
+              <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                {/* Left Column - Story */}
+                <div className="space-y-6">
+                  <div className="bg-gradient-to-r from-purple-500/10 via-primary/5 to-orange-500/10 rounded-2xl p-8 border border-primary/20">
+                    <h3 className="text-2xl font-bold text-foreground mb-4">An Impossible Dream Realized</h3>
+                    <p className="text-foreground/90 leading-relaxed mb-6">
+                      Andre Norman's journey from the depths of maximum security prison to the halls of Harvard University 
+                      is nothing short of extraordinary. His transformation represents the ultimate proof that no one is 
+                      beyond redemption, and that the most broken among us can become the most powerful agents of change.
+                    </p>
+                    <p className="text-foreground/90 leading-relaxed">
+                      Through his work with Second Chance University, Andre has dedicated his life to helping others 
+                      discover their own potential for transformation, proving that education, mentorship, and belief 
+                      in human possibility can overcome even the most challenging circumstances.
+                    </p>
+                  </div>
+                  
+                  {/* Quote */}
+                  <div className="relative p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/20">
+                    <div className="absolute -top-3 left-6">
+                      <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                        <span className="text-primary-foreground text-sm font-bold">"</span>
+                      </div>
+                    </div>
+                    <blockquote className="text-lg italic text-foreground/90 leading-relaxed mb-3">
+                      "Your past doesn't determine your future. Every day is an opportunity to write a new chapter 
+                      in the story of your life."
+                    </blockquote>
+                    <cite className="text-primary font-semibold">— Andre Norman</cite>
+                  </div>
+                </div>
+                
+                {/* Right Column - Impact & Stats */}
+                <div className="space-y-6">
+                  <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/20">
+                    <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
+                      <BookOpen className="w-8 h-8 text-primary" />
+                      Second Chance University
+                    </h3>
+                    <p className="text-foreground/90 leading-relaxed mb-6">
+                      Founder of Second Chance University, Andre provides people with a supportive environment 
+                      to learn and grow, empowering them to overcome the challenges and obstacles that are holding them back.
+                    </p>
+                    
+                    {/* Impact Numbers */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="text-center p-4 bg-gradient-to-br from-primary/10 to-orange-500/10 rounded-xl border border-primary/20">
+                        <div className="text-3xl font-black text-primary mb-1">200K+</div>
+                        <div className="text-sm text-foreground/80 font-medium">Prisoners Impacted</div>
+                      </div>
+                      <div className="text-center p-4 bg-gradient-to-br from-primary/10 to-orange-500/10 rounded-xl border border-primary/20">
+                        <div className="text-3xl font-black text-primary mb-1">45</div>
+                        <div className="text-sm text-foreground/80 font-medium">States Visited</div>
+                      </div>
+                      <div className="text-center p-4 bg-gradient-to-br from-primary/10 to-orange-500/10 rounded-xl border border-primary/20">
+                        <div className="text-3xl font-black text-primary mb-1">25</div>
+                        <div className="text-sm text-foreground/80 font-medium">Countries Reached</div>
+                      </div>
+                      <div className="text-center p-4 bg-gradient-to-br from-primary/10 to-orange-500/10 rounded-xl border border-primary/20">
+                        <div className="text-3xl font-black text-primary mb-1">8M+</div>
+                        <div className="text-sm text-foreground/80 font-medium">Social Media Impact</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Mission Alignment */}
+                  <div className="bg-gradient-to-r from-purple-500/10 via-primary/5 to-orange-500/10 rounded-2xl p-6 border border-primary/20">
+                    <h4 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                      <Heart className="w-5 h-5 text-primary" />
+                      Aligned with Genius Recovery
+                    </h4>
+                    <p className="text-foreground/90 leading-relaxed text-sm">
+                      Andre's expertise in transformation and second chances perfectly complements Genius Recovery's 
+                      mission of changing how the world understands addiction and recovery. Together, we're proving 
+                      that redemption is possible for everyone.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
           {/* Our Mission Section */}
           <OurMissionSection />
           {/* Call to Action Section */}
