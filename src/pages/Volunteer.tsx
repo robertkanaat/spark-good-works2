@@ -137,11 +137,24 @@ const Volunteer = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    console.log("=== VOLUNTEER FORM SUBMISSION DEBUG ===");
+    console.log("Form data:", formData);
+    console.log("Timestamp:", new Date().toISOString());
+
     try {
       // Submit to Zapier webhook
       const webhookUrl = "https://hooks.zapier.com/hooks/catch/155028/u6j9txh/";
       
-      console.log("Submitting volunteer application to Zapier:", formData);
+      const payload = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: "Genius Recovery Volunteer Application",
+        page_url: window.location.href
+      };
+
+      console.log("Webhook URL:", webhookUrl);
+      console.log("Payload being sent:", payload);
+      console.log("Attempting to send request...");
       
       const response = await fetch(webhookUrl, {
         method: "POST",
@@ -149,14 +162,11 @@ const Volunteer = () => {
           "Content-Type": "application/json",
         },
         mode: "no-cors", // Handle CORS for Zapier webhooks
-        body: JSON.stringify({
-          ...formData,
-          timestamp: new Date().toISOString(),
-          source: "Genius Recovery Volunteer Application",
-          page_url: window.location.href
-        }),
+        body: JSON.stringify(payload),
       });
 
+      console.log("Request sent successfully (no-cors mode)");
+      
       // Since we're using no-cors, we can't check response status
       // So we'll assume success and show confirmation
       toast({
@@ -175,7 +185,11 @@ const Volunteer = () => {
         message: ""
       });
     } catch (error) {
-      console.error("Error submitting volunteer application:", error);
+      console.error("=== ERROR submitting volunteer application ===");
+      console.error("Error details:", error);
+      console.error("Error message:", error.message);
+      console.error("Error stack:", error.stack);
+      
       toast({
         variant: "destructive",
         title: "Submission Failed",
@@ -183,6 +197,7 @@ const Volunteer = () => {
       });
     } finally {
       setIsSubmitting(false);
+      console.log("=== VOLUNTEER FORM SUBMISSION COMPLETE ===");
     }
   };
 
