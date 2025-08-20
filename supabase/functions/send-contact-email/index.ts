@@ -262,7 +262,7 @@ const handler = async (req: Request): Promise<Response> => {
       <body>
         <div class="container">
           <div class="header">
-            <img src="https://geniusrecovery.org/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" alt="Genius Recovery" class="logo">
+            <img src="https://geniusrecovery.org/genius-recovery-logo.png" alt="Genius Recovery" class="logo">
             <div class="header-subtitle">Your Recovery Resource is Ready</div>
           </div>
           
@@ -452,7 +452,7 @@ const handler = async (req: Request): Promise<Response> => {
       <body>
         <div class="container">
           <div class="header">
-            <img src="https://geniusrecovery.org/lovable-uploads/503e117d-b085-47e8-916d-ecb3995e75e9.png" alt="Genius Recovery" class="logo">
+            <img src="https://geniusrecovery.org/genius-recovery-logo.png" alt="Genius Recovery" class="logo">
             <div class="header-subtitle">On A Mission To Heal Addiction Around The World</div>
           </div>
           
