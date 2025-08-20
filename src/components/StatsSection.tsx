@@ -29,11 +29,11 @@ const StatsSection = () => {
       icon: "🤖"
     },
     {
-      number: "300+",
-      animatedNumber: 300,
+      number: "50,000+",
+      animatedNumber: 50000,
       suffix: "+",
-      label: "recovery stories shared",
-      description: "Real experiences inspiring hope and healing",
+      label: "people supported in recovery",
+      description: "Building a community of hope and healing",
       color: "from-green-500 to-emerald-500",
       icon: "❤️"
     },
@@ -132,7 +132,7 @@ const StatsSection = () => {
                 <div className={`text-5xl md:text-6xl font-bold mb-3 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-500`}>
                   {index === 0 && `${animatedNumbers.addiction}${stat.suffix}`}
                   {index === 1 && stat.number}
-                  {index === 2 && stat.number}
+                  {index === 2 && `${animatedNumbers.supported.toLocaleString()}${stat.suffix}`}
                   {index === 3 && `${animatedNumbers.lessAlone}${stat.suffix}`}
                 </div>
                 
