@@ -650,7 +650,7 @@ const Education = () => {
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-16">
             <h2 className="text-5xl font-bold text-foreground mb-8 relative">
-              <span className="bg-gradient-to-r from-primary via-accent to-primary/80 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-500 via-primary to-orange-500 bg-clip-text text-transparent">
                 Ready to Take the Next Step?
               </span>
               {/* Fallback text for better contrast */}
