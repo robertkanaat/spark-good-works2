@@ -517,7 +517,7 @@ const Education = () => {
                 <Heart className="w-8 h-8 text-primary" />
               </div>
               <div>
-                <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-violet-500 to-purple-700 bg-clip-text text-transparent">
                   Mental Health & Recovery
                 </h2>
                 <p className="text-muted-foreground">Addressing Co-Occurring Conditions</p>
