@@ -112,7 +112,7 @@ const Header = () => {
                   <NavigationMenuTrigger 
                     onClick={() => window.location.href = '/about'}
                     className={`text-sm font-medium transition-all duration-300 hover:scale-105 cursor-pointer ${
-                      isActiveRoute('/about') || isActiveRoute('/press') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
+                      isActiveRoute('/about') || isActiveRoute('/press') || isActiveRoute('/open-letter') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
                     }`}
                   >
                     ABOUT
@@ -133,14 +133,42 @@ const Header = () => {
                       </div>
                       <Link
                         to="/about#mission"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                        className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent focus:text-accent-foreground group ${
+                          location.hash === '#mission' && isActiveRoute('/about')
+                            ? 'bg-accent text-accent-foreground' 
+                            : 'hover:bg-accent hover:text-accent-foreground'
+                        }`}
                       >
                         <div className="flex items-center gap-2">
-                          <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <Heart className={`h-4 w-4 transition-transform duration-300 group-hover:scale-110 ${
+                            location.hash === '#mission' && isActiveRoute('/about') ? 'text-primary' : 'text-primary'
+                          }`} />
                           <div className="text-sm font-medium leading-none">Our Mission</div>
                         </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        <p className={`line-clamp-2 text-sm leading-snug ${
+                          location.hash === '#mission' && isActiveRoute('/about') ? 'text-accent-foreground/80' : 'text-muted-foreground'
+                        }`}>
                           Transforming lives through comprehensive recovery support
+                        </p>
+                      </Link>
+                      <Link
+                        to="/open-letter"
+                        className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent focus:text-accent-foreground group ${
+                          isActiveRoute('/open-letter')
+                            ? 'bg-accent text-accent-foreground' 
+                            : 'hover:bg-accent hover:text-accent-foreground'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <BookOpen className={`h-4 w-4 transition-transform duration-300 group-hover:scale-110 ${
+                            isActiveRoute('/open-letter') ? 'text-primary' : 'text-primary'
+                          }`} />
+                          <div className="text-sm font-medium leading-none">Open Letter</div>
+                        </div>
+                        <p className={`line-clamp-2 text-sm leading-snug ${
+                          isActiveRoute('/open-letter') ? 'text-accent-foreground/80' : 'text-muted-foreground'
+                        }`}>
+                          Our public statement on addiction recovery reform
                         </p>
                       </Link>
                       <Link
