@@ -433,12 +433,13 @@ const Header = () => {
 
             {/* Desktop Donate Button */}
             <Link to="/donation" className="hidden sm:block">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-4 lg:px-6 text-sm relative overflow-hidden group transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
+              <Button className="bg-gradient-to-r from-primary via-purple-600 to-primary hover:from-purple-700 hover:via-primary hover:to-purple-700 text-primary-foreground font-semibold px-4 lg:px-6 text-sm relative overflow-hidden group transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/30">
+                <Heart className="w-4 h-4 mr-2 relative z-10 transition-all duration-300 group-hover:animate-pulse group-hover:text-pink-200" />
                 <span className="relative z-10 transition-transform duration-300 group-hover:scale-110">
                   DONATE NOW
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-pink-200/20 to-white/10 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
               </Button>
             </Link>
 
@@ -571,8 +572,10 @@ const Header = () => {
 
                     {/* Mobile Donate Button */}
                     <Link to="/donation" onClick={() => setIsOpen(false)}>
-                      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 text-lg mt-6">
-                        DONATE NOW
+                      <Button className="w-full bg-gradient-to-r from-primary via-purple-600 to-primary hover:from-purple-700 hover:via-primary hover:to-purple-700 text-primary-foreground font-semibold py-3 text-lg mt-6 relative overflow-hidden group">
+                        <Heart className="w-5 h-5 mr-2 transition-all duration-300 group-hover:animate-pulse group-hover:text-pink-200" />
+                        <span className="transition-transform duration-300 group-hover:scale-105">DONATE NOW</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </Button>
                     </Link>
                   </div>
