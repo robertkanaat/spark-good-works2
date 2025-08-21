@@ -439,6 +439,7 @@ const Header = () => {
                   DONATE NOW
                 </span>
                 <div className="absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-300/30 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
               </Button>
             </Link>
 
@@ -571,9 +572,10 @@ const Header = () => {
 
                     {/* Mobile Donate Button */}
                     <Link to="/donation" onClick={() => setIsOpen(false)}>
-                      <Button className="w-full bg-primary hover:bg-purple-600 text-primary-foreground font-semibold py-3 text-lg mt-6 group transition-all duration-300">
-                        <Heart className="w-5 h-5 mr-2 transition-all duration-300 group-hover:animate-heartbeat" />
-                        <span className="transition-transform duration-300 group-hover:scale-105">DONATE NOW</span>
+                      <Button className="w-full bg-primary hover:bg-purple-600 text-primary-foreground font-semibold py-3 text-lg mt-6 group transition-all duration-300 relative overflow-hidden">
+                        <Heart className="w-5 h-5 mr-2 transition-all duration-300 group-hover:animate-heartbeat relative z-10" />
+                        <span className="transition-transform duration-300 group-hover:scale-105 relative z-10">DONATE NOW</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-300/30 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
                       </Button>
                     </Link>
                   </div>
