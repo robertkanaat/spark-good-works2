@@ -105,7 +105,7 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden lg:block">
-            <NavigationMenu>
+            <NavigationMenu className="z-50">
               <NavigationMenuList className="space-x-2">
                 {/* About Dropdown */}
                 <NavigationMenuItem>
@@ -114,7 +114,7 @@ const Header = () => {
                   }`}>
                     ABOUT
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent>
+                  <NavigationMenuContent className="z-50">
                     <div className="grid gap-3 p-6 w-[400px]">
                       <div className="row-span-3">
                         <Link
@@ -165,7 +165,7 @@ const Header = () => {
                   }`}>
                     SUPPORT
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent>
+                  <NavigationMenuContent className="z-50">
                     <div className="grid gap-3 p-6 w-[500px] grid-cols-2">
                       <Link
                         to="/emergency"
@@ -228,7 +228,7 @@ const Header = () => {
                   }`}>
                     RESOURCES
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent>
+                  <NavigationMenuContent className="z-50">
                     <div className="grid gap-3 p-6 w-[450px]">
                       <div className="row-span-3">
                         <Link
