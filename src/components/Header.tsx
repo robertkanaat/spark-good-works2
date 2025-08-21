@@ -109,15 +109,13 @@ const Header = () => {
               <NavigationMenuList className="space-x-2">
                 {/* About Dropdown */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger asChild>
-                    <Link 
-                      to="/about"
-                      className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                        isActiveRoute('/about') || isActiveRoute('/press') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
-                      }`}
-                    >
-                      ABOUT
-                    </Link>
+                  <NavigationMenuTrigger 
+                    onClick={() => window.location.href = '/about'}
+                    className={`text-sm font-medium transition-all duration-300 hover:scale-105 cursor-pointer ${
+                      isActiveRoute('/about') || isActiveRoute('/press') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
+                    }`}
+                  >
+                    ABOUT
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50">
                     <div className="grid gap-3 p-6 w-[400px]">
@@ -265,17 +263,15 @@ const Header = () => {
 
                 {/* Resources Dropdown */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger asChild>
-                    <Link 
-                      to="/resources"
-                      className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                        isActiveRoute('/resources') || isActiveRoute('/education') || isActiveRoute('/recovery-tools') || isActiveRoute('/faq')
-                          ? 'text-primary bg-primary/5' 
-                          : 'text-muted-foreground'
-                      }`}
-                    >
-                      RESOURCES
-                    </Link>
+                  <NavigationMenuTrigger 
+                    onClick={() => window.location.href = '/resources'}
+                    className={`text-sm font-medium transition-all duration-300 hover:scale-105 cursor-pointer ${
+                      isActiveRoute('/resources') || isActiveRoute('/education') || isActiveRoute('/recovery-tools') || isActiveRoute('/faq')
+                        ? 'text-primary bg-primary/5' 
+                        : 'text-muted-foreground'
+                    }`}
+                  >
+                    RESOURCES
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50">
                     <div className="grid gap-3 p-6 w-[450px]">
