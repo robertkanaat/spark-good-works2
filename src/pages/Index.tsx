@@ -1,16 +1,21 @@
 
+import { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import VideoSection from '@/components/VideoSection';
-import StatsSection from '@/components/StatsSection';
-import FeaturesSection from '@/components/FeaturesSection';
-import BlogPreviewSection from '@/components/BlogPreviewSection';
-import OpenLetterPreview from '@/components/OpenLetterPreview';
-import HomeFAQSection from '@/components/HomeFAQSection';
-import VolunteerCTA from '@/components/VolunteerCTA';
-import Footer from '@/components/Footer';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import PerformanceOptimizer from '@/components/PerformanceOptimizer';
+
+// Lazy load components for better performance
+const HeroSection = lazy(() => import('@/components/HeroSection'));
+const TestimonialsSection = lazy(() => import('@/components/TestimonialsSection'));
+const VideoSection = lazy(() => import('@/components/VideoSection'));
+const StatsSection = lazy(() => import('@/components/StatsSection'));
+const FeaturesSection = lazy(() => import('@/components/FeaturesSection'));
+const BlogPreviewSection = lazy(() => import('@/components/BlogPreviewSection'));
+const OpenLetterPreview = lazy(() => import('@/components/OpenLetterPreview'));
+const HomeFAQSection = lazy(() => import('@/components/HomeFAQSection'));
+const VolunteerCTA = lazy(() => import('@/components/VolunteerCTA'));
+const Footer = lazy(() => import('@/components/Footer'));
 
 const Index = () => {
   const organizationSchema = {
@@ -219,6 +224,7 @@ const Index = () => {
 
   return (
     <>
+      <PerformanceOptimizer />
       <Helmet>
         <title>Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help</title>
         <meta
@@ -252,16 +258,36 @@ const Index = () => {
       </Helmet>
       <div className="min-h-screen">
         <Header />
-        <HeroSection />
-        <TestimonialsSection />
-        <VideoSection />
-        <StatsSection />
-        <FeaturesSection />
-        <VolunteerCTA />
-        <BlogPreviewSection />
-        <OpenLetterPreview />
-        <HomeFAQSection />
-        <Footer />
+        <Suspense fallback={<LoadingSpinner />}>
+          <HeroSection />
+        </Suspense>
+        <Suspense fallback={<div className="py-8" />}>
+          <TestimonialsSection />
+        </Suspense>
+        <Suspense fallback={<div className="py-8" />}>
+          <VideoSection />
+        </Suspense>
+        <Suspense fallback={<div className="py-8" />}>
+          <StatsSection />
+        </Suspense>
+        <Suspense fallback={<div className="py-8" />}>
+          <FeaturesSection />
+        </Suspense>
+        <Suspense fallback={<div className="py-8" />}>
+          <VolunteerCTA />
+        </Suspense>
+        <Suspense fallback={<div className="py-8" />}>
+          <BlogPreviewSection />
+        </Suspense>
+        <Suspense fallback={<div className="py-8" />}>
+          <OpenLetterPreview />
+        </Suspense>
+        <Suspense fallback={<div className="py-8" />}>
+          <HomeFAQSection />
+        </Suspense>
+        <Suspense fallback={<div className="py-8" />}>
+          <Footer />
+        </Suspense>
       </div>
     </>
   );
