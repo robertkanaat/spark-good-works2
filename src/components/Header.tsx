@@ -109,10 +109,15 @@ const Header = () => {
               <NavigationMenuList className="space-x-2">
                 {/* About Dropdown */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                    isActiveRoute('/about') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
-                  }`}>
-                    ABOUT
+                  <NavigationMenuTrigger asChild>
+                    <Link 
+                      to="/about"
+                      className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                        isActiveRoute('/about') || isActiveRoute('/press') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
+                      }`}
+                    >
+                      ABOUT
+                    </Link>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50">
                     <div className="grid gap-3 p-6 w-[400px]">
@@ -173,7 +178,8 @@ const Header = () => {
                 {/* Support Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                    isActiveRoute('/emergency') || isActiveRoute('/crisis-support') || isActiveRoute('/family-support') || isActiveRoute('/volunteer') || isActiveRoute('/donation')
+                    isActiveRoute('/emergency') || isActiveRoute('/treatment-centers') || isActiveRoute('/support-groups') || 
+                    isActiveRoute('/family-support') || isActiveRoute('/volunteer') || isActiveRoute('/donation')
                       ? 'text-primary bg-primary/5' 
                       : 'text-muted-foreground'
                   }`}>
@@ -259,12 +265,17 @@ const Header = () => {
 
                 {/* Resources Dropdown */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                    isActiveRoute('/resources') || isActiveRoute('/education') || isActiveRoute('/recovery-tools') || isActiveRoute('/faq')
-                      ? 'text-primary bg-primary/5' 
-                      : 'text-muted-foreground'
-                  }`}>
-                    RESOURCES
+                  <NavigationMenuTrigger asChild>
+                    <Link 
+                      to="/resources"
+                      className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                        isActiveRoute('/resources') || isActiveRoute('/education') || isActiveRoute('/recovery-tools') || isActiveRoute('/faq')
+                          ? 'text-primary bg-primary/5' 
+                          : 'text-muted-foreground'
+                      }`}
+                    >
+                      RESOURCES
+                    </Link>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50">
                     <div className="grid gap-3 p-6 w-[450px]">
