@@ -141,15 +141,15 @@ const Header = () => {
                         </p>
                       </Link>
                       <Link
-                        to="/contact"
+                        to="/press"
                         className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
                       >
                         <div className="flex items-center gap-2">
                           <Mail className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-medium leading-none">Contact Us</div>
+                          <div className="text-sm font-medium leading-none">Press & Media</div>
                         </div>
                         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                          Get in touch with our team for support and information
+                          Media resources, press releases, and news coverage
                         </p>
                       </Link>
                     </div>
@@ -282,6 +282,45 @@ const Header = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
+                {/* Get Involved Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                    isActiveRoute('/volunteer') || isActiveRoute('/donation')
+                      ? 'text-primary bg-primary/5' 
+                      : 'text-muted-foreground'
+                  }`}>
+                    GET INVOLVED
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="z-50">
+                    <div className="grid gap-3 p-6 w-[400px]">
+                      <div className="row-span-3">
+                        <Link
+                          to="/volunteer"
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md hover:shadow-lg transition-all duration-300 group"
+                        >
+                          <Heart className="h-6 w-6 text-primary mb-2 transition-transform duration-300 group-hover:scale-110" />
+                          <div className="mb-2 mt-4 text-lg font-medium">Volunteer</div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            Join our mission to transform lives and make a difference in recovery.
+                          </p>
+                        </Link>
+                      </div>
+                      <Link
+                        to="/donation"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Donate</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Support our mission with a financial contribution
+                        </p>
+                      </Link>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
                 {/* Blog Link */}
                 <NavigationMenuItem>
                   <Link 
@@ -293,6 +332,34 @@ const Header = () => {
                     }`}
                   >
                     BLOG
+                  </Link>
+                </NavigationMenuItem>
+
+                {/* Contact Link */}
+                <NavigationMenuItem>
+                  <Link 
+                    to="/contact"
+                    className={`inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 ${
+                      isActiveRoute('/contact') 
+                        ? 'text-primary bg-primary/5 scale-105' 
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    CONTACT
+                  </Link>
+                </NavigationMenuItem>
+
+                {/* Emergency Button */}
+                <NavigationMenuItem>
+                  <Link 
+                    to="/emergency"
+                    className={`inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-semibold transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-500/25 ${
+                      isActiveRoute('/emergency')
+                        ? 'text-red-600 bg-red-50 dark:bg-red-950/20 scale-110 shadow-lg shadow-red-500/25'
+                        : 'text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20'
+                    }`}
+                  >
+                    EMERGENCY
                   </Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
