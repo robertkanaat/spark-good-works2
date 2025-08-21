@@ -145,13 +145,23 @@ const Header = () => {
                       </Link>
                       <Link
                         to="/press"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                        className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent focus:text-accent-foreground group ${
+                          isActiveRoute('/press') 
+                            ? 'bg-accent text-accent-foreground' 
+                            : 'hover:bg-accent hover:text-accent-foreground'
+                        }`}
                       >
                         <div className="flex items-center gap-2">
-                          <Mail className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-medium leading-none">Press & Media</div>
+                          <Mail className={`h-4 w-4 transition-transform duration-300 group-hover:scale-110 ${
+                            isActiveRoute('/press') ? 'text-primary' : 'text-primary'
+                          }`} />
+                          <div className={`text-sm font-medium leading-none ${
+                            isActiveRoute('/press') ? 'text-accent-foreground' : ''
+                          }`}>Press & Media</div>
                         </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                        <p className={`line-clamp-2 text-sm leading-snug ${
+                          isActiveRoute('/press') ? 'text-accent-foreground/80' : 'text-muted-foreground'
+                        }`}>
                           Media resources, press releases, and news coverage
                         </p>
                       </Link>
