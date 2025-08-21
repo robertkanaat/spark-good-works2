@@ -2,17 +2,10 @@ import { useEffect } from 'react';
 
 const PerformanceOptimizer = () => {
   useEffect(() => {
-    // Prefetch critical pages that users are likely to visit
-    const criticalPages = ['/emergency', '/donation', '/resources'];
+    // Remove SPA route prefetching that causes 404 errors
+    // React Router handles route prefetching internally via code splitting
     
-    criticalPages.forEach(page => {
-      const link = document.createElement('link');
-      link.rel = 'prefetch';
-      link.href = page;
-      document.head.appendChild(link);
-    });
-
-    // Optimize font loading
+    // Optimize font loading for better performance
     const fontLink = document.createElement('link');
     fontLink.rel = 'preload';
     fontLink.as = 'font';
@@ -33,10 +26,7 @@ const PerformanceOptimizer = () => {
     });
 
     return () => {
-      // Cleanup prefetch links on unmount
-      document.querySelectorAll('link[rel="prefetch"]').forEach(link => {
-        link.remove();
-      });
+      // No cleanup needed for font preload
     };
   }, []);
 
