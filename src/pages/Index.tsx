@@ -297,6 +297,11 @@ const Index = () => {
           <VideoSection />
         </Suspense>
         
+        {/* Volunteer CTA positioned after engaging video content */}
+        <Suspense fallback={<div className="h-16" />}>
+          <VolunteerCTA />
+        </Suspense>
+        
         {/* Content sections */}
         <Suspense fallback={<div className="h-16" />}>
           <BlogPreviewSection />
@@ -314,10 +319,6 @@ const Index = () => {
         {/* Bottom sections */}
         <Suspense fallback={<div className="h-16" />}>
           <HomeFAQSection />
-        </Suspense>
-        
-        <Suspense fallback={<div className="h-16" />}>
-          <VolunteerCTA />
         </Suspense>
         
         {/* Footer loads last */}
