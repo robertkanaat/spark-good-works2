@@ -132,26 +132,6 @@ const Header = () => {
                         </Link>
                       </div>
                       <Link
-                        to="/about#mission"
-                        className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent focus:text-accent-foreground group ${
-                          location.hash === '#mission' && isActiveRoute('/about')
-                            ? 'bg-accent text-accent-foreground' 
-                            : 'hover:bg-accent hover:text-accent-foreground'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2">
-                          <Heart className={`h-4 w-4 transition-transform duration-300 group-hover:scale-110 ${
-                            location.hash === '#mission' && isActiveRoute('/about') ? 'text-primary' : 'text-primary'
-                          }`} />
-                          <div className="text-sm font-medium leading-none">Our Mission</div>
-                        </div>
-                        <p className={`line-clamp-2 text-sm leading-snug ${
-                          location.hash === '#mission' && isActiveRoute('/about') ? 'text-accent-foreground/80' : 'text-muted-foreground'
-                        }`}>
-                          Transforming lives through comprehensive recovery support
-                        </p>
-                      </Link>
-                      <Link
                         to="/open-letter"
                         className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent focus:text-accent-foreground group ${
                           isActiveRoute('/open-letter')
