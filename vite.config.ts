@@ -42,8 +42,8 @@ export default defineConfig(({ mode }) => ({
           utils: ['clsx', 'tailwind-merge', 'class-variance-authority'],
           // Charts and data visualization (only loaded when needed)
           charts: ['recharts'],
-          // Supabase (only when auth/data features used)
-          supabase: ['@supabase/supabase-js', '@tanstack/react-query'],
+          // Supabase (include in main bundle for stability)
+          supabase: ['@supabase/supabase-js'],
           // Icons (separate chunk as they're heavy)
           icons: ['lucide-react'],
         },
@@ -60,8 +60,7 @@ export default defineConfig(({ mode }) => ({
     sourcemap: mode === 'development',
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
-    exclude: ['@supabase/supabase-js'], // Load on demand
+    include: ['react', 'react-dom', 'react-router-dom', '@supabase/supabase-js', '@supabase/postgrest-js'],
   },
   esbuild: {
     // Remove console logs in production
