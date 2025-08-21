@@ -159,14 +159,14 @@ const Header = () => {
                 {/* Support Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                    isActiveRoute('/emergency') || isActiveRoute('/crisis-support') || isActiveRoute('/family-support') 
+                    isActiveRoute('/emergency') || isActiveRoute('/crisis-support') || isActiveRoute('/family-support') || isActiveRoute('/volunteer') || isActiveRoute('/donation')
                       ? 'text-primary bg-primary/5' 
                       : 'text-muted-foreground'
                   }`}>
                     SUPPORT
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50">
-                    <div className="grid gap-3 p-6 w-[500px] grid-cols-2">
+                    <div className="grid gap-3 p-6 w-[550px] grid-cols-2">
                       <Link
                         to="/emergency"
                         className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-all duration-300 hover:bg-red-50 dark:hover:bg-red-950/20 hover:shadow-lg hover:shadow-red-500/25 hover:scale-105 group border border-red-200/50 dark:border-red-800/50"
@@ -213,6 +213,30 @@ const Header = () => {
                         </div>
                         <p className="text-sm leading-snug text-muted-foreground">
                           Resources and support for families affected by addiction
+                        </p>
+                      </Link>
+                      <Link
+                        to="/volunteer"
+                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Volunteer</div>
+                        </div>
+                        <p className="text-sm leading-snug text-muted-foreground">
+                          Join our mission to transform lives and make a difference
+                        </p>
+                      </Link>
+                      <Link
+                        to="/donation"
+                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Donate</div>
+                        </div>
+                        <p className="text-sm leading-snug text-muted-foreground">
+                          Support our mission with a financial contribution
                         </p>
                       </Link>
                     </div>
@@ -276,45 +300,6 @@ const Header = () => {
                         </div>
                         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                           Frequently asked questions about addiction and recovery
-                        </p>
-                      </Link>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* Get Involved Dropdown */}
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                    isActiveRoute('/volunteer') || isActiveRoute('/donation')
-                      ? 'text-primary bg-primary/5' 
-                      : 'text-muted-foreground'
-                  }`}>
-                    GET INVOLVED
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent className="z-50">
-                    <div className="grid gap-3 p-6 w-[400px]">
-                      <div className="row-span-3">
-                        <Link
-                          to="/volunteer"
-                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md hover:shadow-lg transition-all duration-300 group"
-                        >
-                          <Heart className="h-6 w-6 text-primary mb-2 transition-transform duration-300 group-hover:scale-110" />
-                          <div className="mb-2 mt-4 text-lg font-medium">Volunteer</div>
-                          <p className="text-sm leading-tight text-muted-foreground">
-                            Join our mission to transform lives and make a difference in recovery.
-                          </p>
-                        </Link>
-                      </div>
-                      <Link
-                        to="/donation"
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-medium leading-none">Donate</div>
-                        </div>
-                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                          Support our mission with a financial contribution
                         </p>
                       </Link>
                     </div>
