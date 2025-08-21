@@ -156,6 +156,20 @@ const Header = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
+                {/* Emergency Button */}
+                <NavigationMenuItem>
+                  <Link 
+                    to="/emergency"
+                    className={`inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-semibold transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-500/25 ${
+                      isActiveRoute('/emergency')
+                        ? 'text-red-600 bg-red-50 dark:bg-red-950/20 scale-110 shadow-lg shadow-red-500/25'
+                        : 'text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20'
+                    }`}
+                  >
+                    EMERGENCY
+                  </Link>
+                </NavigationMenuItem>
+
                 {/* Support Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
@@ -331,20 +345,6 @@ const Header = () => {
                     }`}
                   >
                     CONTACT
-                  </Link>
-                </NavigationMenuItem>
-
-                {/* Emergency Button */}
-                <NavigationMenuItem>
-                  <Link 
-                    to="/emergency"
-                    className={`inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-semibold transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-500/25 ${
-                      isActiveRoute('/emergency')
-                        ? 'text-red-600 bg-red-50 dark:bg-red-950/20 scale-110 shadow-lg shadow-red-500/25'
-                        : 'text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20'
-                    }`}
-                  >
-                    EMERGENCY
                   </Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
