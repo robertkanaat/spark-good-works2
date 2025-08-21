@@ -9,6 +9,10 @@ export const LazyBlogPreviewSection = lazy(() => import('@/components/BlogPrevie
 export const LazyOpenLetterPreview = lazy(() => import('@/components/OpenLetterPreview'));
 export const LazyHomeFAQSection = lazy(() => import('@/components/HomeFAQSection'));
 
+// Lazy load pages to prevent MIME type issues with routing
+export const LazyBlog = lazy(() => import('@/pages/Blog'));
+export const LazyBlogPost = lazy(() => import('@/pages/BlogPost'));
+
 // Lazy load admin and less common components
 export const LazyAdminDashboard = lazy(() => import('@/pages/AdminDashboard'));
 export const LazyTreatmentCenterMap = lazy(() => import('@/components/TreatmentCenterMap'));
