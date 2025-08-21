@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, User, LogOut, Settings, Shield } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
@@ -12,6 +12,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -98,76 +105,198 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden lg:block">
-            <div className="ml-10 flex items-baseline space-x-6">
-              <Link 
-                to="/about" 
-                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group ${
-                  isActiveRoute('/about') 
-                    ? 'text-primary bg-primary/5 scale-105' 
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <span className="relative z-10">ABOUT</span>
-                <div className={`absolute inset-0 bg-primary/10 transition-transform duration-300 origin-left ${
-                  isActiveRoute('/about') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                }`}></div>
-              </Link>
-              <Link 
-                to="/emergency" 
-                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-110 rounded-md relative overflow-hidden group hover:shadow-lg hover:shadow-red-500/25 ${
-                  isActiveRoute('/emergency')
-                    ? 'text-red-600 bg-red-50 dark:bg-red-950/20 scale-110 shadow-lg shadow-red-500/25'
-                    : 'text-muted-foreground hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20'
-                }`}
-              >
-                <span className="relative z-10 font-semibold">EMERGENCY</span>
-                <div className={`absolute inset-0 bg-gradient-to-r from-red-500/10 to-red-600/10 transition-transform duration-300 origin-left ${
-                  isActiveRoute('/emergency') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                }`}></div>
-                <div className={`absolute inset-0 animate-pulse bg-red-500/5 transition-opacity duration-300 ${
-                  isActiveRoute('/emergency') ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                }`}></div>
-              </Link>
-              <Link 
-                to="/resources" 
-                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group ${
-                  isActiveRoute('/resources') 
-                    ? 'text-primary bg-primary/5 scale-105' 
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <span className="relative z-10">RESOURCES</span>
-                <div className={`absolute inset-0 bg-primary/10 transition-transform duration-300 origin-left ${
-                  isActiveRoute('/resources') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                }`}></div>
-              </Link>
-              <Link 
-                to="/blog" 
-                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group ${
-                  isActiveRoute('/blog') 
-                    ? 'text-primary bg-primary/5 scale-105' 
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <span className="relative z-10">BLOG</span>
-                <div className={`absolute inset-0 bg-primary/10 transition-transform duration-300 origin-left ${
-                  isActiveRoute('/blog') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                }`}></div>
-              </Link>
-              <Link 
-                to="/contact" 
-                className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 rounded-md relative overflow-hidden group ${
-                  isActiveRoute('/contact') 
-                    ? 'text-primary bg-primary/5 scale-105' 
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <span className="relative z-10">CONTACT</span>
-                <div className={`absolute inset-0 bg-primary/10 transition-transform duration-300 origin-left ${
-                  isActiveRoute('/contact') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                }`}></div>
-              </Link>
-            </div>
+            <NavigationMenu>
+              <NavigationMenuList className="space-x-2">
+                {/* About Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                    isActiveRoute('/about') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
+                  }`}>
+                    ABOUT
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid gap-3 p-6 w-[400px]">
+                      <div className="row-span-3">
+                        <Link
+                          to="/about"
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md hover:shadow-lg transition-all duration-300 group"
+                        >
+                          <Users className="h-6 w-6 text-primary mb-2 transition-transform duration-300 group-hover:scale-110" />
+                          <div className="mb-2 mt-4 text-lg font-medium">Our Story</div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            Learn about our mission to transform addiction recovery through innovation and compassion.
+                          </p>
+                        </Link>
+                      </div>
+                      <Link
+                        to="/about#mission"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Our Mission</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Transforming lives through comprehensive recovery support
+                        </p>
+                      </Link>
+                      <Link
+                        to="/contact"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Mail className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Contact Us</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Get in touch with our team for support and information
+                        </p>
+                      </Link>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Support Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                    isActiveRoute('/emergency') || isActiveRoute('/crisis-support') || isActiveRoute('/family-support') 
+                      ? 'text-primary bg-primary/5' 
+                      : 'text-muted-foreground'
+                  }`}>
+                    SUPPORT
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid gap-3 p-6 w-[500px] grid-cols-2">
+                      <Link
+                        to="/emergency"
+                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-all duration-300 hover:bg-red-50 dark:hover:bg-red-950/20 hover:shadow-lg hover:shadow-red-500/25 hover:scale-105 group border border-red-200/50 dark:border-red-800/50"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Phone className="h-5 w-5 text-red-600 transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-semibold leading-none text-red-600">Crisis Support</div>
+                        </div>
+                        <p className="text-sm leading-snug text-muted-foreground">
+                          Immediate help for mental health emergencies and suicide prevention
+                        </p>
+                      </Link>
+                      <Link
+                        to="/treatment-centers"
+                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Stethoscope className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Treatment Centers</div>
+                        </div>
+                        <p className="text-sm leading-snug text-muted-foreground">
+                          Find verified addiction treatment facilities near you
+                        </p>
+                      </Link>
+                      <Link
+                        to="/support-groups"
+                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Users className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Support Groups</div>
+                        </div>
+                        <p className="text-sm leading-snug text-muted-foreground">
+                          Connect with peer recovery support communities
+                        </p>
+                      </Link>
+                      <Link
+                        to="/family-support"
+                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Family Support</div>
+                        </div>
+                        <p className="text-sm leading-snug text-muted-foreground">
+                          Resources and support for families affected by addiction
+                        </p>
+                      </Link>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Resources Dropdown */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                    isActiveRoute('/resources') || isActiveRoute('/education') || isActiveRoute('/recovery-tools') || isActiveRoute('/faq')
+                      ? 'text-primary bg-primary/5' 
+                      : 'text-muted-foreground'
+                  }`}>
+                    RESOURCES
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid gap-3 p-6 w-[450px]">
+                      <div className="row-span-3">
+                        <Link
+                          to="/resources"
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md hover:shadow-lg transition-all duration-300 group"
+                        >
+                          <BookOpen className="h-6 w-6 text-primary mb-2 transition-transform duration-300 group-hover:scale-110" />
+                          <div className="mb-2 mt-4 text-lg font-medium">Recovery Resources</div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            Comprehensive tools, guides, and information to support your recovery journey.
+                          </p>
+                        </Link>
+                      </div>
+                      <Link
+                        to="/education"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <GraduationCap className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Education</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Learn about addiction, treatment options, and recovery strategies
+                        </p>
+                      </Link>
+                      <Link
+                        to="/recovery-tools"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Briefcase className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Recovery Tools</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Practical tools and worksheets for your recovery toolkit
+                        </p>
+                      </Link>
+                      <Link
+                        to="/faq"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <HelpCircle className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">FAQ</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Frequently asked questions about addiction and recovery
+                        </p>
+                      </Link>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Blog Link */}
+                <NavigationMenuItem>
+                  <Link 
+                    to="/blog"
+                    className={`inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-muted/50 ${
+                      isActiveRoute('/blog') 
+                        ? 'text-primary bg-primary/5 scale-105' 
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    BLOG
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
           </nav>
 
           {/* Desktop & Mobile Actions */}

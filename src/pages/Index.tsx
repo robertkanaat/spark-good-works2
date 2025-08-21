@@ -11,7 +11,6 @@ import OpenLetterPreview from '@/components/OpenLetterPreview';
 import HomeFAQSection from '@/components/HomeFAQSection';
 import VolunteerCTA from '@/components/VolunteerCTA';
 import Footer from '@/components/Footer';
-import FloatingSectionNav from '@/components/FloatingSectionNav';
 
 const Index = () => {
   const organizationSchema = {
@@ -253,35 +252,16 @@ const Index = () => {
       </Helmet>
       <div className="min-h-screen">
         <Header />
-        <div id="hero">
-          <HeroSection />
-        </div>
-        <div id="testimonials">
-          <TestimonialsSection />
-        </div>
-        <div id="video">
-          <VideoSection />
-        </div>
-        <div id="stats">
-          <StatsSection />
-        </div>
-        <div id="features">
-          <FeaturesSection />
-        </div>
-        <div id="volunteer">
-          <VolunteerCTA />
-        </div>
-        <div id="blog">
-          <BlogPreviewSection />
-        </div>
-        <div id="open-letter">
-          <OpenLetterPreview />
-        </div>
-        <div id="faq">
-          <HomeFAQSection />
-        </div>
+        <HeroSection />
+        <TestimonialsSection />
+        <VideoSection />
+        <StatsSection />
+        <FeaturesSection />
+        <VolunteerCTA />
+        <BlogPreviewSection />
+        <OpenLetterPreview />
+        <HomeFAQSection />
         <Footer />
-        <FloatingSectionNav />
       </div>
     </>
   );
