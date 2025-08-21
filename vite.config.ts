@@ -34,34 +34,28 @@ export default defineConfig(({ mode }) => ({
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
-        manualChunks: {
-          // Core React chunks
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          // UI component chunks - split by usage
-          radix: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
-          radixExtended: ['@radix-ui/react-toast', '@radix-ui/react-scroll-area', '@radix-ui/react-select'],
-          // Form and validation
-          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
-          // Utilities and styling
-          utils: ['clsx', 'tailwind-merge', 'class-variance-authority'],
-          // Charts and data visualization (only loaded when needed)
-          charts: ['recharts'],
-          // Supabase (include in main bundle for stability)
-          supabase: ['@supabase/supabase-js'],
-          // Icons (separate chunk as they're heavy)
-          icons: ['lucide-react'],
+        // Simplified chunking to prevent MIME type issues
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'radix';
+            }
+            if (id.includes('lucide-react')) {
+              return 'icons';
+            }
+            return 'vendor';
+          }
         },
       },
     },
-    target: 'es2020', // Modern browsers only - removes legacy polyfills
+    target: 'es2020',
     minify: 'esbuild',
     cssMinify: true,
-    // Reduce chunk size warnings threshold
-    chunkSizeWarningLimit: 500,
-    // Optimize images but keep reasonable limit
-    assetsInlineLimit: 2048, // Reduced from 4096
-    // Enable source maps for better debugging but smaller
+    chunkSizeWarningLimit: 1000,
+    assetsInlineLimit: 4096,
     sourcemap: mode === 'development',
   },
   optimizeDeps: {
