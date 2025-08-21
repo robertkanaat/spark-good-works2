@@ -1,149 +1,164 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Quote } from "lucide-react";
+import { Quote, Lightbulb, Heart } from "lucide-react";
+import joePolishImage from "@/assets/experts/joe-polish.png";
 
 const OurStorySection = () => {
   return (
     <section className="relative py-24 overflow-hidden" id="our-story">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-subtle opacity-30" aria-hidden />
-      
-      {/* Animated Background Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse opacity-60" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-donate/5 rounded-full blur-3xl animate-pulse delay-1000 opacity-40" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse opacity-30" />
+      <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse delay-1000 opacity-40" />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-card/80 backdrop-blur-sm rounded-full border border-primary/20 mb-6">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
             <span className="text-foreground font-bold tracking-wider uppercase text-sm">
-              Our Story
+              Our Founder
             </span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-8 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-black text-foreground mb-8 leading-tight">
             Meet{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-donate to-primary">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-primary to-orange-500">
               Joe Polish
             </span>
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            The founder's personal journey from addiction to advocacy that sparked a movement.
+            From addiction's darkest depths to becoming a beacon of hope—discover the personal journey that sparked a movement.
           </p>
         </div>
-
-        {/* Main Story Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-16">
-          {/* Story Text */}
-          <div className="lg:col-span-8">
-            <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-xl">
-              <CardContent className="p-8 md:p-12">
-                <div className="prose prose-neutral dark:prose-invert max-w-none prose-lg leading-relaxed">
-                  <div className="space-y-6 text-foreground/90">
-                    <p className="text-xl leading-relaxed font-light">
-                      Joe Polish's life was profoundly shaped by his struggles with addiction. Like many, 
-                      Joe found himself battling substance abuse at a young age, searching for an escape 
-                      from underlying pain and trauma.
-                    </p>
-                    
-                    <p>
-                      By the time he was 18, addiction had nearly taken everything from him—his health, 
-                      his relationships, and his hope for the future. It was in these darkest moments 
-                      that Joe discovered something that would change his life: <strong className="font-bold text-primary">the root of his addiction wasn't a lack of willpower or a moral failing, but rather a response to unresolved pain.</strong>
-                    </p>
-                    
-                    <p>
-                      This realization became the catalyst for his healing journey. As Joe navigated his 
-                      path to recovery, he encountered the stigmas and misunderstandings that often 
-                      surround addiction. He saw firsthand how society isolates and judges those struggling, 
-                      and how this only deepens the cycle of shame.
-                    </p>
-                    
-                    <p>
-                      Joe began to feel a strong urge to address this misunderstanding—to transform how 
-                      people view addiction and to help others see it not as a failure, but as a response 
-                      to life's deepest wounds.
-                    </p>
+        
+        {/* Main Content - Two Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+          {/* Left Column - Story */}
+          <div className="space-y-8">
+            <Card className="bg-gradient-to-br from-card/90 via-card/80 to-primary/5 backdrop-blur-sm border border-primary/10 shadow-2xl">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
+                    <Heart className="w-5 h-5 text-primary" />
                   </div>
+                  <h3 className="text-2xl font-bold text-foreground">The Journey</h3>
+                </div>
+                
+                <div className="space-y-4 text-foreground/90 leading-relaxed">
+                  <p className="text-lg">
+                    Joe Polish's life was profoundly shaped by his struggles with addiction. By age 18, 
+                    addiction had nearly taken everything—his health, relationships, and hope for the future.
+                  </p>
+                  
+                  <p>
+                    In those darkest moments, Joe discovered a life-changing truth: 
+                    <span className="font-semibold text-primary"> the root of his addiction wasn't a moral failing, 
+                    but a response to unresolved pain.</span>
+                  </p>
+                  
+                  <p>
+                    This realization became his catalyst for healing. As he navigated recovery, Joe witnessed 
+                    the stigma and isolation that deepens addiction's cycle of shame—and knew something had to change.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-gradient-to-br from-orange-500/10 via-primary/5 to-card/80 backdrop-blur-sm border border-orange-500/20 shadow-2xl">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-orange-500/20 rounded-full flex items-center justify-center">
+                    <Lightbulb className="w-5 h-5 text-orange-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground">The Mission</h3>
+                </div>
+                
+                <div className="space-y-4 text-foreground/90 leading-relaxed">
+                  <p>
+                    Joe's entrepreneurial success taught him the power of connection and community. 
+                    He envisioned applying these principles to transform addiction support.
+                  </p>
+                  
+                  <p className="font-medium text-orange-600 dark:text-orange-400">
+                    "What if those struggling could access a supportive, non-judgmental network? 
+                    A place where understanding replaces shame?"
+                  </p>
+                  
+                  <p>
+                    Driven by these questions, Joe founded Genius Recovery—creating a new paradigm 
+                    where empathy conquers stigma and hope illuminates the path to healing.
+                  </p>
                 </div>
               </CardContent>
             </Card>
           </div>
           
-          {/* Inspirational Quote Card */}
-          <div className="lg:col-span-4">
-            <Card className="bg-gradient-to-br from-primary/10 via-primary/5 to-donate/10 backdrop-blur-md border border-primary/20 shadow-xl">
+          {/* Right Column - Image & Quote */}
+          <div className="space-y-8">
+            {/* Professional Photo */}
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-orange-500 to-primary rounded-2xl blur opacity-30 animate-pulse"></div>
+              <div className="relative bg-card rounded-2xl p-1 border border-primary/20">
+                <img 
+                  src={joePolishImage} 
+                  alt="Joe Polish - Founder of Genius Recovery" 
+                  className="w-full h-[500px] object-cover rounded-xl"
+                />
+              </div>
+            </div>
+            
+            {/* Signature Quote */}
+            <Card className="bg-gradient-to-br from-primary/10 via-primary/5 to-orange-500/10 backdrop-blur-md border border-primary/20 shadow-2xl">
               <CardContent className="p-8 text-center">
                 <Quote className="w-12 h-12 text-primary mx-auto mb-6" />
                 <blockquote className="text-xl font-medium text-foreground mb-6 italic leading-relaxed">
-                  "Addiction isn't a failure—it's a response to pain. When we address the trauma, we unlock the potential for true healing."
+                  "Addiction isn't a failure—it's a response to pain. When we address the trauma, 
+                  we unlock the potential for true healing."
                 </blockquote>
-                <div className="text-primary font-bold">
-                  — Joe Polish
+                <div className="text-primary font-bold text-lg">
+                  — Joe Polish, Founder
+                </div>
+                <div className="text-sm text-muted-foreground mt-2">
+                  Genius Recovery
                 </div>
               </CardContent>
             </Card>
           </div>
         </div>
-
-        {/* Vision & Impact Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Vision */}
-          <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-xl">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-                <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
-                  <span className="text-primary font-bold text-sm">✦</span>
-                </div>
-                The Vision
-              </h3>
-              <div className="space-y-4 text-foreground/90">
-                <p>
-                  Joe's career as a successful entrepreneur taught him the power of connection and 
-                  community. He realized that these principles could be incredibly impactful in 
-                  the recovery space.
-                </p>
-                <p>
-                  <strong className="text-primary">What if those struggling with addiction could access a supportive, 
-                  non-judgmental network?</strong> What if there was a place where addicts, caregivers, 
-                  and advocates could find resources, encouragement, and empathy?
-                </p>
-                <p>
-                  Driven by these questions, Joe founded Genius Recovery to create a new paradigm 
-                  in addiction support.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+        
+        {/* Impact Section */}
+        <div className="text-center">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-card/80 backdrop-blur-sm rounded-full border border-orange-500/20 mb-8">
+            <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+            <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+              The Impact
+            </span>
+          </div>
           
-          {/* Impact */}
-          <Card className="bg-card/90 backdrop-blur-sm border-0 shadow-xl">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-                <div className="w-8 h-8 bg-donate/20 rounded-full flex items-center justify-center">
-                  <span className="text-donate font-bold text-sm">✦</span>
-                </div>
-                The Impact
-              </h3>
-              <div className="space-y-4 text-foreground/90">
-                <p>
-                  Genius Recovery reflects Joe's vision for a compassionate approach to addiction. 
-                  It's a space where people from all walks of life can come together, free from 
-                  stigma, to understand addiction and support each other.
+          <h3 className="text-3xl md:text-4xl font-black text-foreground mb-8 leading-tight">
+            Transforming{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500">
+              Lives & Perspectives
+            </span>
+          </h3>
+          
+          <div className="max-w-4xl mx-auto">
+            <Card className="bg-gradient-to-r from-primary/5 via-card/80 to-orange-500/5 backdrop-blur-sm border border-primary/10 shadow-xl">
+              <CardContent className="p-8 md:p-12">
+                <p className="text-xl text-foreground leading-relaxed mb-6">
+                  Genius Recovery embodies Joe's vision for compassionate addiction support—a space where 
+                  people from all walks of life unite, free from stigma, to understand addiction and support each other.
                 </p>
-                <p>
-                  Joe hopes that through Genius Recovery, people can find the strength and resources 
-                  to rebuild their lives and that society can learn to view addiction through a 
-                  lens of empathy and compassion.
+                
+                <p className="text-lg text-foreground/90 leading-relaxed">
+                  Through Genius Recovery, Joe hopes people find the strength and resources to rebuild their lives, 
+                  while society learns to view addiction through a lens of empathy and compassion. 
+                  <span className="font-semibold text-primary"> He believes that with the right support, 
+                  education, and connection, recovery is possible for everyone.</span>
                 </p>
-                <p className="font-medium text-primary">
-                  He believes that with the right support, education, and connection, recovery 
-                  is possible for everyone.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </section>
