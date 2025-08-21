@@ -18,13 +18,14 @@ const LazyBackgroundImage: React.FC<LazyBackgroundImageProps> = ({
   priority = false,
   placeholder = 'linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--muted-foreground) / 0.1) 100%)',
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(priority); // Load immediately if priority
   const [isInView, setIsInView] = useState(priority);
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (priority) {
-      loadImage();
+      // For LCP images, load immediately without lazy loading
+      setIsLoaded(true);
       return;
     }
 
@@ -63,9 +64,10 @@ const LazyBackgroundImage: React.FC<LazyBackgroundImageProps> = ({
         ...style,
         backgroundImage: isLoaded ? `url(${src})` : placeholder,
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: style?.backgroundPosition || 'center',
         backgroundRepeat: 'no-repeat',
-        transition: 'background-image 0.3s ease-in-out',
+        transition: priority ? 'none' : 'background-image 0.3s ease-in-out',
+        willChange: priority ? 'auto' : 'background-image', // Avoid layout thrashing for LCP
       }}
     >
       {children}
