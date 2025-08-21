@@ -1,27 +1,16 @@
 
-// Import only critical components immediately
-import { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import PerformanceOptimizer from '@/components/PerformanceOptimizer';
-
-// Lazy load ALL components except header for maximum performance
-const HeroSection = lazy(() => import('@/components/HeroSection'));
-const TestimonialsSection = lazy(() => import('@/components/TestimonialsSection'));
-const VideoSection = lazy(() => import('@/components/VideoSection'));
-const StatsSection = lazy(() => import('@/components/StatsSection'));
-const FeaturesSection = lazy(() => import('@/components/FeaturesSection'));
-const BlogPreviewSection = lazy(() => import('@/components/BlogPreviewSection'));
-const OpenLetterPreview = lazy(() => import('@/components/OpenLetterPreview'));
-const HomeFAQSection = lazy(() => import('@/components/HomeFAQSection'));
-const VolunteerCTA = lazy(() => import('@/components/VolunteerCTA'));
-const Footer = lazy(() => import('@/components/Footer'));
-
-// Mission and story sections are light enough to load directly
-const OurMissionSection = lazy(() => import('@/components/OurMissionSection'));
-const OurStorySection = lazy(() => import('@/components/OurStorySection'));
-const DonationSection = lazy(() => import('@/components/DonationSection'));
+import HeroSection from '@/components/HeroSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
+import VideoSection from '@/components/VideoSection';
+import StatsSection from '@/components/StatsSection';
+import FeaturesSection from '@/components/FeaturesSection';
+import BlogPreviewSection from '@/components/BlogPreviewSection';
+import OpenLetterPreview from '@/components/OpenLetterPreview';
+import HomeFAQSection from '@/components/HomeFAQSection';
+import VolunteerCTA from '@/components/VolunteerCTA';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   const organizationSchema = {
@@ -230,7 +219,6 @@ const Index = () => {
 
   return (
     <>
-      <PerformanceOptimizer />
       <Helmet>
         <title>Genius Recovery - Addiction Recovery Support & Crisis Intervention | 24/7 Help</title>
         <meta
@@ -264,67 +252,16 @@ const Index = () => {
       </Helmet>
       <div className="min-h-screen">
         <Header />
-        
-        {/* Hero section loads first for LCP */}
-        <Suspense fallback={<LoadingSpinner />}>
-          <HeroSection />
-        </Suspense>
-        
-        {/* Load mission and story early as they're lightweight */}
-        <Suspense fallback={<div className="py-4" />}>
-          <OurMissionSection />
-        </Suspense>
-        
-        <Suspense fallback={<div className="py-4" />}>
-          <OurStorySection />
-        </Suspense>
-        
-        {/* Defer heavy components with minimal loading states */}
-        <Suspense fallback={<div className="h-16" />}>
-          <FeaturesSection />
-        </Suspense>
-        
-        <Suspense fallback={<div className="h-16" />}>
-          <TestimonialsSection />
-        </Suspense>
-        
-        <Suspense fallback={<div className="h-16" />}>
-          <StatsSection />
-        </Suspense>
-        
-        {/* Video section deferred to avoid blocking */}
-        <Suspense fallback={<div className="h-20" />}>
-          <VideoSection />
-        </Suspense>
-        
-        {/* Volunteer CTA positioned after engaging video content */}
-        <Suspense fallback={<div className="h-16" />}>
-          <VolunteerCTA />
-        </Suspense>
-        
-        {/* Content sections */}
-        <Suspense fallback={<div className="h-16" />}>
-          <BlogPreviewSection />
-        </Suspense>
-        
-        <Suspense fallback={<div className="h-16" />}>
-          <OpenLetterPreview />
-        </Suspense>
-        
-        {/* Donation section */}
-        <Suspense fallback={<div className="h-16" />}>
-          <DonationSection />
-        </Suspense>
-        
-        {/* Bottom sections */}
-        <Suspense fallback={<div className="h-16" />}>
-          <HomeFAQSection />
-        </Suspense>
-        
-        {/* Footer loads last */}
-        <Suspense fallback={<div className="h-20" />}>
-          <Footer />
-        </Suspense>
+        <HeroSection />
+        <TestimonialsSection />
+        <VideoSection />
+        <StatsSection />
+        <FeaturesSection />
+        <VolunteerCTA />
+        <BlogPreviewSection />
+        <OpenLetterPreview />
+        <HomeFAQSection />
+        <Footer />
       </div>
     </>
   );

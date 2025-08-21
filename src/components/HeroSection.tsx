@@ -1,17 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import heroRecoveryPerson from "@/assets/hero-recovery-person.jpg";
+import heroFamilyEmbrace from "@/assets/hero-family-embrace.jpg";
 import LazyBackgroundImage from "@/components/LazyBackgroundImage";
 
 const HeroSection = () => {
   const [selectedAmount, setSelectedAmount] = useState(50);
   const [activeView, setActiveView] = useState<'donate' | 'help' | 'support'>('donate');
-  // Use a fixed hero image for better performance
-  const currentHeroImage = heroRecoveryPerson;
+  const [currentHeroImage, setCurrentHeroImage] = useState(heroRecoveryPerson);
   const presetAmounts = [25, 50, 100, 200];
+  
+  const heroImages = [heroRecoveryPerson, heroFamilyEmbrace];
+  
+  useEffect(() => {
+    // Randomly select an image on component mount
+    const randomIndex = Math.floor(Math.random() * heroImages.length);
+    setCurrentHeroImage(heroImages[randomIndex]);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center">

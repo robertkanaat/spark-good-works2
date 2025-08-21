@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { Suspense } from 'react';
-import LoadingSpinner from '@/components/LoadingSpinner';
 import { Toaster } from '@/components/ui/sonner';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -17,7 +15,8 @@ import Resources from './pages/Resources';
 import PaymentSuccess from './pages/PaymentSuccess';
 import PaymentFailed from './pages/PaymentFailed';
 import Emergency from './pages/Emergency';
-import { LazyBlog, LazyBlogPost } from '@/utils/lazyComponents';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import Shop from './pages/Shop';
 import Press from './pages/Press';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -70,9 +69,9 @@ const App = () => {
             <Route path="/payment-failed" element={<PaymentFailed />} />
             <Route path="/emergency" element={<Emergency />} />
             <Route path="/help" element={<Emergency />} />
-            <Route path="/blog" element={<Suspense fallback={<LoadingSpinner />}><LazyBlog /></Suspense>} />
-            <Route path="/blog/page/:pageNumber" element={<Suspense fallback={<LoadingSpinner />}><LazyBlog /></Suspense>} />
-            <Route path="/blog/:slug" element={<Suspense fallback={<LoadingSpinner />}><LazyBlogPost /></Suspense>} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/page/:pageNumber" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/open-letter" element={<OpenLetter />} />
             <Route path="/ai-companion" element={<AICompanion />} />
