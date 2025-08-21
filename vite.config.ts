@@ -30,20 +30,41 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Separate vendor chunks for better caching
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+          // Core React chunks
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          // UI component chunks - split by usage
+          radix: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+          radixExtended: ['@radix-ui/react-toast', '@radix-ui/react-scroll-area', '@radix-ui/react-select'],
+          // Form and validation
+          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
+          // Utilities and styling
           utils: ['clsx', 'tailwind-merge', 'class-variance-authority'],
+          // Charts and data visualization (only loaded when needed)
+          charts: ['recharts'],
+          // Supabase (only when auth/data features used)
+          supabase: ['@supabase/supabase-js', '@tanstack/react-query'],
+          // Icons (separate chunk as they're heavy)
+          icons: ['lucide-react'],
         },
       },
     },
-    target: 'esnext',
+    target: 'es2020', // Modern browsers only - removes legacy polyfills
     minify: 'esbuild',
     cssMinify: true,
-    // Optimize images
-    assetsInlineLimit: 4096,
+    // Reduce chunk size warnings threshold
+    chunkSizeWarningLimit: 500,
+    // Optimize images but keep reasonable limit
+    assetsInlineLimit: 2048, // Reduced from 4096
+    // Enable source maps for better debugging but smaller
+    sourcemap: mode === 'development',
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['@supabase/supabase-js'], // Load on demand
+  },
+  esbuild: {
+    // Remove console logs in production
+    drop: mode === 'production' ? ['console', 'debugger'] : [],
   },
 }));

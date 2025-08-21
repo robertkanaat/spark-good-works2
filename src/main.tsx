@@ -3,6 +3,7 @@ import { ToastProvider, ToastViewport } from '@/components/ui/toast';
 import App from './App.tsx';
 import './index.css';
 import { preloadCriticalImages, lazyPreloadImages } from './utils/imagePreloader.ts';
+import { optimizeAudioElements } from './utils/preventAudioPreload.ts';
 
 // Debug log to confirm rendering
 console.log('main.tsx: Initializing React app');
@@ -11,6 +12,8 @@ console.log('main.tsx: Initializing React app');
 preloadCriticalImages();
 // Lazy preload other images
 lazyPreloadImages();
+// Optimize audio elements to prevent auto-loading
+optimizeAudioElements();
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

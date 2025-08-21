@@ -1,11 +1,12 @@
 
+// Import only critical components immediately
 import { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import PerformanceOptimizer from '@/components/PerformanceOptimizer';
 
-// Lazy load components for better performance
+// Lazy load ALL components except header for maximum performance
 const HeroSection = lazy(() => import('@/components/HeroSection'));
 const TestimonialsSection = lazy(() => import('@/components/TestimonialsSection'));
 const VideoSection = lazy(() => import('@/components/VideoSection'));
@@ -16,6 +17,11 @@ const OpenLetterPreview = lazy(() => import('@/components/OpenLetterPreview'));
 const HomeFAQSection = lazy(() => import('@/components/HomeFAQSection'));
 const VolunteerCTA = lazy(() => import('@/components/VolunteerCTA'));
 const Footer = lazy(() => import('@/components/Footer'));
+
+// Mission and story sections are light enough to load directly
+const OurMissionSection = lazy(() => import('@/components/OurMissionSection'));
+const OurStorySection = lazy(() => import('@/components/OurStorySection'));
+const DonationSection = lazy(() => import('@/components/DonationSection'));
 
 const Index = () => {
   const organizationSchema = {
@@ -258,34 +264,64 @@ const Index = () => {
       </Helmet>
       <div className="min-h-screen">
         <Header />
+        
+        {/* Hero section loads first for LCP */}
         <Suspense fallback={<LoadingSpinner />}>
           <HeroSection />
         </Suspense>
-        <Suspense fallback={<div className="py-8" />}>
-          <TestimonialsSection />
+        
+        {/* Load mission and story early as they're lightweight */}
+        <Suspense fallback={<div className="py-4" />}>
+          <OurMissionSection />
         </Suspense>
-        <Suspense fallback={<div className="py-8" />}>
-          <VideoSection />
+        
+        <Suspense fallback={<div className="py-4" />}>
+          <OurStorySection />
         </Suspense>
-        <Suspense fallback={<div className="py-8" />}>
-          <StatsSection />
-        </Suspense>
-        <Suspense fallback={<div className="py-8" />}>
+        
+        {/* Defer heavy components with minimal loading states */}
+        <Suspense fallback={<div className="h-16" />}>
           <FeaturesSection />
         </Suspense>
-        <Suspense fallback={<div className="py-8" />}>
-          <VolunteerCTA />
+        
+        <Suspense fallback={<div className="h-16" />}>
+          <TestimonialsSection />
         </Suspense>
-        <Suspense fallback={<div className="py-8" />}>
+        
+        <Suspense fallback={<div className="h-16" />}>
+          <StatsSection />
+        </Suspense>
+        
+        {/* Video section deferred to avoid blocking */}
+        <Suspense fallback={<div className="h-20" />}>
+          <VideoSection />
+        </Suspense>
+        
+        {/* Content sections */}
+        <Suspense fallback={<div className="h-16" />}>
           <BlogPreviewSection />
         </Suspense>
-        <Suspense fallback={<div className="py-8" />}>
+        
+        <Suspense fallback={<div className="h-16" />}>
           <OpenLetterPreview />
         </Suspense>
-        <Suspense fallback={<div className="py-8" />}>
+        
+        {/* Donation section */}
+        <Suspense fallback={<div className="h-16" />}>
+          <DonationSection />
+        </Suspense>
+        
+        {/* Bottom sections */}
+        <Suspense fallback={<div className="h-16" />}>
           <HomeFAQSection />
         </Suspense>
-        <Suspense fallback={<div className="py-8" />}>
+        
+        <Suspense fallback={<div className="h-16" />}>
+          <VolunteerCTA />
+        </Suspense>
+        
+        {/* Footer loads last */}
+        <Suspense fallback={<div className="h-20" />}>
           <Footer />
         </Suspense>
       </div>
