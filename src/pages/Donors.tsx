@@ -262,7 +262,7 @@ const Donors = () => {
                       <div className={`w-20 h-20 rounded-2xl flex items-center justify-center hover-scale hover-glow transition-all duration-500 ${way.iconBg} backdrop-blur-sm border border-border/50`}>
                         <way.icon className={`w-10 h-10 ${way.iconColor}`} />
                       </div>
-                      <h3 className="text-3xl lg:text-4xl font-bold bg-[var(--gradient-primary)] bg-clip-text text-transparent">{way.title}</h3>
+                      <h3 className="text-3xl lg:text-4xl font-bold text-foreground">{way.title}</h3>
                     </div>
                     
                     <blockquote className="text-lg text-muted-foreground italic mb-8 border-l-4 border-primary pl-6 bg-[var(--gradient-card)] p-6 rounded-r-lg backdrop-blur-sm">
@@ -346,7 +346,7 @@ const Donors = () => {
                     <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center flex-shrink-0 hover-scale hover-glow group-hover:bg-primary/30 transition-all duration-300">
                       <story.icon className="w-8 h-8 text-primary" />
                     </div>
-                    <h4 className="text-2xl font-bold bg-[var(--gradient-primary)] bg-clip-text text-transparent">{story.name}</h4>
+                    <h4 className="text-2xl font-bold text-foreground">{story.name}</h4>
                   </div>
                   <p className="text-muted-foreground leading-relaxed text-lg">{story.story}</p>
                 </CardContent>
@@ -375,7 +375,7 @@ const Donors = () => {
                   <div className="w-20 h-20 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-6 hover-scale hover-glow group-hover:bg-primary/30 transition-all duration-300">
                     <area.icon className="w-10 h-10 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-4 bg-[var(--gradient-primary)] bg-clip-text text-transparent">{area.title}</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-foreground">{area.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">{area.description}</p>
                 </CardContent>
               </Card>
@@ -409,7 +409,7 @@ const Donors = () => {
                   <div className="w-20 h-20 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-6 hover-scale hover-glow group-hover:bg-primary/30 transition-all duration-300">
                     <category.icon className="w-10 h-10 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-4 bg-[var(--gradient-primary)] bg-clip-text text-transparent">{category.title}</h3>
+                  <h3 className="text-xl font-semibold mb-4 text-foreground">{category.title}</h3>
                   <p className="text-muted-foreground leading-relaxed mb-6">{category.description}</p>
                   <Link to="/volunteer">
                     <Button 
@@ -470,7 +470,7 @@ const Donors = () => {
         <div className="absolute bottom-0 left-0 w-full h-1 bg-[var(--gradient-primary)]"></div>
         
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-12 animate-fade-in bg-[var(--gradient-primary)] bg-clip-text text-transparent leading-tight">
+          <h2 className="text-3xl md:text-5xl font-bold mb-12 animate-fade-in text-foreground leading-tight">
             Thank you for helping us create a world where recovery and hope are possible for everyone.
           </h2>
           
