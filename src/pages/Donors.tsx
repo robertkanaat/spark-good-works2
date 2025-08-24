@@ -78,7 +78,7 @@ const Donors = () => {
     },
     {
       icon: HandHeart,
-      title: "Donate Your Treasures",
+      title: "Donate Today",
       quote: "Every dollar given is a step toward a world where no one struggles with addiction alone.",
       items: [
         "One-Time Donation: Make an immediate impact with a single donation.",
@@ -233,13 +233,35 @@ const Donors = () => {
       </section>
 
       {/* How You Can Make a Difference */}
-      <section id="ways-to-help" className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              How You Can Make a Difference
+      <section id="ways-to-help" className="relative py-24 overflow-hidden bg-muted/30">
+        {/* Enhanced Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-donate/10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,hsl(var(--primary))_0%,transparent_50%)] opacity-20"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse opacity-30" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-donate/15 rounded-full blur-3xl animate-pulse delay-1000 opacity-40" />
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            {/* Badge */}
+            <div className="mb-8 animate-fade-in">
+              <div className="inline-flex items-center gap-3 px-8 py-4 bg-white/20 backdrop-blur-sm rounded-full border border-primary/30 shadow-[var(--shadow-elegant)]">
+                <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+                  Three Ways to Help
+                </span>
+              </div>
+            </div>
+            
+            {/* Main Headline */}
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight animate-fade-in">
+              How You Can Make a{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-donate to-secondary-foreground">
+                Difference
+              </span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            
+            {/* Subheadline */}
+            <p className="text-2xl md:text-3xl text-foreground/90 leading-relaxed max-w-4xl mx-auto animate-fade-in font-medium">
               Choose the way that resonates most with you—every contribution matters and creates real impact.
             </p>
           </div>
