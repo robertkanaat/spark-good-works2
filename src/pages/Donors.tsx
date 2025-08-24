@@ -506,13 +506,29 @@ const Donors = () => {
       </section>
 
       {/* Why Your Contribution Matters */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Why Your Contribution Matters
+      <section className="relative py-24 overflow-hidden bg-muted/30">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-primary/5 to-muted/30" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse opacity-30" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-donate/10 rounded-full blur-3xl animate-pulse delay-1000 opacity-40" />
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-card/80 backdrop-blur-sm rounded-full border border-primary/20 mb-6 animate-fade-in">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+              <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+                Your Impact
+              </span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-black text-foreground mb-8 leading-tight animate-fade-in">
+              Why Your{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-donate to-secondary-foreground">
+                Contribution Matters
+              </span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            
+            <p className="text-xl text-foreground/90 leading-relaxed max-w-3xl mx-auto animate-fade-in">
               Addiction affects more than just individuals—it impacts families, communities, and society. With your help, we can:
             </p>
           </div>
@@ -540,13 +556,29 @@ const Donors = () => {
       </section>
 
       {/* Talent Areas Section */}
-      <section id="talent-areas" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ways to Share Your Talent
+      <section id="talent-areas" className="relative py-24 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse opacity-30" />
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-donate/10 rounded-full blur-3xl animate-pulse delay-1000 opacity-40" />
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-card/80 backdrop-blur-sm rounded-full border border-primary/20 mb-6 animate-fade-in">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+              <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+                Talent Categories
+              </span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-black text-foreground mb-8 leading-tight animate-fade-in">
+              Ways to Share Your{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-foreground via-primary to-donate">
+                Talent
+              </span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            
+            <p className="text-xl text-foreground/90 leading-relaxed max-w-3xl mx-auto animate-fade-in">
               Your unique skills and expertise can make a real difference in our mission to support recovery.
             </p>
           </div>
@@ -659,7 +691,7 @@ const Donors = () => {
               >
                 <HandHeart className="w-6 h-6 mr-3 group-hover:animate-heartbeat" />
                 <span className="flex flex-col items-start">
-                  <span className="font-semibold">Donate Treasure</span>
+                  <span className="font-semibold">Donate Now</span>
                   <span className="text-sm opacity-70">Make an impact</span>
                 </span>
               </Button>
