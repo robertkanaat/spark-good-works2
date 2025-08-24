@@ -195,7 +195,7 @@ const Header = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
                     isActiveRoute('/emergency') || isActiveRoute('/treatment-centers') || isActiveRoute('/support-groups') || 
-                    isActiveRoute('/family-support') || isActiveRoute('/volunteer') || isActiveRoute('/donation')
+                    isActiveRoute('/family-support') || isActiveRoute('/volunteer') || isActiveRoute('/donation') || isActiveRoute('/donors')
                       ? 'text-primary bg-primary/5' 
                       : 'text-muted-foreground'
                   }`}>
@@ -204,15 +204,15 @@ const Header = () => {
                   <NavigationMenuContent className="z-50">
                     <div className="grid gap-3 p-6 w-[550px] grid-cols-2">
                       <Link
-                        to="/emergency"
-                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-all duration-300 hover:bg-red-50 dark:hover:bg-red-950/20 hover:shadow-lg hover:shadow-red-500/25 hover:scale-105 group border border-red-200/50 dark:border-red-800/50"
+                        to="/donors"
+                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
                       >
                         <div className="flex items-center gap-2">
-                          <Phone className="h-5 w-5 text-red-600 transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-semibold leading-none text-red-600">Crisis Support</div>
+                          <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Donors</div>
                         </div>
                         <p className="text-sm leading-snug text-muted-foreground">
-                          Immediate help for mental health emergencies and suicide prevention
+                          Support through time, talent, or treasure - every contribution matters
                         </p>
                       </Link>
                       <Link
