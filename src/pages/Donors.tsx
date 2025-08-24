@@ -325,33 +325,182 @@ const Donors = () => {
       </section>
 
       {/* Real Stories of Hope */}
-      <section id="impact-stories" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 italic">
-              Real Stories of Hope and Recovery
+      <section id="impact-stories" className="relative py-24 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-donate/10 rounded-full blur-3xl animate-pulse opacity-30" />
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-pulse delay-1000 opacity-40" />
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-card/80 backdrop-blur-sm rounded-full border border-primary/20 mb-6 animate-fade-in">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+              <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+                Impact Stories
+              </span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-black text-foreground mb-8 leading-tight animate-fade-in">
+              Real Stories of{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-donate to-secondary-foreground">
+                Hope and Recovery
+              </span>
             </h2>
-            <h3 className="text-2xl font-semibold mb-4">The Impact of Your Support</h3>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+            
+            <h3 className="text-2xl md:text-3xl font-semibold text-primary mb-4 animate-fade-in">The Impact of Your Support</h3>
+            <p className="text-xl text-foreground/90 leading-relaxed max-w-4xl mx-auto animate-fade-in">
               Your generosity directly impacts the lives of those struggling with addiction and their families. 
               Here are some of the lives transformed through your support.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="space-y-16">
             {impactStories.map((story, index) => (
-              <Card key={index} className="group hover:shadow-[var(--shadow-elegant)] transition-all duration-700 hover:-translate-y-3 animate-fade-in bg-[var(--gradient-card)] backdrop-blur-sm border-border/50" style={{ animationDelay: `${index * 0.2}s` }}>
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-6 mb-6">
-                    <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center flex-shrink-0 hover-scale hover-glow group-hover:bg-primary/30 transition-all duration-300">
-                      <story.icon className="w-8 h-8 text-primary" />
+              <div key={index} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''} animate-fade-in`} style={{ animationDelay: `${index * 0.2}s` }}>
+                {/* Story Content */}
+                <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                  <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-donate/10 rounded-2xl p-8 border border-primary/20 group hover:shadow-[var(--shadow-elegant)] transition-all duration-700">
+                    <div className="flex items-start gap-6 mb-6">
+                      <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center flex-shrink-0 hover-scale hover-glow group-hover:bg-primary/30 transition-all duration-300">
+                        <story.icon className="w-8 h-8 text-primary" />
+                      </div>
+                      <h4 className="text-2xl md:text-3xl font-bold text-foreground">{story.name}</h4>
                     </div>
-                    <h4 className="text-2xl font-bold text-foreground">{story.name}</h4>
+                    <p className="text-foreground/90 leading-relaxed text-lg mb-6">{story.story}</p>
+                    
+                    {/* Impact Stats for this story */}
+                    <div className="grid grid-cols-2 gap-4 pt-6 border-t border-primary/20">
+                      <div className="text-center p-4 bg-background/50 rounded-xl">
+                        <div className="text-2xl font-black text-primary mb-1">
+                          {index === 0 ? "5+" : "100+"}
+                        </div>
+                        <div className="text-sm text-foreground/70 font-medium">
+                          {index === 0 ? "Years in Recovery" : "Lives Touched"}
+                        </div>
+                      </div>
+                      <div className="text-center p-4 bg-background/50 rounded-xl">
+                        <div className="text-2xl font-black text-primary mb-1">
+                          {index === 0 ? "25+" : "12"}
+                        </div>
+                        <div className="text-sm text-foreground/70 font-medium">
+                          {index === 0 ? "People Mentored" : "Policy Changes"}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed text-lg">{story.story}</p>
-                </CardContent>
-              </Card>
+                  
+                  {/* Quote */}
+                  <div className="relative p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/20">
+                    <div className="absolute -top-3 left-6">
+                      <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                        <span className="text-primary-foreground text-sm font-bold">"</span>
+                      </div>
+                    </div>
+                    <blockquote className="text-lg italic text-foreground/90 leading-relaxed mb-3">
+                      {index === 0 
+                        ? "Recovery isn't just about getting clean—it's about discovering who you're meant to be and helping others find their path too."
+                        : "Every life lost to overdose represents a failure of our system. We must create a world where compassion comes before judgment."
+                      }
+                    </blockquote>
+                    <cite className="text-primary font-semibold">— {story.name.split("'s")[0]}</cite>
+                  </div>
+                </div>
+                
+                {/* Visual Element / Stats */}
+                <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                  <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/20 hover:shadow-[var(--shadow-elegant)] transition-all duration-700">
+                    <h5 className="text-xl font-bold text-foreground mb-6 flex items-center gap-3">
+                      <Heart className="w-6 h-6 text-primary" />
+                      {index === 0 ? "Recovery Milestones" : "Advocacy Impact"}
+                    </h5>
+                    
+                    <div className="space-y-4">
+                      {index === 0 ? (
+                        <>
+                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-primary/10 to-donate/10 rounded-lg">
+                            <span className="text-foreground/80">Completed Treatment</span>
+                            <div className="w-3 h-3 bg-primary rounded-full"></div>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-primary/10 to-donate/10 rounded-lg">
+                            <span className="text-foreground/80">Became a Sponsor</span>
+                            <div className="w-3 h-3 bg-primary rounded-full"></div>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-primary/10 to-donate/10 rounded-lg">
+                            <span className="text-foreground/80">Started Mentoring</span>
+                            <div className="w-3 h-3 bg-primary rounded-full"></div>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-primary/10 to-donate/10 rounded-lg">
+                            <span className="text-foreground/80">Community Leader</span>
+                            <div className="w-3 h-3 bg-primary rounded-full"></div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-primary/10 to-donate/10 rounded-lg">
+                            <span className="text-foreground/80">Harm Reduction Programs</span>
+                            <div className="w-3 h-3 bg-primary rounded-full"></div>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-primary/10 to-donate/10 rounded-lg">
+                            <span className="text-foreground/80">Treatment Access Laws</span>
+                            <div className="w-3 h-3 bg-primary rounded-full"></div>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-primary/10 to-donate/10 rounded-lg">
+                            <span className="text-foreground/80">Stigma Reduction</span>
+                            <div className="w-3 h-3 bg-primary rounded-full"></div>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-primary/10 to-donate/10 rounded-lg">
+                            <span className="text-foreground/80">Family Support</span>
+                            <div className="w-3 h-3 bg-primary rounded-full"></div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Mission Alignment */}
+                  <div className="bg-gradient-to-r from-primary/10 via-secondary/10 to-donate/10 rounded-2xl p-6 border border-primary/20">
+                    <h6 className="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-primary" />
+                      Your Support Made This Possible
+                    </h6>
+                    <p className="text-foreground/90 leading-relaxed text-sm">
+                      {index === 0 
+                        ? "Through donations to recovery programs and mentorship initiatives, supporters like you provided Rachel with the tools, community, and hope she needed to transform her life."
+                        : "Your contributions to advocacy programs and policy work enabled Mark to channel his grief into meaningful change that prevents other families from experiencing similar loss."
+                      }
+                    </p>
+                  </div>
+                </div>
+              </div>
             ))}
+          </div>
+          
+          {/* Overall Impact Summary */}
+          <div className="mt-20 text-center">
+            <div className="max-w-4xl mx-auto bg-gradient-to-r from-primary/10 via-primary/5 to-donate/10 rounded-2xl p-8 border border-primary/20">
+              <h4 className="text-2xl font-bold text-foreground mb-6">Your Collective Impact</h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="text-center">
+                  <div className="text-3xl font-black text-primary mb-2">500+</div>
+                  <div className="text-sm text-foreground/70 font-medium">Lives Transformed</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-black text-primary mb-2">50+</div>
+                  <div className="text-sm text-foreground/70 font-medium">Families Reunited</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-black text-primary mb-2">25</div>
+                  <div className="text-sm text-foreground/70 font-medium">Policy Changes</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-black text-primary mb-2">1M+</div>
+                  <div className="text-sm text-foreground/70 font-medium">People Reached</div>
+                </div>
+              </div>
+              <p className="text-lg text-primary font-semibold mt-6">
+                Every dollar donated creates ripples of hope that extend far beyond what we can measure.
+              </p>
+            </div>
           </div>
         </div>
       </section>
