@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -20,7 +20,9 @@ import {
   PenTool,
   Briefcase,
   Gift,
-  ArrowDown
+  ArrowDown,
+  Sparkles,
+  HandHeart
 } from "lucide-react";
 
 // Smooth scroll function
@@ -54,10 +56,13 @@ const Donors = () => {
         "Share expert content: There are many factors to support achievement of long-term recovery, including nutrition, exercise, breathwork, yoga, meditation, journaling, and so many more tools!"
       ],
       buttonText: "Become a Volunteer",
-      color: "blue"
+      variant: "secondary",
+      iconBg: "bg-secondary/20",
+      iconColor: "text-secondary-foreground",
+      bulletColor: "bg-secondary"
     },
     {
-      icon: Star,
+      icon: Sparkles,
       title: "Share Your Talent",
       quote: "Your unique skills are a gift. Contribute your talents to make recovery accessible and relatable.",
       items: [
@@ -66,10 +71,13 @@ const Donors = () => {
         "Advocacy Work: Join our team in advocating for policy changes that increase access to treatment and support services. Your voice matters!"
       ],
       buttonText: "Get Involved",
-      color: "purple"
+      variant: "outline",
+      iconBg: "bg-accent/30",
+      iconColor: "text-accent-foreground",
+      bulletColor: "bg-accent-foreground"
     },
     {
-      icon: Gift,
+      icon: HandHeart,
       title: "Donate Your Treasures",
       quote: "Every dollar given is a step toward a world where no one struggles with addiction alone.",
       items: [
@@ -78,7 +86,10 @@ const Donors = () => {
         "Fund a Program: Choose a specific initiative that resonates with you, like education, community outreach, or recovery mentorship programs."
       ],
       buttonText: "Donate Now",
-      color: "green"
+      variant: "donate",
+      iconBg: "bg-donate/20",
+      iconColor: "text-donate",
+      bulletColor: "bg-donate"
     }
   ];
 
@@ -159,8 +170,9 @@ const Donors = () => {
       
       {/* Hero Section */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-background to-primary/10"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,hsl(var(--primary))_0%,transparent_50%)] opacity-15"></div>
+        <div className="absolute inset-0 bg-[var(--gradient-subtle)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,hsl(var(--primary))_0%,transparent_50%)] opacity-20"></div>
+        <div className="absolute top-0 left-0 w-full h-1 bg-[var(--gradient-primary)]"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-5xl mx-auto">
@@ -177,8 +189,8 @@ const Donors = () => {
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-4xl mx-auto">
               When you join Genius Recovery as a donor, you're not just giving resources—you're giving hope, support, and a path to recovery. 
               Every contribution you make, whether through <span className="text-primary font-semibold">time</span>, 
-              <span className="text-purple-600 font-semibold"> talent</span>, or 
-              <span className="text-green-600 font-semibold"> treasure</span>, fuels real, lasting change in the lives of those affected by addiction.
+              <span className="text-secondary-foreground font-semibold"> talent</span>, or 
+              <span className="text-donate font-semibold"> treasure</span>, fuels real, lasting change in the lives of those affected by addiction.
             </p>
             
             <p className="text-2xl font-semibold text-foreground mb-12">
@@ -232,7 +244,7 @@ const Donors = () => {
             </p>
           </div>
           
-          <div className="space-y-16">
+          <div className="space-y-20">
             {waysToDonate.map((way, index) => {
               const getButtonAction = (title: string) => {
                 if (title.includes('Time')) return '/volunteer';
@@ -241,75 +253,68 @@ const Donors = () => {
                 return () => {};
               };
 
+              const isFunction = typeof getButtonAction(way.title) === 'function';
+
               return (
-                <div key={index} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''} animate-fade-in`}>
-                  <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className={`w-16 h-16 rounded-full flex items-center justify-center hover-scale transition-all duration-300 ${
-                        way.color === 'blue' ? 'bg-blue-500/10' :
-                        way.color === 'purple' ? 'bg-purple-500/10' : 'bg-green-500/10'
-                      }`}>
-                        <way.icon className={`w-8 h-8 ${
-                          way.color === 'blue' ? 'text-blue-600' :
-                          way.color === 'purple' ? 'text-purple-600' : 'text-green-600'
-                        }`} />
+                <div key={index} className={`group grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+                  <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''} animate-fade-in`} style={{ animationDelay: `${index * 0.2}s` }}>
+                    <div className="flex items-center gap-6 mb-8">
+                      <div className={`w-20 h-20 rounded-2xl flex items-center justify-center hover-scale hover-glow transition-all duration-500 ${way.iconBg} backdrop-blur-sm border border-border/50`}>
+                        <way.icon className={`w-10 h-10 ${way.iconColor}`} />
                       </div>
-                      <h3 className="text-3xl font-bold">{way.title}</h3>
+                      <h3 className="text-3xl lg:text-4xl font-bold bg-[var(--gradient-primary)] bg-clip-text text-transparent">{way.title}</h3>
                     </div>
                     
-                    <blockquote className="text-lg text-muted-foreground italic mb-8 border-l-4 border-primary pl-6 animate-fade-in">
+                    <blockquote className="text-lg text-muted-foreground italic mb-8 border-l-4 border-primary pl-6 bg-[var(--gradient-card)] p-6 rounded-r-lg backdrop-blur-sm">
                       "{way.quote}"
                     </blockquote>
                     
-                    <ul className="space-y-4 mb-8">
+                    <ul className="space-y-6 mb-10">
                       {way.items.map((item, itemIndex) => (
-                        <li key={itemIndex} className="flex items-start gap-3 animate-fade-in" style={{ animationDelay: `${itemIndex * 0.1}s` }}>
-                          <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
-                            way.color === 'blue' ? 'bg-blue-600' :
-                            way.color === 'purple' ? 'bg-purple-600' : 'bg-green-600'
-                          }`}></div>
-                          <span className="text-muted-foreground leading-relaxed">{item}</span>
+                        <li key={itemIndex} className="flex items-start gap-4 animate-fade-in hover-scale" style={{ animationDelay: `${(index * 0.2) + (itemIndex * 0.1)}s` }}>
+                          <div className={`w-3 h-3 rounded-full mt-2 flex-shrink-0 ${way.bulletColor} shadow-lg`}></div>
+                          <span className="text-muted-foreground leading-relaxed text-base">{item}</span>
                         </li>
                       ))}
                     </ul>
                     
-                    {typeof getButtonAction(way.title) === 'string' ? (
+                    {isFunction ? (
+                      <Button 
+                        size="lg" 
+                        variant={way.variant as any}
+                        className="text-lg px-8 py-6 h-auto hover-scale hover-glow transition-all duration-300 w-full lg:w-auto shadow-lg"
+                        onClick={getButtonAction(way.title) as () => void}
+                      >
+                        <way.icon className="w-5 h-5 mr-2" />
+                        {way.buttonText}
+                      </Button>
+                    ) : (
                       <Link to={getButtonAction(way.title) as string}>
                         <Button 
                           size="lg" 
-                          className={`${
-                            way.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700' :
-                            way.color === 'purple' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-green-600 hover:bg-green-700'
-                          } text-white hover-scale transition-all duration-300 w-full`}
+                          variant={way.variant as any}
+                          className="text-lg px-8 py-6 h-auto hover-scale hover-glow transition-all duration-300 w-full lg:w-auto shadow-lg"
                         >
+                          <way.icon className="w-5 h-5 mr-2" />
                           {way.buttonText}
                         </Button>
                       </Link>
-                    ) : (
-                      <Button 
-                        size="lg" 
-                        className={`${
-                          way.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700' :
-                          way.color === 'purple' ? 'bg-purple-600 hover:bg-purple-700' : 'bg-green-600 hover:bg-green-700'
-                        } text-white hover-scale transition-all duration-300`}
-                        onClick={getButtonAction(way.title) as () => void}
-                      >
-                        {way.buttonText}
-                      </Button>
                     )}
                   </div>
                   
-                  <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
-                    <Card className="p-8 h-full bg-gradient-to-br from-muted/50 to-background hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                      <div className="grid grid-cols-2 gap-4">
-                        {talentCategories.slice(index * 2, (index * 2) + 2).map((category, catIndex) => (
-                          <div key={catIndex} className="text-center p-4 rounded-lg bg-background/50 hover:bg-background/80 transition-all duration-300 hover-scale">
-                            <category.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
-                            <h4 className="font-semibold text-sm mb-2">{category.title}</h4>
-                            <p className="text-xs text-muted-foreground">{category.description}</p>
-                          </div>
-                        ))}
-                      </div>
+                  <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''} animate-fade-in`} style={{ animationDelay: `${index * 0.2 + 0.1}s` }}>
+                    <Card className="group-hover:shadow-[var(--shadow-elegant)] transition-all duration-700 hover:-translate-y-3 bg-[var(--gradient-card)] backdrop-blur-sm border-border/50">
+                      <CardContent className="p-8">
+                        <div className="grid grid-cols-2 gap-6">
+                          {talentCategories.slice(index * 2, (index * 2) + 2).map((category, catIndex) => (
+                            <div key={catIndex} className="text-center p-6 rounded-xl bg-background/60 hover:bg-background/90 transition-all duration-300 hover-scale hover-glow border border-border/30">
+                              <category.icon className="w-10 h-10 mx-auto mb-4 text-primary" />
+                              <h4 className="font-semibold text-sm mb-3 text-foreground">{category.title}</h4>
+                              <p className="text-xs text-muted-foreground leading-relaxed">{category.description}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
                     </Card>
                   </div>
                 </div>
@@ -335,14 +340,16 @@ const Donors = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {impactStories.map((story, index) => (
-              <Card key={index} className="p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 hover-scale">
-                    <story.icon className="w-6 h-6 text-primary" />
+              <Card key={index} className="group hover:shadow-[var(--shadow-elegant)] transition-all duration-700 hover:-translate-y-3 animate-fade-in bg-[var(--gradient-card)] backdrop-blur-sm border-border/50" style={{ animationDelay: `${index * 0.2}s` }}>
+                <CardContent className="p-8">
+                  <div className="flex items-start gap-6 mb-6">
+                    <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center flex-shrink-0 hover-scale hover-glow group-hover:bg-primary/30 transition-all duration-300">
+                      <story.icon className="w-8 h-8 text-primary" />
+                    </div>
+                    <h4 className="text-2xl font-bold bg-[var(--gradient-primary)] bg-clip-text text-transparent">{story.name}</h4>
                   </div>
-                  <h4 className="text-2xl font-bold">{story.name}</h4>
-                </div>
-                <p className="text-muted-foreground leading-relaxed text-lg">{story.story}</p>
+                  <p className="text-muted-foreground leading-relaxed text-lg">{story.story}</p>
+                </CardContent>
               </Card>
             ))}
           </div>
@@ -363,12 +370,14 @@ const Donors = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {impactAreas.map((area, index) => (
-              <Card key={index} className="p-8 text-center hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 hover-scale">
-                  <area.icon className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">{area.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{area.description}</p>
+              <Card key={index} className="group hover:shadow-[var(--shadow-elegant)] transition-all duration-700 hover:-translate-y-3 animate-fade-in bg-[var(--gradient-card)] backdrop-blur-sm border-border/50" style={{ animationDelay: `${index * 0.1}s` }}>
+                <CardContent className="p-8 text-center">
+                  <div className="w-20 h-20 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-6 hover-scale hover-glow group-hover:bg-primary/30 transition-all duration-300">
+                    <area.icon className="w-10 h-10 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4 bg-[var(--gradient-primary)] bg-clip-text text-transparent">{area.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{area.description}</p>
+                </CardContent>
               </Card>
             ))}
           </div>
@@ -395,21 +404,24 @@ const Donors = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {talentCategories.map((category, index) => (
-              <Card key={index} className="p-6 text-center hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 hover-scale">
-                  <category.icon className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
-                <p className="text-muted-foreground leading-relaxed mb-6">{category.description}</p>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  className="hover-scale"
-                >
-                  <Link to="/volunteer" className="flex items-center">
-                    Get Involved
+              <Card key={index} className="group hover:shadow-[var(--shadow-elegant)] transition-all duration-700 hover:-translate-y-3 animate-fade-in bg-[var(--gradient-card)] backdrop-blur-sm border-border/50" style={{ animationDelay: `${index * 0.1}s` }}>
+                <CardContent className="p-8 text-center">
+                  <div className="w-20 h-20 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-6 hover-scale hover-glow group-hover:bg-primary/30 transition-all duration-300">
+                    <category.icon className="w-10 h-10 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4 bg-[var(--gradient-primary)] bg-clip-text text-transparent">{category.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-6">{category.description}</p>
+                  <Link to="/volunteer">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      className="hover-scale hover-glow transition-all duration-300 w-full"
+                    >
+                      <category.icon className="w-4 h-4 mr-2" />
+                      Get Involved
+                    </Button>
                   </Link>
-                </Button>
+                </CardContent>
               </Card>
             ))}
           </div>
@@ -452,45 +464,62 @@ const Donors = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-orange-500/10 to-primary/10"></div>
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 animate-fade-in">
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[var(--gradient-primary)] opacity-5"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary))_0%,transparent_70%)] opacity-10"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-[var(--gradient-primary)]"></div>
+        
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-12 animate-fade-in bg-[var(--gradient-primary)] bg-clip-text text-transparent leading-tight">
             Thank you for helping us create a world where recovery and hope are possible for everyone.
           </h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <Button 
               size="lg" 
               variant="outline" 
-              className="text-lg px-6 py-4 h-auto hover-scale animate-fade-in"
+              className="text-lg px-8 py-6 h-auto hover-scale hover-glow animate-fade-in transition-all duration-300 group"
               onClick={() => scrollToSection('volunteer-signup')}
               style={{ animationDelay: '0.1s' }}
             >
-              <Clock className="w-5 h-5 mr-2" />
-              Donate Your Time
+              <Clock className="w-6 h-6 mr-3 group-hover:animate-pulse" />
+              <span className="flex flex-col items-start">
+                <span className="font-semibold">Donate Your Time</span>
+                <span className="text-sm opacity-70">Share your story</span>
+              </span>
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="text-lg px-6 py-4 h-auto hover-scale animate-fade-in"
+              variant="secondary"
+              className="text-lg px-8 py-6 h-auto hover-scale hover-glow animate-fade-in transition-all duration-300 group"
               onClick={() => scrollToSection('talent-areas')}
               style={{ animationDelay: '0.2s' }}
             >
-              <Star className="w-5 h-5 mr-2" />
-              Give Your Talent
+              <Sparkles className="w-6 h-6 mr-3 group-hover:animate-pulse" />
+              <span className="flex flex-col items-start">
+                <span className="font-semibold">Give Your Talent</span>
+                <span className="text-sm opacity-70">Use your skills</span>
+              </span>
             </Button>
-            <Link to="/donation">
+            <Link to="/donation" className="w-full">
               <Button 
                 size="lg" 
-                className="text-lg px-6 py-4 h-auto w-full hover-scale animate-fade-in"
+                variant="donate"
+                className="text-lg px-8 py-6 h-auto w-full hover-scale hover-glow animate-fade-in transition-all duration-300 group"
                 style={{ animationDelay: '0.3s' }}
               >
-                <DollarSign className="w-5 h-5 mr-2" />
-                Donate Treasure
+                <HandHeart className="w-6 h-6 mr-3 group-hover:animate-heartbeat" />
+                <span className="flex flex-col items-start">
+                  <span className="font-semibold">Donate Treasure</span>
+                  <span className="text-sm opacity-70">Make an impact</span>
+                </span>
               </Button>
             </Link>
           </div>
+          
+          <p className="mt-12 text-lg text-muted-foreground animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            Every action you take creates ripples of hope in someone's recovery journey.
+          </p>
         </div>
       </section>
 
