@@ -610,35 +610,99 @@ const Donors = () => {
       </section>
 
       {/* Volunteer Signup Section */}
-      <section id="volunteer-signup" className="py-20 bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section id="volunteer-signup" className="relative py-24 overflow-hidden bg-muted/30">
+        {/* Enhanced Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-donate/5 to-secondary/10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary))_0%,transparent_70%)] opacity-15"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-donate/20 rounded-full blur-3xl animate-pulse opacity-40" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse delay-1000 opacity-50" />
+        <div className="absolute top-0 left-0 w-full h-1 bg-[var(--gradient-primary)]"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-[var(--gradient-primary)]"></div>
+        
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Make a Difference?
+            {/* Badge */}
+            <div className="mb-8">
+              <div className="inline-flex items-center gap-3 px-8 py-4 bg-white/20 backdrop-blur-sm rounded-full border border-primary/30 shadow-[var(--shadow-elegant)]">
+                <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                <span className="text-foreground font-bold tracking-wider uppercase text-sm">
+                  Join Our Mission
+                </span>
+              </div>
+            </div>
+            
+            {/* Main Headline */}
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-foreground mb-8 leading-tight">
+              Ready to Make a{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-donate to-secondary-foreground animate-gradient-slide bg-300% bg-left">
+                Difference?
+              </span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Join our community of volunteers and start making an impact today.
+            
+            {/* Subheadline */}
+            <p className="text-2xl md:text-3xl text-foreground/90 mb-12 leading-relaxed font-medium max-w-4xl mx-auto">
+              Join our community of volunteers and start making an impact today. Every action creates ripples of hope.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/volunteer">
+            
+            {/* Enhanced CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+              <Link to="/volunteer" className="group">
                 <Button 
                   size="lg" 
-                  className="text-lg px-8 py-4 h-auto hover-scale w-full"
+                  className="text-xl px-12 py-8 h-auto hover-scale w-full sm:w-auto shadow-2xl transition-all duration-500 group-hover:shadow-[0_0_50px_hsl(var(--primary)/0.5)] relative overflow-hidden"
+                  style={{
+                    background: 'var(--gradient-primary)',
+                  }}
                 >
-                  <Users className="w-5 h-5 mr-2" />
-                  Become a Volunteer
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                  <Users className="w-6 h-6 mr-3 group-hover:animate-pulse" />
+                  <span className="relative flex flex-col items-start">
+                    <span className="font-bold">Become a Volunteer</span>
+                    <span className="text-sm opacity-90">Share your story & time</span>
+                  </span>
                 </Button>
               </Link>
-              <Link to="/contact">
+              
+              <Link to="/contact" className="group">
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="text-lg px-8 py-4 h-auto hover-scale w-full"
+                  className="text-xl px-12 py-8 h-auto hover-scale w-full sm:w-auto border-2 border-primary/40 bg-white/10 backdrop-blur-sm hover:bg-primary/10 hover:border-primary transition-all duration-500 group-hover:shadow-[0_0_30px_hsl(var(--primary)/0.3)]"
                 >
-                  <Megaphone className="w-5 h-5 mr-2" />
-                  Contact Us
+                  <Megaphone className="w-6 h-6 mr-3 group-hover:animate-pulse" />
+                  <span className="flex flex-col items-start">
+                    <span className="font-bold">Contact Us</span>
+                    <span className="text-sm opacity-70">Let's discuss your ideas</span>
+                  </span>
                 </Button>
               </Link>
+            </div>
+            
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div className="flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-primary/20 hover:bg-white/20 transition-all duration-300">
+                <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                  <Heart className="w-8 h-8 text-primary" />
+                </div>
+                <h4 className="text-lg font-bold text-foreground mb-2">500+ Lives Transformed</h4>
+                <p className="text-sm text-foreground/70 text-center">Through volunteer support and mentorship</p>
+              </div>
+              
+              <div className="flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-primary/20 hover:bg-white/20 transition-all duration-300">
+                <div className="w-16 h-16 bg-donate/20 rounded-full flex items-center justify-center mb-4">
+                  <Users className="w-8 h-8 text-donate" />
+                </div>
+                <h4 className="text-lg font-bold text-foreground mb-2">Growing Community</h4>
+                <p className="text-sm text-foreground/70 text-center">Join hundreds of dedicated volunteers</p>
+              </div>
+              
+              <div className="flex flex-col items-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-primary/20 hover:bg-white/20 transition-all duration-300">
+                <div className="w-16 h-16 bg-secondary/30 rounded-full flex items-center justify-center mb-4">
+                  <Sparkles className="w-8 h-8 text-secondary-foreground" />
+                </div>
+                <h4 className="text-lg font-bold text-foreground mb-2">Meaningful Impact</h4>
+                <p className="text-sm text-foreground/70 text-center">Every contribution creates lasting change</p>
+              </div>
             </div>
           </div>
         </div>
