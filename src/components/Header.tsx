@@ -202,79 +202,86 @@ const Header = () => {
                     SUPPORT
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50">
-                    <div className="grid gap-3 p-6 w-[550px] grid-cols-2">
-                      <Link
-                        to="/donation"
-                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-medium leading-none">Donate</div>
-                        </div>
-                        <p className="text-sm leading-snug text-muted-foreground">
-                          Support our mission with a financial contribution
-                        </p>
-                      </Link>
-                      <Link
-                        to="/treatment-centers"
-                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Stethoscope className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-medium leading-none">Treatment Centers</div>
-                        </div>
-                        <p className="text-sm leading-snug text-muted-foreground">
-                          Find verified addiction treatment facilities near you
-                        </p>
-                      </Link>
-                      <Link
-                        to="/support-groups"
-                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Users className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-medium leading-none">Support Groups</div>
-                        </div>
-                        <p className="text-sm leading-snug text-muted-foreground">
-                          Connect with peer recovery support communities
-                        </p>
-                      </Link>
-                      <Link
-                        to="/family-support"
-                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Shield className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-medium leading-none">Family Support</div>
-                        </div>
-                        <p className="text-sm leading-snug text-muted-foreground">
-                          Resources and support for families affected by addiction
-                        </p>
-                      </Link>
-                      <Link
-                        to="/volunteer"
-                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Handshake className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-medium leading-none">Volunteer</div>
-                        </div>
-                        <p className="text-sm leading-snug text-muted-foreground">
-                          Join our mission to transform lives and make a difference
-                        </p>
-                      </Link>
-                      <Link
-                        to="/donors"
-                        className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Gift className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
-                          <div className="text-sm font-medium leading-none">Donors</div>
-                        </div>
-                        <p className="text-sm leading-snug text-muted-foreground">
-                          Support through time, talent, or treasure - every contribution matters
-                        </p>
-                      </Link>
+                    <div className="grid gap-6 p-6 w-[550px] grid-cols-2">
+                      {/* Left Column - Getting Support */}
+                      <div className="space-y-3">
+                        <Link
+                          to="/family-support"
+                          className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Shield className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                            <div className="text-sm font-medium leading-none">Family Support</div>
+                          </div>
+                          <p className="text-sm leading-snug text-muted-foreground">
+                            Resources and support for families affected by addiction
+                          </p>
+                        </Link>
+                        <Link
+                          to="/treatment-centers"
+                          className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Stethoscope className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                            <div className="text-sm font-medium leading-none">Treatment Centers</div>
+                          </div>
+                          <p className="text-sm leading-snug text-muted-foreground">
+                            Find verified addiction treatment facilities near you
+                          </p>
+                        </Link>
+                        <Link
+                          to="/support-groups"
+                          className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Users className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                            <div className="text-sm font-medium leading-none">Support Groups</div>
+                          </div>
+                          <p className="text-sm leading-snug text-muted-foreground">
+                            Connect with peer recovery support communities
+                          </p>
+                        </Link>
+                      </div>
+                      
+                      {/* Right Column - Giving Support */}
+                      <div className="space-y-3">
+                        <Link
+                          to="/donation"
+                          className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Heart className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                            <div className="text-sm font-medium leading-none">Donate</div>
+                          </div>
+                          <p className="text-sm leading-snug text-muted-foreground">
+                            Support our mission with a financial contribution
+                          </p>
+                        </Link>
+                        <Link
+                          to="/volunteer"
+                          className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Handshake className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                            <div className="text-sm font-medium leading-none">Volunteer</div>
+                          </div>
+                          <p className="text-sm leading-snug text-muted-foreground">
+                            Join our mission to transform lives and make a difference
+                          </p>
+                        </Link>
+                        <Link
+                          to="/donors"
+                          className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Gift className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                            <div className="text-sm font-medium leading-none">Donors</div>
+                          </div>
+                          <p className="text-sm leading-snug text-muted-foreground">
+                            Support through time, talent, or treasure - every contribution matters
+                          </p>
+                        </Link>
+                      </div>
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
