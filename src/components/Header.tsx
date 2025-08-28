@@ -205,6 +205,11 @@ const Header = () => {
                     <div className="grid gap-6 p-6 w-[550px] grid-cols-2">
                       {/* Left Column - Getting Support */}
                       <div className="space-y-3">
+                        <div className="px-4 py-2 mb-2">
+                          <h3 className="text-sm font-semibold text-foreground/90 tracking-wide uppercase border-b border-primary/20 pb-2">
+                            Get Support
+                          </h3>
+                        </div>
                         <Link
                           to="/family-support"
                           className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
@@ -245,6 +250,11 @@ const Header = () => {
                       
                       {/* Right Column - Giving Support */}
                       <div className="space-y-3">
+                        <div className="px-4 py-2 mb-2">
+                          <h3 className="text-sm font-semibold text-foreground/90 tracking-wide uppercase border-b border-primary/20 pb-2">
+                            Give Support
+                          </h3>
+                        </div>
                         <Link
                           to="/donation"
                           className="block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
