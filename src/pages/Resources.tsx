@@ -6,7 +6,7 @@ import { ArrowLeft, Heart, Users, Globe, Shield, Phone, BookOpen, HeadphonesIcon
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import resourcesHeroBg from "@/assets/recovery-resources-hero-enhanced.jpg";
+import resourcesHeroBg from "@/assets/recovery-resources-hero-new.jpg";
 
 const Resources = () => {
   useEffect(() => {
