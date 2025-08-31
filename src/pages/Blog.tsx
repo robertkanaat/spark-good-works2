@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { useWordPressPosts } from "@/hooks/useWordPressPosts";
+import { useToast } from "@/hooks/use-toast";
 import {
   Pagination,
   PaginationContent,
@@ -29,8 +30,11 @@ const Blog = () => {
   const { pageNumber } = useParams<{ pageNumber: string }>();
   const navigate = useNavigate();
   const location = useLocation();
+  const { toast } = useToast();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
+  const [email, setEmail] = useState("");
+  const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
   const { posts, loading, error, featuredPost, categories, totalPages, currentPage, fetchPage, totalPostsCount } = useWordPressPosts();
   
   // Get page from URL params, default to 1
@@ -105,6 +109,62 @@ const Blog = () => {
     
     if (shareUrl) {
       window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      toast({
+        title: "Error",
+        description: "Please enter your email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!email.includes('@')) {
+      toast({
+        title: "Error", 
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsNewsletterLoading(true);
+    
+    try {
+      const response = await fetch("https://hooks.zapier.com/hooks/catch/155028/uhapjg7/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+        body: JSON.stringify({
+          email: email,
+          timestamp: new Date().toISOString(),
+          source: "blog_newsletter",
+          page: "blog",
+        }),
+      });
+
+      toast({
+        title: "Success!",
+        description: "You've been subscribed to our newsletter. Welcome to the community!",
+      });
+      
+      setEmail("");
+    } catch (error) {
+      console.error("Error subscribing to newsletter:", error);
+      toast({
+        title: "Error",
+        description: "Failed to subscribe. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsNewsletterLoading(false);
     }
   };
 
@@ -628,19 +688,31 @@ Best regards,`;
               Get the latest recovery stories, expert insights, and life-changing resources delivered directly to your inbox. 
               Join our community of hope and healing.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input 
                 type="email" 
-                placeholder="Enter your email" 
-                className="flex-1 px-6 py-4 rounded-full border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} 
+                className="flex-1 h-12 px-6 rounded-full border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
+                disabled={isNewsletterLoading}
               />
               <Button 
+                type="submit"
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-full font-medium hover-scale hover-glow transition-all duration-300"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 h-12 rounded-full font-medium hover-scale hover-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isNewsletterLoading}
               >
-                Subscribe
+                {isNewsletterLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Subscribing...
+                  </>
+                ) : (
+                  'Subscribe'
+                )}
               </Button>
-            </div>
+            </form>
           </div>
         </Card>
       </div>
