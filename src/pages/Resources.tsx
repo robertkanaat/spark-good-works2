@@ -119,99 +119,115 @@ const Resources = () => {
       
       {/* Enhanced Hero Section */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+        {/* Beautiful Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-primary/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-bl from-secondary/5 via-transparent to-accent/8"></div>
         
-        {/* Floating Elements Animation */}
+        {/* Enhanced Floating Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-20 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-40 left-10 w-24 h-24 bg-secondary/15 rounded-full blur-2xl animate-bounce"></div>
-          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-accent/10 rounded-full blur-xl animate-ping"></div>
+          {/* Large background orbs */}
+          <div className="absolute top-10 right-10 w-96 h-96 bg-gradient-to-br from-primary/20 to-secondary/10 rounded-full blur-3xl opacity-60"></div>
+          <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-accent/15 to-primary/8 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-bl from-secondary/12 to-accent/6 rounded-full blur-2xl opacity-40"></div>
+          
+          {/* Medium accent orbs */}
+          <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-primary/10 rounded-full blur-xl opacity-70"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-32 h-32 bg-secondary/15 rounded-full blur-lg opacity-60"></div>
+          
+          {/* Small detail orbs */}
+          <div className="absolute top-20 left-1/2 w-24 h-24 bg-accent/12 rounded-full blur-md opacity-50"></div>
+          <div className="absolute bottom-40 right-10 w-20 h-20 bg-primary/8 rounded-full blur-sm opacity-40"></div>
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="text-center max-w-5xl mx-auto">
-            {/* Icon Cluster */}
-            <div className="flex items-center justify-center mb-8 gap-4">
-              <div className="relative">
-                <Heart className="w-16 h-16 text-primary" />
-                <div className="absolute -inset-2 bg-primary/20 rounded-full blur-lg"></div>
+        {/* Content Container with enhanced backdrop */}
+        <div className="relative z-10 w-full">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div className="text-center max-w-5xl mx-auto backdrop-blur-sm bg-background/30 rounded-3xl p-12 border border-primary/10 shadow-2xl">
+              {/* Icon Cluster */}
+              <div className="flex items-center justify-center mb-8 gap-4">
+                <div className="relative">
+                  <Heart className="w-16 h-16 text-primary drop-shadow-lg" />
+                  <div className="absolute -inset-2 bg-primary/30 rounded-full blur-lg"></div>
+                </div>
+                <div className="relative">
+                  <Shield className="w-16 h-16 text-secondary drop-shadow-lg" />
+                  <div className="absolute -inset-2 bg-secondary/30 rounded-full blur-lg"></div>
+                </div>
+                <div className="relative">
+                  <Users className="w-16 h-16 text-accent drop-shadow-lg" />
+                  <div className="absolute -inset-2 bg-accent/30 rounded-full blur-lg"></div>
+                </div>
+                <div className="relative">
+                  <BookOpen className="w-16 h-16 text-primary drop-shadow-lg" />
+                  <div className="absolute -inset-2 bg-primary/30 rounded-full blur-lg"></div>
+                </div>
               </div>
-              <div className="relative">
-                <Shield className="w-16 h-16 text-secondary" />
-                <div className="absolute -inset-2 bg-secondary/20 rounded-full blur-lg"></div>
+              
+              <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight drop-shadow-sm">
+                <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-fade-in">
+                  Recovery Resources
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent animate-fade-in delay-300">
+                  & Support Hub
+                </span>
+              </h1>
+              
+              <p className="text-2xl text-foreground/90 mb-12 leading-relaxed max-w-4xl mx-auto font-medium drop-shadow-sm">
+                Your comprehensive gateway to healing, growth, and lasting recovery. 
+                <span className="text-primary font-semibold">Discover resources, connect with support, and transform your journey.</span>
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-6 mb-12">
+                <Badge variant="secondary" className="px-8 py-4 text-lg bg-background/80 backdrop-blur-md border-primary/30 hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-2xl">
+                  <Shield className="w-6 h-6 mr-3" />
+                  Crisis Support 24/7
+                </Badge>
+                <Badge variant="secondary" className="px-8 py-4 text-lg bg-background/80 backdrop-blur-md border-secondary/30 hover:scale-110 hover:bg-secondary hover:text-secondary-foreground transition-all duration-500 shadow-2xl">
+                  <Users className="w-6 h-6 mr-3" />
+                  Community Networks
+                </Badge>
+                <Badge variant="secondary" className="px-8 py-4 text-lg bg-background/80 backdrop-blur-md border-accent/30 hover:scale-110 hover:bg-accent hover:text-accent-foreground transition-all duration-500 shadow-2xl">
+                  <Globe className="w-6 h-6 mr-3" />
+                  Global Resources
+                </Badge>
+                <Badge variant="secondary" className="px-8 py-4 text-lg bg-background/80 backdrop-blur-md border-primary/30 hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-2xl">
+                  <BookOpen className="w-6 h-6 mr-3" />
+                  Educational Tools
+                </Badge>
               </div>
-              <div className="relative">
-                <Users className="w-16 h-16 text-accent" />
-                <div className="absolute -inset-2 bg-accent/20 rounded-full blur-lg"></div>
+              
+              {/* Quick Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-6 justify-center mt-8">
+                <Button 
+                  size="lg" 
+                  className="px-8 py-4 text-xl font-bold bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
+                  onClick={() => {
+                    const emergencySection = document.querySelector('#emergency-section');
+                    if (emergencySection) {
+                      emergencySection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  <Phone className="w-6 h-6 mr-3" />
+                  Emergency Support
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="px-8 py-4 text-xl font-bold border-2 border-primary/30 bg-background/50 backdrop-blur-md hover:bg-primary hover:border-primary hover:text-primary-foreground shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
+                  onClick={() => {
+                    const resourcesSection = document.querySelector('#recovery-resources-section');
+                    if (resourcesSection) {
+                      resourcesSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  <Heart className="w-6 h-6 mr-3" />
+                  Explore Resources
+                </Button>
               </div>
-              <div className="relative">
-                <BookOpen className="w-16 h-16 text-primary" />
-                <div className="absolute -inset-2 bg-primary/20 rounded-full blur-lg"></div>
-              </div>
-            </div>
-            
-            <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
-              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-fade-in">
-                Recovery Resources
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent animate-fade-in delay-300">
-                & Support Hub
-              </span>
-            </h1>
-            
-            <p className="text-2xl text-foreground/80 mb-12 leading-relaxed max-w-4xl mx-auto font-medium">
-              Your comprehensive gateway to healing, growth, and lasting recovery. 
-              <span className="text-primary font-semibold">Discover resources, connect with support, and transform your journey.</span>
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-6 mb-12">
-              <Badge variant="secondary" className="px-8 py-4 text-lg bg-white/90 backdrop-blur-md border-primary/30 hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-2xl">
-                <Shield className="w-6 h-6 mr-3" />
-                Crisis Support 24/7
-              </Badge>
-              <Badge variant="secondary" className="px-8 py-4 text-lg bg-white/90 backdrop-blur-md border-secondary/30 hover:scale-110 hover:bg-secondary hover:text-secondary-foreground transition-all duration-500 shadow-2xl">
-                <Users className="w-6 h-6 mr-3" />
-                Community Networks
-              </Badge>
-              <Badge variant="secondary" className="px-8 py-4 text-lg bg-white/90 backdrop-blur-md border-accent/30 hover:scale-110 hover:bg-accent hover:text-accent-foreground transition-all duration-500 shadow-2xl">
-                <Globe className="w-6 h-6 mr-3" />
-                Global Resources
-              </Badge>
-              <Badge variant="secondary" className="px-8 py-4 text-lg bg-white/90 backdrop-blur-md border-primary/30 hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-2xl">
-                <BookOpen className="w-6 h-6 mr-3" />
-                Educational Tools
-              </Badge>
-            </div>
-            
-            {/* Quick Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button 
-                size="lg" 
-                className="px-8 py-4 text-xl font-bold bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
-                onClick={() => {
-                  const emergencySection = document.querySelector('#emergency-section');
-                  if (emergencySection) {
-                    emergencySection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                <Phone className="w-6 h-6 mr-3" />
-                Emergency Support
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="px-8 py-4 text-xl font-bold border-2 border-primary/30 bg-white/10 backdrop-blur-md hover:bg-primary hover:border-primary hover:text-primary-foreground shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105"
-                onClick={() => {
-                  const resourcesSection = document.querySelector('#recovery-resources-section');
-                  if (resourcesSection) {
-                    resourcesSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                <Heart className="w-6 h-6 mr-3" />
-                Explore Resources
-              </Button>
             </div>
           </div>
         </div>
