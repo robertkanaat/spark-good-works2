@@ -151,13 +151,7 @@ const Press = () => {
                   size="lg" 
                   className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-2xl hover:shadow-primary/30 group"
                   onClick={() => {
-                    // Create a placeholder media kit download
-                    const element = document.createElement('a');
-                    element.href = 'data:application/pdf;base64,JVBERi0xLjQKJcfsj6IKNSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgNCAwIFIKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL1R5cGUgL1BhZ2VzCi9LaWRzIFs2IDAgUl0KL0NvdW50IDEKPD4KZW5kb2JqCjYgMCBvYmoKPDwKL1R5cGUgL1BhZ2UKL1BhcmVudCA0IDAgUgovUmVzb3VyY2VzIDw8Ci9Gb250IDw8Ci9GNyA3IDAgUgo+Pgo+PgovTWVkaWFCb3ggWzAgMCA2MTIgNzkyXQovQ29udGVudHMgOCAwIFIKPj4KZW5kb2JqCjcgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL1N1YnR5cGUgL1R5cGUxCi9CYXNlRm9udCAvSGVsdmV0aWNhCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9MZW5ndGggNDEKPj4Kc3RyZWFtCkJUCi9GNyAxMiBUZgoyIDUwIDUzMCA3MzUgVGQKKEdlbml1cyBSZWNvdmVyeSBNZWRpYSBLaXQpIFRqCkVUCmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDkKMDAwMDAwMDAwMCA2NTUzNSBmCjAwMDAwMDAwMDkgMDAwMDAgbgowMDAwMDAwMDc0IDAwMDAwIG4KMDAwMDAwMDEyMCAwMDAwMCBuCjAwMDAwMDAxNzkgMDAwMDAgbgowMDAwMDAwMjM2IDAwMDAwIG4KMDAwMDAwMDM5NCAwMDAwMCBuCjAwMDAwMDA0OTEgMDAwMDAgbgowMDAwMDAwNTY4IDAwMDAwIG4KdHJhaWxlcgo8PAovU2l6ZSA5Ci9Sb290IDUgMCBSCj4+CnN0YXJ0eHJlZgo2NTcKJSVFT0Y=';
-                    element.download = 'Genius-Recovery-Media-Kit.pdf';
-                    document.body.appendChild(element);
-                    element.click();
-                    document.body.removeChild(element);
+                    window.open('https://lhwxxzxdsrykvznrtigf.supabase.co/storage/v1/object/public/press-materials/Genius%20Recovery%20Media%20Kit.pdf', '_blank');
                   }}
                 >
                   <span className="relative">
@@ -294,13 +288,7 @@ const Press = () => {
                 size="lg" 
                 className="bg-primary hover:bg-primary/90 text-white px-8 py-4 gap-3 hover:scale-105 transition-all duration-300"
                 onClick={() => {
-                  // Create a placeholder media kit download
-                  const element = document.createElement('a');
-                  element.href = 'data:application/pdf;base64,JVBERi0xLjQKJcfsj6IKNSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgNCAwIFIKPj4KZW5kb2JqCjQgMCBvYmoKPDwKL1R5cGUgL1BhZ2VzCi9LaWRzIFs2IDAgUl0KL0NvdW50IDEKPD4KZW5kb2JqCjYgMCBvYmoKPDwKL1R5cGUgL1BhZ2UKL1BhcmVudCA0IDAgUgovUmVzb3VyY2VzIDw8Ci9Gb250IDw8Ci9GNyA3IDAgUgo+Pgo+PgovTWVkaWFCb3ggWzAgMCA2MTIgNzkyXQovQ29udGVudHMgOCAwIFIKPj4KZW5kb2JqCjcgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL1N1YnR5cGUgL1R5cGUxCi9CYXNlRm9udCAvSGVsdmV0aWNhCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9MZW5ndGggNDEKPj4Kc3RyZWFtCkJUCi9GNyAxMiBUZgoyIDUwIDUzMCA3MzUgVGQKKEdlbml1cyBSZWNvdmVyeSBNZWRpYSBLaXQpIFRqCkVUCmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDkKMDAwMDAwMDAwMCA2NTUzNSBmCjAwMDAwMDAwMDkgMDAwMDAgbgowMDAwMDAwMDc0IDAwMDAwIG4KMDAwMDAwMDEyMCAwMDAwMCBuCjAwMDAwMDAxNzkgMDAwMDAgbgowMDAwMDAwMjM2IDAwMDAwIG4KMDAwMDAwMDM5NCAwMDAwMCBuCjAwMDAwMDA0OTEgMDAwMDAgbgowMDAwMDAwNTY4IDAwMDAwIG4KdHJhaWxlcgo8PAovU2l6ZSA5Ci9Sb290IDUgMCBSCj4+CnN0YXJ0eHJlZgo2NTcKJSVFT0Y=';
-                  element.download = 'Genius-Recovery-Media-Kit.pdf';
-                  document.body.appendChild(element);
-                  element.click();
-                  document.body.removeChild(element);
+                  window.open('https://lhwxxzxdsrykvznrtigf.supabase.co/storage/v1/object/public/press-materials/Genius%20Recovery%20Media%20Kit.pdf', '_blank');
                 }}
               >
                 <Download className="w-5 h-5" />
