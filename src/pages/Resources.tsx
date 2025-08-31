@@ -123,8 +123,9 @@ const Resources = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${resourcesHeroBg})` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background/60 to-secondary/30"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-background/70 to-secondary/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent"></div>
         </div>
         
         {/* Floating Elements Animation */}
@@ -156,19 +157,19 @@ const Resources = () => {
               </div>
             </div>
             
-            <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
-              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-fade-in">
+            <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight text-white drop-shadow-2xl">
+              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-fade-in drop-shadow-lg" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.3)' }}>
                 Recovery Resources
               </span>
               <br />
-              <span className="bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent animate-fade-in delay-300">
+              <span className="bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent animate-fade-in delay-300 drop-shadow-lg" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.3)' }}>
                 & Support Hub
               </span>
             </h1>
             
-            <p className="text-2xl text-foreground/80 mb-12 leading-relaxed max-w-4xl mx-auto font-medium">
+            <p className="text-2xl text-white/90 mb-12 leading-relaxed max-w-4xl mx-auto font-medium drop-shadow-lg">
               Your comprehensive gateway to healing, growth, and lasting recovery. 
-              <span className="text-primary font-semibold">Discover resources, connect with support, and transform your journey.</span>
+              <span className="text-primary font-semibold drop-shadow-md">Discover resources, connect with support, and transform your journey.</span>
             </p>
             
             <div className="flex flex-wrap justify-center gap-6 mb-12">
