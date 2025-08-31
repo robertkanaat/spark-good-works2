@@ -132,19 +132,19 @@ const Resources = () => {
             {/* Icon Cluster */}
             <div className="flex items-center justify-center mb-8 gap-4">
               <div className="relative">
-                <Heart className="w-16 h-16 text-primary animate-pulse" />
+                <Heart className="w-16 h-16 text-primary" />
                 <div className="absolute -inset-2 bg-primary/20 rounded-full blur-lg"></div>
               </div>
               <div className="relative">
-                <Shield className="w-16 h-16 text-secondary animate-bounce" />
+                <Shield className="w-16 h-16 text-secondary" />
                 <div className="absolute -inset-2 bg-secondary/20 rounded-full blur-lg"></div>
               </div>
               <div className="relative">
-                <Users className="w-16 h-16 text-accent animate-pulse" />
+                <Users className="w-16 h-16 text-accent" />
                 <div className="absolute -inset-2 bg-accent/20 rounded-full blur-lg"></div>
               </div>
               <div className="relative">
-                <BookOpen className="w-16 h-16 text-primary animate-bounce" />
+                <BookOpen className="w-16 h-16 text-primary" />
                 <div className="absolute -inset-2 bg-primary/20 rounded-full blur-lg"></div>
               </div>
             </div>
