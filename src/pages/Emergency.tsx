@@ -36,44 +36,92 @@ const Emergency = () => {
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-          <div className="flex items-center justify-center mb-8">
-            <AlertTriangle className="w-16 h-16 text-red-400 mr-6" />
-            <h1 className="text-5xl md:text-7xl font-bold text-white">
-              Emergency Support
-            </h1>
+          {/* Multi-icon header representing all emergency types */}
+          <div className="flex items-center justify-center mb-8 gap-6">
+            <Phone className="w-12 h-12 text-red-400" />
+            <Heart className="w-12 h-12 text-blue-400" />
+            <AlertTriangle className="w-16 h-16 text-orange-400" />
+            <Shield className="w-12 h-12 text-green-400" />
+            <Stethoscope className="w-12 h-12 text-purple-400" />
           </div>
-          <p className="text-2xl text-white/90 mb-12 max-w-4xl mx-auto">
-            Together, We Can Reduce Suffering and Save Lives
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+            Emergency Support
+          </h1>
+          <p className="text-2xl text-white/90 mb-8 max-w-4xl mx-auto">
+            Comprehensive Crisis Resources: 911 • Crisis Hotlines • Overdose Recognition • Mental Health Support
           </p>
           <p className="text-lg text-white/80 max-w-3xl mx-auto mb-12">
-            You're taking an important step in building a safer, more prepared community. 
-            Below you'll find critical information to handle life-threatening emergencies.
+            Complete emergency preparedness guide including life-threatening situations, opioid overdose recognition, 
+            Naloxone information, and 24/7 crisis support resources.
           </p>
           
-          {/* Quick Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          {/* Comprehensive Quick Action Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
             <Button 
               size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-xl"
+              className="bg-red-600 hover:bg-red-700 text-white px-6 py-4"
               onClick={() => window.location.href = 'tel:911'}
             >
-              <Phone className="w-6 h-6 mr-3" />
-              Call 911 Now
+              <Phone className="w-5 h-5 mr-2" />
+              Call 911
+            </Button>
+            <Button 
+              size="lg" 
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4"
+              onClick={() => window.location.href = 'tel:988'}
+            >
+              <Heart className="w-5 h-5 mr-2" />
+              Crisis Line 988
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="bg-white/10 border-white/30 text-white hover:bg-white/90 hover:text-primary hover:border-white hover:shadow-lg hover:shadow-white/20 hover:scale-[1.02] px-8 py-4 text-xl transition-all duration-300 backdrop-blur-sm"
+              className="bg-white/10 border-white/30 text-white hover:bg-white/90 hover:text-primary backdrop-blur-sm px-6 py-4"
               onClick={() => {
-                const crisisSection = document.querySelector('[id="crisis-hotlines"]');
-                if (crisisSection) {
-                  crisisSection.scrollIntoView({ behavior: 'smooth' });
+                const overdoseSection = document.querySelector('[title="Warning Signs"]')?.closest('.space-y-6')?.parentElement;
+                if (overdoseSection) {
+                  overdoseSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
             >
-              <Heart className="w-6 h-6 mr-3 transition-transform duration-300 group-hover:scale-110" />
-              Crisis Hotlines
+              <AlertTriangle className="w-5 h-5 mr-2" />
+              Overdose Help
             </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="bg-white/10 border-white/30 text-white hover:bg-white/90 hover:text-primary backdrop-blur-sm px-6 py-4"
+              onClick={() => {
+                const naloxoneSection = document.querySelector('h2')?.textContent?.includes('Naloxone') ? 
+                  document.querySelector('h2:contains("Naloxone")')?.closest('.p-12') : null;
+                if (naloxoneSection) {
+                  naloxoneSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              <Shield className="w-5 h-5 mr-2" />
+              Naloxone Info
+            </Button>
+          </div>
+          
+          {/* Visual indicators for key resources */}
+          <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-white/70">
+            <span className="flex items-center gap-2">
+              <Phone className="w-4 h-4" />
+              Emergency Numbers
+            </span>
+            <span className="flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4" />
+              Overdose Recognition
+            </span>
+            <span className="flex items-center gap-2">
+              <Shield className="w-4 h-4" />
+              Life-Saving Medications
+            </span>
+            <span className="flex items-center gap-2">
+              <Heart className="w-4 h-4" />
+              24/7 Crisis Support
+            </span>
           </div>
         </div>
       </section>
