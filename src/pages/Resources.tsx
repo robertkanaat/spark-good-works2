@@ -143,15 +143,15 @@ const Resources = () => {
                 <div className="absolute -inset-2 bg-primary/20 rounded-full blur-lg"></div>
               </div>
               <div className="relative">
-                <Shield className="w-14 h-14 text-secondary animate-bounce" />
+                <Shield className="w-16 h-16 text-secondary animate-bounce" />
                 <div className="absolute -inset-2 bg-secondary/20 rounded-full blur-lg"></div>
               </div>
               <div className="relative">
-                <Users className="w-18 h-18 text-accent animate-pulse" />
+                <Users className="w-16 h-16 text-accent animate-pulse" />
                 <div className="absolute -inset-2 bg-accent/20 rounded-full blur-lg"></div>
               </div>
               <div className="relative">
-                <BookOpen className="w-14 h-14 text-primary animate-bounce" />
+                <BookOpen className="w-16 h-16 text-primary animate-bounce" />
                 <div className="absolute -inset-2 bg-primary/20 rounded-full blur-lg"></div>
               </div>
             </div>
