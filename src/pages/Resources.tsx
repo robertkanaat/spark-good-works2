@@ -119,26 +119,14 @@ const Resources = () => {
       
       {/* Enhanced Hero Section */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-        {/* Beautiful Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/10"></div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-primary/10"></div>
-        <div className="absolute inset-0 bg-gradient-to-bl from-secondary/5 via-transparent to-accent/8"></div>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${resourcesHeroBg})` }}
+        ></div>
         
-        {/* Enhanced Floating Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Large background orbs */}
-          <div className="absolute top-10 right-10 w-96 h-96 bg-gradient-to-br from-primary/20 to-secondary/10 rounded-full blur-3xl opacity-60"></div>
-          <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-accent/15 to-primary/8 rounded-full blur-3xl opacity-50"></div>
-          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-bl from-secondary/12 to-accent/6 rounded-full blur-2xl opacity-40"></div>
-          
-          {/* Medium accent orbs */}
-          <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-primary/10 rounded-full blur-xl opacity-70"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-32 h-32 bg-secondary/15 rounded-full blur-lg opacity-60"></div>
-          
-          {/* Small detail orbs */}
-          <div className="absolute top-20 left-1/2 w-24 h-24 bg-accent/12 rounded-full blur-md opacity-50"></div>
-          <div className="absolute bottom-40 right-10 w-20 h-20 bg-primary/8 rounded-full blur-sm opacity-40"></div>
-        </div>
+        {/* Dark Overlay for text readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
         
         {/* Content Container with enhanced backdrop */}
         <div className="relative z-10 w-full">
