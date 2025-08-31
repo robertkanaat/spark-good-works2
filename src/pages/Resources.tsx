@@ -119,13 +119,6 @@ const Resources = () => {
       
       {/* Enhanced Hero Section */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${resourcesHeroBg})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background/40 to-secondary/20"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
-        </div>
         
         {/* Floating Elements Animation */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
