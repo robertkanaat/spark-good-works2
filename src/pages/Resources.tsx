@@ -123,8 +123,8 @@ const Resources = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${resourcesHeroBg})` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background/60 to-secondary/30"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-background/50 to-secondary/25"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent"></div>
         </div>
         
         {/* Floating Elements Animation */}
