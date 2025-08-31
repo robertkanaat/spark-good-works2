@@ -128,10 +128,10 @@ const Resources = () => {
         {/* Dark Overlay for text readability */}
         <div className="absolute inset-0 bg-black/50"></div>
         
-        {/* Content Container with enhanced backdrop */}
+        {/* Content Container */}
         <div className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-            <div className="text-center max-w-5xl mx-auto backdrop-blur-sm bg-background/30 rounded-3xl p-12 border border-primary/10 shadow-2xl">
+            <div className="text-center max-w-5xl mx-auto">
               {/* Icon Cluster */}
               <div className="flex items-center justify-center mb-8 gap-4">
                 <div className="relative">
@@ -162,7 +162,7 @@ const Resources = () => {
                 </span>
               </h1>
               
-              <p className="text-2xl text-foreground/90 mb-12 leading-relaxed max-w-4xl mx-auto font-medium drop-shadow-sm">
+              <p className="text-2xl text-white/90 mb-12 leading-relaxed max-w-4xl mx-auto font-medium drop-shadow-sm">
                 Your comprehensive gateway to healing, growth, and lasting recovery. 
                 <span className="text-primary font-semibold">Discover resources, connect with support, and transform your journey.</span>
               </p>
