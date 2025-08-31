@@ -151,11 +151,20 @@ const CrisisSupport = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="destructive" className="text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                variant="destructive" 
+                className="text-lg px-8 py-4 h-auto"
+                onClick={() => window.location.href = 'tel:911'}
+              >
                 <Phone className="w-5 h-5 mr-2" />
                 Call 911 - Emergency
               </Button>
-              <Button size="lg" className="text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-4 h-auto"
+                onClick={() => window.location.href = 'tel:988'}
+              >
                 <LifeBuoy className="w-5 h-5 mr-2" />
                 Call 988 - Crisis Support
               </Button>
