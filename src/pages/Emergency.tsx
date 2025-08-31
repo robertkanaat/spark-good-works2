@@ -280,48 +280,148 @@ const Emergency = () => {
           </Card>
 
           {/* Crisis Resources */}
-          <div id="crisis-hotlines" className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div id="crisis-hotlines" className="space-y-8 mb-16">
             <Card className="p-8 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20">
-              <div className="flex items-center mb-6">
-                <Heart className="w-10 h-10 text-purple-500 mr-4" />
-                <h3 className="text-2xl font-bold">Crisis Hotlines</h3>
+              <div className="flex items-center mb-8">
+                <Heart className="w-12 h-12 text-purple-500 mr-4" />
+                <h3 className="text-3xl font-bold">24/7 Crisis Hotlines & Support</h3>
               </div>
-              <div className="space-y-6">
-                <div className="p-4 bg-white/80 rounded-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
+                  <div className="font-bold text-lg text-purple-700">988 Suicide & Crisis Lifeline</div>
+                  <div className="text-2xl font-bold text-purple-600">988</div>
+                  <div className="text-sm text-muted-foreground">24/7 suicide prevention & mental health crisis</div>
+                </div>
+                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
                   <div className="font-bold text-lg text-purple-700">Crisis Text Line</div>
-                  <div className="text-2xl font-bold text-purple-600">Text HOME to 741741</div>
+                  <div className="text-xl font-bold text-purple-600">Text HOME to 741741</div>
                   <div className="text-sm text-muted-foreground">Free, 24/7 crisis support via text</div>
                 </div>
-                <div className="p-4 bg-white/80 rounded-lg">
+                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
+                  <div className="font-bold text-lg text-purple-700">SAMHSA Helpline</div>
+                  <div className="text-xl font-bold text-purple-600">1-800-662-4357</div>
+                  <div className="text-sm text-muted-foreground">Treatment referral & information</div>
+                </div>
+                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
+                  <div className="font-bold text-lg text-purple-700">Trevor Project (LGBTQ+)</div>
+                  <div className="text-xl font-bold text-purple-600">1-866-488-7386</div>
+                  <div className="text-sm text-muted-foreground">LGBTQ+ crisis support & suicide prevention</div>
+                </div>
+                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
+                  <div className="font-bold text-lg text-purple-700">Trans Lifeline</div>
+                  <div className="text-xl font-bold text-purple-600">877-565-8860</div>
+                  <div className="text-sm text-muted-foreground">Transgender crisis support hotline</div>
+                </div>
+                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
                   <div className="font-bold text-lg text-purple-700">Poison Control</div>
                   <div className="text-xl font-bold text-purple-600">1-800-222-1222</div>
                   <div className="text-sm text-muted-foreground">24/7 poison emergency assistance</div>
                 </div>
+                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
+                  <div className="font-bold text-lg text-purple-700">Veterans Crisis Line</div>
+                  <div className="text-xl font-bold text-purple-600">1-800-273-8255</div>
+                  <div className="text-sm text-muted-foreground">Support for veterans in crisis</div>
+                </div>
+                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
+                  <div className="font-bold text-lg text-purple-700">National Domestic Violence</div>
+                  <div className="text-xl font-bold text-purple-600">1-800-799-7233</div>
+                  <div className="text-sm text-muted-foreground">24/7 domestic violence support</div>
+                </div>
+                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
+                  <div className="font-bold text-lg text-purple-700">RAINN Sexual Assault</div>
+                  <div className="text-xl font-bold text-purple-600">1-800-656-4673</div>
+                  <div className="text-sm text-muted-foreground">Sexual assault crisis support</div>
+                </div>
               </div>
             </Card>
 
-            <Card className="p-8 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20">
-              <div className="flex items-center mb-6">
-                <Users className="w-10 h-10 text-amber-500 mr-4" />
-                <h3 className="text-2xl font-bold">Mental Health Support</h3>
+            <Card className="p-8 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20">
+              <div className="flex items-center mb-8">
+                <Users className="w-12 h-12 text-emerald-500 mr-4" />
+                <h3 className="text-3xl font-bold">Mental Health Crisis Support</h3>
               </div>
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold mb-3 text-amber-700">Warning Signs:</h4>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-                      Talking about wanting to die or hurt themselves
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-                      Feeling hopeless or having no purpose
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
-                      Extreme mood swings
-                    </li>
-                  </ul>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-bold text-xl mb-4 text-emerald-700 flex items-center">
+                      <AlertTriangle className="w-6 h-6 mr-2" />
+                      Warning Signs of Crisis
+                    </h4>
+                    <div className="grid grid-cols-1 gap-3">
+                      {[
+                        "Talking about wanting to die or hurt themselves",
+                        "Feeling hopeless or having no purpose",
+                        "Feeling trapped or in unbearable pain",
+                        "Extreme mood swings or sudden calmness",
+                        "Withdrawing from friends and family",
+                        "Giving away possessions or saying goodbye",
+                        "Increased use of alcohol or drugs",
+                        "Looking for ways to kill themselves"
+                      ].map((sign, index) => (
+                        <div key={index} className="flex items-start gap-3 p-3 bg-white/80 rounded-lg">
+                          <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="text-sm font-medium">{sign}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-bold text-xl mb-4 text-emerald-700 flex items-center">
+                      <Heart className="w-6 h-6 mr-2" />
+                      How to Help Someone in Crisis
+                    </h4>
+                    <div className="space-y-3">
+                      {[
+                        { step: "Listen without judgment", desc: "Let them know you care and are there to help" },
+                        { step: "Ask directly about suicide", desc: "Don't be afraid to ask if they're thinking of hurting themselves" },
+                        { step: "Stay with them", desc: "Don't leave someone in crisis alone" },
+                        { step: "Remove means of harm", desc: "Remove weapons, pills, or other dangerous items" },
+                        { step: "Call for help", desc: "Contact 988 or emergency services immediately" },
+                        { step: "Follow up", desc: "Check on them regularly after the crisis passes" }
+                      ].map((item, index) => (
+                        <Card key={index} className="p-4 bg-white/90 border-emerald-200">
+                          <div className="flex items-start gap-4">
+                            <div className="w-8 h-8 bg-emerald-500 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                              {index + 1}
+                            </div>
+                            <div>
+                              <div className="font-semibold text-emerald-700">{item.step}</div>
+                              <div className="text-sm text-muted-foreground mt-1">{item.desc}</div>
+                            </div>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-8 p-6 bg-gradient-to-r from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-lg">
+                <div className="text-center">
+                  <h4 className="font-bold text-xl mb-3 text-emerald-700">Remember: Crisis is Temporary</h4>
+                  <p className="text-muted-foreground mb-4">
+                    Mental health crises are temporary and treatable. With the right support, people can and do recover.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <Button 
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                      onClick={() => window.location.href = 'tel:988'}
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call 988 Now
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      className="border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+                      onClick={() => window.open('sms:741741?body=HOME', '_blank')}
+                    >
+                      <Heart className="w-4 h-4 mr-2" />
+                      Text Crisis Line
+                    </Button>
+                  </div>
                 </div>
               </div>
             </Card>
