@@ -268,14 +268,6 @@ const Education = () => {
                   </div>
                 ))}
               </div>
-              <div className="mt-6 pt-6 border-t border-border">
-                <Link to="/support">
-                  <Button className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70">
-                    Find Support Resources
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-              </div>
             </Card>
           </div>
         </div>
