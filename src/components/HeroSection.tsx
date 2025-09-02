@@ -272,7 +272,7 @@ const HeroSection = () => {
                       className="w-full py-6 text-xl font-bold mb-4 gap-3 relative overflow-hidden group"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                      SUPPORT ADDICTION RECOVERY
+                      SUPPORT RECOVERY
                     </Button>
                   </Link>
                   
