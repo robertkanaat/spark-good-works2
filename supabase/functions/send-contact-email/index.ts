@@ -107,7 +107,7 @@ const handler = async (req: Request): Promise<Response> => {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Your Addiction Recovery Book Download</title>
+        <title>Understanding Addiction and Recovery - Free Book Download</title>
         <style>
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body { 
@@ -127,50 +127,38 @@ const handler = async (req: Request): Promise<Response> => {
             box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.15);
           }
           .header {
-            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-            padding: 40px 30px;
+            background: #ffffff;
+            padding: 40px 30px 20px;
             text-align: center;
-            color: white;
+            border-bottom: 1px solid #e5e7eb;
           }
           .logo {
             max-width: 200px;
             height: auto;
             margin-bottom: 10px;
-            filter: brightness(0) invert(1);
-          }
-          .header-subtitle {
-            font-size: 16px;
-            opacity: 0.95;
-            font-weight: 300;
           }
           .content {
-            padding: 40px 30px;
+            padding: 30px;
           }
           .greeting {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 400;
             color: #1c1917;
             margin-bottom: 20px;
           }
           .message {
             font-size: 16px;
             color: #44403c;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.7;
           }
           .download-box {
             background: linear-gradient(145deg, rgba(245, 158, 11, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
             border: 2px solid #f59e0b;
-            padding: 30px;
-            margin: 30px 0;
+            padding: 25px;
+            margin: 25px 0;
             border-radius: 12px;
             text-align: center;
-          }
-          .download-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #ea580c;
-            margin-bottom: 15px;
           }
           .download-button {
             display: inline-block;
@@ -187,56 +175,22 @@ const handler = async (req: Request): Promise<Response> => {
           .download-button:hover {
             transform: translateY(-2px);
           }
-          .emergency-box {
-            background: linear-gradient(145deg, rgba(220, 38, 38, 0.05) 0%, rgba(239, 68, 68, 0.05) 100%);
-            border-left: 4px solid #dc2626;
-            padding: 25px;
-            margin: 30px 0;
-            border-radius: 8px;
+          .signature {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
           }
-          .emergency-title {
-            font-size: 18px;
+          .signature-name {
             font-weight: 600;
-            color: #dc2626;
-            margin-bottom: 15px;
+            color: #1c1917;
           }
-          .emergency-list {
-            list-style: none;
-            margin: 15px 0;
-          }
-          .emergency-list li {
-            margin: 8px 0;
-            padding-left: 20px;
-            position: relative;
-          }
-          .emergency-list li:before {
-            content: "🆘";
-            position: absolute;
-            left: 0;
-          }
-          .emergency-number {
-            font-weight: 600;
-            color: #dc2626;
-          }
-          .mission-statement {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(145deg, rgba(245, 158, 11, 0.03) 0%, rgba(249, 115, 22, 0.03) 100%);
-            border-radius: 8px;
-            margin: 30px 0;
-          }
-          .mission-text {
-            font-size: 18px;
-            font-weight: 500;
-            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+          .signature-title {
+            color: #78716c;
+            font-size: 14px;
           }
           .footer {
             text-align: center;
-            padding: 30px;
+            padding: 20px 30px;
             border-top: 1px solid #f3f4f6;
             background: #fafaf9;
           }
@@ -245,15 +199,9 @@ const handler = async (req: Request): Promise<Response> => {
             color: #78716c;
             margin-bottom: 5px;
           }
-          .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, #f59e0b 50%, transparent 100%);
-            margin: 20px 0;
-          }
           @media only screen and (max-width: 600px) {
             .container { margin: 10px; border-radius: 8px; }
-            .header, .content { padding: 25px 20px; }
-            .greeting { font-size: 20px; }
+            .content { padding: 25px 20px; }
             .message { font-size: 15px; }
             .download-box { padding: 20px; }
           }
@@ -262,60 +210,52 @@ const handler = async (req: Request): Promise<Response> => {
       <body>
         <div class="container">
           <div class="header">
-            <img src="https://geniusrecovery.org/genius-recovery-logo.png" alt="Genius Recovery" class="logo">
-            <div class="header-subtitle">Your Recovery Resource is Ready</div>
+            <img src="https://lhwxxzxdsrykvznrtigf.supabase.co/storage/v1/object/public/press-materials/genius-recovery-logo.png" alt="Genius Recovery" class="logo">
           </div>
           
           <div class="content">
-            <div class="greeting">Congratulations, ${firstName}! 📖</div>
+            <div class="greeting">Dear ${firstName},</div>
             
             <div class="message">
-              Thank you for requesting our comprehensive addiction recovery resource. Your commitment to healing and growth is inspiring, and we're honored to support your journey.
+              On behalf of Joe Polish and the Genius Recovery Foundation, Inc., a 501(c)3, thank you for requesting a free copy of Understanding Addiction and Recovery.
+            </div>
+            
+            <div class="message">
+              We hope you'll find this book enlightening and useful. We encourage you to read the "Open Letter To Anyone Struggling With Addiction" on the GeniusRecovery.org site and to utilize the site to find additional addiction recovery resources and support.
+            </div>
+            
+            <div class="message">
+              As promised, here is a digital copy of Understanding Addiction and Recovery.
             </div>
             
             <div class="download-box">
-              <div class="download-title">📚 Your Recovery Resource Awaits</div>
-              <div class="message">
-                This valuable resource contains insights, strategies, and hope from leading experts in addiction recovery.
-              </div>
-              <a href="https://geniusrecovery.org/addiction-recovery-book-download" class="download-button">
-                Access Your Resource Now
+              <a href="https://lhwxxzxdsrykvznrtigf.supabase.co/storage/v1/object/public/Addiction%20Recovery%20Book/Understanding-Addiction-and-Recovery-by-Joe-Poilsh-from-Genius-Recovery.pdf" class="download-button">
+                📚 Download Your Free Book
               </a>
-              <div style="font-size: 14px; color: #78716c; margin-top: 15px;">
-                Save this email - you can return to download anytime
-              </div>
             </div>
             
             <div class="message">
-              Remember, recovery is a journey, not a destination. Every step forward, no matter how small, is a victory worth celebrating.
+              If you'd like a physical copy of this book mailed to you for just $10 shipping and handling, simply reply to this email and let me know.
             </div>
             
-            <div class="divider"></div>
-            
-            <div class="emergency-box">
-              <div class="emergency-title">🚨 Need Immediate Support?</div>
-              <div class="message">If you're experiencing a crisis, don't wait. Help is available 24/7:</div>
-              <ul class="emergency-list">
-                <li><span class="emergency-number">Call 988</span> - Suicide & Crisis Lifeline</li>
-                <li><span class="emergency-number">Call 911</span> - For immediate emergencies</li>
-                <li><span class="emergency-number">Call 1-800-662-4357</span> - SAMHSA National Helpline</li>
-              </ul>
+            <div class="message">
+              This free book is provided to you by the Genius Recovery Foundation. We are on a mission to be the premier curator of the best and latest knowledge in addiction recovery. Our organization's commitment is to change the global conversation around addictions of all kinds. We help find the best forms of treatment that have efficacy and share those with the world.
             </div>
             
-            <div class="mission-statement">
-              <div class="mission-text">One Human At A Time</div>
-              <div style="color: #78716c; font-size: 14px;">
-                Your journey matters. Your recovery matters. You matter.
+            <div class="signature">
+              <div class="message">
+                Sincerely,<br><br>
+                <div class="signature-name">Gina DeLong</div>
+                <div class="signature-title">Support Team</div>
+                <div class="signature-title">Genius Recovery Foundation, Inc.</div>
+                <div class="signature-title"><a href="https://GeniusRecovery.org" style="color: #f59e0b; text-decoration: none;">https://GeniusRecovery.org</a></div>
               </div>
             </div>
           </div>
           
           <div class="footer">
             <div class="footer-text">
-              This is an automated confirmation. Please do not reply to this email.
-            </div>
-            <div class="footer-text">
-              © ${new Date().getFullYear()} Genius Recovery. All rights reserved.
+              © ${new Date().getFullYear()} Genius Recovery Foundation, Inc. All rights reserved.
             </div>
           </div>
         </div>
