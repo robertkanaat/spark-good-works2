@@ -36,14 +36,6 @@ const Emergency = () => {
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-          {/* Multi-icon header representing all emergency types */}
-          <div className="flex items-center justify-center mb-8 gap-6">
-            <Phone className="w-12 h-12 text-red-400" />
-            <Heart className="w-12 h-12 text-blue-400" />
-            <AlertTriangle className="w-16 h-16 text-orange-400" />
-            <Shield className="w-12 h-12 text-green-400" />
-            <Stethoscope className="w-12 h-12 text-purple-400" />
-          </div>
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
             Emergency Support
           </h1>
@@ -78,7 +70,7 @@ const Emergency = () => {
               variant="outline" 
               className="bg-white/10 border-white/30 text-white hover:bg-white/90 hover:text-primary backdrop-blur-sm px-6 py-4"
               onClick={() => {
-                const overdoseSection = document.querySelector('[title="Warning Signs"]')?.closest('.space-y-6')?.parentElement;
+                const overdoseSection = document.querySelector('h2[class*="text-4xl"]:nth-of-type(1)');
                 if (overdoseSection) {
                   overdoseSection.scrollIntoView({ behavior: 'smooth' });
                 }
@@ -92,8 +84,7 @@ const Emergency = () => {
               variant="outline" 
               className="bg-white/10 border-white/30 text-white hover:bg-white/90 hover:text-primary backdrop-blur-sm px-6 py-4"
               onClick={() => {
-                const naloxoneSection = document.querySelector('h2')?.textContent?.includes('Naloxone') ? 
-                  document.querySelector('h2:contains("Naloxone")')?.closest('.p-12') : null;
+                const naloxoneSection = document.querySelector('h2[class*="text-4xl"]:nth-of-type(2)');
                 if (naloxoneSection) {
                   naloxoneSection.scrollIntoView({ behavior: 'smooth' });
                 }
