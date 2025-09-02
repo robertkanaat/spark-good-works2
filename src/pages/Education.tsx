@@ -619,8 +619,8 @@ const Education = () => {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/treatment-centers">
-                  <Button className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white px-8 py-3 text-lg font-semibold">
-                    Find Dual Diagnosis Treatment
+                  <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                    Find Treatment Centers
                     <ExternalLink className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
