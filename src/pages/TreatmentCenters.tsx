@@ -857,7 +857,7 @@ export default function TreatmentCenters() {
                 <Link to="/help">
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                   <Phone className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
-                  <span className="relative z-10 font-semibold">Get Help Now</span>
+                  <span className="relative z-10 font-semibold">Emergency Support</span>
                 </Link>
               </Button>
               <Button 
@@ -1057,7 +1057,7 @@ export default function TreatmentCenters() {
               <Link to="/help">
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                 <Phone className="h-5 w-5 mr-3 group-hover:animate-pulse relative z-10" />
-                <span className="relative z-10 font-semibold">Get Help Now</span>
+                <span className="relative z-10 font-semibold">Emergency Support</span>
               </Link>
             </Button>
             <Button 
