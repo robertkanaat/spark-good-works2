@@ -240,7 +240,7 @@ const HeroSection = () => {
 
               {activeView === 'support' && (
                 <>
-                  <h3 className="text-2xl font-bold mb-6 text-center">Caregiver Support Hub</h3>
+                  <h3 className="text-2xl font-bold mb-6 text-center">Support Addiction Recovery</h3>
                   
                   <div className="space-y-4 mb-6">
                     <div className="text-center">
@@ -266,13 +266,13 @@ const HeroSection = () => {
                     </div>
                   </div>
                   
-                  <Link to="/support">
+                  <Link to="/donors">
                     <Button 
                       variant="donate" 
                       className="w-full py-6 text-xl font-bold mb-4 gap-3 relative overflow-hidden group"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                      GET CAREGIVER SUPPORT
+                      SUPPORT ADDICTION RECOVERY
                     </Button>
                   </Link>
                   
