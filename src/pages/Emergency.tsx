@@ -84,8 +84,7 @@ const Emergency = () => {
               variant="outline" 
               className="bg-white/10 border-white/30 text-white hover:bg-white/90 hover:text-primary backdrop-blur-sm px-6 py-4"
               onClick={() => {
-                const naloxoneSection = document.querySelector('h2:contains("Naloxone")') || 
-                  Array.from(document.querySelectorAll('h2')).find(h2 => h2.textContent?.includes('Naloxone'));
+                const naloxoneSection = Array.from(document.querySelectorAll('h2')).find(h2 => h2.textContent?.includes('Naloxone'));
                 if (naloxoneSection) {
                   naloxoneSection.scrollIntoView({ behavior: 'smooth' });
                 }
