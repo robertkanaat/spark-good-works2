@@ -196,7 +196,7 @@ const HeroSection = () => {
 
               {activeView === 'help' && (
                 <>
-                  <h3 className="text-2xl font-bold mb-6 text-center">Recovery Support Hub</h3>
+                  <h3 className="text-2xl font-bold mb-6 text-center">Recovery Support</h3>
                   
                   <div className="space-y-4 mb-6">
                     <div className="text-center">
@@ -224,7 +224,7 @@ const HeroSection = () => {
                       className="w-full py-6 text-xl font-bold mb-4 gap-3 relative overflow-hidden group"
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                      GET RECOVERY SUPPORT
+                      EMERGENCY SUPPORT
                     </Button>
                   </Link>
                   
