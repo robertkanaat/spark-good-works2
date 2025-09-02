@@ -70,7 +70,7 @@ const Donors = () => {
         "Creative Contributions: If you're an artist, musician, or content creator, help us share stories of hope and recovery through your craft.",
         "Advocacy Work: Join our team in advocating for policy changes that increase access to treatment and support services. Your voice matters!"
       ],
-      buttonText: "Get Involved",
+      buttonText: "Share Your Talent",
       variant: "outline",
       iconBg: "bg-accent/30",
       iconColor: "text-accent-foreground",
