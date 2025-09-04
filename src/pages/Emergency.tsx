@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import SectionNavigation from "@/components/SectionNavigation";
 import emergencyHeroBg from "@/assets/emergency-comprehensive-hero-bg.jpg";
 
 const Emergency = () => {
@@ -25,9 +26,10 @@ const Emergency = () => {
   return (
     <div className="min-h-screen">
       <Header />
+      <SectionNavigation />
       
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center">
+      <section id="hero" className="relative min-h-[70vh] flex items-center">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${emergencyHeroBg})` }}
@@ -120,7 +122,7 @@ const Emergency = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
           {/* Emergency Numbers - Prominent Display */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+          <div id="emergency-numbers" className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
             <Card className="p-8 bg-gradient-to-br from-red-50 to-red-100 border-red-200 dark:from-red-950/30 dark:to-red-900/30">
               <div className="text-center">
                 <Phone className="w-20 h-20 text-red-500 mx-auto mb-6" />
@@ -168,7 +170,7 @@ const Emergency = () => {
           </div>
 
           {/* Overdose Recognition Section */}
-          <Card className="p-12 mb-16 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20">
+          <Card id="overdose-recognition" className="p-12 mb-16 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20">
             <div className="text-center mb-12">
               <AlertTriangle className="w-20 h-20 text-orange-500 mx-auto mb-6" />
               <h2 className="text-4xl font-bold mb-6">Recognizing an Opioid Overdose</h2>
@@ -232,7 +234,7 @@ const Emergency = () => {
           </Card>
 
           {/* Naloxone Information */}
-          <Card className="p-12 mb-16 bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 dark:from-green-950/20 dark:to-emerald-950/20">
+          <Card id="naloxone-info" className="p-12 mb-16 bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 dark:from-green-950/20 dark:to-emerald-950/20">
             <div className="text-center mb-12">
               <Shield className="w-20 h-20 text-green-500 mx-auto mb-6" />
               <h2 className="text-4xl font-bold text-green-700 dark:text-green-400 mb-6">

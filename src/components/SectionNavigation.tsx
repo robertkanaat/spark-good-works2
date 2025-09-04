@@ -4,7 +4,16 @@ import { Button } from './ui/button';
 const SectionNavigation = () => {
   const [activeSection, setActiveSection] = useState('hero');
 
-  const sections = [
+  // Get current path to determine which sections to show
+  const currentPath = window.location.pathname;
+  
+  const sections = currentPath === '/emergency' ? [
+    { id: 'hero', label: 'Emergency' },
+    { id: 'emergency-numbers', label: 'Numbers' },
+    { id: 'overdose-recognition', label: 'Overdose' },
+    { id: 'naloxone-info', label: 'Naloxone' },
+    { id: 'crisis-hotlines', label: 'Crisis Help' }
+  ] : [
     { id: 'hero', label: 'Home' },
     { id: 'testimonials', label: 'Stories' },
     { id: 'video', label: 'About' },
