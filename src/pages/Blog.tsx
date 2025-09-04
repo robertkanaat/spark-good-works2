@@ -348,9 +348,9 @@ Best regards,`;
           <div className="mb-20">
             <div className="text-center mb-12">
               <Badge variant="secondary" className="bg-primary/10 text-primary px-4 py-2 text-sm font-medium">
-                ✨ Featured Story
+                ✨ Must Read
               </Badge>
-              <h2 className="text-4xl font-bold mt-6 mb-4">Latest Featured Article</h2>
+              <h2 className="text-4xl font-bold mt-6 mb-4">Latest Article</h2>
               <p className="text-xl text-muted-foreground">Inspiring stories that change lives</p>
             </div>
             
