@@ -55,22 +55,20 @@ const SectionNavigation = () => {
   }, []);
 
   return (
-    <div className="sticky top-20 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center py-2">
-          <div className="flex gap-1 overflow-x-auto scrollbar-hide">
-            {sections.map((section) => (
-              <Button
-                key={section.id}
-                variant={activeSection === section.id ? "default" : "ghost"}
-                size="sm"
-                onClick={() => scrollToSection(section.id)}
-                className="whitespace-nowrap text-xs px-3 py-1 h-8"
-              >
-                {section.label}
-              </Button>
-            ))}
-          </div>
+    <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
+      <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border rounded-lg p-2 shadow-lg">
+        <div className="flex flex-col gap-1">
+          {sections.map((section) => (
+            <Button
+              key={section.id}
+              variant={activeSection === section.id ? "default" : "ghost"}
+              size="sm"
+              onClick={() => scrollToSection(section.id)}
+              className="text-xs px-3 py-1 h-8 justify-start min-w-[80px]"
+            >
+              {section.label}
+            </Button>
+          ))}
         </div>
       </div>
     </div>

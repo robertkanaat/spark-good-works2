@@ -253,7 +253,6 @@ const Index = () => {
       </Helmet>
       <div className="min-h-screen">
         <Header />
-        <SectionNavigation />
         <div id="hero">
           <HeroSection />
         </div>
@@ -282,6 +281,7 @@ const Index = () => {
           <HomeFAQSection />
         </div>
         <Footer />
+        <SectionNavigation />
       </div>
     </>
   );
