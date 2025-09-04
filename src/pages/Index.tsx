@@ -1,6 +1,7 @@
 
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
+import SectionNavigation from '@/components/SectionNavigation';
 import HeroSection from '@/components/HeroSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import VideoSection from '@/components/VideoSection';
@@ -252,15 +253,34 @@ const Index = () => {
       </Helmet>
       <div className="min-h-screen">
         <Header />
-        <HeroSection />
-        <TestimonialsSection />
-        <VideoSection />
-        <StatsSection />
-        <FeaturesSection />
-        <VolunteerCTA />
-        <BlogPreviewSection />
-        <OpenLetterPreview />
-        <HomeFAQSection />
+        <SectionNavigation />
+        <div id="hero">
+          <HeroSection />
+        </div>
+        <div id="testimonials">
+          <TestimonialsSection />
+        </div>
+        <div id="video">
+          <VideoSection />
+        </div>
+        <div id="stats">
+          <StatsSection />
+        </div>
+        <div id="features">
+          <FeaturesSection />
+        </div>
+        <div id="volunteer">
+          <VolunteerCTA />
+        </div>
+        <div id="blog">
+          <BlogPreviewSection />
+        </div>
+        <div id="letter">
+          <OpenLetterPreview />
+        </div>
+        <div id="faq">
+          <HomeFAQSection />
+        </div>
         <Footer />
       </div>
     </>
