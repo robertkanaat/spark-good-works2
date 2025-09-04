@@ -19,7 +19,7 @@ const OpenLetterPreview = () => {
           </div>
           <div className="rounded-lg border border-border p-4 bg-background/60">
             <p className="text-sm text-muted-foreground">
-              "Ultimately, addiction is a connection disorder. It’s feeling incredibly disconnected and uncomfortable in your own skin…"
+              "Ultimately, <strong className="text-primary">addiction is a connection disorder</strong>. It's feeling incredibly disconnected and uncomfortable in your own skin…"
             </p>
           </div>
         </div>

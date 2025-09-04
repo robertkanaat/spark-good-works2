@@ -104,9 +104,9 @@ const StatsSection = () => {
             <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
               The addiction crisis affects us all
             </h2>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Access to recovery support changes everything. It means hope, healing, and connection for individuals and families affected by addiction.
-            </p>
+             <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+               <strong className="text-primary bg-primary/10 px-2 py-1 rounded">Access to recovery support changes everything.</strong> It means hope, healing, and connection for individuals and families affected by addiction.
+             </p>
           </div>
         </div>
         
@@ -156,9 +156,9 @@ const StatsSection = () => {
         <div className={`text-center mt-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: '800ms' }}>
           <div className="inline-flex items-center gap-4 bg-gradient-to-r from-primary/10 to-orange-500/10 backdrop-blur-sm rounded-2xl p-6 border border-primary/20">
             <span className="text-3xl">✨</span>
-            <span className="text-lg font-medium">
-              Every number represents real lives touched by hope and healing
-            </span>
+             <span className="text-lg font-medium">
+               <span className="bg-gradient-to-r from-primary/10 to-donate/10 px-3 py-1 rounded-lg">Every number represents real lives touched by hope and healing</span>
+             </span>
             <span className="text-3xl">💝</span>
           </div>
         </div>

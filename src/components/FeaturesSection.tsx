@@ -44,13 +44,13 @@ const FeaturesSection = () => {
             <span className="text-sm font-medium text-primary">Features</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            Comprehensive Recovery Support
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Our platform provides everything you need for a successful recovery journey, 
-            combining innovative technology with compassionate human support.
-          </p>
+           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+             <span className="bg-gradient-to-r from-primary/10 to-donate/10 px-3 py-1 rounded-lg">Comprehensive Recovery Support</span>
+           </h2>
+           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+             Our platform provides everything you need for a successful recovery journey, 
+             combining <strong className="text-primary">innovative technology</strong> with <strong className="text-primary">compassionate human support</strong>.
+           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -71,14 +71,18 @@ const FeaturesSection = () => {
                 </div>
               </div>
 
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-foreground">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
+               <div>
+                 <h3 className="text-xl font-semibold mb-4 text-foreground">
+                   {feature.title === "24/7 Support" ? (
+                     <span className="bg-primary/10 px-2 py-1 rounded">{feature.title}</span>
+                   ) : (
+                     feature.title
+                   )}
+                 </h3>
+                 <p className="text-muted-foreground leading-relaxed">
+                   {feature.description}
+                 </p>
+               </div>
 
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-border/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>

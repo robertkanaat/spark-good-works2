@@ -93,13 +93,13 @@ const TestimonialsSection = () => {
             <Star className="w-4 h-4 fill-current" />
             Real Stories, Real Impact
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Transforming Lives Through
-            <span className="text-primary"> Recovery Support</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Hear from real people whose lives have been transformed by our comprehensive recovery platform and 24/7 AI support system.
-          </p>
+           <h2 className="text-3xl md:text-4xl font-bold mb-4">
+             <span className="bg-gradient-to-r from-primary/10 to-donate/10 px-3 py-1 rounded-lg">Transforming Lives</span> Through
+             <span className="text-primary"> Recovery Support</span>
+           </h2>
+           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+             Hear from real people whose lives have been transformed by our comprehensive recovery platform and <strong className="text-primary">24/7 AI support system</strong>.
+           </p>
         </div>
 
         <div className="relative">
@@ -197,11 +197,13 @@ const TestimonialsSection = () => {
 
         {/* Call to action */}
         <div className="text-center mt-16">
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Ready to Start Your Recovery Journey?</h3>
-            <p className="text-muted-foreground mb-6">
-              Join thousands of people who have found hope, healing, and lasting recovery through our platform.
-            </p>
+           <div className="max-w-2xl mx-auto">
+             <h3 className="text-2xl font-bold mb-4">
+               <span className="bg-primary/10 px-3 py-1 rounded-lg">Ready to Start Your Recovery Journey?</span>
+             </h3>
+             <p className="text-muted-foreground mb-6">
+               Join thousands of people who have found <strong className="text-primary">hope, healing, and lasting recovery</strong> through our platform.
+             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/emergency">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 hover-scale animate-fade-in">

@@ -190,9 +190,9 @@ const HeroSection = () => {
                     </Button>
                   </Link>
                   
-                  <p className="text-sm text-muted-foreground mb-4 text-center">
-                    Your ${selectedAmount}.00 donation helps provide 24/7 recovery support and connects people to life-saving resources. Every dollar makes a difference.
-                  </p>
+                   <p className="text-sm text-muted-foreground mb-4 text-center">
+                     Your ${selectedAmount}.00 donation helps provide <strong className="text-primary">24/7 recovery support</strong> and connects people to life-saving resources. <strong className="text-primary">Every dollar makes a difference.</strong>
+                   </p>
                   
                   <div className="text-center mb-4">
                     <Link to="/donors" className="text-primary hover:underline text-sm">Learn about our programs</Link>
@@ -210,9 +210,11 @@ const HeroSection = () => {
                   
                   <div className="space-y-4 mb-6">
                     <div className="text-center">
-                      <h4 className="font-semibold text-lg mb-2">Transform Your Life</h4>
+                      <h4 className="font-semibold text-lg mb-2">
+                        <span className="bg-primary/10 px-2 py-1 rounded">Transform Your Life</span>
+                      </h4>
                       <p className="text-sm text-muted-foreground">
-                        Through connection, support, and proven recovery tools. Recovery is possible – no matter how rough the journey has been.
+                        Through connection, support, and proven recovery tools. <strong className="text-primary font-semibold">Recovery is possible</strong> – no matter how rough the journey has been.
                       </p>
                     </div>
                     
@@ -254,7 +256,9 @@ const HeroSection = () => {
                   
                   <div className="space-y-4 mb-6">
                     <div className="text-center">
-                      <h4 className="font-semibold text-lg mb-2">You're Not Alone</h4>
+                      <h4 className="font-semibold text-lg mb-2">
+                        <span className="bg-primary/10 px-2 py-1 rounded">You're Not Alone</span>
+                      </h4>
                       <p className="text-sm text-muted-foreground">
                         Supporting someone with addiction is challenging. Get the tools and community you need to navigate this journey.
                       </p>

@@ -27,9 +27,9 @@ const VideoSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent drop-shadow-sm">
               See Our Impact in Action
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Watch how we're transforming lives and building stronger communities through recovery support.
-            </p>
+           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+             Watch how we're <strong className="text-primary bg-primary/10 px-2 py-1 rounded">transforming lives</strong> and building stronger communities through recovery support.
+           </p>
           </div>
 
           <div className="relative group cursor-pointer" onClick={() => setIsVideoOpen(true)}>
@@ -59,10 +59,10 @@ const VideoSection = () => {
               </div>
 
               {/* Video info overlay */}
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">Our Recovery Journey</h3>
-                <p className="text-white/90">Stories of hope, healing, and transformation</p>
-              </div>
+               <div className="absolute bottom-6 left-6 right-6 text-white">
+                 <h3 className="text-2xl font-bold mb-2">Our Recovery Journey</h3>
+                 <p className="text-white/90">Stories of <span className="font-semibold text-white bg-white/20 px-2 py-1 rounded">hope, healing, and transformation</span></p>
+               </div>
             </LazyBackgroundImage>
 
             {/* Decorative elements */}
