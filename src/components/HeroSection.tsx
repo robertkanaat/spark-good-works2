@@ -9,11 +9,21 @@ import LazyBackgroundImage from "@/components/LazyBackgroundImage";
 
 const HeroSection = () => {
   const [selectedAmount, setSelectedAmount] = useState(50);
-  const [activeView, setActiveView] = useState<'donate' | 'help' | 'support'>('donate');
+  const [activeView, setActiveView] = useState<'donate' | 'help' | 'support'>(() => {
+    // Initialize from localStorage or default to 'donate'
+    const saved = localStorage.getItem('heroActiveView');
+    return (saved as 'donate' | 'help' | 'support') || 'donate';
+  });
   const [currentHeroImage, setCurrentHeroImage] = useState(heroRecoveryPerson);
   const presetAmounts = [25, 50, 100, 200];
   
   const heroImages = [heroRecoveryPerson, heroFamilyEmbrace];
+  
+  // Function to handle view changes and persist to localStorage
+  const handleViewChange = (view: 'donate' | 'help' | 'support') => {
+    setActiveView(view);
+    localStorage.setItem('heroActiveView', view);
+  };
   
   useEffect(() => {
     // Randomly select an image on component mount
@@ -60,7 +70,7 @@ const HeroSection = () => {
                         ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
                         : ''
                     }`}
-                    onClick={() => setActiveView('help')}
+                     onClick={() => handleViewChange('help')}
                   >
                     HELP
                   </Button>
@@ -74,7 +84,7 @@ const HeroSection = () => {
                         ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
                         : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
                     }`}
-                    onClick={() => setActiveView('donate')}
+                     onClick={() => handleViewChange('donate')}
                   >
                     DONATE
                   </Button>
@@ -89,7 +99,7 @@ const HeroSection = () => {
                         ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
                         : ''
                     }`}
-                    onClick={() => setActiveView('support')}
+                    onClick={() => handleViewChange('support')}
                   >
                     SUPPORT
                   </Button>
@@ -107,7 +117,7 @@ const HeroSection = () => {
                         ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
                         : ''
                     }`}
-                    onClick={() => setActiveView('help')}
+                    onClick={() => handleViewChange('help')}
                   >
                     HELP
                   </Button>
@@ -121,7 +131,7 @@ const HeroSection = () => {
                         ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
                         : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
                     }`}
-                    onClick={() => setActiveView('donate')}
+                    onClick={() => handleViewChange('donate')}
                   >
                     DONATE
                   </Button>
@@ -136,7 +146,7 @@ const HeroSection = () => {
                         ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
                         : ''
                     }`}
-                    onClick={() => setActiveView('support')}
+                     onClick={() => handleViewChange('support')}
                   >
                     SUPPORT
                   </Button>
