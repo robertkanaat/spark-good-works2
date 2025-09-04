@@ -306,7 +306,7 @@ const Header = () => {
                         : 'text-muted-foreground'
                     }`}
                   >
-                    RESOURCES
+                     RECOVERY
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="z-50">
                     <div className="grid gap-3 p-6 w-[450px]">
@@ -519,7 +519,7 @@ const Header = () => {
                        }`}
                        onClick={() => setIsOpen(false)}
                      >
-                       RESOURCES
+                       RECOVERY
                      </Link>
                      <Link 
                        to="/blog" 
