@@ -272,6 +272,87 @@ const Emergency = () => {
             </div>
           </Card>
 
+          {/* Poison Control Section */}
+          <Card id="poison-control" className="p-12 mb-16 bg-gradient-to-br from-orange-50 to-yellow-50 border-orange-200 dark:from-orange-950/20 dark:to-yellow-950/20">
+            <div className="text-center mb-12">
+              <AlertTriangle className="w-20 h-20 text-orange-500 mx-auto mb-6" />
+              <h2 className="text-4xl font-bold text-orange-700 dark:text-orange-400 mb-6">
+                Poison Control Center
+              </h2>
+              <div className="text-6xl font-bold text-orange-600 dark:text-orange-400 mb-4">
+                1-800-222-1222
+              </div>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                24/7 expert guidance for poison emergencies - they'll tell you exactly what to do
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-red-600 mb-6 flex items-center">
+                  <Phone className="w-8 h-8 mr-3" />
+                  Call IMMEDIATELY If Someone:
+                </h3>
+                <div className="space-y-4">
+                  {[
+                    { title: "Swallowed anything harmful", desc: "Cleaning products, medications, chemicals, detergent pods" },
+                    { title: "Took too much medicine", desc: "Prescription drugs, over-the-counter meds, vitamins" },
+                    { title: "Ate something dangerous", desc: "Wild mushrooms, berries, plants, spoiled food" },
+                    { title: "Got chemicals on skin/eyes", desc: "Bleach, drain cleaner, pesticides, paint" },
+                    { title: "Breathed in toxic fumes", desc: "Carbon monoxide, cleaning chemicals, gas leaks" },
+                    { title: "Was bitten or stung", desc: "Unknown insects, spiders, or had severe allergic reaction" }
+                  ].map((item, index) => (
+                    <Card key={index} className="p-4 bg-white/80 border-orange-200">
+                      <div className="flex items-start gap-4">
+                        <div className="w-3 h-3 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div>
+                          <div className="font-semibold text-orange-700">{item.title}</div>
+                          <div className="text-sm text-muted-foreground">{item.desc}</div>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-green-600 mb-6 flex items-center">
+                  <Stethoscope className="w-8 h-8 mr-3" />
+                  What They'll Do For You
+                </h3>
+                <div className="space-y-4">
+                  {[
+                    "Tell you if it's dangerous or not",
+                    "Give step-by-step instructions",
+                    "Decide if you need to go to ER",
+                    "Stay on the phone with you",
+                    "Connect you to local emergency services",
+                    "Follow up to make sure you're okay"
+                  ].map((step, index) => (
+                    <Card key={index} className="p-4 bg-white/80 border-green-200">
+                      <div className="flex items-start gap-4">
+                        <div className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                          {index + 1}
+                        </div>
+                        <div className="font-medium text-green-700">{step}</div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+                
+                <Card className="p-4 bg-red-50 border-red-200 dark:bg-red-950/20">
+                  <div className="font-bold text-red-700 mb-2 flex items-center">
+                    <AlertTriangle className="w-5 h-5 mr-2" />
+                    If Someone is Unconscious or Not Breathing:
+                  </div>
+                  <div className="text-red-600 font-medium">
+                    Call 911 FIRST, then Poison Control while waiting for ambulance
+                  </div>
+                </Card>
+              </div>
+            </div>
+          </Card>
+
           {/* Crisis Resources */}
           <div id="crisis-hotlines" className="space-y-8 mb-16">
             <Card className="p-8 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20">
@@ -304,41 +385,6 @@ const Emergency = () => {
                   <div className="font-bold text-lg text-purple-700">Trans Lifeline</div>
                   <div className="text-xl font-bold text-purple-600">877-565-8860</div>
                   <div className="text-sm text-muted-foreground">Transgender crisis support hotline</div>
-                </div>
-                <div className="p-6 bg-white/90 rounded-lg shadow-sm border-2 border-orange-200">
-                  <div className="font-bold text-lg text-orange-700 mb-3">Poison Control Center</div>
-                  <div className="text-2xl font-bold text-orange-600 mb-3">1-800-222-1222</div>
-                  <div className="text-sm text-muted-foreground mb-4">24/7 poison emergency assistance</div>
-                  
-                  <div className="space-y-3">
-                    <div className="font-semibold text-orange-700 text-sm">CALL IMMEDIATELY IF:</div>
-                    <div className="grid grid-cols-1 gap-2 text-xs">
-                      <div className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
-                        <span>Someone swallowed cleaning products, medications, or chemicals</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
-                        <span>Accidental overdose of prescription/over-the-counter drugs</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
-                        <span>Ingestion of plants, berries, or unknown substances</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
-                        <span>Skin/eye contact with harmful chemicals</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
-                        <span>Inhaled toxic fumes or gases</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-red-500 rounded-full mt-1 flex-shrink-0"></div>
-                        <span className="font-medium">If unconscious/not breathing → Call 911 FIRST</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div className="p-4 bg-white/90 rounded-lg shadow-sm">
                   <div className="font-bold text-lg text-purple-700">Veterans Crisis Line</div>

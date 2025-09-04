@@ -12,6 +12,7 @@ const SectionNavigation = () => {
     { id: 'emergency-numbers', label: 'Numbers' },
     { id: 'overdose-recognition', label: 'Overdose' },
     { id: 'naloxone-info', label: 'Naloxone' },
+    { id: 'poison-control', label: 'Poison Control' },
     { id: 'crisis-hotlines', label: 'Crisis Help' }
   ] : [
     { id: 'hero', label: 'Home' },
