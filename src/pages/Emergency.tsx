@@ -305,10 +305,40 @@ const Emergency = () => {
                   <div className="text-xl font-bold text-purple-600">877-565-8860</div>
                   <div className="text-sm text-muted-foreground">Transgender crisis support hotline</div>
                 </div>
-                <div className="p-4 bg-white/90 rounded-lg shadow-sm">
-                  <div className="font-bold text-lg text-purple-700">Poison Control</div>
-                  <div className="text-xl font-bold text-purple-600">1-800-222-1222</div>
-                  <div className="text-sm text-muted-foreground">24/7 poison emergency assistance</div>
+                <div className="p-6 bg-white/90 rounded-lg shadow-sm border-2 border-orange-200">
+                  <div className="font-bold text-lg text-orange-700 mb-3">Poison Control Center</div>
+                  <div className="text-2xl font-bold text-orange-600 mb-3">1-800-222-1222</div>
+                  <div className="text-sm text-muted-foreground mb-4">24/7 poison emergency assistance</div>
+                  
+                  <div className="space-y-3">
+                    <div className="font-semibold text-orange-700 text-sm">CALL IMMEDIATELY IF:</div>
+                    <div className="grid grid-cols-1 gap-2 text-xs">
+                      <div className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
+                        <span>Someone swallowed cleaning products, medications, or chemicals</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
+                        <span>Accidental overdose of prescription/over-the-counter drugs</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
+                        <span>Ingestion of plants, berries, or unknown substances</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
+                        <span>Skin/eye contact with harmful chemicals</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-shrink-0"></div>
+                        <span>Inhaled toxic fumes or gases</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-red-500 rounded-full mt-1 flex-shrink-0"></div>
+                        <span className="font-medium">If unconscious/not breathing → Call 911 FIRST</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-4 bg-white/90 rounded-lg shadow-sm">
                   <div className="font-bold text-lg text-purple-700">Veterans Crisis Line</div>
