@@ -55,21 +55,44 @@ const SectionNavigation = () => {
   }, []);
 
   return (
-    <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
-      <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border rounded-lg p-2 shadow-lg">
-        <div className="flex flex-col gap-1">
-          {sections.map((section) => (
-            <Button
-              key={section.id}
-              variant={activeSection === section.id ? "default" : "ghost"}
-              size="sm"
-              onClick={() => scrollToSection(section.id)}
-              className="text-xs px-3 py-1 h-8 justify-start min-w-[80px]"
-            >
-              {section.label}
-            </Button>
-          ))}
+    <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block group">
+      <div className="relative">
+        {/* Sliding container */}
+        <div className="transform translate-x-[calc(100%-12px)] group-hover:translate-x-0 transition-transform duration-300 ease-out">
+          <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-r-0 rounded-l-lg shadow-lg min-w-[140px]">
+            <div className="flex flex-col py-2">
+              {sections.map((section, index) => (
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`
+                    flex items-center gap-3 px-4 py-2 text-sm transition-all duration-200
+                    hover:bg-accent hover:text-accent-foreground
+                    ${activeSection === section.id 
+                      ? 'bg-primary text-primary-foreground' 
+                      : 'text-muted-foreground hover:text-foreground'
+                    }
+                  `}
+                  style={{
+                    transitionDelay: `${index * 30}ms`
+                  }}
+                >
+                  <div className={`
+                    w-2 h-2 rounded-full transition-all duration-200
+                    ${activeSection === section.id 
+                      ? 'bg-primary-foreground' 
+                      : 'bg-muted-foreground/50'
+                    }
+                  `} />
+                  <span className="whitespace-nowrap">{section.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
+        
+        {/* Hover trigger tab */}
+        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3 h-16 bg-primary/20 rounded-l-md group-hover:bg-primary/30 transition-colors duration-200" />
       </div>
     </div>
   );
