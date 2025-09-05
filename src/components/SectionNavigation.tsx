@@ -20,6 +20,12 @@ const SectionNavigation = () => {
     { id: 'support-programs', label: 'Programs' },
     { id: 'education-resources', label: 'Education' },
     { id: 'cta', label: 'Get Support' }
+  ] : currentPath === '/recovery-tools' ? [
+    { id: 'hero', label: 'Overview' },
+    { id: 'emergency-support', label: 'Emergency Help' },
+    { id: 'digital-tools', label: 'Apps & Tools' },
+    { id: 'workbooks', label: 'Workbooks' },
+    { id: 'online-support', label: 'Online Support' }
   ] : [
     { id: 'hero', label: 'Home' },
     { id: 'testimonials', label: 'Stories' },

@@ -28,6 +28,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import SectionNavigation from "@/components/SectionNavigation";
 
 const RecoveryTools = () => {
   useEffect(() => {
@@ -216,8 +217,10 @@ const RecoveryTools = () => {
       />
       <Header />
       
+      <SectionNavigation />
+      
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/10 via-background to-accent/5 py-20 overflow-hidden">
+      <section id="hero" className="relative bg-gradient-to-br from-primary/10 via-background to-accent/5 py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
@@ -251,7 +254,7 @@ const RecoveryTools = () => {
       </section>
 
       {/* Emergency Resources */}
-      <section className="py-20 relative">
+      <section id="emergency-support" className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-destructive/5 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -289,7 +292,7 @@ const RecoveryTools = () => {
       </section>
 
       {/* Digital Tools Section */}
-      <section className="py-20 relative bg-gradient-to-br from-muted/30 via-muted/10 to-primary/5">
+      <section id="digital-tools" className="py-20 relative bg-gradient-to-br from-muted/30 via-muted/10 to-primary/5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.05),transparent_70%)]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -362,7 +365,7 @@ const RecoveryTools = () => {
       </section>
 
       {/* Workbooks and Resources */}
-      <section className="py-20 relative">
+      <section id="workbooks" className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -415,7 +418,7 @@ const RecoveryTools = () => {
       </section>
 
       {/* Online Support Communities */}
-      <section className="py-20 relative bg-gradient-to-br from-primary/5 to-accent/5">
+      <section id="online-support" className="py-20 relative bg-gradient-to-br from-primary/5 to-accent/5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,hsl(var(--primary)/0.1),transparent_50%)]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
