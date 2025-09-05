@@ -462,35 +462,56 @@ const Education = () => {
               </p>
 
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-destructive/10 rounded-lg flex items-center justify-center mt-1">
-                    <CheckCircle className="w-5 h-5 text-destructive" />
+                <Card className="p-6 bg-muted/20">
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 bg-destructive/10 rounded-lg flex items-center justify-center mt-1">
+                      <CheckCircle className="w-5 h-5 text-destructive" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg mb-3">Risk Assessment - How to Do It:</h3>
+                      <div className="space-y-2 text-sm text-muted-foreground">
+                        <p><strong>Step 1:</strong> Create a "high-risk situations" list (specific people, places, times, emotions)</p>
+                        <p><strong>Step 2:</strong> Rate each situation 1-10 for danger level</p>
+                        <p><strong>Step 3:</strong> For each high-risk item, write 2-3 specific alternatives or exit strategies</p>
+                        <p><strong>Example:</strong> "Friday nights at Jake's house (Risk: 9/10) → Alternative: Movie night at home, gym session, coffee with sober friend"</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Risk Assessment</h3>
-                    <p className="text-muted-foreground">Learn to identify high-risk situations, substances, and behaviors to make informed safety decisions.</p>
-                  </div>
-                </div>
+                </Card>
                 
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-destructive/10 rounded-lg flex items-center justify-center mt-1">
-                    <CheckCircle className="w-5 h-5 text-destructive" />
+                <Card className="p-6 bg-muted/20">
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 bg-destructive/10 rounded-lg flex items-center justify-center mt-1">
+                      <CheckCircle className="w-5 h-5 text-destructive" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg mb-3">Safety Planning - Concrete Steps:</h3>
+                      <div className="space-y-2 text-sm text-muted-foreground">
+                        <p><strong>Emergency Contacts:</strong> Program 3 people you can call 24/7 (with their consent)</p>
+                        <p><strong>Overdose Kit:</strong> Keep Naloxone/Narcan accessible + know how to use it</p>
+                        <p><strong>Safe Use Rules:</strong> Never use alone, test small amounts first, avoid mixing substances</p>
+                        <p><strong>Crisis Plan:</strong> "If I feel like using, I will: 1) Call [name], 2) Go to [safe place], 3) Use [coping skill]"</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Safety Planning</h3>
-                    <p className="text-muted-foreground">Develop personal safety protocols including emergency contacts and overdose prevention strategies.</p>
-                  </div>
-                </div>
+                </Card>
                 
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-destructive/10 rounded-lg flex items-center justify-center mt-1">
-                    <CheckCircle className="w-5 h-5 text-destructive" />
+                <Card className="p-6 bg-muted/20">
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 bg-destructive/10 rounded-lg flex items-center justify-center mt-1">
+                      <CheckCircle className="w-5 h-5 text-destructive" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg mb-3">Gradual Reduction - Practical Techniques:</h3>
+                      <div className="space-y-2 text-sm text-muted-foreground">
+                        <p><strong>Track & Measure:</strong> Keep a daily log (amount, time, triggers, mood)</p>
+                        <p><strong>10% Rule:</strong> Reduce use by 10% each week (e.g., from 10 drinks to 9, then 8, etc.)</p>
+                        <p><strong>Time Delays:</strong> Wait 15 minutes before using, gradually increase to 30, 45, 60 minutes</p>
+                        <p><strong>Substitute Activities:</strong> Replace 1 use session with exercise, call a friend, or creative activity</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-2">Gradual Reduction</h3>
-                    <p className="text-muted-foreground">Understand techniques for safely reducing substance use when abstinence isn't immediately achievable.</p>
-                  </div>
-                </div>
+                </Card>
               </div>
             </div>
           </div>
