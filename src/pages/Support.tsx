@@ -246,19 +246,38 @@ const Support = () => {
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {resources.map((resource, index) => (
-                <Card key={index} className="p-8 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                      <resource.icon className="w-6 h-6 text-primary" />
+              {resources.map((resource, index) => {
+                const getResourceLink = (title: string) => {
+                  switch(title) {
+                    case "Expert Videos": return "/blog";
+                    case "Expert Articles & Resources": return "/resources"; 
+                    case "Live Virtual Events": return "/support-groups";
+                    case "Community Support": return "/support-groups";
+                    default: return "/resources";
+                  }
+                };
+
+                return (
+                  <Card 
+                    key={index} 
+                    className="p-8 hover:shadow-lg transition-all duration-300 cursor-pointer group"
+                    onClick={() => window.location.href = getResourceLink(resource.title)}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1 group-hover:bg-primary/20 transition-colors">
+                        <resource.icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">{resource.title}</h4>
+                        <p className="text-muted-foreground leading-relaxed mb-4">{resource.description}</p>
+                        <Button variant="outline" size="sm" className="mt-2">
+                          Learn More →
+                        </Button>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-xl font-semibold mb-3">{resource.title}</h4>
-                      <p className="text-muted-foreground leading-relaxed">{resource.description}</p>
-                    </div>
-                  </div>
-                </Card>
-              ))}
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </div>
