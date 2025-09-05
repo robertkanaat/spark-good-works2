@@ -233,10 +233,10 @@ const Support = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               What You Get When You{" "}
-              <span className="text-primary">Join Our Community</span>
+              <span className="text-primary">Connect With Us</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Free comprehensive resources and community support designed specifically for caregivers and families. No membership fees - just support when you need it most.
+              Free comprehensive resources and community support designed specifically for caregivers and families.
             </p>
           </div>
           
@@ -324,7 +324,7 @@ const Support = () => {
             Ready to Get the Support You Deserve?
           </h2>
           <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-            Join thousands of caregivers who have found strength, hope, and practical tools to support both themselves and their loved ones on the recovery journey. It's completely free to get started.
+            Join thousands of caregivers who have found strength, hope, and practical tools to support both themselves and their loved ones on the recovery journey.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
