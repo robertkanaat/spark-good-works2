@@ -157,8 +157,8 @@ const StatsSection = () => {
           <div className="inline-flex items-center gap-4 bg-gradient-to-r from-primary/10 to-orange-500/10 backdrop-blur-sm rounded-2xl p-6 border border-primary/20">
             <span className="text-3xl">✨</span>
              <span className="text-lg font-medium">
-               <span className="bg-gradient-to-r from-primary/10 to-donate/10 px-3 py-1 rounded-lg">Every number represents real lives touched by hope and healing</span>
-             </span>
+                Every number represents real lives touched by hope and healing
+              </span>
             <span className="text-3xl">💝</span>
           </div>
         </div>
