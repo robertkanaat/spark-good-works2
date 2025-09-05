@@ -79,21 +79,21 @@ const FamilySupport = () => {
       description: "Effective ways to communicate with your loved one during recovery",
       topics: ["Active listening", "Non-judgmental language", "Setting boundaries", "Conflict resolution"],
       icon: MessageCircle,
-      link: "/education#supporting-recovery"
+      link: "/education#recovery-stages"
     },
     {
       title: "Self-Care for Family Members",
       description: "Essential self-care practices for maintaining your own well-being",
       topics: ["Stress management", "Support systems", "Personal boundaries", "Mental health"],
       icon: Heart,
-      link: "/education#holistic-approaches"
+      link: "/education#mental-health"
     },
     {
       title: "Supporting Recovery",
       description: "How to be supportive without enabling during the recovery process",
       topics: ["Encouragement vs enabling", "Recovery milestones", "Relapse prevention", "Long-term support"],
       icon: HandHeart,
-      link: "/education#supporting-recovery"
+      link: "/education#harm-reduction"
     }
   ];
 
