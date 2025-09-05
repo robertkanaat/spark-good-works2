@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake, Mic } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
@@ -112,7 +112,7 @@ const Header = () => {
                   <NavigationMenuTrigger 
                     onClick={() => window.location.href = '/about'}
                     className={`text-sm font-medium transition-all duration-300 hover:scale-105 cursor-pointer ${
-                      isActiveRoute('/about') || isActiveRoute('/press') || isActiveRoute('/open-letter') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
+                      isActiveRoute('/about') || isActiveRoute('/press') || isActiveRoute('/open-letter') || isActiveRoute('/speakers') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
                     }`}
                   >
                     ABOUT
@@ -171,6 +171,28 @@ const Header = () => {
                           isActiveRoute('/press') ? 'text-accent-foreground/80' : 'text-muted-foreground'
                         }`}>
                           Media resources, press releases, and news coverage
+                        </p>
+                      </Link>
+                      <Link
+                        to="/speakers"
+                        className={`block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors focus:bg-accent focus:text-accent-foreground group ${
+                          isActiveRoute('/speakers') 
+                            ? 'bg-accent text-accent-foreground' 
+                            : 'hover:bg-accent hover:text-accent-foreground'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <Mic className={`h-4 w-4 transition-transform duration-300 group-hover:scale-110 ${
+                            isActiveRoute('/speakers') ? 'text-primary' : 'text-primary'
+                          }`} />
+                          <div className={`text-sm font-medium leading-none ${
+                            isActiveRoute('/speakers') ? 'text-accent-foreground' : ''
+                          }`}>Book Our Speakers</div>
+                        </div>
+                        <p className={`line-clamp-2 text-sm leading-snug ${
+                          isActiveRoute('/speakers') ? 'text-accent-foreground/80' : 'text-muted-foreground'
+                        }`}>
+                          Hire Joe and Andre for transformational speaking engagements
                         </p>
                       </Link>
                     </div>
@@ -495,6 +517,17 @@ const Header = () => {
                        onClick={() => setIsOpen(false)}
                      >
                        ABOUT
+                     </Link>
+                     <Link 
+                       to="/speakers" 
+                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
+                         isActiveRoute('/speakers')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       SPEAKERS
                      </Link>
                      <Link 
                        to="/emergency" 
