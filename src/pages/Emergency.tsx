@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Phone, AlertTriangle, Heart, Shield, Users, Clock, MapPin, Stethoscope } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -368,6 +369,54 @@ const Emergency = () => {
 
           {/* Crisis Resources */}
           <div id="crisis-hotlines" className="space-y-8 mb-16">
+            {/* Family Crisis Support */}
+            <Card className="p-8 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20 border-l-4 border-l-purple-500">
+              <div className="flex items-center mb-8">
+                <Users className="w-12 h-12 text-purple-500 mr-4" />
+                <h3 className="text-3xl font-bold">Crisis Support for Families</h3>
+              </div>
+              <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
+                Addiction affects the entire family. These specialized crisis resources are available to help families navigate emergency situations.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="p-6 bg-white/90 rounded-lg shadow-sm border-l-4 border-l-destructive">
+                  <Phone className="w-8 h-8 text-destructive mb-3" />
+                  <div className="font-bold text-lg text-destructive">Family Crisis Hotline</div>
+                  <div className="text-xl font-bold text-destructive mb-2">1-800-621-4673</div>
+                  <div className="text-sm text-muted-foreground mb-3">24/7 support for families in crisis situations</div>
+                  <Badge variant="outline" className="border-destructive/20 text-destructive bg-destructive/5">24/7</Badge>
+                </div>
+                
+                <div className="p-6 bg-white/90 rounded-lg shadow-sm border-l-4 border-l-blue-500">
+                  <Phone className="w-8 h-8 text-blue-500 mb-3" />
+                  <div className="font-bold text-lg text-blue-700">Al-Anon Information Service</div>
+                  <div className="text-xl font-bold text-blue-600 mb-2">1-888-425-2666</div>
+                  <div className="text-sm text-muted-foreground mb-3">Information and meeting referrals for Al-Anon groups</div>
+                  <Badge variant="outline" className="border-blue-500/20 text-blue-600 bg-blue-50">Business Hours</Badge>
+                </div>
+                
+                <div className="p-6 bg-white/90 rounded-lg shadow-sm border-l-4 border-l-purple-500">
+                  <Phone className="w-8 h-8 text-purple-500 mb-3" />
+                  <div className="font-bold text-lg text-purple-700">National Suicide Prevention</div>
+                  <div className="text-xl font-bold text-purple-600 mb-2">988</div>
+                  <div className="text-sm text-muted-foreground mb-3">Crisis support for anyone contemplating suicide</div>
+                  <Badge variant="outline" className="border-purple-500/20 text-purple-600 bg-purple-50">24/7</Badge>
+                </div>
+              </div>
+              
+              <div className="p-4 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 rounded-lg">
+                <div className="flex items-center gap-3 mb-2">
+                  <Shield className="w-5 h-5 text-blue-600" />
+                  <span className="font-semibold text-blue-700">For Families:</span>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Remember that supporting a loved one with addiction can be overwhelming. These resources are specifically designed to help families cope with crisis situations, providing both immediate support and guidance on next steps.
+                </p>
+              </div>
+            </Card>
+            
+            {/* General Crisis Support */}
             <Card className="p-8 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20">
               <div className="flex items-center mb-8">
                 <Heart className="w-12 h-12 text-purple-500 mr-4" />

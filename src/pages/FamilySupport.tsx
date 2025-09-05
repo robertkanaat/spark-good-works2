@@ -97,27 +97,6 @@ const FamilySupport = () => {
     }
   ];
 
-  const crisisResources = [
-    {
-      title: "Family Crisis Hotline",
-      phone: "1-800-621-4673",
-      description: "24/7 support for families in crisis situations",
-      availability: "24/7"
-    },
-    {
-      title: "Al-Anon Information Service",
-      phone: "1-888-425-2666",
-      description: "Information and meeting referrals for Al-Anon groups",
-      availability: "Business hours"
-    },
-    {
-      title: "National Suicide Prevention Lifeline",
-      phone: "988",
-      description: "Crisis support for anyone contemplating suicide",
-      availability: "24/7"
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
@@ -161,44 +140,6 @@ const FamilySupport = () => {
                 Community Support
               </Badge>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Crisis Resources */}
-      <section id="crisis-support" className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-destructive/5 to-transparent"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-destructive to-destructive/70 bg-clip-text text-transparent mb-6">
-              Crisis Support for Families
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Immediate help and support when you need it most
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {crisisResources.map((resource, index) => (
-              <Card key={index} className="group p-8 border-l-4 border-l-destructive bg-gradient-to-br from-card to-card/50 hover:shadow-2xl hover:scale-105 transition-all duration-500">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-destructive/20 to-destructive/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Phone className="w-8 h-8 text-destructive" />
-                  </div>
-                  <h3 className="font-bold text-xl mb-3 text-foreground">{resource.title}</h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{resource.description}</p>
-                  <a 
-                    href={`tel:${resource.phone.replace(/[^0-9]/g, '')}`}
-                    className="block text-2xl font-bold text-destructive hover:text-destructive/80 transition-colors duration-200 mb-3"
-                  >
-                    {resource.phone}
-                  </a>
-                  <Badge variant="outline" className="border-destructive/20 text-destructive bg-destructive/5">
-                    {resource.availability}
-                  </Badge>
-                </div>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
