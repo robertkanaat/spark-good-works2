@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import SectionNavigation from "@/components/SectionNavigation";
 
 const FamilySupport = () => {
   useEffect(() => {
@@ -127,8 +128,10 @@ const FamilySupport = () => {
       />
       <Header />
       
+      <SectionNavigation />
+      
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/10 via-background to-muted/20 py-20 overflow-hidden">
+      <section id="hero" className="relative bg-gradient-to-br from-primary/10 via-background to-muted/20 py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -163,7 +166,7 @@ const FamilySupport = () => {
       </section>
 
       {/* Crisis Resources */}
-      <section className="py-20 relative">
+      <section id="crisis-support" className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-destructive/5 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -201,7 +204,7 @@ const FamilySupport = () => {
       </section>
 
       {/* Support Programs */}
-      <section className="py-20 relative bg-gradient-to-br from-muted/30 via-muted/10 to-primary/5">
+      <section id="support-programs" className="py-20 relative bg-gradient-to-br from-muted/30 via-muted/10 to-primary/5">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.05),transparent_70%)]"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -263,7 +266,7 @@ const FamilySupport = () => {
       </section>
 
       {/* Educational Resources */}
-      <section className="py-20 relative">
+      <section id="education-resources" className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -312,7 +315,7 @@ const FamilySupport = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-24 relative bg-gradient-to-br from-primary/10 via-background to-muted/20 overflow-hidden">
+      <section id="cta" className="py-24 relative bg-gradient-to-br from-primary/10 via-background to-muted/20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,hsl(var(--primary)/0.1),transparent_50%)] opacity-50"></div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="mb-16">

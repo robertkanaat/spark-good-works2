@@ -14,6 +14,12 @@ const SectionNavigation = () => {
     { id: 'naloxone-info', label: 'Naloxone' },
     { id: 'poison-control', label: 'Poison Control' },
     { id: 'crisis-hotlines', label: 'Crisis Help' }
+  ] : currentPath === '/family-support' ? [
+    { id: 'hero', label: 'Overview' },
+    { id: 'crisis-support', label: 'Crisis Help' },
+    { id: 'support-programs', label: 'Programs' },
+    { id: 'education-resources', label: 'Education' },
+    { id: 'cta', label: 'Get Support' }
   ] : [
     { id: 'hero', label: 'Home' },
     { id: 'testimonials', label: 'Stories' },
