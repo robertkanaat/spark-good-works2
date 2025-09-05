@@ -36,6 +36,7 @@ import BookDownloadConfirmation from './pages/BookDownloadConfirmation';
 import Education from './pages/Education';
 import FamilySupport from './pages/FamilySupport';
 import RecoveryTools from './pages/RecoveryTools';
+import Speakers from './pages/Speakers';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -88,6 +89,7 @@ const App = () => {
             <Route path="/education" element={<Education />} />
             <Route path="/family-support" element={<FamilySupport />} />
             <Route path="/recovery-tools" element={<RecoveryTools />} />
+            <Route path="/speakers" element={<Speakers />} />
             <Route path="/addiction-recovery-book" element={<BookDownload />} />
             <Route path="/addiction-recovery-book-download" element={<BookDownloadConfirmation />} />
             <Route path="*" element={<NotFound />} />
