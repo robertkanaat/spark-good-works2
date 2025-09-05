@@ -198,9 +198,9 @@ const TestimonialsSection = () => {
         {/* Call to action */}
         <div className="text-center mt-16">
            <div className="max-w-2xl mx-auto">
-             <h3 className="text-2xl font-bold mb-4">
-               <span className="bg-primary/10 px-3 py-1 rounded-lg">Ready to Start Your Recovery Journey?</span>
-             </h3>
+              <h3 className="text-2xl font-bold mb-4">
+                Ready to Start Your Recovery Journey?
+              </h3>
              <p className="text-muted-foreground mb-6">
                Join thousands of people who have found <strong className="text-primary">hope, healing, and lasting recovery</strong> through our platform.
              </p>

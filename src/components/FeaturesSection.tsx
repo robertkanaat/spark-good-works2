@@ -44,9 +44,9 @@ const FeaturesSection = () => {
             <span className="text-sm font-medium text-primary">Features</span>
           </div>
           
-           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-             <span className="bg-gradient-to-r from-primary/10 to-donate/10 px-3 py-1 rounded-lg">Comprehensive Recovery Support</span>
-           </h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              Comprehensive Recovery Support
+            </h2>
            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
              Our platform provides everything you need for a successful recovery journey, 
              combining <strong className="text-primary">innovative technology</strong> with <strong className="text-primary">compassionate human support</strong>.
@@ -72,13 +72,9 @@ const FeaturesSection = () => {
               </div>
 
                <div>
-                 <h3 className="text-xl font-semibold mb-4 text-foreground">
-                   {feature.title === "24/7 Support" ? (
-                     <span className="bg-primary/10 px-2 py-1 rounded">{feature.title}</span>
-                   ) : (
-                     feature.title
-                   )}
-                 </h3>
+                <h3 className="text-xl font-semibold mb-4 text-foreground">
+                  {feature.title}
+                </h3>
                  <p className="text-muted-foreground leading-relaxed">
                    {feature.description}
                  </p>
