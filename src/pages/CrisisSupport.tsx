@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { Link } from "react-router-dom";
 import { 
   Phone, 
   Heart, 
@@ -150,7 +151,7 @@ const CrisisSupport = () => {
               helped someone before, the information here could make all the difference in an emergency situation.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Button 
                 size="lg" 
                 variant="destructive" 
@@ -169,6 +170,24 @@ const CrisisSupport = () => {
                 Call 988 - Crisis Support
               </Button>
             </div>
+
+            {/* Primary Personal Support CTA */}
+            <Card className="bg-primary/10 border-primary/20 p-8 max-w-2xl mx-auto">
+              <div className="text-center">
+                <Users className="w-12 h-12 text-primary mx-auto mb-4" />
+                <h3 className="text-2xl font-bold mb-4">Need Personal Support?</h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Our professional support team is available 24/7 to provide personalized crisis intervention, 
+                  guidance, and ongoing support tailored to your specific situation.
+                </p>
+                <Link to="/contact">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 py-4">
+                    <Heart className="w-5 h-5 mr-2" />
+                    Connect with Our Professional Team
+                  </Button>
+                </Link>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
@@ -321,13 +340,15 @@ const CrisisSupport = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-4 h-auto">
-              <Heart className="w-5 h-5 mr-2" />
-              Find More Resources
-            </Button>
+            <Link to="/contact">
+              <Button size="lg" className="text-lg px-8 py-4 h-auto">
+                <Heart className="w-5 h-5 mr-2" />
+                Get Personal Support Now
+              </Button>
+            </Link>
             <Button variant="outline" size="lg" className="text-lg px-8 py-4 h-auto">
               <Users className="w-5 h-5 mr-2" />
-              Join Our Community
+              Find More Resources
             </Button>
           </div>
           
