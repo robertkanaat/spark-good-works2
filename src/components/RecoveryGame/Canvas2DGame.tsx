@@ -478,9 +478,9 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
           <Button 
             onClick={startGame}
             size="lg"
-            className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-12 py-6 text-xl font-bold"
           >
-            <Zap className="h-5 w-5 mr-2" />
+            <Zap className="h-6 w-6 mr-3" />
             Start Recovery Game
           </Button>
         </div>
