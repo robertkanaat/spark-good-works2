@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake, Mic, ClipboardCheck } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake, Mic, ClipboardCheck, Gamepad2 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
@@ -378,6 +378,18 @@ const Header = () => {
                         </div>
                         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                           Take our personalized recovery assessment quiz
+                        </p>
+                      </Link>
+                      <Link
+                        to="/recovery-game"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Gamepad2 className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Recovery Journey Game</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Interactive game with challenges and team support
                         </p>
                       </Link>
                       <Link
