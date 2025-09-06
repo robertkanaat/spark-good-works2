@@ -8,7 +8,7 @@ import { Trophy, Users, Target, Zap, Heart, Shield, Play } from 'lucide-react';
 import { GameStats } from './GameStats';
 import { Leaderboard } from './Leaderboard';
 import { TeamsSection } from './TeamsSection';
-import { InteractiveGameWorld } from './InteractiveGameWorld';
+import { ThreeDGameWorld } from './ThreeDGameWorld';
 import { toast } from 'sonner';
 
 export interface GameState {
@@ -129,7 +129,7 @@ export const RecoveryGame: React.FC = () => {
               <CardDescription>Complete challenges and collect recovery tools</CardDescription>
             </CardHeader>
             <CardContent className="p-0">
-              <InteractiveGameWorld 
+              <ThreeDGameWorld 
                 gameState={gameState}
                 onChallengeComplete={completeChallenge}
                 onToolCollect={collectTool}
