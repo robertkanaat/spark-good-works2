@@ -192,7 +192,11 @@ export const ThreeDGameWorld: React.FC<ThreeDGameWorldProps> = ({
   ];
 
   const spawnItem = useCallback(() => {
-    if (!gameActive) return;
+    console.log('🔄 SpawnItem called, gameActive:', gameActive);
+    if (!gameActive) {
+      console.log('❌ Game not active, not spawning item');
+      return;
+    }
 
     const isTemptation = Math.random() < 0.5;
     const itemList = isTemptation ? temptations : tools;
@@ -212,10 +216,16 @@ export const ThreeDGameWorld: React.FC<ThreeDGameWorldProps> = ({
       emoji: item.emoji,
     };
 
-    setItems(prev => [...prev, newItem]);
+    console.log('✨ Spawning new item:', newItem.name, 'at position:', newItem.position);
+    setItems(prev => {
+      const newItems = [...prev, newItem];
+      console.log('📦 Total items now:', newItems.length);
+      return newItems;
+    });
   }, [gameActive]);
 
   const handleCollect = useCallback((item: GameItem) => {
+    console.log('🎯 Item collected!', item.name, 'Points:', item.points);
     setScore(prev => prev + item.points);
     setCombo(prev => prev + 1);
     
@@ -227,23 +237,32 @@ export const ThreeDGameWorld: React.FC<ThreeDGameWorldProps> = ({
     }
 
     // Remove the item
-    setItems(prev => prev.filter(i => i.id !== item.id));
+    setItems(prev => {
+      const filtered = prev.filter(i => i.id !== item.id);
+      console.log('🗑️ Removed item, remaining items:', filtered.length);
+      return filtered;
+    });
   }, [onChallengeComplete, onToolCollect]);
 
   const movePlayer = useCallback((direction: 'up' | 'down' | 'left' | 'right') => {
+    console.log('🏃 Moving player:', direction);
     setPlayerPos(prev => {
       const speed = 1;
+      let newPos;
       switch (direction) {
-        case 'up': return { ...prev, z: Math.max(-8, prev.z - speed) };
-        case 'down': return { ...prev, z: Math.min(8, prev.z + speed) };
-        case 'left': return { ...prev, x: Math.max(-8, prev.x - speed) };
-        case 'right': return { ...prev, x: Math.min(8, prev.x + speed) };
-        default: return prev;
+        case 'up': newPos = { ...prev, z: Math.max(-8, prev.z - speed) }; break;
+        case 'down': newPos = { ...prev, z: Math.min(8, prev.z + speed) }; break;
+        case 'left': newPos = { ...prev, x: Math.max(-8, prev.x - speed) }; break;
+        case 'right': newPos = { ...prev, x: Math.min(8, prev.x + speed) }; break;
+        default: newPos = prev;
       }
+      console.log('📍 Player moved to:', newPos);
+      return newPos;
     });
   }, []);
 
   const startGame = () => {
+    console.log('🎮 Starting 3D Recovery Game...');
     setGameActive(true);
     setScore(0);
     setCombo(0);
@@ -252,18 +271,62 @@ export const ThreeDGameWorld: React.FC<ThreeDGameWorldProps> = ({
     setPlayerPos({ x: 0, z: 0 });
 
     // Spawn items periodically
-    const spawnInterval = setInterval(spawnItem, 2000);
+    const spawnInterval = setInterval(() => {
+      console.log('⏰ Spawning item in interval');
+      
+      const isTemptation = Math.random() < 0.5;
+      const itemList = isTemptation ? temptations : tools;
+      const item = itemList[Math.floor(Math.random() * itemList.length)];
+      
+      const newItem: GameItem = {
+        id: Math.random().toString(36).substr(2, 9),
+        type: isTemptation ? 'temptation' : 'tool',
+        position: [
+          (Math.random() - 0.5) * 16, // Random X position
+          2, // Fixed Y position
+          (Math.random() - 0.5) * 16  // Random Z position
+        ],
+        name: item.name,
+        points: item.points,
+        color: isTemptation ? '#ef4444' : '#22c55e',
+        emoji: item.emoji,
+      };
+
+      console.log('✨ Spawning new item:', newItem.name, 'at position:', newItem.position);
+      setItems(prev => {
+        const newItems = [...prev, newItem];
+        console.log('📦 Total items now:', newItems.length);
+        return newItems;
+      });
+    }, 2000);
 
     // Game timer
     const timer = setInterval(() => {
       setGameTime(prev => {
         if (prev <= 1) {
+          console.log('⏱️ Game time expired, ending game');
           endGame();
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
+
+    // Spawn first item immediately for testing
+    setTimeout(() => {
+      console.log('🎯 Spawning first test item immediately');
+      const testItem: GameItem = {
+        id: 'test-item',
+        type: 'tool',
+        position: [2, 2, 2],
+        name: 'Test Meditation',
+        points: 100,
+        color: '#22c55e',
+        emoji: '🧘',
+      };
+      setItems([testItem]);
+      console.log('🎯 Test item spawned');
+    }, 500);
 
     setTimeout(() => {
       clearInterval(spawnInterval);
