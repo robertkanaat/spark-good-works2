@@ -30,27 +30,46 @@ interface PlayerPosition {
   z: number;
 }
 
-// Simple 3D Item Component
+// Enhanced 3D Item Component with better visual feedback
 const GameItem3D: React.FC<{
   item: GameItem;
   onCollect: (item: GameItem) => void;
   playerPos: PlayerPosition;
 }> = ({ item, onCollect, playerPos }) => {
   const meshRef = useRef<THREE.Mesh>(null);
+  const outerMeshRef = useRef<THREE.Mesh>(null);
   const [collected, setCollected] = useState(false);
+  const [isNear, setIsNear] = useState(false);
 
   useFrame((state) => {
-    if (meshRef.current && !collected) {
+    if (meshRef.current && outerMeshRef.current && !collected) {
+      // Rotate items
       meshRef.current.rotation.y += 0.02;
-      meshRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 3) * 0.2;
+      outerMeshRef.current.rotation.y -= 0.01;
       
-      // Check collision with player
+      // Float animation
+      const floatY = item.position[1] + Math.sin(state.clock.elapsedTime * 3) * 0.2;
+      meshRef.current.position.y = floatY;
+      outerMeshRef.current.position.y = floatY;
+      
+      // Check distance to player
       const distance = Math.sqrt(
         Math.pow(meshRef.current.position.x - playerPos.x, 2) + 
         Math.pow(meshRef.current.position.z - playerPos.z, 2)
       );
       
-      if (distance < 1.5 && !collected) {
+      // Visual feedback when near
+      const wasNear = isNear;
+      const nowNear = distance < 2.5;
+      setIsNear(nowNear);
+      
+      // Scale effect when near
+      const targetScale = nowNear ? 1.2 : 1.0;
+      meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+      
+      // Collect when very close
+      if (distance < 1.0 && !collected) {
+        console.log('🎯 Collecting item:', item.name, 'Distance:', distance.toFixed(2));
         setCollected(true);
         onCollect(item);
       }
@@ -59,52 +78,107 @@ const GameItem3D: React.FC<{
 
   if (collected) return null;
 
+  const itemColor = item.type === 'temptation' ? 'hsl(0, 80%, 60%)' : 'hsl(120, 80%, 60%)';
+  const glowColor = item.type === 'temptation' ? 'hsl(0, 80%, 40%)' : 'hsl(120, 80%, 40%)';
+
   return (
     <group position={item.position}>
+      {/* Outer glow ring - visible when near */}
+      {isNear && (
+        <mesh ref={outerMeshRef}>
+          <torusGeometry args={[1.5, 0.1, 8, 16]} />
+          <meshBasicMaterial color={glowColor} wireframe={true} transparent opacity={0.6} />
+        </mesh>
+      )}
+      
+      {/* Main item */}
       <mesh ref={meshRef}>
         <boxGeometry args={[0.8, 0.8, 0.8]} />
         <meshBasicMaterial 
-          color={item.type === 'temptation' ? 'hsl(25, 95%, 53%)' : 'hsl(25, 95%, 63%)'} 
+          color={itemColor}
           wireframe={true}
         />
       </mesh>
+      
+      {/* Item label */}
       <Text
-        position={[0, 1.2, 0]}
-        fontSize={0.4}
-        color="#ffffff"
-        anchorX="center"
-        anchorY="middle"
-      >
-        {item.emoji}
-      </Text>
-    </group>
-  );
-};
-
-// Player Character Component
-const Player3D: React.FC<{ position: PlayerPosition }> = ({ position }) => {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime) * 0.1;
-    }
-  });
-
-  return (
-    <group position={[position.x, 0.5, position.z]}>
-      <mesh ref={meshRef}>
-        <capsuleGeometry args={[0.5, 1]} />
-        <meshBasicMaterial color="hsl(25, 95%, 53%)" wireframe={true} />
-      </mesh>
-      <Text
-        position={[0, 2, 0]}
+        position={[0, 1.5, 0]}
         fontSize={0.3}
         color="#ffffff"
         anchorX="center"
         anchorY="middle"
       >
+        {item.emoji} {item.name}
+      </Text>
+      
+      {/* Distance indicator when near */}
+      {isNear && (
+        <Text
+          position={[0, -1.2, 0]}
+          fontSize={0.25}
+          color="#ffffff"
+          anchorX="center"
+          anchorY="middle"
+        >
+          Get closer to collect!
+        </Text>
+      )}
+    </group>
+  );
+};
+
+// Enhanced Player Character Component
+const Player3D: React.FC<{ position: PlayerPosition }> = ({ position }) => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const ringRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      // Gentle breathing animation
+      const breathe = 1 + Math.sin(state.clock.elapsedTime * 2) * 0.05;
+      meshRef.current.scale.set(breathe, breathe, breathe);
+    }
+    
+    if (ringRef.current) {
+      // Rotating indicator ring
+      ringRef.current.rotation.y += 0.03;
+    }
+  });
+
+  return (
+    <group position={[position.x, 0.5, position.z]}>
+      {/* Player indicator ring */}
+      <mesh ref={ringRef} position={[0, -0.3, 0]}>
+        <torusGeometry args={[0.8, 0.05, 8, 16]} />
+        <meshBasicMaterial color="hsl(200, 80%, 60%)" wireframe={true} />
+      </mesh>
+      
+      {/* Player character */}
+      <mesh ref={meshRef}>
+        <capsuleGeometry args={[0.5, 1]} />
+        <meshBasicMaterial color="hsl(200, 80%, 70%)" wireframe={true} />
+      </mesh>
+      
+      {/* Player emoji */}
+      <Text
+        position={[0, 2, 0]}
+        fontSize={0.4}
+        color="#ffffff"
+        anchorX="center"
+        anchorY="middle"
+      >
         🧘‍♂️
+      </Text>
+      
+      {/* Player name */}
+      <Text
+        position={[0, 2.5, 0]}
+        fontSize={0.2}
+        color="#88ccff"
+        anchorX="center"
+        anchorY="middle"
+      >
+        YOU
       </Text>
     </group>
   );
@@ -488,10 +562,15 @@ export const ThreeDGameWorld: React.FC<ThreeDGameWorldProps> = ({
       </div>
 
       {/* Instructions */}
-      <div className="absolute bottom-4 right-4 bg-card/80 backdrop-blur-sm rounded-lg p-2 border border-border text-xs z-30">
-        <p>WASD or arrows to move</p>
-        <p>Walk into items to collect</p>
-        <p>Drag to rotate camera</p>
+      <div className="absolute bottom-4 right-4 bg-card/90 backdrop-blur-sm rounded-lg p-3 border border-border text-xs z-30 max-w-48">
+        <div className="space-y-1">
+          <p className="font-semibold text-primary">Controls:</p>
+          <p>• WASD or arrows to move</p>
+          <p>• Walk close to items to collect</p>
+          <p>• Red items = resist temptations</p>
+          <p>• Green items = recovery tools</p>
+          <p>• Items glow when you're near!</p>
+        </div>
       </div>
     </div>
   );
