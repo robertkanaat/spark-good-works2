@@ -62,6 +62,22 @@ export const RecoveryGame: React.FC = () => {
     toast.success("Recovery Journey started! Complete challenges to level up!");
   };
 
+  const resetGame = () => {
+    const initialState: GameState = {
+      level: 1,
+      score: 0,
+      health: 100,
+      energy: 80,
+      challenges_completed: 0,
+      recovery_tools: [],
+      achievements: [],
+      streak_days: 0,
+    };
+    setGameState(initialState);
+    localStorage.removeItem('recoveryGameState');
+    toast.success("Game progress reset! Starting fresh at Level 1!");
+  };
+
   const completeChallenge = (challenge: string, points: number) => {
     setGameState(prev => ({
       ...prev,
@@ -108,13 +124,22 @@ export const RecoveryGame: React.FC = () => {
               <h1 className="text-3xl font-bold gradient-text">Recovery Journey</h1>
               <p className="text-muted-foreground">Navigate challenges and build resilience</p>
             </div>
-            <Button 
-              variant="outline" 
-              onClick={() => setShowGame(false)}
-              className="border-primary/20"
-            >
-              Return to Overview
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                onClick={resetGame}
+                className="border-red-500/20 text-red-500 hover:bg-red-500/10"
+              >
+                Reset Progress
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={() => setShowGame(false)}
+                className="border-primary/20"
+              >
+                Return to Overview
+              </Button>
+            </div>
           </div>
 
           {/* Game Stats Bar */}
