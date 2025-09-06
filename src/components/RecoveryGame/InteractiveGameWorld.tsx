@@ -58,18 +58,22 @@ export const InteractiveGameWorld: React.FC<InteractiveGameWorldProps> = ({
   ];
 
   const spawnItem = useCallback(() => {
-    if (!gameActive) return;
+    console.log('spawnItem called, gameActive:', gameActive);
+    if (!gameActive) {
+      console.log('Game not active, returning');
+      return;
+    }
 
-    const isTemptation = Math.random() < 0.4; // 40% chance for temptations
+    const isTemptation = Math.random() < 0.4;
     const items = isTemptation ? temptationItems : recoveryItems;
     const item = items[Math.floor(Math.random() * items.length)];
     
     const newItem: FallingItem = {
       id: Math.random().toString(36).substr(2, 9),
       type: isTemptation ? 'temptation' : (Math.random() < 0.7 ? 'tool' : 'challenge'),
-      x: Math.random() * 70 + 15, // Keep items more centered
-      y: -10, // Start higher up
-      speed: Math.random() * 1.5 + 2, // Faster falling speed
+      x: Math.random() * 70 + 15,
+      y: -10,
+      speed: Math.random() * 1.5 + 2,
       icon: typeof item.icon === 'string' ? item.icon : item.icon,
       name: item.name,
       points: isTemptation ? -50 : (item.points || 100),
@@ -77,8 +81,11 @@ export const InteractiveGameWorld: React.FC<InteractiveGameWorldProps> = ({
     };
 
     console.log('Spawning item:', newItem.name, 'at position', newItem.x, newItem.y);
-    setFallingItems(prev => [...prev, newItem]);
-  }, [gameActive]);
+    setFallingItems(prev => {
+      console.log('Previous items:', prev.length, 'Adding new item:', newItem.name);
+      return [...prev, newItem];
+    });
+  }, [gameActive, temptationItems, recoveryItems]);
 
   const movePlayer = useCallback((direction: 'left' | 'right') => {
     setPlayerPos(prev => {
@@ -144,9 +151,54 @@ export const InteractiveGameWorld: React.FC<InteractiveGameWorldProps> = ({
     setFallingItems([]);
     setPlayerPos({ x: 50, y: 85 });
 
+    // Spawn first item immediately for testing
+    setTimeout(() => {
+      console.log('Spawning first test item...');
+      const testItem: FallingItem = {
+        id: 'test-item',
+        type: 'tool',
+        x: 50,
+        y: 0,
+        speed: 2,
+        icon: <Heart className="h-4 w-4" />,
+        name: 'Test Item',
+        points: 100,
+        color: 'bg-green-500',
+      };
+      setFallingItems([testItem]);
+    }, 1000);
+
     // Start game loops
-    gameLoopRef.current = setInterval(gameLoop, 50);
-    spawnRef.current = setInterval(spawnItem, 800); // Spawn items faster
+    const gameInterval = setInterval(() => {
+      setFallingItems(prev => {
+        return prev
+          .map(item => ({ ...item, y: item.y + item.speed }))
+          .filter(item => item.y < 110);
+      });
+    }, 50);
+
+    const spawnInterval = setInterval(() => {
+      const isTemptation = Math.random() < 0.4;
+      const items = isTemptation ? temptationItems : recoveryItems;
+      const item = items[Math.floor(Math.random() * items.length)];
+      
+      const newItem: FallingItem = {
+        id: Math.random().toString(36).substr(2, 9),
+        type: isTemptation ? 'temptation' : 'tool',
+        x: Math.random() * 70 + 15,
+        y: -10,
+        speed: 2,
+        icon: typeof item.icon === 'string' ? item.icon : item.icon,
+        name: item.name,
+        points: isTemptation ? -50 : (item.points || 100),
+        color: item.color,
+      };
+
+      setFallingItems(prev => [...prev, newItem]);
+    }, 1500);
+
+    gameLoopRef.current = gameInterval;
+    spawnRef.current = spawnInterval;
 
     console.log('Game loops started');
 
