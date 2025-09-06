@@ -401,7 +401,13 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     gameObjectsRef.current = [];
     projectilesRef.current = [];
     keysRef.current.clear();
-    playerRef.current = { ...playerRef.current, x: canvasSize.width / 2 };
+    // Reset player to center and bottom
+    playerRef.current = { 
+      x: canvasSize.width / 2, 
+      y: canvasSize.height - 80, 
+      width: 40, 
+      height: 30 
+    };
     
     // Spawn initial objects
     setTimeout(() => {
@@ -460,6 +466,41 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
             <Zap className="h-5 w-5 mr-2" />
             Start Recovery Shooter
           </Button>
+        </div>
+      </div>
+    );
+  }
+
+  // Game Over Screen
+  if (!isPlaying && timeLeft === 0) {
+    const finalLevel = Math.floor((60 - timeLeft) / 10) + 1;
+    return (
+      <div ref={containerRef} className="relative h-[500px] bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20 flex flex-col items-center justify-center border-2 border-primary/20 rounded-lg">
+        <div className="text-center space-y-6 max-w-md">
+          <div className="space-y-2">
+            <h3 className="text-3xl font-bold gradient-text">Game Complete!</h3>
+            <div className="space-y-1">
+              <p className="text-xl font-semibold text-primary">Final Score: {score}</p>
+              <p className="text-muted-foreground">Reached Level: {finalLevel}</p>
+            </div>
+          </div>
+          
+          <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
+            <p className="text-sm text-muted-foreground">
+              Great job on your recovery journey! You've successfully navigated through challenges and collected valuable tools.
+            </p>
+          </div>
+
+          <div className="flex gap-3">
+            <Button 
+              onClick={startGame}
+              size="lg"
+              className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+            >
+              <Play className="h-5 w-5 mr-2" />
+              Play Again
+            </Button>
+          </div>
         </div>
       </div>
     );
