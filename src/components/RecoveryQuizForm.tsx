@@ -185,6 +185,19 @@ const RecoveryQuizForm = () => {
     const motivationLevel = answers.find(a => a.questionId === 'motivation-level')?.value as number;
     const confidenceLevel = answers.find(a => a.questionId === 'confidence-level')?.value as number;
 
+    // Calculate overall score
+    const overallScore = Math.round(((motivationLevel + confidenceLevel) / 20) * 100);
+    
+    // Determine badge based on overall score
+    const getBadge = (score: number) => {
+      if (score >= 80) return { name: 'Champion', color: 'from-yellow-500 to-orange-500', emoji: '🏆' };
+      if (score >= 60) return { name: 'Achiever', color: 'from-green-500 to-emerald-500', emoji: '⭐' };
+      if (score >= 40) return { name: 'Builder', color: 'from-blue-500 to-cyan-500', emoji: '🚀' };
+      return { name: 'Starter', color: 'from-purple-500 to-pink-500', emoji: '🌱' };
+    };
+
+    const badge = getBadge(overallScore);
+
     // Generate personalized recommendations based on answers
     const recommendations = [];
     
@@ -200,7 +213,11 @@ const RecoveryQuizForm = () => {
       recommendations.push("Focus on building daily routines and connecting with support groups during this crucial phase.");
     }
 
-    return { recoveryStage, primaryConcern, motivationLevel, confidenceLevel, recommendations };
+    if (overallScore >= 70) {
+      recommendations.push("You're showing strong readiness for recovery. Consider taking on leadership roles in support groups.");
+    }
+
+    return { recoveryStage, primaryConcern, motivationLevel, confidenceLevel, overallScore, badge, recommendations };
   };
 
   if (showResults) {
@@ -209,8 +226,19 @@ const RecoveryQuizForm = () => {
       <div className="max-w-4xl mx-auto">
         <Card className="border-0 shadow-2xl bg-gradient-to-br from-card via-card to-secondary/10">
           <CardHeader className="text-center pb-8">
-            <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-white" />
+            <div className={cn(
+              "w-24 h-24 bg-gradient-to-r rounded-full flex flex-col items-center justify-center mx-auto mb-6 shadow-lg",
+              results.badge.color
+            )}>
+              <span className="text-2xl mb-1">{results.badge.emoji}</span>
+              <span className="text-white text-xs font-bold">{results.overallScore}%</span>
+            </div>
+            <div className={cn(
+              "inline-flex items-center gap-2 px-4 py-2 rounded-full text-white font-semibold mb-6 bg-gradient-to-r",
+              results.badge.color
+            )}>
+              <span>{results.badge.name}</span>
+              <span className="text-sm opacity-90">({results.overallScore}% Overall Score)</span>
             </div>
             <CardTitle className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Your Recovery Assessment Results
@@ -246,23 +274,36 @@ const RecoveryQuizForm = () => {
                 <h3 className="font-semibold text-lg mb-3 text-green-900 dark:text-green-100">
                   Motivation Level
                 </h3>
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    {[...Array(10)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={cn(
-                          "w-4 h-4",
-                          i < results.motivationLevel 
-                            ? "text-yellow-500 fill-current" 
-                            : "text-gray-300"
-                        )}
-                      />
-                    ))}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex">
+                      {[...Array(10)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={cn(
+                            "w-4 h-4",
+                            i < results.motivationLevel 
+                              ? "text-yellow-500 fill-current" 
+                              : "text-gray-300"
+                          )}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-green-800 dark:text-green-200 font-medium">
+                      {results.motivationLevel}/10
+                    </span>
                   </div>
-                  <span className="text-green-800 dark:text-green-200 font-medium">
-                    {results.motivationLevel}/10
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 bg-green-200/50 dark:bg-green-800/30 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${(results.motivationLevel / 10) * 100}%` }}
+                      />
+                    </div>
+                    <span className="text-sm font-bold text-green-700 dark:text-green-300">
+                      {Math.round((results.motivationLevel / 10) * 100)}%
+                    </span>
+                  </div>
                 </div>
               </div>
               
@@ -270,23 +311,36 @@ const RecoveryQuizForm = () => {
                 <h3 className="font-semibold text-lg mb-3 text-orange-900 dark:text-orange-100">
                   Confidence Level
                 </h3>
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    {[...Array(10)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={cn(
-                          "w-4 h-4",
-                          i < results.confidenceLevel 
-                            ? "text-yellow-500 fill-current" 
-                            : "text-gray-300"
-                        )}
-                      />
-                    ))}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex">
+                      {[...Array(10)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={cn(
+                            "w-4 h-4",
+                            i < results.confidenceLevel 
+                              ? "text-yellow-500 fill-current" 
+                              : "text-gray-300"
+                          )}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-orange-800 dark:text-orange-200 font-medium">
+                      {results.confidenceLevel}/10
+                    </span>
                   </div>
-                  <span className="text-orange-800 dark:text-orange-200 font-medium">
-                    {results.confidenceLevel}/10
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 bg-orange-200/50 dark:bg-orange-800/30 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-orange-500 to-red-500 h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${(results.confidenceLevel / 10) * 100}%` }}
+                      />
+                    </div>
+                    <span className="text-sm font-bold text-orange-700 dark:text-orange-300">
+                      {Math.round((results.confidenceLevel / 10) * 100)}%
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

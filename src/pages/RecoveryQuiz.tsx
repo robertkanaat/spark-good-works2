@@ -23,10 +23,11 @@ const RecoveryQuiz = () => {
             <img 
               src="/genius-recovery-uploads/879915a0-9251-4cd3-8f03-11b3f3a07f1d.png"
               alt="Recovery assessment background"
-              className="w-full h-full object-cover opacity-20"
+              className="w-full h-full object-cover opacity-30"
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-secondary/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/90 to-secondary/95" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-background/10" />
           
           <div className="relative container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center text-white">
