@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { ArrowLeft, ArrowRight, CheckCircle, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { RecoveryGame } from './RecoveryGame/RecoveryGame';
 
 interface QuizAnswer {
   questionId: string;
@@ -357,6 +358,11 @@ const RecoveryQuizForm = () => {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Recovery Game Integration */}
+            <div className="mt-8">
+              <RecoveryGame />
             </div>
 
             <div className="text-center pt-6 border-t border-border">
