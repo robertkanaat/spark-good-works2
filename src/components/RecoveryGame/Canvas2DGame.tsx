@@ -154,10 +154,10 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     if (!canvas || !ctx || !isPlaying) return;
 
     // Calculate difficulty based on time elapsed (progressive difficulty)
-    const timeElapsed = 60 - timeLeft;
-    const difficultyLevel = Math.floor(timeElapsed / 10) + 1; // Increases every 10 seconds
-    const spawnRate = Math.min(0.02 + (difficultyLevel * 0.01), 0.08); // Increases spawn rate
-    const objectSpeed = 1 + (difficultyLevel * 0.3); // Increases falling speed
+    const timeElapsed = Math.max(0, 60 - timeLeft); // Ensure non-negative
+    const difficultyLevel = Math.floor(timeElapsed / 10) + 1; // Starts at 1, increases every 10 seconds
+    const spawnRate = Math.min(0.015 + (Math.max(0, difficultyLevel - 1) * 0.01), 0.08); // Start easier
+    const objectSpeed = 1 + (Math.max(0, difficultyLevel - 1) * 0.3); // Start at base speed
 
     // Update player movement (smoother with easing)
     const currentPlayer = playerRef.current;
@@ -469,7 +469,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
             className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
           >
             <Zap className="h-5 w-5 mr-2" />
-            Start Recovery Shooter
+            Start Recovery Game
           </Button>
         </div>
       </div>
