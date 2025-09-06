@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake, Mic } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake, Mic, ClipboardCheck } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
@@ -369,6 +369,18 @@ const Header = () => {
                         </p>
                       </Link>
                       <Link
+                        to="/recovery-quiz"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <ClipboardCheck className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Recovery Assessment</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Take our personalized recovery assessment quiz
+                        </p>
+                      </Link>
+                      <Link
                         to="/faq"
                         className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
                       >
@@ -543,19 +555,30 @@ const Header = () => {
                          isActiveRoute('/emergency') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                        }`}></div>
                      </Link>
-                     <Link 
-                       to="/resources" 
-                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
-                         isActiveRoute('/resources')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       RECOVERY
-                     </Link>
-                     <Link 
-                       to="/blog" 
+                      <Link 
+                        to="/resources" 
+                        className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
+                          isActiveRoute('/resources')
+                            ? 'text-primary bg-primary/10'
+                            : 'text-foreground hover:text-primary hover:bg-muted'
+                        }`}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        RECOVERY
+                      </Link>
+                      <Link 
+                        to="/recovery-quiz" 
+                        className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                          isActiveRoute('/recovery-quiz')
+                            ? 'text-primary bg-primary/10'
+                            : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                        }`}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Assessment Quiz
+                      </Link>
+                      <Link 
+                        to="/blog"
                        className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
                          isActiveRoute('/blog')
                            ? 'text-primary bg-primary/10'
