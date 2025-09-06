@@ -97,6 +97,7 @@ const Speakers = () => {
     budget: '',
     message: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -106,18 +107,64 @@ const Speakers = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    toast({
-      title: "Speaking Request Submitted",
-      description: "Thank you for your interest! We'll respond within 24 hours.",
-    });
-    // Reset form
-    setFormData({
-      name: '', email: '', phone: '', organization: '', eventDate: '',
-      eventType: '', audience: '', topic: '', budget: '', message: ''
-    });
+    
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.phone || !formData.organization || !formData.eventDate || !formData.eventType || !formData.audience) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields marked with *",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      // Prepare data for Zapier webhook
+      const webhookData = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: "Genius Recovery Speakers Page",
+        url: window.location.href,
+      };
+
+      console.log("Sending speaker booking data to Zapier:", webhookData);
+
+      const response = await fetch("https://hooks.zapier.com/hooks/catch/155028/ud1c44d/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors", // Handle CORS for external webhook
+        body: JSON.stringify(webhookData),
+      });
+
+      // Since we're using no-cors, we won't get a proper response status
+      // Show success message
+      toast({
+        title: "Speaking Request Submitted Successfully! 🎉",
+        description: "Thank you for your interest! We'll respond within 24 hours to discuss your event.",
+      });
+
+      // Reset form on success
+      setFormData({
+        name: '', email: '', phone: '', organization: '', eventDate: '',
+        eventType: '', audience: '', topic: '', budget: '', message: ''
+      });
+
+    } catch (error) {
+      console.error("Error submitting speaker booking:", error);
+      toast({
+        title: "Submission Error",
+        description: "There was an issue submitting your request. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -561,9 +608,9 @@ const Speakers = () => {
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full">
+                <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
                   <Mail className="mr-2 h-5 w-5" />
-                  Submit Speaking Request
+                  {isLoading ? "Submitting Request..." : "Submit Speaking Request"}
                 </Button>
               </form>
             </Card>
