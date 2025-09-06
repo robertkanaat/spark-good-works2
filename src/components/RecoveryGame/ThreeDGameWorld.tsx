@@ -63,10 +63,9 @@ const GameItem3D: React.FC<{
     <group position={item.position}>
       <mesh ref={meshRef}>
         <boxGeometry args={[0.8, 0.8, 0.8]} />
-        <meshStandardMaterial 
-          color={item.type === 'temptation' ? '#ef4444' : '#22c55e'} 
-          emissive={item.type === 'temptation' ? '#7f1d1d' : '#15803d'}
-          emissiveIntensity={0.2}
+        <meshBasicMaterial 
+          color={item.type === 'temptation' ? 'hsl(25, 95%, 53%)' : 'hsl(25, 95%, 63%)'} 
+          wireframe={true}
         />
       </mesh>
       <Text
@@ -96,7 +95,7 @@ const Player3D: React.FC<{ position: PlayerPosition }> = ({ position }) => {
     <group position={[position.x, 0.5, position.z]}>
       <mesh ref={meshRef}>
         <capsuleGeometry args={[0.5, 1]} />
-        <meshStandardMaterial color="#3b82f6" emissive="#1e40af" emissiveIntensity={0.1} />
+        <meshBasicMaterial color="hsl(25, 95%, 53%)" wireframe={true} />
       </mesh>
       <Text
         position={[0, 2, 0]}
@@ -128,14 +127,14 @@ const Scene3D: React.FC<{
       {/* Ground */}
       <mesh position={[0, -0.5, 0]} receiveShadow>
         <boxGeometry args={[20, 1, 20]} />
-        <meshStandardMaterial color="#1f2937" />
+        <meshBasicMaterial color="hsl(25, 95%, 40%)" wireframe={true} />
       </mesh>
 
       {/* Recovery Path */}
       {Array.from({ length: 10 }, (_, i) => (
         <mesh key={i} position={[i * 2 - 10, 0, 0]}>
           <cylinderGeometry args={[0.3, 0.3, 0.1]} />
-          <meshStandardMaterial color="#8b5cf6" emissive="#6d28d9" emissiveIntensity={0.2} />
+          <meshBasicMaterial color="hsl(25, 95%, 50%)" wireframe={true} />
         </mesh>
       ))}
 
