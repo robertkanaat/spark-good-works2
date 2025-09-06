@@ -28,10 +28,11 @@ const RecoveryQuiz = () => {
             />
           </div>
           
-          {/* Multiple gradient overlays for depth */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/85 to-secondary/90" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-background/20" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/10 to-transparent" />
+          {/* Enhanced gradient overlays with deeper, more vibrant colors */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/95 via-indigo-900/90 to-blue-800/95" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-purple-900/30 to-indigo-900/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-800/30 to-indigo-900/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-600/10 to-slate-900/30" />
           
           {/* Animated floating elements */}
           <div className="absolute inset-0 overflow-hidden">
@@ -43,12 +44,12 @@ const RecoveryQuiz = () => {
           
           <div className="relative container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center text-white">
-              {/* Enhanced badge */}
-              <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 mb-8 shadow-lg">
-                <div className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></div>
-                <span className="text-sm font-medium">Free • Confidential • Personalized</span>
-                <div className="w-2 h-2 bg-blue-400 rounded-full ml-3 animate-pulse" style={{animationDelay: '1s'}}></div>
-              </div>
+               {/* Enhanced badge with deeper colors */}
+               <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/25 backdrop-blur-md border border-white/40 mb-8 shadow-2xl shadow-purple-500/20">
+                 <div className="w-2 h-2 bg-emerald-400 rounded-full mr-3 animate-pulse shadow-lg shadow-emerald-400/50"></div>
+                 <span className="text-sm font-medium text-white">Free • Confidential • Personalized</span>
+                 <div className="w-2 h-2 bg-cyan-400 rounded-full ml-3 animate-pulse shadow-lg shadow-cyan-400/50" style={{animationDelay: '1s'}}></div>
+               </div>
               
               {/* Enhanced title with better gradient */}
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
