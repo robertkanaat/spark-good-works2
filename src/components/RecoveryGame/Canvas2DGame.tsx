@@ -156,7 +156,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     // Calculate difficulty based on time elapsed (progressive difficulty)
     const timeElapsed = Math.max(0, 60 - timeLeft); // Ensure non-negative
     const difficultyLevel = Math.floor(timeElapsed / 10) + 1; // Starts at 1, increases every 10 seconds
-    const spawnRate = Math.min(0.015 + (Math.max(0, difficultyLevel - 1) * 0.01), 0.08); // Start easier
+    const spawnRate = Math.min(0.008 + (Math.max(0, difficultyLevel - 1) * 0.005), 0.04); // Much slower spawn rate
     const objectSpeed = 1 + (Math.max(0, difficultyLevel - 1) * 0.3); // Start at base speed
 
     // Update player movement (smoother with easing)
@@ -220,19 +220,27 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     // Check projectile collisions with temptations
     projectilesRef.current.forEach(projectile => {
       gameObjectsRef.current.forEach(obj => {
-        if (obj.collected || obj.type !== 'temptation' || !projectile.active) return;
+        if (obj.collected || !projectile.active) return;
         
         const distance = Math.sqrt(
           Math.pow(projectile.x - obj.x, 2) + Math.pow(projectile.y - obj.y, 2)
         );
         
         if (distance <= obj.size + 8) {
-          console.log('💥 Shot down:', obj.name);
           obj.collected = true;
           projectile.active = false;
-          const bonusPoints = obj.points + (difficultyLevel * 10); // Bonus points for higher difficulty
-          setScore(s => s + bonusPoints);
-          onChallengeComplete(`Shot down ${obj.name} (Level ${difficultyLevel})`, bonusPoints);
+          
+          if (obj.type === 'temptation') {
+            console.log('💥 Shot down:', obj.name);
+            const bonusPoints = obj.points + (difficultyLevel * 10); // Bonus points for higher difficulty
+            setScore(s => s + bonusPoints);
+            onChallengeComplete(`Shot down ${obj.name} (Level ${difficultyLevel})`, bonusPoints);
+          } else if (obj.type === 'tool') {
+            console.log('💔 Accidentally shot recovery tool:', obj.name);
+            const penalty = Math.floor(obj.points / 2); // Lose half the points
+            setScore(s => Math.max(0, s - penalty)); // Don't go below 0
+            onChallengeComplete(`Oops! Shot ${obj.name} (-${penalty} points)`, -penalty);
+          }
         }
       });
     });
