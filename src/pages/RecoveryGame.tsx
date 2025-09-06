@@ -1,5 +1,7 @@
 import React from 'react';
 import SEOHead from '@/components/SEOHead';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { RecoveryGame as RecoveryGameComponent } from '@/components/RecoveryGame/RecoveryGame';
 
 const RecoveryGame: React.FC = () => {
@@ -11,11 +13,15 @@ const RecoveryGame: React.FC = () => {
         keywords="recovery game, addiction recovery, 3D game, recovery challenges, support groups, recovery progress, interactive recovery, recovery community"
       />
       
+      <Header />
+      
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/10">
         <div className="container mx-auto px-4 py-8">
           <RecoveryGameComponent />
         </div>
       </div>
+      
+      <Footer />
     </>
   );
 };

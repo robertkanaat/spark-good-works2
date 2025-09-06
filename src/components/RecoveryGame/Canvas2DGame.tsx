@@ -114,13 +114,13 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   const shootProjectile = useCallback(() => {
     const newProjectile: Projectile = {
       id: Math.random().toString(36).substr(2, 9),
-      x: player.x,
+      x: player.x, // Use current player position
       y: player.y - 10,
-      vy: -8,
+      vy: -10, // Faster projectiles
       active: true,
     };
     projectilesRef.current.push(newProjectile);
-    console.log('🚀 Shot projectile');
+    console.log('🚀 Shot projectile from player position:', player.x, player.y);
   }, [player.x, player.y]);
 
   const createGameObject = useCallback((): GameObject => {
@@ -153,10 +153,17 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx || !isPlaying) return;
 
-    // Update player movement
+    // Calculate difficulty based on time elapsed (progressive difficulty)
+    const timeElapsed = 60 - timeLeft;
+    const difficultyLevel = Math.floor(timeElapsed / 10) + 1; // Increases every 10 seconds
+    const spawnRate = Math.min(0.02 + (difficultyLevel * 0.01), 0.08); // Increases spawn rate
+    const objectSpeed = 1 + (difficultyLevel * 0.3); // Increases falling speed
+
+    // Update player movement (smoother with easing)
     setPlayer(prev => {
       let newX = prev.x;
-      const speed = 5;
+      let newY = prev.y;
+      const speed = 7; // Increased speed for more fluid movement
       
       if (keysRef.current.has('a') || keysRef.current.has('arrowleft')) {
         newX = Math.max(prev.width / 2, prev.x - speed);
@@ -164,52 +171,68 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
       if (keysRef.current.has('d') || keysRef.current.has('arrowright')) {
         newX = Math.min(canvas.width - prev.width / 2, prev.x + speed);
       }
+      if (keysRef.current.has('w') || keysRef.current.has('arrowup')) {
+        newY = Math.max(prev.height / 2, prev.y - speed);
+      }
+      if (keysRef.current.has('s') || keysRef.current.has('arrowdown')) {
+        newY = Math.min(canvas.height - prev.height / 2, prev.y + speed);
+      }
       
-      return { ...prev, x: newX };
+      return { ...prev, x: newX, y: newY };
     });
 
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Draw background
+    // Draw animated background
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     gradient.addColorStop(0, '#0a0a1a');
-    gradient.addColorStop(0.7, '#1a1a3a');
-    gradient.addColorStop(1, '#2a2a4a');
+    gradient.addColorStop(0.3, '#1a1a3a');
+    gradient.addColorStop(0.7, '#2a2a4a');
+    gradient.addColorStop(1, '#1a1a2a');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Update projectiles
+    // Draw stars for background effect
+    ctx.fillStyle = 'rgba(255,255,255,0.1)';
+    for (let i = 0; i < 20; i++) {
+      const x = (Date.now() * 0.01 + i * 50) % canvas.width;
+      const y = (i * 30) % canvas.height;
+      ctx.fillRect(x, y, 1, 1);
+    }
+
+    // Update projectiles (faster movement)
     projectilesRef.current = projectilesRef.current.map(projectile => ({
       ...projectile,
       y: projectile.y + projectile.vy,
-    })).filter(projectile => projectile.y > -10);
+    })).filter(projectile => projectile.y > -20 && projectile.active);
 
-    // Update game objects
+    // Update game objects with progressive difficulty
     gameObjectsRef.current = gameObjectsRef.current.map(obj => {
       if (obj.collected) return obj;
       return {
         ...obj,
         x: obj.x + obj.vx,
-        y: obj.y + obj.vy,
+        y: obj.y + (obj.vy * objectSpeed), // Apply difficulty speed multiplier
       };
     }).filter(obj => !obj.collected && obj.y < canvas.height + 50);
 
     // Check projectile collisions with temptations
     projectilesRef.current.forEach(projectile => {
       gameObjectsRef.current.forEach(obj => {
-        if (obj.collected || obj.type !== 'temptation') return;
+        if (obj.collected || obj.type !== 'temptation' || !projectile.active) return;
         
         const distance = Math.sqrt(
           Math.pow(projectile.x - obj.x, 2) + Math.pow(projectile.y - obj.y, 2)
         );
         
-        if (distance <= obj.size + 5) {
+        if (distance <= obj.size + 8) {
           console.log('💥 Shot down:', obj.name);
           obj.collected = true;
           projectile.active = false;
-          setScore(s => s + obj.points);
-          onChallengeComplete(`Shot down ${obj.name}`, obj.points);
+          const bonusPoints = obj.points + (difficultyLevel * 10); // Bonus points for higher difficulty
+          setScore(s => s + bonusPoints);
+          onChallengeComplete(`Shot down ${obj.name} (Level ${difficultyLevel})`, bonusPoints);
         }
       });
     });
@@ -222,103 +245,134 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
         Math.pow(player.x - obj.x, 2) + Math.pow(player.y - obj.y, 2)
       );
       
-      if (distance <= obj.size + player.width / 2) {
+      if (distance <= obj.size + player.width / 2 + 5) {
         console.log('✨ Collected tool:', obj.name);
         obj.collected = true;
-        setScore(s => s + obj.points);
+        const bonusPoints = obj.points + (difficultyLevel * 5);
+        setScore(s => s + bonusPoints);
         onToolCollect(obj.name);
-        onChallengeComplete(`Collected ${obj.name}`, obj.points);
+        onChallengeComplete(`Collected ${obj.name} (Level ${difficultyLevel})`, bonusPoints);
       }
     });
 
     // Filter out inactive projectiles
     projectilesRef.current = projectilesRef.current.filter(p => p.active);
 
-    // Draw player ship
+    // Draw player ship with glow effect
     ctx.save();
     ctx.fillStyle = '#00aaff';
     ctx.shadowColor = '#00aaff';
-    ctx.shadowBlur = 10;
+    ctx.shadowBlur = 15;
     
-    // Draw ship body
+    // Draw ship body (more detailed)
     ctx.beginPath();
     ctx.moveTo(player.x, player.y - player.height / 2);
     ctx.lineTo(player.x - player.width / 2, player.y + player.height / 2);
+    ctx.lineTo(player.x - player.width / 4, player.y + player.height / 4);
+    ctx.lineTo(player.x + player.width / 4, player.y + player.height / 4);
     ctx.lineTo(player.x + player.width / 2, player.y + player.height / 2);
     ctx.closePath();
     ctx.fill();
     
-    // Draw ship details
+    // Draw ship engine glow
     ctx.fillStyle = '#ffffff';
-    ctx.fillRect(player.x - 2, player.y - 5, 4, 8);
+    ctx.fillRect(player.x - 3, player.y + 5, 6, 12);
+    ctx.fillStyle = '#00ddff';
+    ctx.fillRect(player.x - 2, player.y + 8, 4, 8);
     
     ctx.restore();
 
-    // Draw projectiles
+    // Draw projectiles with trail effect
     projectilesRef.current.forEach(projectile => {
       ctx.save();
+      
+      // Draw trail
+      ctx.fillStyle = 'rgba(255, 255, 0, 0.3)';
+      for (let i = 1; i <= 3; i++) {
+        ctx.beginPath();
+        ctx.arc(projectile.x, projectile.y + (i * 8), 3 - i, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      
+      // Draw main projectile
       ctx.fillStyle = '#ffff00';
       ctx.shadowColor = '#ffff00';
-      ctx.shadowBlur = 5;
+      ctx.shadowBlur = 10;
       ctx.beginPath();
-      ctx.arc(projectile.x, projectile.y, 3, 0, Math.PI * 2);
+      ctx.arc(projectile.x, projectile.y, 4, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
     });
 
-    // Draw game objects
+    // Draw game objects with enhanced effects
     gameObjectsRef.current.forEach(obj => {
       if (obj.collected) return;
       
       ctx.save();
       const glowColor = obj.type === 'temptation' ? '#ff4444' : '#44ff44';
       ctx.shadowColor = glowColor;
-      ctx.shadowBlur = 15;
+      ctx.shadowBlur = 20 + Math.sin(Date.now() * 0.005) * 5; // Pulsing glow
       
-      // Draw object circle
-      ctx.fillStyle = obj.type === 'temptation' ? '#ff3333' : '#33ff33';
+      // Draw object circle with better colors
+      ctx.fillStyle = obj.type === 'temptation' 
+        ? `rgba(255, 51, 51, ${0.8 + Math.sin(Date.now() * 0.01) * 0.2})` 
+        : `rgba(51, 255, 51, ${0.8 + Math.sin(Date.now() * 0.01) * 0.2})`;
       ctx.beginPath();
       ctx.arc(obj.x, obj.y, obj.size, 0, Math.PI * 2);
       ctx.fill();
       
-      // Draw border
+      // Draw animated border
       ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 3;
+      ctx.setLineDash([5, 5]);
+      ctx.lineDashOffset = -Date.now() * 0.01; // Animated dash
       ctx.stroke();
+      ctx.setLineDash([]); // Reset dash
       
       ctx.restore();
       
       // Draw emoji
-      ctx.font = `${obj.size * 0.8}px Arial`;
+      ctx.font = `${obj.size * 0.7}px Arial`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(obj.emoji, obj.x, obj.y);
+      ctx.fillText(obj.emoji, obj.x, obj.y - 2);
       
       // Draw name
-      ctx.font = '10px Arial';
+      ctx.font = '11px Arial';
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(obj.name, obj.x, obj.y + obj.size + 12);
+      ctx.strokeStyle = 'rgba(0,0,0,0.8)';
+      ctx.lineWidth = 3;
+      ctx.strokeText(obj.name, obj.x, obj.y + obj.size + 15);
+      ctx.fillText(obj.name, obj.x, obj.y + obj.size + 15);
     });
 
-    // Spawn new objects
-    if (Math.random() < 0.02) {
+    // Spawn new objects with progressive difficulty
+    if (Math.random() < spawnRate) {
       gameObjectsRef.current.push(createGameObject());
     }
+
+    // Draw difficulty indicator
+    ctx.save();
+    ctx.fillStyle = `rgba(255, 255, 255, 0.8)`;
+    ctx.font = 'bold 14px Arial';
+    ctx.textAlign = 'right';
+    ctx.fillText(`Difficulty Level: ${difficultyLevel}`, canvas.width - 20, 25);
+    ctx.restore();
 
     // Update timer
     setTimeLeft(prev => {
       const newTime = prev - (1/60);
       if (newTime <= 0) {
         setIsPlaying(false);
-        onChallengeComplete(`Recovery Shooter Completed`, score);
+        onChallengeComplete(`Recovery Shooter Completed - Level ${difficultyLevel}`, score + (difficultyLevel * 100));
         return 0;
       }
       return newTime;
     });
 
     animationRef.current = requestAnimationFrame(gameLoop);
-  }, [isPlaying, createGameObject, onChallengeComplete, onToolCollect, score, player]);
+  }, [isPlaying, createGameObject, onChallengeComplete, onToolCollect, score, player, timeLeft]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -391,8 +445,10 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
           </div>
 
           <div className="text-xs text-muted-foreground space-y-1">
-            <p>• A/D or Arrow Keys: Move ship</p>
-            <p>• Spacebar or Click: Shoot</p>
+            <p>• A/D or Arrow Keys: Move ship left/right</p>
+            <p>• W/S or Up/Down Arrows: Move ship up/down</p>
+            <p>• Spacebar or Click: Shoot projectiles</p>
+            <p>• Difficulty increases every 10 seconds!</p>
           </div>
 
           <Button 
@@ -453,10 +509,11 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
         {/* Instructions overlay */}
         <div className="absolute top-4 left-4 bg-black/70 text-white text-sm p-3 rounded backdrop-blur-sm">
           <p className="font-semibold mb-1">Controls:</p>
-          <p>• A/D or ←/→: Move ship</p>
+          <p>• WASD or Arrow Keys: Move ship</p>
           <p>• Spacebar/Click: Shoot</p>
           <p>• Shoot red bad habits</p>
           <p>• Fly into green recovery tools</p>
+          <p>• Difficulty increases over time!</p>
         </div>
       </div>
     </div>
