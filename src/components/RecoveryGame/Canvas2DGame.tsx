@@ -397,21 +397,25 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     console.log('🚀 Starting Recovery Shooter game - Level 1');
     // Complete reset of all game state
     setIsPlaying(false); // Stop any current game loop
+    
+    // Force immediate state reset
+    setScore(0);
+    setTimeLeft(60); // This ensures level calculation starts from 1
+    gameObjectsRef.current = [];
+    projectilesRef.current = [];
+    keysRef.current.clear();
+    
+    // Reset player to initial position
+    playerRef.current = { 
+      x: canvasSize.width / 2, 
+      y: canvasSize.height - 80, 
+      width: 40, 
+      height: 30 
+    };
+    
+    // Start the game after state is reset
     setTimeout(() => {
       setIsPlaying(true);
-      setScore(0);
-      setTimeLeft(60); // Reset to full time for level 1
-      gameObjectsRef.current = [];
-      projectilesRef.current = [];
-      keysRef.current.clear();
-      
-      // Reset player to initial position
-      playerRef.current = { 
-        x: canvasSize.width / 2, 
-        y: canvasSize.height - 80, 
-        width: 40, 
-        height: 30 
-      };
       
       // Spawn initial objects after a delay
       setTimeout(() => {
