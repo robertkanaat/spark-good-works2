@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Text, Box, Sphere, Cylinder } from '@react-three/drei';
 import * as THREE from 'three';
@@ -108,18 +108,50 @@ const RecoveryPath: React.FC = () => {
     }
   });
 
+  const pathElements = useMemo(() => 
+    Array.from({ length: 20 }, (_, i) => (
+      <Cylinder
+        key={`path-${i}`}
+        position={[i * 2 - 20, -0.5, 0]}
+        args={[0.2, 0.2, 0.1, 8]}
+      >
+        <meshStandardMaterial color="#8b5cf6" />
+      </Cylinder>
+    )), []
+  );
+
   return (
     <group ref={pathRef}>
-      {Array.from({ length: 20 }, (_, i) => (
-        <Cylinder
-          key={i}
-          position={[i * 2 - 20, -0.5, 0]}
-          args={[0.2, 0.2, 0.1, 8]}
-        >
-          <meshStandardMaterial color="#8b5cf6" />
-        </Cylinder>
-      ))}
+      {pathElements}
     </group>
+  );
+};
+
+const Particles: React.FC = () => {
+  // Generate fixed particle positions to avoid re-renders
+  const particles = useMemo(() => 
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      position: [
+        (Math.random() - 0.5) * 30,
+        Math.random() * 10 + 3,
+        (Math.random() - 0.5) * 30
+      ] as [number, number, number]
+    })), []
+  );
+
+  return (
+    <>
+      {particles.map((particle) => (
+        <Sphere
+          key={`particle-${particle.id}`}
+          position={particle.position}
+          args={[0.02, 6, 6]}
+        >
+          <meshBasicMaterial color="#8b5cf6" opacity={0.6} transparent />
+        </Sphere>
+      ))}
+    </>
   );
 };
 
@@ -128,22 +160,22 @@ export const GameScene: React.FC<GameSceneProps> = ({
   onChallengeComplete,
   onToolCollect,
 }) => {
-  const challenges = [
+  const challenges = useMemo(() => [
     { name: "Meditation", color: "#22c55e", position: [-4, 2, 0] as [number, number, number] },
     { name: "Exercise", color: "#3b82f6", position: [4, 2, -2] as [number, number, number] },
     { name: "Gratitude", color: "#f59e0b", position: [0, 3, 2] as [number, number, number] },
     { name: "Connection", color: "#ec4899", position: [-6, 1, 3] as [number, number, number] },
-  ];
+  ], []);
 
-  const tools = [
+  const tools = useMemo(() => [
     { name: "Mindfulness", position: [-2, 1, -1] as [number, number, number] },
     { name: "Resilience", position: [2, 1.5, 1] as [number, number, number] },
     { name: "Support", position: [0, 1, -3] as [number, number, number] },
-  ];
+  ], []);
 
   return (
     <>
-      {/* Ambient lighting */}
+      {/* Lighting */}
       <ambientLight intensity={0.6} />
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <pointLight position={[0, 10, 0]} intensity={0.5} color="#8b5cf6" />
@@ -159,7 +191,7 @@ export const GameScene: React.FC<GameSceneProps> = ({
       {/* Challenges */}
       {challenges.map((challenge, index) => (
         <FloatingChallenge
-          key={index}
+          key={`challenge-${challenge.name}-${index}`}
           position={challenge.position}
           color={challenge.color}
           label={challenge.name}
@@ -170,7 +202,7 @@ export const GameScene: React.FC<GameSceneProps> = ({
       {/* Recovery Tools */}
       {tools.map((tool, index) => (
         <RecoveryTool
-          key={index}
+          key={`tool-${tool.name}-${index}`}
           position={tool.position}
           tool={tool.name}
           onClick={() => onToolCollect(tool.name)}
@@ -188,20 +220,8 @@ export const GameScene: React.FC<GameSceneProps> = ({
         Level {gameState.level}
       </Text>
 
-      {/* Floating particles for ambiance */}
-      {Array.from({ length: 50 }, (_, i) => (
-        <Sphere
-          key={i}
-          position={[
-            (Math.random() - 0.5) * 40,
-            Math.random() * 15 + 5,
-            (Math.random() - 0.5) * 40
-          ]}
-          args={[0.02, 8, 8]}
-        >
-          <meshBasicMaterial color="#8b5cf6" opacity={0.6} transparent />
-        </Sphere>
-      ))}
+      {/* Ambient particles */}
+      <Particles />
     </>
   );
 };
