@@ -1,16 +1,14 @@
-import React, { Suspense, useState, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Text, Environment, Stars } from '@react-three/drei';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Trophy, Users, Target, Zap, Heart, Shield } from 'lucide-react';
-import { GameScene } from './GameScene';
+import { Trophy, Users, Target, Zap, Heart, Shield, Play } from 'lucide-react';
 import { GameStats } from './GameStats';
 import { Leaderboard } from './Leaderboard';
 import { TeamsSection } from './TeamsSection';
+import { SimpleGameWorld } from './SimpleGameWorld';
 import { toast } from 'sonner';
 
 export interface GameState {
@@ -44,7 +42,11 @@ export const RecoveryGame: React.FC = () => {
     // Load game state from localStorage
     const savedState = localStorage.getItem('recoveryGameState');
     if (savedState) {
-      setGameState(JSON.parse(savedState));
+      try {
+        setGameState(JSON.parse(savedState));
+      } catch (error) {
+        console.log('Could not load saved game state');
+      }
     }
   }, []);
 
@@ -56,7 +58,7 @@ export const RecoveryGame: React.FC = () => {
   const startGame = () => {
     setIsGameActive(true);
     setShowGame(true);
-    toast.success("Recovery Journey started! Navigate through the challenges!");
+    toast.success("Recovery Journey started! Complete challenges to level up!");
   };
 
   const completeChallenge = (challenge: string, points: number) => {
@@ -72,13 +74,18 @@ export const RecoveryGame: React.FC = () => {
   };
 
   const collectTool = (tool: string) => {
+    if (gameState.recovery_tools.includes(tool)) {
+      toast.info(`You already have the ${tool} tool!`);
+      return;
+    }
+    
     setGameState(prev => ({
       ...prev,
       recovery_tools: [...prev.recovery_tools, tool],
       score: prev.score + 50,
     }));
     
-    toast.success(`Recovery tool "${tool}" collected!`);
+    toast.success(`Recovery tool "${tool}" collected! +50 points`);
   };
 
   const joinTeam = (teamName: string) => {
@@ -112,34 +119,21 @@ export const RecoveryGame: React.FC = () => {
           {/* Game Stats Bar */}
           <GameStats gameState={gameState} />
 
-          {/* 3D Game Scene */}
+          {/* Simple Game World */}
           <Card className="mb-8 overflow-hidden bg-gradient-to-br from-card via-card/95 to-muted/20 border-primary/10">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Target className="h-5 w-5 text-primary" />
                 Recovery World - Level {gameState.level}
               </CardTitle>
+              <CardDescription>Complete challenges and collect recovery tools</CardDescription>
             </CardHeader>
             <CardContent className="p-0">
-              <div className="h-[500px] w-full">
-                <Canvas camera={{ position: [0, 5, 10], fov: 60 }}>
-                  <Suspense fallback={null}>
-                    <Environment preset="sunset" />
-                    <Stars />
-                    <GameScene 
-                      gameState={gameState}
-                      onChallengeComplete={completeChallenge}
-                      onToolCollect={collectTool}
-                    />
-                    <OrbitControls enablePan={false} enableZoom={true} enableRotate={true} />
-                  </Suspense>
-                </Canvas>
-              </div>
-              <div className="p-4 bg-gradient-to-r from-primary/5 to-secondary/5">
-                <p className="text-sm text-muted-foreground text-center">
-                  Click and drag to explore • Scroll to zoom • Click objects to interact
-                </p>
-              </div>
+              <SimpleGameWorld 
+                gameState={gameState}
+                onChallengeComplete={completeChallenge}
+                onToolCollect={collectTool}
+              />
             </CardContent>
           </Card>
 
@@ -212,7 +206,7 @@ export const RecoveryGame: React.FC = () => {
             <div>
               <CardTitle className="text-2xl gradient-text mb-2">Recovery Journey Game</CardTitle>
               <CardDescription className="text-base">
-                Embark on an interactive 3D journey through recovery challenges, collect tools, and build resilience with your community.
+                Embark on an interactive journey through recovery challenges, collect tools, and build resilience with your community.
               </CardDescription>
             </div>
             <Trophy className="h-12 w-12 text-primary opacity-60" />
@@ -260,14 +254,14 @@ export const RecoveryGame: React.FC = () => {
                     <span>Challenges</span>
                     <span>{gameState.challenges_completed}</span>
                   </div>
-                  <Progress value={gameState.challenges_completed * 10} className="h-2" />
+                  <Progress value={Math.min(gameState.challenges_completed * 10, 100)} className="h-2" />
                 </div>
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span>Tools Collected</span>
                     <span>{gameState.recovery_tools.length}</span>
                   </div>
-                  <Progress value={gameState.recovery_tools.length * 20} className="h-2" />
+                  <Progress value={Math.min(gameState.recovery_tools.length * 20, 100)} className="h-2" />
                 </div>
               </div>
             </div>
@@ -280,6 +274,7 @@ export const RecoveryGame: React.FC = () => {
               size="lg"
               className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground px-8 py-4"
             >
+              <Play className="h-5 w-5 mr-2" />
               {gameState.challenges_completed > 0 ? 'Continue Journey' : 'Start Recovery Journey'}
             </Button>
           </div>
