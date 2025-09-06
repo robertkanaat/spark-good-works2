@@ -56,6 +56,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   const [timeLeft, setTimeLeft] = useState(60);
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 500 });
   const [currentLevel, setCurrentLevel] = useState(1);
+  const [lives, setLives] = useState(3);
 
   const tools = [
     { name: 'Meditation', emoji: '🧘', points: 100 },
@@ -253,19 +254,33 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
 
     // Check player collision with recovery tools  
     gameObjectsRef.current.forEach(obj => {
-      if (obj.collected || obj.type !== 'tool') return;
+      if (obj.collected) return;
       
       const distance = Math.sqrt(
         Math.pow(playerRef.current.x - obj.x, 2) + Math.pow(playerRef.current.y - obj.y, 2)
       );
       
       if (distance <= obj.size + playerRef.current.width / 2 + 5) {
-        console.log('✨ Collected tool:', obj.name);
         obj.collected = true;
-        const bonusPoints = obj.points + (difficultyLevel * 5);
-        setScore(s => s + bonusPoints);
-        onToolCollect(obj.name);
-        onChallengeComplete(`Collected ${obj.name} (Level ${difficultyLevel})`, bonusPoints);
+        
+        if (obj.type === 'tool') {
+          console.log('✨ Collected tool:', obj.name);
+          const bonusPoints = obj.points + (difficultyLevel * 5);
+          setScore(s => s + bonusPoints);
+          onToolCollect(obj.name);
+          onChallengeComplete(`Collected ${obj.name} (Level ${difficultyLevel})`, bonusPoints);
+        } else if (obj.type === 'temptation') {
+          console.log('💥 Hit by temptation:', obj.name);
+          setLives(prevLives => {
+            const newLives = prevLives - 1;
+            if (newLives <= 0) {
+              setIsPlaying(false);
+              onChallengeComplete(`Game Over! Final Score: ${score}`, 0);
+            }
+            return newLives;
+          });
+          onChallengeComplete(`Hit by ${obj.name} - Lost a life!`, -50);
+        }
       }
     });
 
@@ -416,6 +431,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     setScore(0);
     setTimeLeft(60); // This ensures level calculation starts from 1
     setCurrentLevel(1); // Reset level display to 1
+    setLives(3); // Reset lives to 3
     gameObjectsRef.current = [];
     projectilesRef.current = [];
     keysRef.current.clear();
@@ -446,7 +462,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     setIsPlaying(false);
   };
 
-  if (!isPlaying && timeLeft === 60) {
+  if (!isPlaying && timeLeft === 60 && lives === 3) {
     return (
       <div ref={containerRef} className="relative h-[500px] bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20 flex flex-col items-center justify-center border-2 border-primary/20 rounded-lg">
         <div className="text-center space-y-6 max-w-md">
@@ -457,7 +473,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
             </p>
           </div>
           
-          <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="grid sm:grid-cols-3 gap-4 text-sm">
             <div className="p-3 bg-red-500/10 rounded-lg border border-red-500/20">
               <div className="flex items-center gap-2 mb-1">
                 <Zap className="w-4 h-4 text-red-500" />
@@ -472,6 +488,14 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
                 <span className="font-semibold text-green-500">Recovery Tools</span>
               </div>
               <p className="text-xs text-muted-foreground">Fly into them to collect</p>
+            </div>
+            
+            <div className="p-3 bg-orange-500/10 rounded-lg border border-orange-500/20 sm:col-span-3">
+              <div className="flex items-center gap-2 mb-1 justify-center">
+                <span className="text-orange-500">❤️</span>
+                <span className="font-semibold text-orange-500">Lives System</span>
+              </div>
+              <p className="text-xs text-muted-foreground text-center">You start with 3 lives. Touching bad habits costs a life!</p>
             </div>
           </div>
 
@@ -496,16 +520,19 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   }
 
   // Game Over Screen
-  if (!isPlaying && timeLeft === 0) {
+  if (!isPlaying && (timeLeft === 0 || lives === 0)) {
     const finalLevel = Math.floor((60 - timeLeft) / 10) + 1;
     return (
       <div ref={containerRef} className="relative h-[500px] bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20 flex flex-col items-center justify-center border-2 border-primary/20 rounded-lg">
         <div className="text-center space-y-6 max-w-md">
           <div className="space-y-2">
-            <h3 className="text-3xl font-bold gradient-text">Game Complete!</h3>
+            <h3 className="text-3xl font-bold gradient-text">
+              {lives === 0 ? "Game Over!" : "Game Complete!"}
+            </h3>
             <div className="space-y-1">
               <p className="text-xl font-semibold text-primary">Final Score: {score}</p>
               <p className="text-muted-foreground">Reached Level: {finalLevel}</p>
+              {lives === 0 && <p className="text-red-500 text-sm">All lives lost!</p>}
             </div>
           </div>
           
@@ -543,6 +570,9 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
           </Badge>
           <Badge className="bg-green-500/10 text-green-500 border-green-500/20">
             Objects: {gameObjectsRef.current.filter(obj => !obj.collected).length}
+          </Badge>
+          <Badge className="bg-red-500/10 text-red-500 border-red-500/20">
+            Lives: {lives} ❤️
           </Badge>
         </div>
         
