@@ -394,28 +394,33 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   }, [isPlaying, gameLoop]);
 
   const startGame = () => {
-    console.log('🚀 Starting Recovery Shooter game');
-    setIsPlaying(true);
-    setScore(0);
-    setTimeLeft(60);
-    gameObjectsRef.current = [];
-    projectilesRef.current = [];
-    keysRef.current.clear();
-    // Reset player to center and bottom
-    playerRef.current = { 
-      x: canvasSize.width / 2, 
-      y: canvasSize.height - 80, 
-      width: 40, 
-      height: 30 
-    };
-    
-    // Spawn initial objects
+    console.log('🚀 Starting Recovery Shooter game - Level 1');
+    // Complete reset of all game state
+    setIsPlaying(false); // Stop any current game loop
     setTimeout(() => {
-      for (let i = 0; i < 2; i++) {
-        gameObjectsRef.current.push(createGameObject());
-      }
-      console.log('🎯 Spawned initial objects:', gameObjectsRef.current.length);
-    }, 1000);
+      setIsPlaying(true);
+      setScore(0);
+      setTimeLeft(60); // Reset to full time for level 1
+      gameObjectsRef.current = [];
+      projectilesRef.current = [];
+      keysRef.current.clear();
+      
+      // Reset player to initial position
+      playerRef.current = { 
+        x: canvasSize.width / 2, 
+        y: canvasSize.height - 80, 
+        width: 40, 
+        height: 30 
+      };
+      
+      // Spawn initial objects after a delay
+      setTimeout(() => {
+        for (let i = 0; i < 2; i++) {
+          gameObjectsRef.current.push(createGameObject());
+        }
+        console.log('🎯 Spawned initial objects for Level 1:', gameObjectsRef.current.length);
+      }, 1000);
+    }, 100);
   };
 
   const pauseGame = () => {
