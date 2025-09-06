@@ -67,15 +67,16 @@ export const InteractiveGameWorld: React.FC<InteractiveGameWorldProps> = ({
     const newItem: FallingItem = {
       id: Math.random().toString(36).substr(2, 9),
       type: isTemptation ? 'temptation' : (Math.random() < 0.7 ? 'tool' : 'challenge'),
-      x: Math.random() * 80 + 10, // Keep items within bounds
-      y: -5,
-      speed: Math.random() * 2 + 1.5,
+      x: Math.random() * 70 + 15, // Keep items more centered
+      y: -10, // Start higher up
+      speed: Math.random() * 1.5 + 2, // Faster falling speed
       icon: typeof item.icon === 'string' ? item.icon : item.icon,
       name: item.name,
       points: isTemptation ? -50 : (item.points || 100),
       color: item.color,
     };
 
+    console.log('Spawning item:', newItem.name, 'at position', newItem.x, newItem.y);
     setFallingItems(prev => [...prev, newItem]);
   }, [gameActive]);
 
@@ -112,23 +113,30 @@ export const InteractiveGameWorld: React.FC<InteractiveGameWorldProps> = ({
 
   const gameLoop = useCallback(() => {
     setFallingItems(prev => {
-      return prev
+      const updated = prev
         .map(item => ({ ...item, y: item.y + item.speed }))
         .filter(item => {
-          if (item.y > 100) {
+          if (item.y > 110) {
             // Item fell off screen
             if (item.type !== 'temptation') {
               // Missed a good item - reset combo
               setCombo(0);
             }
+            console.log('Item fell off screen:', item.name);
             return false;
           }
           return true;
         });
+      
+      if (updated.length !== prev.length) {
+        console.log('Updated falling items:', updated.length);
+      }
+      return updated;
     });
   }, []);
 
   const startGame = () => {
+    console.log('Starting game...');
     setGameActive(true);
     setScore(0);
     setCombo(0);
@@ -138,7 +146,9 @@ export const InteractiveGameWorld: React.FC<InteractiveGameWorldProps> = ({
 
     // Start game loops
     gameLoopRef.current = setInterval(gameLoop, 50);
-    spawnRef.current = setInterval(spawnItem, 1500);
+    spawnRef.current = setInterval(spawnItem, 800); // Spawn items faster
+
+    console.log('Game loops started');
 
     // Game timer
     const timer = setInterval(() => {
@@ -269,6 +279,14 @@ export const InteractiveGameWorld: React.FC<InteractiveGameWorldProps> = ({
           End Game
         </Button>
       </div>
+
+      {/* Debug Info */}
+      {gameActive && (
+        <div className="absolute top-20 left-4 bg-card/80 backdrop-blur-sm rounded-lg p-2 border border-border text-xs z-30">
+          <p>Active Items: {fallingItems.length}</p>
+          <p>Player: {Math.round(playerPos.x)}%, {Math.round(playerPos.y)}%</p>
+        </div>
+      )}
 
       {/* Falling Items */}
       {fallingItems.map(item => (
