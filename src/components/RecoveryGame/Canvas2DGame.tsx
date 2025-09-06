@@ -50,11 +50,11 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   const gameObjectsRef = useRef<GameObject[]>([]);
   const projectilesRef = useRef<Projectile[]>([]);
   const keysRef = useRef<Set<string>>(new Set());
+  const playerRef = useRef<Player>({ x: 400, y: 450, width: 40, height: 30 });
   const [isPlaying, setIsPlaying] = useState(false);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 500 });
-  const [player, setPlayer] = useState<Player>({ x: 400, y: 450, width: 40, height: 30 });
 
   const tools = [
     { name: 'Meditation', emoji: '🧘', points: 100 },
@@ -77,7 +77,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
       const newWidth = Math.max(600, rect.width - 32);
       const newHeight = Math.max(400, Math.min(600, window.innerHeight * 0.6));
       setCanvasSize({ width: newWidth, height: newHeight });
-      setPlayer(prev => ({ ...prev, x: newWidth / 2, y: newHeight - 80 }));
+      playerRef.current = { ...playerRef.current, x: newWidth / 2, y: newHeight - 80 };
       console.log('📐 Canvas resized to:', newWidth, 'x', newHeight);
     }
   }, []);
@@ -114,14 +114,14 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   const shootProjectile = useCallback(() => {
     const newProjectile: Projectile = {
       id: Math.random().toString(36).substr(2, 9),
-      x: player.x, // Use current player position
-      y: player.y - 10,
+      x: playerRef.current.x, // Use current player position from ref
+      y: playerRef.current.y - 10,
       vy: -10, // Faster projectiles
       active: true,
     };
     projectilesRef.current.push(newProjectile);
-    console.log('🚀 Shot projectile from player position:', player.x, player.y);
-  }, [player.x, player.y]);
+    console.log('🚀 Shot projectile from player position:', playerRef.current.x, playerRef.current.y);
+  }, []); // No dependencies needed since we use ref
 
   const createGameObject = useCallback((): GameObject => {
     const isTemptation = Math.random() < 0.6; // 60% bad habits to shoot
@@ -160,26 +160,26 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     const objectSpeed = 1 + (difficultyLevel * 0.3); // Increases falling speed
 
     // Update player movement (smoother with easing)
-    setPlayer(prev => {
-      let newX = prev.x;
-      let newY = prev.y;
-      const speed = 7; // Increased speed for more fluid movement
-      
-      if (keysRef.current.has('a') || keysRef.current.has('arrowleft')) {
-        newX = Math.max(prev.width / 2, prev.x - speed);
-      }
-      if (keysRef.current.has('d') || keysRef.current.has('arrowright')) {
-        newX = Math.min(canvas.width - prev.width / 2, prev.x + speed);
-      }
-      if (keysRef.current.has('w') || keysRef.current.has('arrowup')) {
-        newY = Math.max(prev.height / 2, prev.y - speed);
-      }
-      if (keysRef.current.has('s') || keysRef.current.has('arrowdown')) {
-        newY = Math.min(canvas.height - prev.height / 2, prev.y + speed);
-      }
-      
-      return { ...prev, x: newX, y: newY };
-    });
+    const currentPlayer = playerRef.current;
+    let newX = currentPlayer.x;
+    let newY = currentPlayer.y;
+    const speed = 7; // Increased speed for more fluid movement
+    
+    if (keysRef.current.has('a') || keysRef.current.has('arrowleft')) {
+      newX = Math.max(currentPlayer.width / 2, currentPlayer.x - speed);
+    }
+    if (keysRef.current.has('d') || keysRef.current.has('arrowright')) {
+      newX = Math.min(canvas.width - currentPlayer.width / 2, currentPlayer.x + speed);
+    }
+    if (keysRef.current.has('w') || keysRef.current.has('arrowup')) {
+      newY = Math.max(currentPlayer.height / 2, currentPlayer.y - speed);
+    }
+    if (keysRef.current.has('s') || keysRef.current.has('arrowdown')) {
+      newY = Math.min(canvas.height - currentPlayer.height / 2, currentPlayer.y + speed);
+    }
+    
+    // Update player ref directly
+    playerRef.current = { ...currentPlayer, x: newX, y: newY };
 
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -237,15 +237,15 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
       });
     });
 
-    // Check player collision with recovery tools
+    // Check player collision with recovery tools  
     gameObjectsRef.current.forEach(obj => {
       if (obj.collected || obj.type !== 'tool') return;
       
       const distance = Math.sqrt(
-        Math.pow(player.x - obj.x, 2) + Math.pow(player.y - obj.y, 2)
+        Math.pow(playerRef.current.x - obj.x, 2) + Math.pow(playerRef.current.y - obj.y, 2)
       );
       
-      if (distance <= obj.size + player.width / 2 + 5) {
+      if (distance <= obj.size + playerRef.current.width / 2 + 5) {
         console.log('✨ Collected tool:', obj.name);
         obj.collected = true;
         const bonusPoints = obj.points + (difficultyLevel * 5);
@@ -259,6 +259,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     projectilesRef.current = projectilesRef.current.filter(p => p.active);
 
     // Draw player ship with glow effect
+    const player = playerRef.current;
     ctx.save();
     ctx.fillStyle = '#00aaff';
     ctx.shadowColor = '#00aaff';
@@ -372,7 +373,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     });
 
     animationRef.current = requestAnimationFrame(gameLoop);
-  }, [isPlaying, createGameObject, onChallengeComplete, onToolCollect, score, player, timeLeft]);
+  }, [isPlaying, createGameObject, onChallengeComplete, onToolCollect, score, timeLeft]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -400,7 +401,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     gameObjectsRef.current = [];
     projectilesRef.current = [];
     keysRef.current.clear();
-    setPlayer(prev => ({ ...prev, x: canvasSize.width / 2 }));
+    playerRef.current = { ...playerRef.current, x: canvasSize.width / 2 };
     
     // Spawn initial objects
     setTimeout(() => {
