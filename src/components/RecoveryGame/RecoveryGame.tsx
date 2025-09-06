@@ -295,14 +295,14 @@ export const RecoveryGame: React.FC = () => {
 
           {/* Start Game Button */}
           <div className="text-center">
-            <Button 
-              onClick={startGame}
-              size="lg"
-              className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground px-8 py-4"
-            >
-              <Play className="h-5 w-5 mr-2" />
-              {gameState.challenges_completed > 0 ? 'Continue Journey' : 'Start Recovery Journey'}
-            </Button>
+          <Button 
+            onClick={startGame}
+            size="lg"
+            className="bg-orange-600 hover:bg-orange-700 text-white px-12 py-6 text-xl font-bold shadow-lg transition-colors"
+          >
+            <Play className="h-6 w-6 mr-3" />
+            {gameState.challenges_completed > 0 ? 'Continue Recovery Game' : 'Start Recovery Game'}
+          </Button>
           </div>
         </CardContent>
       </Card>
