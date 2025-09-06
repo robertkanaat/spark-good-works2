@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Target, Play, Pause } from 'lucide-react';
+import { Target, Play, Pause, Zap } from 'lucide-react';
 import type { GameState } from './RecoveryGame';
 
 interface Canvas2DGameProps {
@@ -24,6 +24,21 @@ interface GameObject {
   collected: boolean;
 }
 
+interface Projectile {
+  id: string;
+  x: number;
+  y: number;
+  vy: number;
+  active: boolean;
+}
+
+interface Player {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   gameState,
   onChallengeComplete,
@@ -33,10 +48,13 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
   const gameObjectsRef = useRef<GameObject[]>([]);
+  const projectilesRef = useRef<Projectile[]>([]);
+  const keysRef = useRef<Set<string>>(new Set());
   const [isPlaying, setIsPlaying] = useState(false);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 500 });
+  const [player, setPlayer] = useState<Player>({ x: 400, y: 450, width: 40, height: 30 });
 
   const tools = [
     { name: 'Meditation', emoji: '🧘', points: 100 },
@@ -56,9 +74,10 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   const updateCanvasSize = useCallback(() => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
-      const newWidth = Math.max(600, rect.width - 32); // Account for padding
+      const newWidth = Math.max(600, rect.width - 32);
       const newHeight = Math.max(400, Math.min(600, window.innerHeight * 0.6));
       setCanvasSize({ width: newWidth, height: newHeight });
+      setPlayer(prev => ({ ...prev, x: newWidth / 2, y: newHeight - 80 }));
       console.log('📐 Canvas resized to:', newWidth, 'x', newHeight);
     }
   }, []);
@@ -69,8 +88,43 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     return () => window.removeEventListener('resize', updateCanvasSize);
   }, [updateCanvasSize]);
 
+  // Keyboard controls
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      keysRef.current.add(e.key.toLowerCase());
+      if (e.key === ' ' && isPlaying) {
+        e.preventDefault();
+        shootProjectile();
+      }
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      keysRef.current.delete(e.key.toLowerCase());
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [isPlaying]);
+
+  const shootProjectile = useCallback(() => {
+    const newProjectile: Projectile = {
+      id: Math.random().toString(36).substr(2, 9),
+      x: player.x,
+      y: player.y - 10,
+      vy: -8,
+      active: true,
+    };
+    projectilesRef.current.push(newProjectile);
+    console.log('🚀 Shot projectile');
+  }, [player.x, player.y]);
+
   const createGameObject = useCallback((): GameObject => {
-    const isTemptation = Math.random() < 0.3;
+    const isTemptation = Math.random() < 0.6; // 60% bad habits to shoot
     const items = isTemptation ? temptations : tools;
     const item = items[Math.floor(Math.random() * items.length)];
     
@@ -78,8 +132,8 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
       id: Math.random().toString(36).substr(2, 9),
       x: Math.random() * (canvasSize.width - 100) + 50,
       y: -50,
-      vx: (Math.random() - 0.5) * 4,
-      vy: 1 + Math.random() * 2,
+      vx: (Math.random() - 0.5) * 2,
+      vy: 1 + Math.random() * 1.5,
       type: isTemptation ? 'temptation' : 'tool',
       name: item.name,
       emoji: item.emoji,
@@ -91,82 +145,135 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
 
   const handleCanvasClick = useCallback((event: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isPlaying) return;
-    
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    
-    const clickX = (event.clientX - rect.left) * scaleX;
-    const clickY = (event.clientY - rect.top) * scaleY;
-    
-    console.log('🖱️ Click at:', clickX, clickY);
-
-    let hitSomething = false;
-    gameObjectsRef.current = gameObjectsRef.current.map(obj => {
-      if (obj.collected || hitSomething) return obj;
-      
-      const distance = Math.sqrt(
-        Math.pow(clickX - obj.x, 2) + Math.pow(clickY - obj.y, 2)
-      );
-      
-      if (distance <= obj.size + 10) {
-        console.log('🎯 Hit object:', obj.name, 'Distance:', distance);
-        hitSomething = true;
-        setScore(s => s + obj.points);
-        
-        if (obj.type === 'temptation') {
-          onChallengeComplete(`Resisted ${obj.name}`, obj.points);
-        } else {
-          onToolCollect(obj.name);
-          onChallengeComplete(`Used ${obj.name}`, obj.points);
-        }
-        
-        return { ...obj, collected: true };
-      }
-      return obj;
-    });
-  }, [isPlaying, onChallengeComplete, onToolCollect]);
+    shootProjectile();
+  }, [isPlaying, shootProjectile]);
 
   const gameLoop = useCallback(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx || !isPlaying) return;
 
+    // Update player movement
+    setPlayer(prev => {
+      let newX = prev.x;
+      const speed = 5;
+      
+      if (keysRef.current.has('a') || keysRef.current.has('arrowleft')) {
+        newX = Math.max(prev.width / 2, prev.x - speed);
+      }
+      if (keysRef.current.has('d') || keysRef.current.has('arrowright')) {
+        newX = Math.min(canvas.width - prev.width / 2, prev.x + speed);
+      }
+      
+      return { ...prev, x: newX };
+    });
+
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     // Draw background
     const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, '#0f0f23');
-    gradient.addColorStop(0.5, '#1a1a3a');
-    gradient.addColorStop(1, '#0f0f23');
+    gradient.addColorStop(0, '#0a0a1a');
+    gradient.addColorStop(0.7, '#1a1a3a');
+    gradient.addColorStop(1, '#2a2a4a');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Update projectiles
+    projectilesRef.current = projectilesRef.current.map(projectile => ({
+      ...projectile,
+      y: projectile.y + projectile.vy,
+    })).filter(projectile => projectile.y > -10);
 
     // Update game objects
     gameObjectsRef.current = gameObjectsRef.current.map(obj => {
       if (obj.collected) return obj;
-      
       return {
         ...obj,
         x: obj.x + obj.vx,
         y: obj.y + obj.vy,
-        vy: obj.vy + 0.1, // gravity
       };
-    }).filter(obj => !obj.collected && obj.y < canvas.height + 100);
+    }).filter(obj => !obj.collected && obj.y < canvas.height + 50);
 
-    // Draw objects
+    // Check projectile collisions with temptations
+    projectilesRef.current.forEach(projectile => {
+      gameObjectsRef.current.forEach(obj => {
+        if (obj.collected || obj.type !== 'temptation') return;
+        
+        const distance = Math.sqrt(
+          Math.pow(projectile.x - obj.x, 2) + Math.pow(projectile.y - obj.y, 2)
+        );
+        
+        if (distance <= obj.size + 5) {
+          console.log('💥 Shot down:', obj.name);
+          obj.collected = true;
+          projectile.active = false;
+          setScore(s => s + obj.points);
+          onChallengeComplete(`Shot down ${obj.name}`, obj.points);
+        }
+      });
+    });
+
+    // Check player collision with recovery tools
+    gameObjectsRef.current.forEach(obj => {
+      if (obj.collected || obj.type !== 'tool') return;
+      
+      const distance = Math.sqrt(
+        Math.pow(player.x - obj.x, 2) + Math.pow(player.y - obj.y, 2)
+      );
+      
+      if (distance <= obj.size + player.width / 2) {
+        console.log('✨ Collected tool:', obj.name);
+        obj.collected = true;
+        setScore(s => s + obj.points);
+        onToolCollect(obj.name);
+        onChallengeComplete(`Collected ${obj.name}`, obj.points);
+      }
+    });
+
+    // Filter out inactive projectiles
+    projectilesRef.current = projectilesRef.current.filter(p => p.active);
+
+    // Draw player ship
+    ctx.save();
+    ctx.fillStyle = '#00aaff';
+    ctx.shadowColor = '#00aaff';
+    ctx.shadowBlur = 10;
+    
+    // Draw ship body
+    ctx.beginPath();
+    ctx.moveTo(player.x, player.y - player.height / 2);
+    ctx.lineTo(player.x - player.width / 2, player.y + player.height / 2);
+    ctx.lineTo(player.x + player.width / 2, player.y + player.height / 2);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Draw ship details
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(player.x - 2, player.y - 5, 4, 8);
+    
+    ctx.restore();
+
+    // Draw projectiles
+    projectilesRef.current.forEach(projectile => {
+      ctx.save();
+      ctx.fillStyle = '#ffff00';
+      ctx.shadowColor = '#ffff00';
+      ctx.shadowBlur = 5;
+      ctx.beginPath();
+      ctx.arc(projectile.x, projectile.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+
+    // Draw game objects
     gameObjectsRef.current.forEach(obj => {
       if (obj.collected) return;
       
-      // Draw glow effect
       ctx.save();
       const glowColor = obj.type === 'temptation' ? '#ff4444' : '#44ff44';
       ctx.shadowColor = glowColor;
-      ctx.shadowBlur = 20;
+      ctx.shadowBlur = 15;
       
       // Draw object circle
       ctx.fillStyle = obj.type === 'temptation' ? '#ff3333' : '#33ff33';
@@ -175,7 +282,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
       ctx.fill();
       
       // Draw border
-      ctx.strokeStyle = obj.type === 'temptation' ? '#ffffff' : '#ffffff';
+      ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 2;
       ctx.stroke();
       
@@ -189,30 +296,29 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
       ctx.fillText(obj.emoji, obj.x, obj.y);
       
       // Draw name
-      ctx.font = '12px Arial';
+      ctx.font = '10px Arial';
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(obj.name, obj.x, obj.y + obj.size + 15);
+      ctx.fillText(obj.name, obj.x, obj.y + obj.size + 12);
     });
 
     // Spawn new objects
-    if (Math.random() < 0.015) {
+    if (Math.random() < 0.02) {
       gameObjectsRef.current.push(createGameObject());
-      console.log('✨ Spawned new object, total:', gameObjectsRef.current.length);
     }
 
     // Update timer
     setTimeLeft(prev => {
-      const newTime = prev - (1/60); // Assuming 60fps
+      const newTime = prev - (1/60);
       if (newTime <= 0) {
         setIsPlaying(false);
-        onChallengeComplete(`Recovery Catcher Completed`, score);
+        onChallengeComplete(`Recovery Shooter Completed`, score);
         return 0;
       }
       return newTime;
     });
 
     animationRef.current = requestAnimationFrame(gameLoop);
-  }, [isPlaying, createGameObject, onChallengeComplete, score]);
+  }, [isPlaying, createGameObject, onChallengeComplete, onToolCollect, score, player]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -233,15 +339,18 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   }, [isPlaying, gameLoop]);
 
   const startGame = () => {
-    console.log('🚀 Starting Recovery Catcher game');
+    console.log('🚀 Starting Recovery Shooter game');
     setIsPlaying(true);
     setScore(0);
     setTimeLeft(60);
     gameObjectsRef.current = [];
+    projectilesRef.current = [];
+    keysRef.current.clear();
+    setPlayer(prev => ({ ...prev, x: canvasSize.width / 2 }));
     
     // Spawn initial objects
     setTimeout(() => {
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 2; i++) {
         gameObjectsRef.current.push(createGameObject());
       }
       console.log('🎯 Spawned initial objects:', gameObjectsRef.current.length);
@@ -257,28 +366,33 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
       <div ref={containerRef} className="relative h-[500px] bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20 flex flex-col items-center justify-center border-2 border-primary/20 rounded-lg">
         <div className="text-center space-y-6 max-w-md">
           <div className="space-y-2">
-            <h3 className="text-2xl font-bold gradient-text">Recovery Catcher</h3>
+            <h3 className="text-2xl font-bold gradient-text">Recovery Shooter</h3>
             <p className="text-muted-foreground">
-              Click on falling recovery tools to collect them and resist temptations!
+              Shoot down bad habits and collect recovery tools by flying into them!
             </p>
           </div>
           
           <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="p-3 bg-red-500/10 rounded-lg border border-red-500/20">
+              <div className="flex items-center gap-2 mb-1">
+                <Zap className="w-4 h-4 text-red-500" />
+                <span className="font-semibold text-red-500">Bad Habits</span>
+              </div>
+              <p className="text-xs text-muted-foreground">Shoot them down with projectiles</p>
+            </div>
+            
             <div className="p-3 bg-green-500/10 rounded-lg border border-green-500/20">
               <div className="flex items-center gap-2 mb-1">
                 <div className="w-4 h-4 bg-green-500 rounded-full"></div>
                 <span className="font-semibold text-green-500">Recovery Tools</span>
               </div>
-              <p className="text-xs text-muted-foreground">Click to collect and gain points</p>
+              <p className="text-xs text-muted-foreground">Fly into them to collect</p>
             </div>
-            
-            <div className="p-3 bg-red-500/10 rounded-lg border border-red-500/20">
-              <div className="flex items-center gap-2 mb-1">
-                <div className="w-4 h-4 bg-red-500 rounded-full"></div>
-                <span className="font-semibold text-red-500">Temptations</span>
-              </div>
-              <p className="text-xs text-muted-foreground">Click to resist and overcome</p>
-            </div>
+          </div>
+
+          <div className="text-xs text-muted-foreground space-y-1">
+            <p>• A/D or Arrow Keys: Move ship</p>
+            <p>• Spacebar or Click: Shoot</p>
           </div>
 
           <Button 
@@ -286,8 +400,8 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
             size="lg"
             className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
           >
-            <Play className="h-5 w-5 mr-2" />
-            Start Recovery Catcher
+            <Zap className="h-5 w-5 mr-2" />
+            Start Recovery Shooter
           </Button>
         </div>
       </div>
@@ -338,10 +452,11 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
         
         {/* Instructions overlay */}
         <div className="absolute top-4 left-4 bg-black/70 text-white text-sm p-3 rounded backdrop-blur-sm">
-          <p className="font-semibold mb-1">How to Play:</p>
-          <p>• Click on falling objects to interact</p>
-          <p>• Green = Recovery tools (collect them!)</p>
-          <p>• Red = Temptations (resist by clicking!)</p>
+          <p className="font-semibold mb-1">Controls:</p>
+          <p>• A/D or ←/→: Move ship</p>
+          <p>• Spacebar/Click: Shoot</p>
+          <p>• Shoot red bad habits</p>
+          <p>• Fly into green recovery tools</p>
         </div>
       </div>
     </div>
