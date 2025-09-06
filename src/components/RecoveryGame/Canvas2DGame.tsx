@@ -55,6 +55,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
   const [canvasSize, setCanvasSize] = useState({ width: 800, height: 500 });
+  const [currentLevel, setCurrentLevel] = useState(1);
 
   const tools = [
     { name: 'Meditation', emoji: '🧘', points: 100 },
@@ -158,6 +159,11 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     const difficultyLevel = Math.floor(timeElapsed / 10) + 1; // Starts at 1, increases every 10 seconds
     const spawnRate = Math.min(0.008 + (Math.max(0, difficultyLevel - 1) * 0.005), 0.04); // Much slower spawn rate
     const objectSpeed = 1 + (Math.max(0, difficultyLevel - 1) * 0.3); // Start at base speed
+
+    // Update current level state
+    if (currentLevel !== difficultyLevel) {
+      setCurrentLevel(difficultyLevel);
+    }
 
     // Update player movement (smoother with easing)
     const currentPlayer = playerRef.current;
@@ -409,6 +415,7 @@ export const Canvas2DGame: React.FC<Canvas2DGameProps> = ({
     // Force immediate state reset
     setScore(0);
     setTimeLeft(60); // This ensures level calculation starts from 1
+    setCurrentLevel(1); // Reset level display to 1
     gameObjectsRef.current = [];
     projectilesRef.current = [];
     keysRef.current.clear();

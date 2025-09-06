@@ -150,9 +150,9 @@ export const RecoveryGame: React.FC = () => {
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Target className="h-5 w-5 text-primary" />
-                Recovery Catcher - Level {gameState.level}
+                Recovery Shooter Game
               </CardTitle>
-              <CardDescription>Click on falling objects to collect recovery tools and resist temptations</CardDescription>
+              <CardDescription>Shoot down bad habits and collect recovery tools by flying into them!</CardDescription>
             </CardHeader>
             <CardContent className="p-0">
               <Canvas2DGame 
