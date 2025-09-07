@@ -164,11 +164,44 @@ const RecoveryQuizForm = () => {
     return answer !== '' && answer !== undefined;
   };
 
+  const sendResultsToZapier = async (results: any) => {
+    try {
+      const webhookUrl = 'https://hooks.zapier.com/hooks/catch/155028/ud5nnaw/';
+      
+      const payload = {
+        timestamp: new Date().toISOString(),
+        recoveryStage: results.recoveryStage,
+        primaryConcern: results.primaryConcern,
+        motivationLevel: results.motivationLevel,
+        confidenceLevel: results.confidenceLevel,
+        overallScore: results.overallScore,
+        badge: results.badge.name,
+        recommendations: results.recommendations,
+        allAnswers: answers
+      };
+
+      await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      });
+      
+      console.log('Recovery assessment results sent to Zapier');
+    } catch (error) {
+      console.error('Error sending results to Zapier:', error);
+    }
+  };
+
   const nextStep = () => {
     if (currentStep < quizQuestions.length - 1) {
       setCurrentStep(currentStep + 1);
       setMultipleSelections([]);
     } else {
+      const results = getResults();
+      sendResultsToZapier(results);
       setShowResults(true);
     }
   };
