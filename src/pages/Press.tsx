@@ -297,7 +297,8 @@ const Press = () => {
             </Card>
           </div>
 
-          {/* Individual Asset Downloads */}
+          {/* Individual Asset Downloads - Hidden temporarily */}
+          {/* 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {mediaKit.map((item, index) => (
               <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow duration-300">
@@ -320,6 +321,7 @@ const Press = () => {
               </Card>
             ))}
           </div>
+          */}
         </div>
       </section>
 
