@@ -101,7 +101,7 @@ const HeroSection = () => {
                     }`}
                     onClick={() => handleViewChange('support')}
                   >
-                    GET CAREGIVER SUPPORT
+                     SUPPORT
                   </Button>
                 </div>
               </div>
@@ -148,7 +148,7 @@ const HeroSection = () => {
                     }`}
                      onClick={() => handleViewChange('support')}
                   >
-                    GET CAREGIVER SUPPORT
+                    SUPPORT
                   </Button>
                 </div>
               </div>
