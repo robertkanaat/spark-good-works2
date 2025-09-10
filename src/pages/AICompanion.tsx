@@ -160,14 +160,6 @@ const AICompanion = () => {
                   <p className="text-muted-foreground mb-6 leading-relaxed">
                     {testimonial.description}
                   </p>
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-                  >
-                    <Play className="w-4 h-4 mr-2" />
-                    Watch Video
-                  </Button>
                 </Card>
               ))}
             </div>
