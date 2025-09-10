@@ -218,7 +218,8 @@ const Press = () => {
         </div>
       </section>
 
-      {/* Press Releases Section */}
+      {/* Press Releases Section - Hidden temporarily */}
+      {/* 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -258,6 +259,7 @@ const Press = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* Media Kit Section */}
       <section className="py-16 bg-muted/50" id="media-kit">
