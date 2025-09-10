@@ -269,7 +269,7 @@ const Press = () => {
               Media Kit
             </h2>
             <p className="text-lg text-muted-foreground">
-              Download logos, photos, and brand assets for media coverage
+              Download our media kit or get in touch with us below
             </p>
           </div>
 
