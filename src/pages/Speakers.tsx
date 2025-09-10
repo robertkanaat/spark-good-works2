@@ -7,6 +7,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Play, Star, Calendar, Users, Award, Download, Mail, Phone, MapPin } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -98,6 +105,8 @@ const Speakers = () => {
     message: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isJoeVideoOpen, setIsJoeVideoOpen] = useState(false);
+  const [isAndreVideoOpen, setIsAndreVideoOpen] = useState(false);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -254,7 +263,10 @@ const Speakers = () => {
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <Card className="group cursor-pointer hover:shadow-glow hover:-translate-y-1 transition-all duration-500 overflow-hidden border-2 hover:border-primary/30">
+            <Card 
+              className="group cursor-pointer hover:shadow-glow hover:-translate-y-1 transition-all duration-500 overflow-hidden border-2 hover:border-primary/30"
+              onClick={() => setIsJoeVideoOpen(true)}
+            >
               <div className="relative aspect-video bg-gradient-to-br from-primary/30 via-primary/20 to-secondary/30 rounded-t-lg flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="relative z-10 flex flex-col items-center">
@@ -278,7 +290,10 @@ const Speakers = () => {
               </CardContent>
             </Card>
             
-            <Card className="group cursor-pointer hover:shadow-glow hover:-translate-y-1 transition-all duration-500 overflow-hidden border-2 hover:border-secondary/30">
+            <Card 
+              className="group cursor-pointer hover:shadow-glow hover:-translate-y-1 transition-all duration-500 overflow-hidden border-2 hover:border-secondary/30"
+              onClick={() => setIsAndreVideoOpen(true)}
+            >
               <div className="relative aspect-video bg-gradient-to-br from-secondary/30 via-secondary/20 to-primary/30 rounded-t-lg flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="relative z-10 flex flex-col items-center">
@@ -631,6 +646,51 @@ const Speakers = () => {
           </div>
         </div>
       </section>
+
+      {/* Video Modals */}
+      <Dialog open={isJoeVideoOpen} onOpenChange={setIsJoeVideoOpen}>
+        <DialogContent className="max-w-4xl w-[95vw] p-0 bg-black border-0">
+          <DialogHeader className="sr-only">
+            <DialogTitle>Joe's Keynote Highlights</DialogTitle>
+            <DialogDescription>
+              Watch Joe's keynote highlights and powerful speaking moments
+            </DialogDescription>
+          </DialogHeader>
+          <div className="aspect-video w-full">
+            <iframe
+              src="https://www.youtube.com/embed/KW_Oqge2fNE?autoplay=1"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isAndreVideoOpen} onOpenChange={setIsAndreVideoOpen}>
+        <DialogContent className="max-w-4xl w-[95vw] p-0 bg-black border-0">
+          <DialogHeader className="sr-only">
+            <DialogTitle>Andre's Speaker Reel</DialogTitle>
+            <DialogDescription>
+              Watch Andre's transformational presentations and speaker highlights
+            </DialogDescription>
+          </DialogHeader>
+          <div className="aspect-video w-full">
+            <iframe
+              src="https://www.youtube.com/embed/7I2xO3AzLbc?autoplay=1"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>
