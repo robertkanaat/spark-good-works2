@@ -50,18 +50,6 @@ const Emergency = () => {
             Naloxone information, and 24/7 crisis support resources.
           </p>
           
-          {/* Primary Personal Support CTA */}
-          <div className="mb-8">
-            <Link to="/contact">
-              <Button 
-                size="lg" 
-                className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-xl font-bold rounded-2xl shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
-              >
-                <Users className="w-6 h-6 mr-3" />
-                Get Personal Support - 24/7 Professional Team
-              </Button>
-            </Link>
-          </div>
 
           {/* Comprehensive Quick Action Buttons */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
