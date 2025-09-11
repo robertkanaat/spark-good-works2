@@ -27,7 +27,6 @@ const Emergency = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <SectionNavigation />
       
       {/* Hero Section */}
       <section id="hero" className="relative min-h-[70vh] flex items-center">
