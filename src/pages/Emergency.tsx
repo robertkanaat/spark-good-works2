@@ -552,15 +552,6 @@ const Emergency = () => {
               Help is available 24/7. Taking action in an emergency can save a life.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-                >
-                  <Users className="w-5 h-5 mr-2" />
-                  Get Personal Support - 24/7 Professional Team
-                </Button>
-              </Link>
               <Button 
                 size="lg" 
                 className="bg-gradient-to-r from-red-500 via-red-600 to-red-500 bg-[length:200%_100%] hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl hover:shadow-red-500/30 hover:scale-[1.02] transition-all duration-300 animate-gradient-slide hover:animate-none"
