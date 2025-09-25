@@ -174,6 +174,38 @@ const Donation = () => {
       if (data.html) {
         setPaymentFormHtml(data.html);
         setShowPaymentForm(true);
+
+        // Send donation data to Zapier webhook
+        try {
+          const donationData = {
+            amount: amount,
+            currency: 'USD',
+            frequency: isMonthly ? 'monthly' : 'one-time',
+            email: email,
+            tier: getTier(amount),
+            livesSupported: getLivesSupported(amount),
+            familiesHelped: getFamiliesHelped(amount),
+            sessionsProvided: getSessionsProvided(amount),
+            impactMessage: getImpactMessage(amount),
+            impactText: getImpactText(amount, isMonthly),
+            timestamp: new Date().toISOString(),
+            source: 'Genius Recovery Donation Page'
+          };
+
+          await fetch('https://hooks.zapier.com/hooks/catch/155028/u1f7ojj/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            mode: 'no-cors',
+            body: JSON.stringify(donationData)
+          });
+
+          console.log('Donation data sent to Zapier webhook:', donationData);
+        } catch (webhookError) {
+          console.error('Failed to send data to Zapier webhook:', webhookError);
+          // Don't block the donation process if webhook fails
+        }
       } else {
         throw new Error('No payment form received');
       }
