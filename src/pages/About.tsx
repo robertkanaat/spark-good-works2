@@ -411,7 +411,7 @@ const About = () => {
                   <h3 className="text-xl font-bold text-foreground mb-4">I'm Seeking Recovery Support</h3>
                   <p className="text-muted-foreground mb-6">Find guidance and resources for your recovery journey</p>
                   <Link to="/emergency">
-                    <Button className="w-full" style={{ background: 'var(--gradient-primary)' }}>
+                    <Button variant="donate" className="w-full">
                       Get Help Now
                     </Button>
                   </Link>
@@ -420,7 +420,7 @@ const About = () => {
                   <h3 className="text-xl font-bold text-foreground mb-4">I'm Supporting a Loved One</h3>
                   <p className="text-muted-foreground mb-6">Access tools and community for caregivers</p>
                   <Link to="/resources">
-                    <Button className="w-full" variant="outline">
+                    <Button variant="donate" className="w-full">
                       Find Resources
                     </Button>
                   </Link>
@@ -429,7 +429,7 @@ const About = () => {
                   <h3 className="text-xl font-bold text-foreground mb-4">I Want to Support Recovery</h3>
                   <p className="text-muted-foreground mb-6">Contribute to recovery initiatives and support</p>
                   <Link to="/donation">
-                    <Button className="w-full" style={{ background: 'var(--gradient-primary)' }}>
+                    <Button variant="donate" className="w-full">
                       Donate Now
                     </Button>
                   </Link>
