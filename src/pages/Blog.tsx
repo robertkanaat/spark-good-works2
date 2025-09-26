@@ -281,34 +281,7 @@ const Blog = () => {
                 size="lg" 
                 variant="outline" 
                 className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white px-8 py-4 text-lg group hover-scale transition-all duration-300 hover:shadow-2xl hover:shadow-white/20"
-                onClick={() => {
-                  const subject = 'I want to share my recovery story';
-                  const body = `Hi Genius Recovery team,
-
-I would like to share my story of recovery and hope to inspire others on their journey.
-
-My story includes:
-- My background and challenges I faced
-- The turning point in my recovery
-- What has helped me in my healing journey
-- Message of hope I want to share
-
-Please let me know the best way to submit my story.
-
-Thank you for all the incredible work you do!
-
-Best regards,`;
-                  
-                  // Try to open email client
-                  window.location.href = `mailto:director@geniusrecovery.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                  
-                  // Provide fallback to contact page after a brief delay
-                  setTimeout(() => {
-                    if (confirm('Having trouble with email? Click OK to go to our contact page instead.')) {
-                      navigate('/contact');
-                    }
-                  }, 1500);
-                }}
+                onClick={() => navigate('/contact')}
               >
                 <Heart className="w-6 h-6 mr-3 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300" />
                 Share Your Story
