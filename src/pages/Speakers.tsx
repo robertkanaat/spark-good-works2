@@ -18,6 +18,7 @@ import { Play, Star, Calendar, Users, Award, Download, Mail, Phone, MapPin } fro
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useToast } from '@/hooks/use-toast';
+import { z } from 'zod';
 
 const speakingTopics = [
   {
@@ -91,8 +92,52 @@ const achievements = [
   "Award-Winning Recovery Advocates"
 ];
 
+// Validation schema
+const speakerBookingSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be less than 100 characters")
+    .regex(/^[a-zA-Z\s\-'\.]+$/, "Name can only contain letters, spaces, hyphens, apostrophes, and periods"),
+  email: z.string()
+    .trim()
+    .email("Please enter a valid email address")
+    .max(255, "Email must be less than 255 characters"),
+  phone: z.string()
+    .trim()
+    .min(10, "Phone number must be at least 10 digits")
+    .max(20, "Phone number must be less than 20 characters")
+    .regex(/^[\+\-\(\)\s\d]+$/, "Please enter a valid phone number"),
+  organization: z.string()
+    .trim()
+    .min(2, "Organization name must be at least 2 characters")
+    .max(200, "Organization name must be less than 200 characters"),
+  eventDate: z.string()
+    .trim()
+    .min(1, "Event date is required"),
+  eventType: z.string()
+    .trim()
+    .min(1, "Event type is required")
+    .max(100, "Event type must be less than 100 characters"),
+  audience: z.string()
+    .trim()
+    .min(1, "Audience size is required")
+    .max(50, "Audience size must be less than 50 characters"),
+  topic: z.string()
+    .trim()
+    .max(200, "Topic must be less than 200 characters"),
+  budget: z.string()
+    .trim()
+    .max(50, "Budget must be less than 50 characters"),
+  message: z.string()
+    .trim()
+    .max(2000, "Message must be less than 2000 characters")
+});
+
+type SpeakerBookingForm = z.infer<typeof speakerBookingSchema>;
+
 const Speakers = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SpeakerBookingForm>({
     name: '',
     email: '',
     phone: '',
@@ -107,40 +152,53 @@ const Speakers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isJoeVideoOpen, setIsJoeVideoOpen] = useState(false);
   const [isAndreVideoOpen, setIsAndreVideoOpen] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<keyof SpeakerBookingForm, string>>>({});
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof SpeakerBookingForm]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate required fields
-    if (!formData.name || !formData.email || !formData.phone || !formData.organization || !formData.eventDate || !formData.eventType || !formData.audience) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields marked with *",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsLoading(true);
+    setErrors({});
     
     try {
+      // Validate form data with zod schema
+      const validatedData = speakerBookingSchema.parse(formData);
+
+      setIsLoading(true);
+      
+      // Sanitize data for webhook (removing any potential XSS)
+      const sanitizedData = Object.fromEntries(
+        Object.entries(validatedData).map(([key, value]) => [
+          key, 
+          typeof value === 'string' ? value.trim().replace(/<[^>]*>?/gm, '') : value
+        ])
+      );
+
       // Prepare data for Zapier webhook
       const webhookData = {
-        ...formData,
+        ...sanitizedData,
         timestamp: new Date().toISOString(),
         source: "Genius Recovery Speakers Page",
         url: window.location.href,
       };
 
-      console.log("Sending speaker booking data to Zapier:", webhookData);
+      console.log("Sending validated speaker booking data to Zapier:", webhookData);
 
       const response = await fetch("https://hooks.zapier.com/hooks/catch/155028/ud1c44d/", {
         method: "POST",
@@ -151,7 +209,6 @@ const Speakers = () => {
         body: JSON.stringify(webhookData),
       });
 
-      // Since we're using no-cors, we won't get a proper response status
       // Show success message
       toast({
         title: "Speaking Request Submitted Successfully! 🎉",
@@ -165,12 +222,29 @@ const Speakers = () => {
       });
 
     } catch (error) {
-      console.error("Error submitting speaker booking:", error);
-      toast({
-        title: "Submission Error",
-        description: "There was an issue submitting your request. Please try again or contact us directly.",
-        variant: "destructive",
-      });
+      if (error instanceof z.ZodError) {
+        // Handle validation errors
+        const fieldErrors: Partial<Record<keyof SpeakerBookingForm, string>> = {};
+        error.issues.forEach((issue) => {
+          if (issue.path[0]) {
+            fieldErrors[issue.path[0] as keyof SpeakerBookingForm] = issue.message;
+          }
+        });
+        setErrors(fieldErrors);
+        
+        toast({
+          title: "Please check your information",
+          description: "Some fields need to be corrected before submitting.",
+          variant: "destructive",
+        });
+      } else {
+        console.error("Error submitting speaker booking:", error);
+        toast({
+          title: "Submission Error",
+          description: "There was an issue submitting your request. Please try again or contact us directly.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -421,8 +495,11 @@ const Speakers = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="mt-1"
+                      className={`mt-1 ${errors.name ? 'border-destructive' : ''}`}
                     />
+                    {errors.name && (
+                      <p className="text-sm text-destructive mt-1">{errors.name}</p>
+                    )}
                   </div>
                   <div>
                     <Label htmlFor="email">Email Address *</Label>
@@ -433,8 +510,11 @@ const Speakers = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="mt-1"
+                      className={`mt-1 ${errors.email ? 'border-destructive' : ''}`}
                     />
+                    {errors.email && (
+                      <p className="text-sm text-destructive mt-1">{errors.email}</p>
+                    )}
                   </div>
                 </div>
 
@@ -448,8 +528,11 @@ const Speakers = () => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
-                      className="mt-1"
+                      className={`mt-1 ${errors.phone ? 'border-destructive' : ''}`}
                     />
+                    {errors.phone && (
+                      <p className="text-sm text-destructive mt-1">{errors.phone}</p>
+                    )}
                   </div>
                   <div>
                     <Label htmlFor="organization">Organization *</Label>
@@ -459,8 +542,11 @@ const Speakers = () => {
                       value={formData.organization}
                       onChange={handleInputChange}
                       required
-                      className="mt-1"
+                      className={`mt-1 ${errors.organization ? 'border-destructive' : ''}`}
                     />
+                    {errors.organization && (
+                      <p className="text-sm text-destructive mt-1">{errors.organization}</p>
+                    )}
                   </div>
                 </div>
 
@@ -474,8 +560,11 @@ const Speakers = () => {
                       value={formData.eventDate}
                       onChange={handleInputChange}
                       required
-                      className="mt-1"
+                      className={`mt-1 ${errors.eventDate ? 'border-destructive' : ''}`}
                     />
+                    {errors.eventDate && (
+                      <p className="text-sm text-destructive mt-1">{errors.eventDate}</p>
+                    )}
                   </div>
                   <div>
                     <Label htmlFor="eventType">Event Type *</Label>
@@ -485,7 +574,7 @@ const Speakers = () => {
                       value={formData.eventType}
                       onChange={handleInputChange}
                       required
-                      className="mt-1 w-full px-3 py-2 border border-input bg-background rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className={`mt-1 w-full px-3 py-2 border bg-background rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${errors.eventType ? 'border-destructive' : 'border-input'}`}
                     >
                       <option value="">Select event type</option>
                       <option value="conference">Conference</option>
@@ -496,6 +585,9 @@ const Speakers = () => {
                       <option value="community">Community Event</option>
                       <option value="other">Other</option>
                     </select>
+                    {errors.eventType && (
+                      <p className="text-sm text-destructive mt-1">{errors.eventType}</p>
+                    )}
                   </div>
                 </div>
 
@@ -509,9 +601,12 @@ const Speakers = () => {
                       value={formData.audience}
                       onChange={handleInputChange}
                       required
-                      className="mt-1"
+                      className={`mt-1 ${errors.audience ? 'border-destructive' : ''}`}
                       placeholder="e.g., 100"
                     />
+                    {errors.audience && (
+                      <p className="text-sm text-destructive mt-1">{errors.audience}</p>
+                    )}
                   </div>
                   <div>
                     <Label htmlFor="budget">Speaking Fee Budget</Label>
@@ -520,7 +615,7 @@ const Speakers = () => {
                       name="budget"
                       value={formData.budget}
                       onChange={handleInputChange}
-                      className="mt-1 w-full px-3 py-2 border border-input bg-background rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className={`mt-1 w-full px-3 py-2 border bg-background rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${errors.budget ? 'border-destructive' : 'border-input'}`}
                     >
                       <option value="">Select budget range</option>
                       <option value="under-5k">Under $5,000</option>
@@ -530,6 +625,9 @@ const Speakers = () => {
                       <option value="nonprofit">Nonprofit Rate</option>
                       <option value="discuss">Prefer to Discuss</option>
                     </select>
+                    {errors.budget && (
+                      <p className="text-sm text-destructive mt-1">{errors.budget}</p>
+                    )}
                   </div>
                 </div>
 
@@ -540,7 +638,7 @@ const Speakers = () => {
                     name="topic"
                     value={formData.topic}
                     onChange={handleInputChange}
-                    className="mt-1 w-full px-3 py-2 border border-input bg-background rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className={`mt-1 w-full px-3 py-2 border bg-background rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${errors.topic ? 'border-destructive' : 'border-input'}`}
                   >
                     <option value="">Select a topic or choose custom</option>
                     {speakingTopics.map((topic, index) => (
@@ -548,6 +646,9 @@ const Speakers = () => {
                     ))}
                     <option value="custom">Custom Topic</option>
                   </select>
+                  {errors.topic && (
+                    <p className="text-sm text-destructive mt-1">{errors.topic}</p>
+                  )}
                 </div>
 
                 <div>
@@ -557,10 +658,13 @@ const Speakers = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    className="mt-1"
+                    className={`mt-1 ${errors.message ? 'border-destructive' : ''}`}
                     placeholder="Tell us about your event, goals, audience, and any special requirements..."
                     rows={4}
                   />
+                  {errors.message && (
+                    <p className="text-sm text-destructive mt-1">{errors.message}</p>
+                  )}
                 </div>
 
                 <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
