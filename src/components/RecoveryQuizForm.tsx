@@ -199,10 +199,26 @@ const RecoveryQuizForm = () => {
     if (currentStep < quizQuestions.length - 1) {
       setCurrentStep(currentStep + 1);
       setMultipleSelections([]);
+      
+      // Scroll to the top of the quiz form smoothly
+      setTimeout(() => {
+        const quizElement = document.querySelector('[data-quiz-container]');
+        if (quizElement) {
+          quizElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     } else {
       const results = getResults();
       sendResultsToZapier(results);
       setShowResults(true);
+      
+      // Scroll to results
+      setTimeout(() => {
+        const resultsElement = document.querySelector('[data-quiz-results]');
+        if (resultsElement) {
+          resultsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     }
   };
 
@@ -257,7 +273,7 @@ const RecoveryQuizForm = () => {
   if (showResults) {
     const results = getResults();
     return (
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto" data-quiz-results>
         <Card className="border-0 shadow-2xl bg-gradient-to-br from-card via-card to-secondary/10">
           <CardHeader className="text-center pb-8">
             <div className={cn(
@@ -403,10 +419,23 @@ const RecoveryQuizForm = () => {
                 Ready to take the next step in your recovery journey?
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90">
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+                  onClick={() => window.location.href = '/resources'}
+                >
                   Explore Resources
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => {
+                    setShowResults(false);
+                    setCurrentStep(0);
+                    setAnswers([]);
+                    setMultipleSelections([]);
+                  }}
+                >
                   Retake Assessment
                 </Button>
               </div>
@@ -418,7 +447,7 @@ const RecoveryQuizForm = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto" data-quiz-container>
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <span className="text-sm font-medium text-muted-foreground">

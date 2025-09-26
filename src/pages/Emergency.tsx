@@ -87,9 +87,11 @@ const Emergency = () => {
               variant="outline" 
               className="bg-white/10 border-white/30 text-white hover:bg-white/90 hover:text-primary backdrop-blur-sm px-6 py-4"
               onClick={() => {
-                const naloxoneSection = Array.from(document.querySelectorAll('h2')).find(h2 => h2.textContent?.includes('Naloxone'));
+                const naloxoneSection = document.getElementById('naloxone-info');
                 if (naloxoneSection) {
-                  naloxoneSection.scrollIntoView({ behavior: 'smooth' });
+                  const yOffset = -100; // Offset to show header
+                  const y = naloxoneSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                  window.scrollTo({top: y, behavior: 'smooth'});
                 }
               }}
             >
