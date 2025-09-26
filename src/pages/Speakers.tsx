@@ -216,10 +216,6 @@ const Speakers = () => {
                 <Calendar className="mr-3 h-6 w-6" />
                 Book Speaking Engagement
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-10 py-6 border-2 border-primary/30 bg-background/80 backdrop-blur hover:bg-primary/5 hover:border-primary/50 transition-all duration-300" onClick={() => document.getElementById('speaker-kit')?.scrollIntoView({ behavior: 'smooth' })}>
-                <Download className="mr-3 h-6 w-6" />
-                Download Speaker Kit
-              </Button>
             </div>
           </div>
         </div>
@@ -400,62 +396,6 @@ const Speakers = () => {
         </div>
       </section>
 
-      {/* Speaker Kit Download */}
-      <section id="speaker-kit" className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-muted/40 via-background to-secondary/10"></div>
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-secondary/10 rounded-full blur-2xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        
-        <div className="relative container mx-auto px-6">
-          <div className="max-w-5xl mx-auto text-center">
-            <Badge className="mb-6 bg-secondary/10 text-secondary border-secondary/20">Free Resources</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Speaker Kit</h2>
-            <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto">
-              Download our comprehensive speaker kit including bios, photos, topic outlines, and technical requirements
-            </p>
-            
-            <Card className="p-8 md:p-12 bg-gradient-to-br from-card via-card/95 to-card/90 border-2 border-primary/10 shadow-elegant hover:shadow-glow transition-all duration-500">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                <div className="text-left space-y-6">
-                  <h3 className="text-2xl font-bold mb-6 text-primary">Included in Speaker Kit:</h3>
-                  <div className="space-y-4">
-                    {[
-                      { icon: "📸", text: "Professional headshots (high-res)" },
-                      { icon: "📝", text: "Speaker biographies (multiple lengths)" },
-                      { icon: "📋", text: "Topic descriptions and outlines" },
-                      { icon: "⚙️", text: "Technical requirements" },
-                      { icon: "🎤", text: "Introduction scripts" },
-                      { icon: "🎬", text: "Previous event photos and videos" }
-                    ].map((item, index) => (
-                      <div key={index} className="flex items-center gap-4 group">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-lg group-hover:scale-110 transition-transform duration-300">
-                          {item.icon}
-                        </div>
-                        <p className="text-muted-foreground group-hover:text-foreground transition-colors">{item.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="text-center space-y-6">
-                  <div className="w-32 h-32 mx-auto rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-secondary/20 flex items-center justify-center hover-scale">
-                    <Download className="h-16 w-16 text-primary" />
-                  </div>
-                  <Button size="lg" className="w-full text-lg py-6 bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300 hover-scale">
-                    <Download className="mr-3 h-6 w-6" />
-                    Download Speaker Kit (PDF)
-                  </Button>
-                  <p className="text-sm text-muted-foreground">
-                    Free download • Updated monthly • No registration required
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
 
       {/* Booking Form */}
       <section id="booking-form" className="py-20 relative">
