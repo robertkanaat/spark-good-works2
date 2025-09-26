@@ -346,10 +346,12 @@ const CrisisSupport = () => {
                 Get Personal Support Now
               </Button>
             </Link>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-4 h-auto">
-              <Users className="w-5 h-5 mr-2" />
-              Find More Resources
-            </Button>
+            <Link to="/resources">
+              <Button variant="outline" size="lg" className="text-lg px-8 py-4 h-auto">
+                <Users className="w-5 h-5 mr-2" />
+                Find More Resources
+              </Button>
+            </Link>
           </div>
           
           <p className="text-sm text-muted-foreground mt-6">
