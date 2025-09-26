@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { ArrowLeft, ArrowRight, CheckCircle, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { RecoveryGame } from './RecoveryGame/RecoveryGame';
+import { Link } from 'react-router-dom';
 
 interface QuizAnswer {
   questionId: string;
@@ -419,13 +420,14 @@ const RecoveryQuizForm = () => {
                 Ready to take the next step in your recovery journey?
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
-                  onClick={() => window.location.href = '/resources'}
-                >
-                  Explore Resources
-                </Button>
+                <Link to="/resources">
+                  <Button 
+                    size="lg" 
+                    className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 w-full sm:w-auto"
+                  >
+                    Explore Resources
+                  </Button>
+                </Link>
                 <Button 
                   variant="outline" 
                   size="lg"
@@ -434,6 +436,15 @@ const RecoveryQuizForm = () => {
                     setCurrentStep(0);
                     setAnswers([]);
                     setMultipleSelections([]);
+                    // Scroll to top of quiz form
+                    setTimeout(() => {
+                      const quizElement = document.querySelector('[data-quiz-container]');
+                      if (quizElement) {
+                        quizElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      } else {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }
+                    }, 100);
                   }}
                 >
                   Retake Assessment
