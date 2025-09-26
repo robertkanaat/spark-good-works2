@@ -299,7 +299,15 @@ Thank you for all the incredible work you do!
 
 Best regards,`;
                   
-                  window.location.href = `mailto:stories@geniusrecovery.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                  // Try to open email client
+                  window.location.href = `mailto:director@geniusrecovery.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                  
+                  // Provide fallback to contact page after a brief delay
+                  setTimeout(() => {
+                    if (confirm('Having trouble with email? Click OK to go to our contact page instead.')) {
+                      navigate('/contact');
+                    }
+                  }, 1500);
                 }}
               >
                 <Heart className="w-6 h-6 mr-3 group-hover:scale-110 group-hover:text-red-400 transition-all duration-300" />
