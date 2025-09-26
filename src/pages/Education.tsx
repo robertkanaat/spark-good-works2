@@ -683,7 +683,7 @@ const Education = () => {
               <h3 className="font-bold text-lg mb-2">Need Immediate Help?</h3>
               <p className="text-muted-foreground mb-4">Crisis support available 24/7</p>
               <Link to="/emergency">
-                <Button variant="outline" className="w-full border-destructive/20 hover:bg-destructive hover:text-destructive-foreground">
+                <Button className="w-full bg-gradient-to-r from-primary to-primary/80">
                   Emergency Resources
                 </Button>
               </Link>
@@ -705,7 +705,7 @@ const Education = () => {
               <h3 className="font-bold text-lg mb-2">Join Community</h3>
               <p className="text-muted-foreground mb-4">Connect with others in recovery</p>
               <Link to="/support-groups">
-                <Button variant="outline" className="w-full border-accent/20 hover:bg-accent hover:text-accent-foreground">
+                <Button className="w-full bg-gradient-to-r from-primary to-primary/80">
                   Find Support Groups
                 </Button>
               </Link>
