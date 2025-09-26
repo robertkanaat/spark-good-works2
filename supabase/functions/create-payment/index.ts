@@ -1,6 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
-import { Resend } from "npm:resend@4.0.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -520,14 +519,26 @@ serve(async (req) => {
     
     console.log("Gateway response received:", responseText);
     
-    // Check if response contains error parameters
-    if (responseText.includes('response=2') || responseText.includes('response=3') || responseText.includes('Activity limit exceeded')) {
+    // Check if response contains error parameters - be more specific for recurring payments
+    const hasErrorResponse = responseText.includes('response=2') || responseText.includes('response=3');
+    const hasActivityLimit = responseText.includes('Activity limit exceeded') && !responseText.includes('response=1');
+    
+    if (hasErrorResponse || hasActivityLimit) {
       console.log("Payment failed with gateway error");
-      const errorMessage = encodeURIComponent('Activity limit exceeded - Please try again later');
+      let errorMessage = 'Payment processing failed - Please try again';
+      
+      if (responseText.includes('Activity limit exceeded')) {
+        errorMessage = 'Activity limit exceeded - Please try again later';
+      } else if (responseText.includes('response=2')) {
+        errorMessage = 'Payment declined - Please check your card details';
+      } else if (responseText.includes('response=3')) {
+        errorMessage = 'Payment error - Please try a different payment method';
+      }
+      
       return new Response(null, {
         status: 302,
         headers: {
-          'Location': `${baseUrl}/payment-failed?error=${errorMessage}`
+          'Location': `${baseUrl}/payment-failed?error=${encodeURIComponent(errorMessage)}`
         }
       });
     }
@@ -670,29 +681,31 @@ serve(async (req) => {
                 input.value = value;
             }
             
-            // More aggressive error detection and redirect
+            // More specific error detection for recurring payments
             function checkAndRedirectOnError() {
                 const url = window.location.href;
                 const params = new URLSearchParams(window.location.search);
                 const response = params.get('response');
                 const responseText = params.get('responsetext');
                 
-                // If we detect ANY error parameters in URL, redirect immediately
-                if (response || responseText || url.includes('response=') || url.includes('responsetext=') || url.includes('Activity limit exceeded')) {
+                // Only redirect on explicit error responses (2 or 3), not on success (1) with warning text
+                if ((response === '2' || response === '3') || 
+                    (responseText && responseText.includes('Activity limit exceeded') && response !== '1')) {
                     const baseUrl = '${baseUrl}';
                     const failureUrl = baseUrl + '/payment-failed?error=' + encodeURIComponent(responseText || 'Payment failed');
                     window.top.location.href = failureUrl;
                     return true;
                 }
                 
-                // Also check if the current page content contains error text
-                if (document.body && document.body.textContent.includes('Activity limit exceeded')) {
+                // Only check for activity limit in page content if no success response
+                if (document.body && document.body.textContent.includes('Activity limit exceeded') && 
+                    !url.includes('response=1') && !document.body.textContent.includes('successful')) {
                     const baseUrl = '${baseUrl}';
                     const failureUrl = baseUrl + '/payment-failed?error=' + encodeURIComponent('Activity limit exceeded');
                     window.top.location.href = failureUrl;
                     return true;
                 }
-                }
+                
                 return false;
             }
             
@@ -1081,7 +1094,7 @@ serve(async (req) => {
 
   } catch (error) {
     console.error("Payment error:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }), {
       status: 400,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
