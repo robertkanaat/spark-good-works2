@@ -271,7 +271,7 @@ const Donors = () => {
               const getButtonAction = (title: string) => {
                 if (title.includes('Time')) return '/volunteer';
                 if (title.includes('Talent')) return () => scrollToSection('talent-areas');
-                if (title.includes('Treasures')) return '/donation';
+                if (title.includes('Donate')) return '/donation';
                 return () => {};
               };
 
