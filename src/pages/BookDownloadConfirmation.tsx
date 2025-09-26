@@ -26,8 +26,8 @@ const BookDownloadConfirmation = () => {
       title: "Recovery Support Hub",
       description: "Access expert videos, articles, and community support",
       icon: BookOpen,
-      link: "https://geniusrecovery.org/recovery-support-hub/",
-      external: true
+      link: "/resources",
+      external: false
     }
   ];
 
