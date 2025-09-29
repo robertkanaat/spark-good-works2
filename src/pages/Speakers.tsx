@@ -20,6 +20,7 @@ import Footer from '@/components/Footer';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import andreVideoPreview from '@/assets/andre-norman-video-preview.jpg';
+import joeVideoPreview from '@/assets/joe-polish-video-preview.jpg';
 
 const speakingTopics = [
   {
@@ -338,8 +339,9 @@ const Speakers = () => {
               className="group cursor-pointer hover:shadow-glow hover:-translate-y-1 transition-all duration-500 overflow-hidden border-2 hover:border-primary/30"
               onClick={() => setIsJoeVideoOpen(true)}
             >
-              <div className="relative aspect-video bg-gradient-to-br from-primary/30 via-primary/20 to-secondary/30 rounded-t-lg flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-black/20"></div>
+              <div className="relative aspect-video rounded-t-lg flex items-center justify-center overflow-hidden"
+                   style={{ backgroundImage: `url(${joeVideoPreview})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <div className="absolute inset-0 bg-black/30"></div>
                 <div className="relative z-10 flex flex-col items-center">
                   <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-white/30 transition-all duration-300">
                     <Play className="h-10 w-10 text-white ml-1" />
