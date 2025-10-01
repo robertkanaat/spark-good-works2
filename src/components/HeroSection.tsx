@@ -59,13 +59,13 @@ const HeroSection = () => {
             </h1>
             
             <div className="flex flex-col gap-6 mt-12">
-              {/* Mobile: Stack buttons vertically but make them more compact */}
-              <div className="flex flex-col sm:hidden gap-3">
+              {/* Mobile: Fit 3 buttons across */}
+              <div className="grid grid-cols-3 sm:hidden gap-2">
                 <div className="text-center">
-                  <div className="text-white/70 text-xs mb-1">I NEED...</div>
+                  <div className="text-white/70 text-[10px] mb-1">I NEED...</div>
                   <Button 
                     variant="hero" 
-                    className={`w-full py-4 text-base font-semibold ${
+                    className={`w-full py-3 text-xs font-semibold ${
                       activeView === 'help' 
                         ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
                         : ''
@@ -77,9 +77,9 @@ const HeroSection = () => {
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-white/70 text-xs mb-1">I WANT TO...</div>
+                  <div className="text-white/70 text-[10px] mb-1">I WANT TO...</div>
                   <Button 
-                    className={`w-full py-4 text-base font-semibold ${
+                    className={`w-full py-3 text-xs font-semibold ${
                       activeView === 'donate'
                         ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
                         : 'bg-white/10 border-white/30 text-white hover:bg-white/20'
@@ -91,10 +91,10 @@ const HeroSection = () => {
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-white/70 text-xs mb-1">I WANT TO...</div>
+                  <div className="text-white/70 text-[10px] mb-1">I WANT TO...</div>
                   <Button 
                     variant="hero" 
-                    className={`w-full py-4 text-base font-semibold ${
+                    className={`w-full py-3 text-xs font-semibold ${
                       activeView === 'support' 
                         ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent' 
                         : ''
