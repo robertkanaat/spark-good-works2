@@ -50,27 +50,52 @@ const AICompanion = () => {
     `;
     document.head.appendChild(style);
 
-    // Load Delphi widget script directly
-    const delphiScript = document.createElement('script');
-    delphiScript.innerHTML = `
-      window.delphi = {...(window.delphi ?? {}) };
-      window.delphi.bubble = {
-        config: "c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5",
-        trigger: {
-          color: "#FF6A27",
-        },
-      };
+    // Configure Delphi
+    (window as any).delphi = {...((window as any).delphi ?? {}) };
+    (window as any).delphi.bubble = {
+      config: "c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5",
+      trigger: {
+        color: "#FF6A27",
+      },
+    };
+
+    // Create config script tag
+    const configScript = document.createElement('script');
+    configScript.id = 'delphi-bubble-script';
+    document.head.appendChild(configScript);
+
+    // Load Delphi widget using the exact pattern from their code
+    const loadDelphi = () => {
+      const r = window;
+      const a = document;
       
-      (function(){
-        var script = document.createElement('script');
-        script.src = 'https://embed.delphi.ai/widget.js';
+      if (!(r as any).delphi || (typeof (r as any).delphi?.bubble === "undefined" && typeof (r as any).delphi?.page === "undefined")) {
+        console.error("Invalid or missing delphi object");
+        return;
+      }
+      
+      if ((r as any).delphi.bubble && !a.getElementById("delphi-bubble-container")) {
+        const script = a.createElement("script");
+        script.src = "https://embed.delphi.ai/widget.js";
+        script.type = "text/javascript";
         script.async = true;
         script.defer = true;
-        script.setAttribute('data-config', 'c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5');
-        document.body.appendChild(script);
-      })();
-    `;
-    document.body.appendChild(delphiScript);
+        if ((r as any)?.delphi?.bubble?.config) {
+          script.setAttribute("data-config", (r as any).delphi.bubble.config);
+        }
+        const configEl = a.getElementById("delphi-bubble-script");
+        if (configEl && configEl.parentNode) {
+          configEl.parentNode.insertBefore(script, configEl);
+        }
+      }
+    };
+
+    if (document.readyState === "complete") {
+      loadDelphi();
+    } else {
+      window.addEventListener("load", loadDelphi);
+      return () => window.removeEventListener("load", loadDelphi);
+    }
   }, []);
 
   const [isVideoOpen, setIsVideoOpen] = useState(false);
