@@ -463,9 +463,14 @@ const Blog = () => {
               </Link>
               
               <div className="p-8">
-                <h3 className="text-xl font-bold mb-4 line-clamp-2 group-hover:text-primary transition-colors duration-300">
-                  {post.title}
-                </h3>
+                <Link 
+                  to={`/${post.slug}`}
+                  state={{ from: location.pathname + location.search }}
+                >
+                  <h3 className="text-xl font-bold mb-4 line-clamp-2 group-hover:text-primary transition-colors duration-300 cursor-pointer">
+                    {post.title}
+                  </h3>
+                </Link>
                 <p className="text-muted-foreground mb-6 line-clamp-3 leading-relaxed">
                   {post.excerpt}
                 </p>
@@ -489,7 +494,7 @@ const Blog = () => {
                     asChild
                   >
                     <Link 
-                      to={`/blog/${post.slug}`}
+                      to={`/${post.slug}`}
                       state={{ from: location.pathname + location.search }}
                     >
                       <BookOpen className="w-4 h-4 mr-1 group-hover:rotate-6 transition-transform duration-300" />
