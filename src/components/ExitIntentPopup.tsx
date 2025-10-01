@@ -62,12 +62,12 @@ const ExitIntentPopup = () => {
     <>
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 animate-fade-in"
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] animate-fade-in"
         onClick={handleClose}
       />
       
       {/* Popup */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in">
         <Card className="relative max-w-2xl w-full bg-gradient-to-br from-background via-background to-muted/30 border-2 border-primary/20 shadow-2xl animate-scale-in overflow-hidden">
           {/* Close button */}
           <button
