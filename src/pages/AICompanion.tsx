@@ -126,8 +126,9 @@ const AICompanion = () => {
                 size="lg" 
                 className="group"
                 onClick={() => {
-                  // Try multiple selectors to find and trigger the Delphi widget
-                  const delphiButton = document.querySelector('#delphi-bubble-container button') as HTMLElement ||
+                  // Find and click the Delphi bubble trigger
+                  const delphiButton = document.querySelector('#delphi-bubble-trigger') as HTMLElement ||
+                                      document.querySelector('#delphi-bubble-container button') as HTMLElement ||
                                       document.querySelector('[data-delphi-trigger]') as HTMLElement;
                   if (delphiButton) {
                     delphiButton.click();
@@ -240,8 +241,9 @@ const AICompanion = () => {
               variant="secondary" 
               className="group"
               onClick={() => {
-                // Try multiple selectors to find and trigger the Delphi widget
-                const delphiButton = document.querySelector('#delphi-bubble-container button') as HTMLElement ||
+                // Find and click the Delphi bubble trigger
+                const delphiButton = document.querySelector('#delphi-bubble-trigger') as HTMLElement ||
+                                    document.querySelector('#delphi-bubble-container button') as HTMLElement ||
                                     document.querySelector('[data-delphi-trigger]') as HTMLElement;
                 if (delphiButton) {
                   delphiButton.click();
