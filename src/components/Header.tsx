@@ -519,6 +519,7 @@ const Header = () => {
                   </div>
                   
                    <div className="flex flex-col gap-3">
+                     {/* About Section */}
                      <Link 
                        to="/about" 
                        className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
@@ -531,16 +532,40 @@ const Header = () => {
                        ABOUT
                      </Link>
                      <Link 
-                       to="/speakers" 
-                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
-                         isActiveRoute('/speakers')
+                       to="/open-letter" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/open-letter')
                            ? 'text-primary bg-primary/10'
-                           : 'text-foreground hover:text-primary hover:bg-muted'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
                        }`}
                        onClick={() => setIsOpen(false)}
                      >
-                       SPEAKERS
+                       Open Letter
                      </Link>
+                     <Link 
+                       to="/press" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/press')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Press & Media
+                     </Link>
+                     <Link 
+                       to="/speakers" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/speakers')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Book Our Speakers
+                     </Link>
+
+                     {/* Emergency */}
                      <Link 
                        to="/emergency" 
                        className={`text-lg font-semibold px-4 py-3 rounded-md transition-all duration-300 hover:scale-105 hover:shadow-md hover:shadow-red-500/25 relative overflow-hidden group ${
@@ -555,30 +580,155 @@ const Header = () => {
                          isActiveRoute('/emergency') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                        }`}></div>
                      </Link>
-                      <Link 
-                        to="/resources" 
-                        className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
-                          isActiveRoute('/resources')
-                            ? 'text-primary bg-primary/10'
-                            : 'text-foreground hover:text-primary hover:bg-muted'
-                        }`}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        RECOVERY
-                      </Link>
-                      <Link 
-                        to="/recovery-quiz" 
-                        className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                          isActiveRoute('/recovery-quiz')
-                            ? 'text-primary bg-primary/10'
-                            : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                        }`}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        Assessment Quiz
-                      </Link>
-                      <Link 
-                        to="/blog"
+
+                     {/* Support Section */}
+                     <div className="text-lg font-medium px-4 py-3 text-foreground">
+                       SUPPORT
+                     </div>
+                     <div className="text-xs font-semibold px-6 py-1 text-muted-foreground uppercase tracking-wider">
+                       Get Support
+                     </div>
+                     <Link 
+                       to="/family-support" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/family-support')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Family Support
+                     </Link>
+                     <Link 
+                       to="/treatment-centers" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/treatment-centers')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Treatment Centers
+                     </Link>
+                     <Link 
+                       to="/support-groups" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/support-groups')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Support Groups
+                     </Link>
+                     <div className="text-xs font-semibold px-6 py-1 text-muted-foreground uppercase tracking-wider mt-2">
+                       Give Support
+                     </div>
+                     <Link 
+                       to="/donation" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/donation')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Donate
+                     </Link>
+                     <Link 
+                       to="/volunteer" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/volunteer')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Volunteer
+                     </Link>
+                     <Link 
+                       to="/donors" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/donors')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Donors
+                     </Link>
+
+                     {/* Recovery Section */}
+                     <Link 
+                       to="/resources" 
+                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
+                         isActiveRoute('/resources')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       RECOVERY
+                     </Link>
+                     <Link 
+                       to="/ai-companion" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/ai-companion')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       AI Companion
+                     </Link>
+                     <Link 
+                       to="/recovery-quiz" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/recovery-quiz')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Assessment Quiz
+                     </Link>
+                     <Link 
+                       to="/education" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/education')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Education
+                     </Link>
+                     <Link 
+                       to="/recovery-tools" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/recovery-tools')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       Recovery Tools
+                     </Link>
+                     <Link 
+                       to="/faq" 
+                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                         isActiveRoute('/faq')
+                           ? 'text-primary bg-primary/10'
+                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                       }`}
+                       onClick={() => setIsOpen(false)}
+                     >
+                       FAQ
+                     </Link>
+
+                     {/* Blog */}
+                     <Link 
+                       to="/blog"
                        className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
                          isActiveRoute('/blog')
                            ? 'text-primary bg-primary/10'
@@ -588,6 +738,8 @@ const Header = () => {
                      >
                        BLOG
                      </Link>
+
+                     {/* Contact */}
                      <Link 
                        to="/contact" 
                        className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
