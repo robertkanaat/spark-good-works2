@@ -98,6 +98,8 @@ const BlogPost = () => {
     const fetchPost = async () => {
       if (!slug) return;
       
+      console.log('BlogPost: Fetching post with slug:', slug);
+      
       try {
         setIsLoading(true);
         setError(null);
@@ -105,12 +107,14 @@ const BlogPost = () => {
         // First try to find in already loaded posts
         const foundPost = posts.find(p => p.slug === slug);
         if (foundPost) {
+          console.log('BlogPost: Found post in cache:', foundPost.title);
           setPost(foundPost);
           setIsLoading(false);
           return;
         }
         
         // If not found, fetch directly from WordPress API
+        console.log('BlogPost: Fetching from API...');
         const response = await fetch(
           `https://blog.geniusrecovery.org/wp-json/wp/v2/posts?_embed&slug=${slug}`,
           {
@@ -120,13 +124,17 @@ const BlogPost = () => {
           }
         );
         
+        console.log('BlogPost: API response status:', response.status);
+        
         if (!response.ok) {
           throw new Error(`Failed to fetch post: ${response.status}`);
         }
         
         const wordpressPosts = await response.json();
+        console.log('BlogPost: Received posts:', wordpressPosts.length);
         
         if (wordpressPosts.length === 0) {
+          console.log('BlogPost: No posts found for slug:', slug);
           setError('Post not found');
           setIsLoading(false);
           return;
@@ -150,6 +158,7 @@ const BlogPost = () => {
           link: wordpressPost.link,
         };
         
+        console.log('BlogPost: Successfully transformed post:', transformedPost.title);
         setPost(transformedPost);
       } catch (err) {
         console.error('Error fetching WordPress post:', err);
@@ -160,7 +169,7 @@ const BlogPost = () => {
     };
     
     fetchPost();
-  }, [slug, posts, navigate]);
+  }, [slug, posts]);
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
