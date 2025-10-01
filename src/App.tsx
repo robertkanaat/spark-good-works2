@@ -162,7 +162,6 @@ const App = () => {
             <Route path="/help" element={<Emergency />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/page/:pageNumber" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/open-letter" element={<OpenLetter />} />
             <Route path="/ai-companion" element={<AICompanion />} />
@@ -184,6 +183,7 @@ const App = () => {
             <Route path="/addiction-recovery-book" element={<BookDownload />} />
             <Route path="/addiction-recovery-book-download" element={<BookDownloadConfirmation />} />
             <Route path="/recovery-game" element={<RecoveryGame />} />
+            <Route path="/:slug" element={<BlogPost />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

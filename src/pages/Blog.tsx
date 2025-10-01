@@ -83,7 +83,7 @@ const Blog = () => {
   };
 
   const handleShare = (platform: string, post: any) => {
-    const url = `${window.location.origin}/blog/${post.slug}`;
+    const url = `${window.location.origin}/${post.slug}`;
     const title = post.title;
     
     let shareUrl = '';
@@ -236,7 +236,7 @@ const Blog = () => {
               "name": post.author
             },
             "datePublished": post.date,
-            "url": `https://geniusrecovery.org/blog/${post.slug}`
+            "url": `https://geniusrecovery.org/${post.slug}`
           }))
         }}
       />
@@ -338,7 +338,7 @@ const Blog = () => {
             <Card className="overflow-hidden bg-gradient-to-br from-primary/5 via-background to-orange-500/5 border-0 shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 <Link 
-                  to={`/blog/${featuredPost.slug}`}
+                  to={`/${featuredPost.slug}`}
                   state={{ from: location.pathname + location.search }}
                   className="relative h-80 lg:h-auto overflow-hidden cursor-pointer block"
                 >
@@ -396,7 +396,7 @@ const Blog = () => {
                     asChild
                   >
                     <Link 
-                      to={`/blog/${featuredPost.slug}`}
+                      to={`/${featuredPost.slug}`}
                       state={{ from: location.pathname + location.search }}
                     >
                       <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300" />
@@ -435,7 +435,7 @@ const Blog = () => {
           {filteredPosts.filter(post => !post.featured).map((post, index) => (
             <Card key={post.id} className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-0 bg-gradient-to-br from-white to-gray-50/50 animate-fade-in`} style={{ animationDelay: `${index * 0.1}s` }}>
               <Link 
-                to={`/blog/${post.slug}`}
+                to={`/${post.slug}`}
                 state={{ from: location.pathname + location.search }}
                 className="relative overflow-hidden cursor-pointer block"
               >

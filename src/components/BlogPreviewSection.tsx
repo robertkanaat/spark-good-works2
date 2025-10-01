@@ -101,7 +101,7 @@ const BlogPreviewSection = () => {
                   </div>
 
                   {/* Read More Button */}
-                  <Link to={`/blog/${post.slug}`} className="mt-auto">
+                  <Link to={`/${post.slug}`} className="mt-auto">
                     <Button
                       variant="outline"
                       className="w-full group/btn relative overflow-hidden border-primary/20 hover:border-primary bg-transparent hover:bg-primary/5 transition-all duration-300"
