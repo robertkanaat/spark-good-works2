@@ -107,7 +107,7 @@ const HeroSection = () => {
               </div>
 
               {/* Desktop: Horizontal layout */}
-              <div className="hidden sm:flex gap-4">
+              <div className="hidden sm:flex gap-4 justify-center">
                 <div className="text-center">
                   <div className="text-white/70 text-sm mb-2">I NEED...</div>
                   <Button 
@@ -157,7 +157,7 @@ const HeroSection = () => {
 
           {/* Right side - Interactive box */}
           <div className="flex justify-center lg:justify-end">
-            <Card className="p-8 bg-white/95 backdrop-blur-sm max-w-md w-full min-h-[520px] flex flex-col">
+            <Card className="p-8 bg-white/95 backdrop-blur-sm max-w-lg w-full min-h-[520px] flex flex-col">
               {activeView === 'donate' && (
                 <>
                   <h3 className="text-2xl font-bold mb-6 text-center">Choose An Amount To Support Genius Recovery</h3>
