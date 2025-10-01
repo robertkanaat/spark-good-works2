@@ -27,23 +27,14 @@ const AICompanion = () => {
       document.head.appendChild(meta);
     }
 
-    console.log('Initializing Delphi widget...');
+    // Add style to hide grecaptcha badge
+    const style = document.createElement('style');
+    style.textContent = '.grecaptcha-badge { visibility: hidden; }';
+    document.head.appendChild(style);
 
-    // Initialize Delphi configuration
-    (window as any).delphi = {...((window as any).delphi ?? {}) };
-    (window as any).delphi.bubble = {
-      config: "c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5",
-      trigger: {
-        color: "#FF6A27",
-      },
-    };
-
-    console.log('Delphi config set:', (window as any).delphi);
-
-    // Create the config script tag with ID
-    const configScript = document.createElement('script');
-    configScript.id = 'delphi-bubble-script';
-    configScript.textContent = `
+    // Load Delphi widget script directly
+    const delphiScript = document.createElement('script');
+    delphiScript.innerHTML = `
       window.delphi = {...(window.delphi ?? {}) };
       window.delphi.bubble = {
         config: "c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5",
@@ -51,57 +42,17 @@ const AICompanion = () => {
           color: "#FF6A27",
         },
       };
-    `;
-    document.head.appendChild(configScript);
-
-    // Load initialization script
-    const initScript = document.createElement('script');
-    initScript.textContent = `
+      
       (function(){
-        var r=window;
-        var a=document;
-        var e=function(){
-          console.log('Delphi init function called');
-          if(!r.delphi||typeof r.delphi?.bubble==="undefined"&&typeof r.delphi?.page==="undefined"){
-            console.error("Invalid or missing delphi object. Must have a 'bubble' or 'page' property.");
-            throw new Error("Invalid or missing delphi object. Must have a 'bubble' or 'page' property.")
-          }
-          if(r.delphi.bubble&&!a.getElementById("delphi-bubble-container")){
-            console.log('Creating bubble widget script');
-            var e=a.createElement("script");
-            e.src="https://embed.delphi.ai/widget.js";
-            e.type="text/javascript";
-            e["async"]=true;
-            e.defer=true;
-            if(r?.delphi?.bubble?.config){
-              e.setAttribute("data-config",r.delphi.bubble.config)
-            }
-            var i=a.getElementById("delphi-bubble-script");
-            if(!i){
-              console.error("Script tag with id 'delphi-bubble-script' not found.");
-              throw new Error("Script tag with id 'delphi-bubble-script' not found.")
-            }
-            i.parentNode.insertBefore(e,i);
-            console.log('Delphi widget script inserted');
-          }
-        };
-        if(a.readyState==="complete"){
-          e()
-        }else if(r.attachEvent){
-          r.attachEvent("onload",e)
-        }else{
-          r.addEventListener("load",e,false)
-        }
+        var script = document.createElement('script');
+        script.src = 'https://embed.delphi.ai/widget.js';
+        script.async = true;
+        script.defer = true;
+        script.setAttribute('data-config', 'c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5');
+        document.body.appendChild(script);
       })();
     `;
-    document.head.appendChild(initScript);
-
-    // Add style to hide grecaptcha badge
-    const style = document.createElement('style');
-    style.textContent = '.grecaptcha-badge { visibility: hidden; }';
-    document.head.appendChild(style);
-
-    console.log('Delphi initialization complete');
+    document.body.appendChild(delphiScript);
   }, []);
 
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -198,27 +149,9 @@ const AICompanion = () => {
               <h2 className="text-2xl font-bold text-foreground mb-4">
                 Chat With The Genius Recovery AI Clone Now
               </h2>
-              <Button 
-                size="lg" 
-                className="group"
-                onClick={() => {
-                  console.log('Start Conversation clicked');
-                  console.log('Looking for Delphi container:', document.getElementById('delphi-bubble-container'));
-                  // Try multiple selectors to find and trigger the Delphi widget
-                  const delphiButton = document.querySelector('#delphi-bubble-container button') as HTMLElement ||
-                                      document.querySelector('[data-delphi-trigger]') as HTMLElement ||
-                                      document.querySelector('.delphi-trigger') as HTMLElement;
-                  console.log('Found Delphi button:', delphiButton);
-                  if (delphiButton) {
-                    delphiButton.click();
-                  } else {
-                    console.error('Delphi widget button not found');
-                  }
-                }}
-              >
-                <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Start Conversation
-              </Button>
+              <p className="text-muted-foreground">
+                Look for the orange chat bubble in the bottom right corner of your screen to start a conversation with the AI companion.
+              </p>
             </div>
           </div>
         </section>
@@ -314,27 +247,9 @@ const AICompanion = () => {
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
               Take the first step towards personalized recovery support. Your AI companion is ready to help you navigate your journey.
             </p>
-            <Button 
-              size="lg" 
-              variant="secondary" 
-              className="group"
-              onClick={() => {
-                console.log('Begin Chat Now clicked');
-                // Try multiple selectors to find and trigger the Delphi widget
-                const delphiButton = document.querySelector('#delphi-bubble-container button') as HTMLElement ||
-                                    document.querySelector('[data-delphi-trigger]') as HTMLElement ||
-                                    document.querySelector('.delphi-trigger') as HTMLElement;
-                console.log('Found Delphi button:', delphiButton);
-                if (delphiButton) {
-                  delphiButton.click();
-                } else {
-                  console.error('Delphi widget button not found');
-                }
-              }}
-            >
-              <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-              Begin Chat Now
-            </Button>
+            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+              Click the orange chat bubble in the bottom right corner to begin your conversation with the AI companion.
+            </p>
           </div>
         </section>
       </main>
