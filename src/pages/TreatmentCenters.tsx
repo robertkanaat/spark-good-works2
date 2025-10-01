@@ -886,156 +886,17 @@ export default function TreatmentCenters() {
               </p>
             </div>
 
-            <TreatmentCenterMap />
-        </div>
-      </section>
-
-      {/* Filters Section */}
-      <section className="py-8 px-4 bg-background/50 backdrop-blur-sm border-b">
-        <div className="container mx-auto">
-          <div className="flex flex-wrap gap-4 items-center justify-center">
-            <div className="flex items-center gap-2">
-              <label className="text-sm font-medium text-foreground">State:</label>
-              <select 
-                value={selectedState}
-                onChange={(e) => setSelectedState(e.target.value)}
-                className="bg-background border border-border rounded-md px-3 py-1 text-sm"
-              >
-                <option value="all">All States</option>
-                <option value="AZ">Arizona</option>
-                <option value="CA">California</option>
-                <option value="FL">Florida</option>
-                <option value="MN">Minnesota</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NV">Nevada</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="WA">Washington</option>
-              </select>
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <label className="text-sm font-medium text-foreground">Specialty:</label>
-              <select 
-                value={selectedSpecialty}
-                onChange={(e) => setSelectedSpecialty(e.target.value)}
-                className="bg-background border border-border rounded-md px-3 py-1 text-sm"
-              >
-                <option value="all">All Specialties</option>
-                {allSpecialties.map((specialty) => (
-                  <option key={specialty} value={specialty}>{specialty}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Treatment Centers Feed */}
-      <section id="featured-centers" className="py-16 px-4">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Featured Treatment Centers
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Carefully selected centers known for their excellence in addiction treatment and recovery support.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCenters.map((center) => (
-              <Card key={center.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm">
-                <div className="relative overflow-hidden rounded-t-lg">
-                  <img 
-                    src={center.image} 
-                    alt={center.name}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute top-4 right-4 bg-background/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center gap-1">
-                    <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                    <span className="text-sm font-medium">{center.rating}</span>
-                  </div>
-                </div>
-                
-                <CardHeader>
-                  <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
-                    {center.name}
-                  </CardTitle>
-                  <CardDescription className="flex items-center gap-1 text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    {center.location}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="space-y-4">
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {center.description}
+            <div className="relative bg-card/50 backdrop-blur-sm rounded-xl border border-border/50 overflow-hidden" style={{ height: '500px' }}>
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
+                <div className="text-center space-y-4">
+                  <MapPin className="h-20 w-20 text-primary mx-auto animate-pulse" />
+                  <h3 className="text-3xl font-bold text-foreground">Coming Soon</h3>
+                  <p className="text-lg text-muted-foreground max-w-md">
+                    We're working on an interactive map to help you find treatment centers near you.
                   </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {center.specialties.slice(0, 3).map((specialty, index) => (
-                      <Badge key={index} variant="secondary" className="text-xs">
-                        {specialty}
-                      </Badge>
-                    ))}
-                    {center.specialties.length > 3 && (
-                      <Badge variant="outline" className="text-xs">
-                        +{center.specialties.length - 3} more
-                      </Badge>
-                    )}
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                    {center.accreditation.map((acc, index) => (
-                      <span key={index} className="bg-accent/10 px-2 py-1 rounded">
-                        {acc}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="flex gap-2 pt-4">
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="flex-1"
-                      onClick={() => window.open(`tel:${center.phone}`, '_self')}
-                    >
-                      <Phone className="h-4 w-4 mr-2" />
-                      Call
-                    </Button>
-                    <Button 
-                      variant="secondary" 
-                      size="sm" 
-                      className="flex-1"
-                      onClick={() => window.open(`https://${center.website}`, '_blank', 'noopener,noreferrer')}
-                    >
-                      <Globe className="h-4 w-4 mr-2" />
-                      Visit
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {filteredCenters.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">No treatment centers found matching your criteria.</p>
-              <Button 
-                variant="outline" 
-                onClick={() => {
-                  setSelectedState("all");
-                  setSelectedSpecialty("all");
-                }}
-                className="mt-4"
-              >
-                Clear Filters
-              </Button>
+                </div>
+              </div>
             </div>
-          )}
         </div>
       </section>
 
