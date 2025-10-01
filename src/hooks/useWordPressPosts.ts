@@ -72,7 +72,7 @@ interface UseWordPressPostsReturn {
   totalPostsCount: number;
 }
 
-const WORDPRESS_API_URL = 'https://geniusrecovery.org/wp-json/wp/v2/posts';
+const WORDPRESS_API_URL = 'https://blog.geniusrecovery.org/wp-json/wp/v2/posts';
 
 // Function to strip HTML tags and get plain text
 const stripHtml = (html: string): string => {
