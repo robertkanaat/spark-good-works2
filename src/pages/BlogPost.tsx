@@ -277,7 +277,7 @@ const BlogPost = () => {
       <Header />
       
       {/* Hero Section - Above the fold for SEO */}
-      <section className="relative py-20 bg-gradient-to-br from-primary/10 via-background to-orange-500/10">
+      <section className="relative py-8 md:py-20 bg-gradient-to-br from-primary/10 via-background to-orange-500/10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Back Button */}
@@ -369,7 +369,7 @@ const BlogPost = () => {
       </section>
 
       {/* Article Content */}
-      <section className="py-16">
+      <section className="py-8 md:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
