@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake, Mic, ClipboardCheck } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake, Mic, ClipboardCheck, ChevronDown, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
@@ -19,12 +19,20 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [userProfile, setUserProfile] = useState<any>(null);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [supportOpen, setSupportOpen] = useState(false);
+  const [recoveryOpen, setRecoveryOpen] = useState(false);
   const location = useLocation();
 
   // Helper function to check if a route is active
@@ -519,51 +527,59 @@ const Header = () => {
                   </div>
                   
                    <div className="flex flex-col gap-3">
-                     {/* About Section */}
-                     <Link 
-                       to="/about" 
-                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
-                         isActiveRoute('/about')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       ABOUT
-                     </Link>
-                     <Link 
-                       to="/open-letter" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/open-letter')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Open Letter
-                     </Link>
-                     <Link 
-                       to="/press" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/press')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Press & Media
-                     </Link>
-                     <Link 
-                       to="/speakers" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/speakers')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Book Our Speakers
-                     </Link>
+                     {/* About Section - Collapsible */}
+                     <Collapsible open={aboutOpen} onOpenChange={setAboutOpen}>
+                       <CollapsibleTrigger className="flex items-center justify-between w-full text-lg font-medium px-4 py-3 rounded-md transition-colors text-foreground hover:text-primary hover:bg-muted">
+                         ABOUT
+                         {aboutOpen ? <ChevronDown className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
+                       </CollapsibleTrigger>
+                       <CollapsibleContent className="flex flex-col gap-2 mt-2">
+                         <Link 
+                           to="/about" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/about')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Our Story
+                         </Link>
+                         <Link 
+                           to="/open-letter" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/open-letter')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Open Letter
+                         </Link>
+                         <Link 
+                           to="/press" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/press')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Press & Media
+                         </Link>
+                         <Link 
+                           to="/speakers" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/speakers')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Book Our Speakers
+                         </Link>
+                       </CollapsibleContent>
+                     </Collapsible>
 
                      {/* Emergency */}
                      <Link 
@@ -581,150 +597,163 @@ const Header = () => {
                        }`}></div>
                      </Link>
 
-                     {/* Support Section */}
-                     <div className="text-lg font-medium px-4 py-3 text-foreground">
-                       SUPPORT
-                     </div>
-                     <div className="text-xs font-semibold px-6 py-1 text-muted-foreground uppercase tracking-wider">
-                       Get Support
-                     </div>
-                     <Link 
-                       to="/family-support" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/family-support')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Family Support
-                     </Link>
-                     <Link 
-                       to="/treatment-centers" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/treatment-centers')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Treatment Centers
-                     </Link>
-                     <Link 
-                       to="/support-groups" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/support-groups')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Support Groups
-                     </Link>
-                     <div className="text-xs font-semibold px-6 py-1 text-muted-foreground uppercase tracking-wider mt-2">
-                       Give Support
-                     </div>
-                     <Link 
-                       to="/donation" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/donation')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Donate
-                     </Link>
-                     <Link 
-                       to="/volunteer" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/volunteer')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Volunteer
-                     </Link>
-                     <Link 
-                       to="/donors" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/donors')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Donors
-                     </Link>
+                     {/* Support Section - Collapsible */}
+                     <Collapsible open={supportOpen} onOpenChange={setSupportOpen}>
+                       <CollapsibleTrigger className="flex items-center justify-between w-full text-lg font-medium px-4 py-3 rounded-md transition-colors text-foreground hover:text-primary hover:bg-muted">
+                         SUPPORT
+                         {supportOpen ? <ChevronDown className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
+                       </CollapsibleTrigger>
+                       <CollapsibleContent className="flex flex-col gap-2 mt-2">
+                         <div className="text-xs font-semibold px-6 py-1 text-muted-foreground uppercase tracking-wider">
+                           Get Support
+                         </div>
+                         <Link 
+                           to="/family-support" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/family-support')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Family Support
+                         </Link>
+                         <Link 
+                           to="/treatment-centers" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/treatment-centers')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Treatment Centers
+                         </Link>
+                         <Link 
+                           to="/support-groups" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/support-groups')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Support Groups
+                         </Link>
+                         <div className="text-xs font-semibold px-6 py-1 text-muted-foreground uppercase tracking-wider mt-2">
+                           Give Support
+                         </div>
+                         <Link 
+                           to="/donation" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/donation')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Donate
+                         </Link>
+                         <Link 
+                           to="/volunteer" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/volunteer')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Volunteer
+                         </Link>
+                         <Link 
+                           to="/donors" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/donors')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Donors
+                         </Link>
+                       </CollapsibleContent>
+                     </Collapsible>
 
-                     {/* Recovery Section */}
-                     <Link 
-                       to="/resources" 
-                       className={`text-lg font-medium px-4 py-3 rounded-md transition-colors ${
-                         isActiveRoute('/resources')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       RECOVERY
-                     </Link>
-                     <Link 
-                       to="/ai-companion" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/ai-companion')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       AI Companion
-                     </Link>
-                     <Link 
-                       to="/recovery-quiz" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/recovery-quiz')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Assessment Quiz
-                     </Link>
-                     <Link 
-                       to="/education" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/education')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Education
-                     </Link>
-                     <Link 
-                       to="/recovery-tools" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/recovery-tools')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       Recovery Tools
-                     </Link>
-                     <Link 
-                       to="/faq" 
-                       className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
-                         isActiveRoute('/faq')
-                           ? 'text-primary bg-primary/10'
-                           : 'text-muted-foreground hover:text-primary hover:bg-muted'
-                       }`}
-                       onClick={() => setIsOpen(false)}
-                     >
-                       FAQ
-                     </Link>
+                     {/* Recovery Section - Collapsible */}
+                     <Collapsible open={recoveryOpen} onOpenChange={setRecoveryOpen}>
+                       <CollapsibleTrigger className="flex items-center justify-between w-full text-lg font-medium px-4 py-3 rounded-md transition-colors text-foreground hover:text-primary hover:bg-muted">
+                         RECOVERY
+                         {recoveryOpen ? <ChevronDown className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
+                       </CollapsibleTrigger>
+                       <CollapsibleContent className="flex flex-col gap-2 mt-2">
+                         <Link 
+                           to="/resources" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/resources')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Resources
+                         </Link>
+                         <Link 
+                           to="/ai-companion" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/ai-companion')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           AI Companion
+                         </Link>
+                         <Link 
+                           to="/recovery-quiz" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/recovery-quiz')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Assessment Quiz
+                         </Link>
+                         <Link 
+                           to="/education" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/education')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Education
+                         </Link>
+                         <Link 
+                           to="/recovery-tools" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/recovery-tools')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Recovery Tools
+                         </Link>
+                         <Link 
+                           to="/faq" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/faq')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           FAQ
+                         </Link>
+                       </CollapsibleContent>
+                     </Collapsible>
 
                      {/* Blog */}
                      <Link 
