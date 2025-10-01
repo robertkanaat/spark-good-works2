@@ -6,6 +6,7 @@ import { Toaster as ShadcnToaster } from '@/components/ui/toaster';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import ScrollToTop from '@/components/ScrollToTop';
+import { useEffect } from 'react';
 import Index from './pages/Index';
 import About from './pages/About';
 import Support from './pages/Support';
@@ -52,6 +53,91 @@ const queryClient = new QueryClient({
 
 const App = () => {
   console.log('App.tsx: Rendering App component');
+  
+  useEffect(() => {
+    // Add Delphi custom styles
+    const style = document.createElement('style');
+    style.textContent = `
+      .grecaptcha-badge { 
+        visibility: hidden; 
+      }
+      
+      #delphi-bubble-trigger {
+        width: 111px !important;
+        height: 111px !important;
+        position: relative !important;
+        background: 0 0 / 100% no-repeat, #FF6A27 !important;
+        border: 5px solid #FF6A27 !important;
+      }
+
+      #delphi-bubble-trigger[data-is-open="false"] {
+        background-color: #000 !important;
+      }
+
+      #delphi-bubble-trigger::after {
+        content: "GET\\AHELP" !important;
+        position: absolute;
+        color: #fff !important;
+        font-weight: 800 !important;
+        text-align: center !important;
+        line-height: 1.1em !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.2em !important;
+        white-space: pre !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Configure Delphi
+    (window as any).delphi = {...((window as any).delphi ?? {}) };
+    (window as any).delphi.bubble = {
+      config: "c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5",
+      trigger: {
+        color: "#FF6A27",
+      },
+    };
+
+    // Create config script tag
+    const configScript = document.createElement('script');
+    configScript.id = 'delphi-bubble-script';
+    document.head.appendChild(configScript);
+
+    // Load Delphi widget
+    const loadDelphi = () => {
+      const r = window;
+      const a = document;
+      
+      if (!(r as any).delphi || (typeof (r as any).delphi?.bubble === "undefined" && typeof (r as any).delphi?.page === "undefined")) {
+        console.error("Invalid or missing delphi object");
+        return;
+      }
+      
+      if ((r as any).delphi.bubble && !a.getElementById("delphi-bubble-container")) {
+        const script = a.createElement("script");
+        script.src = "https://embed.delphi.ai/widget.js";
+        script.type = "text/javascript";
+        script.async = true;
+        script.defer = true;
+        if ((r as any)?.delphi?.bubble?.config) {
+          script.setAttribute("data-config", (r as any).delphi.bubble.config);
+        }
+        const configEl = a.getElementById("delphi-bubble-script");
+        if (configEl && configEl.parentNode) {
+          configEl.parentNode.insertBefore(script, configEl);
+        }
+      }
+    };
+
+    if (document.readyState === "complete") {
+      loadDelphi();
+    } else {
+      window.addEventListener("load", loadDelphi);
+      return () => window.removeEventListener("load", loadDelphi);
+    }
+  }, []);
+
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
