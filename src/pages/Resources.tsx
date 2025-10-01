@@ -168,20 +168,20 @@ const Resources = () => {
               </p>
               
               <div className="flex flex-wrap justify-center gap-6 mb-12">
-                <Badge variant="secondary" className="px-8 py-4 text-lg bg-background/80 backdrop-blur-md border-primary/30 hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-2xl">
-                  <Shield className="w-6 h-6 mr-3" />
+                <Badge variant="secondary" className="px-4 py-2 text-sm md:px-8 md:py-4 md:text-lg bg-background/80 backdrop-blur-md border-primary/30 hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-2xl">
+                  <Shield className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
                   Crisis Support 24/7
                 </Badge>
-                <Badge variant="secondary" className="px-8 py-4 text-lg bg-background/80 backdrop-blur-md border-secondary/30 hover:scale-110 hover:bg-secondary hover:text-secondary-foreground transition-all duration-500 shadow-2xl">
-                  <Users className="w-6 h-6 mr-3" />
+                <Badge variant="secondary" className="px-4 py-2 text-sm md:px-8 md:py-4 md:text-lg bg-background/80 backdrop-blur-md border-secondary/30 hover:scale-110 hover:bg-secondary hover:text-secondary-foreground transition-all duration-500 shadow-2xl">
+                  <Users className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
                   Community Networks
                 </Badge>
-                <Badge variant="secondary" className="px-8 py-4 text-lg bg-background/80 backdrop-blur-md border-accent/30 hover:scale-110 hover:bg-accent hover:text-accent-foreground transition-all duration-500 shadow-2xl">
-                  <Globe className="w-6 h-6 mr-3" />
+                <Badge variant="secondary" className="px-4 py-2 text-sm md:px-8 md:py-4 md:text-lg bg-background/80 backdrop-blur-md border-accent/30 hover:scale-110 hover:bg-accent hover:text-accent-foreground transition-all duration-500 shadow-2xl">
+                  <Globe className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
                   Global Resources
                 </Badge>
-                <Badge variant="secondary" className="px-8 py-4 text-lg bg-background/80 backdrop-blur-md border-primary/30 hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-2xl">
-                  <BookOpen className="w-6 h-6 mr-3" />
+                <Badge variant="secondary" className="px-4 py-2 text-sm md:px-8 md:py-4 md:text-lg bg-background/80 backdrop-blur-md border-primary/30 hover:scale-110 hover:bg-primary hover:text-primary-foreground transition-all duration-500 shadow-2xl">
+                  <BookOpen className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
                   Educational Tools
                 </Badge>
               </div>
