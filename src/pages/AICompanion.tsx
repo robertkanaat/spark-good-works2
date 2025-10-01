@@ -27,7 +27,9 @@ const AICompanion = () => {
       document.head.appendChild(meta);
     }
 
-    // Initialize Delphi AI widget
+    console.log('Initializing Delphi widget...');
+
+    // Initialize Delphi configuration
     (window as any).delphi = {...((window as any).delphi ?? {}) };
     (window as any).delphi.bubble = {
       config: "c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5",
@@ -36,40 +38,70 @@ const AICompanion = () => {
       },
     };
 
-    // Load Delphi widget script
-    const initDelphiWidget = () => {
-      if (!(window as any).delphi || (typeof (window as any).delphi?.bubble === "undefined" && typeof (window as any).delphi?.page === "undefined")) {
-        console.error("Invalid or missing delphi object");
-        return;
-      }
+    console.log('Delphi config set:', (window as any).delphi);
 
-      if ((window as any).delphi.bubble && !document.getElementById("delphi-bubble-container")) {
-        const script = document.createElement("script");
-        script.src = "https://embed.delphi.ai/widget.js";
-        script.type = "text/javascript";
-        script.async = true;
-        script.defer = true;
-        if ((window as any)?.delphi?.bubble?.config) {
-          script.setAttribute("data-config", (window as any).delphi.bubble.config);
+    // Create the config script tag with ID
+    const configScript = document.createElement('script');
+    configScript.id = 'delphi-bubble-script';
+    configScript.textContent = `
+      window.delphi = {...(window.delphi ?? {}) };
+      window.delphi.bubble = {
+        config: "c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5",
+        trigger: {
+          color: "#FF6A27",
+        },
+      };
+    `;
+    document.head.appendChild(configScript);
+
+    // Load initialization script
+    const initScript = document.createElement('script');
+    initScript.textContent = `
+      (function(){
+        var r=window;
+        var a=document;
+        var e=function(){
+          console.log('Delphi init function called');
+          if(!r.delphi||typeof r.delphi?.bubble==="undefined"&&typeof r.delphi?.page==="undefined"){
+            console.error("Invalid or missing delphi object. Must have a 'bubble' or 'page' property.");
+            throw new Error("Invalid or missing delphi object. Must have a 'bubble' or 'page' property.")
+          }
+          if(r.delphi.bubble&&!a.getElementById("delphi-bubble-container")){
+            console.log('Creating bubble widget script');
+            var e=a.createElement("script");
+            e.src="https://embed.delphi.ai/widget.js";
+            e.type="text/javascript";
+            e["async"]=true;
+            e.defer=true;
+            if(r?.delphi?.bubble?.config){
+              e.setAttribute("data-config",r.delphi.bubble.config)
+            }
+            var i=a.getElementById("delphi-bubble-script");
+            if(!i){
+              console.error("Script tag with id 'delphi-bubble-script' not found.");
+              throw new Error("Script tag with id 'delphi-bubble-script' not found.")
+            }
+            i.parentNode.insertBefore(e,i);
+            console.log('Delphi widget script inserted');
+          }
+        };
+        if(a.readyState==="complete"){
+          e()
+        }else if(r.attachEvent){
+          r.attachEvent("onload",e)
+        }else{
+          r.addEventListener("load",e,false)
         }
-        document.body.appendChild(script);
-      }
-    };
-
-    if (document.readyState === "complete") {
-      initDelphiWidget();
-    } else {
-      window.addEventListener("load", initDelphiWidget);
-    }
+      })();
+    `;
+    document.head.appendChild(initScript);
 
     // Add style to hide grecaptcha badge
     const style = document.createElement('style');
     style.textContent = '.grecaptcha-badge { visibility: hidden; }';
     document.head.appendChild(style);
 
-    return () => {
-      window.removeEventListener("load", initDelphiWidget);
-    };
+    console.log('Delphi initialization complete');
   }, []);
 
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -170,10 +202,17 @@ const AICompanion = () => {
                 size="lg" 
                 className="group"
                 onClick={() => {
-                  // Trigger Delphi widget
-                  const delphiTrigger = document.querySelector('[data-delphi-trigger]') as HTMLElement;
-                  if (delphiTrigger) {
-                    delphiTrigger.click();
+                  console.log('Start Conversation clicked');
+                  console.log('Looking for Delphi container:', document.getElementById('delphi-bubble-container'));
+                  // Try multiple selectors to find and trigger the Delphi widget
+                  const delphiButton = document.querySelector('#delphi-bubble-container button') as HTMLElement ||
+                                      document.querySelector('[data-delphi-trigger]') as HTMLElement ||
+                                      document.querySelector('.delphi-trigger') as HTMLElement;
+                  console.log('Found Delphi button:', delphiButton);
+                  if (delphiButton) {
+                    delphiButton.click();
+                  } else {
+                    console.error('Delphi widget button not found');
                   }
                 }}
               >
@@ -280,10 +319,16 @@ const AICompanion = () => {
               variant="secondary" 
               className="group"
               onClick={() => {
-                // Trigger Delphi widget
-                const delphiTrigger = document.querySelector('[data-delphi-trigger]') as HTMLElement;
-                if (delphiTrigger) {
-                  delphiTrigger.click();
+                console.log('Begin Chat Now clicked');
+                // Try multiple selectors to find and trigger the Delphi widget
+                const delphiButton = document.querySelector('#delphi-bubble-container button') as HTMLElement ||
+                                    document.querySelector('[data-delphi-trigger]') as HTMLElement ||
+                                    document.querySelector('.delphi-trigger') as HTMLElement;
+                console.log('Found Delphi button:', delphiButton);
+                if (delphiButton) {
+                  delphiButton.click();
+                } else {
+                  console.error('Delphi widget button not found');
                 }
               }}
             >
