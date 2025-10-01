@@ -256,7 +256,7 @@ const Blog = () => {
               <span className="font-medium">Recovery Stories & Resources</span>
             </div>
             
-            <h1 className="text-6xl md:text-7xl font-bold mb-8 leading-tight">
+            <h1 className="text-4xl md:text-7xl font-bold mb-8 leading-tight">
               Stories of <span className="text-primary">Hope & Healing</span>
             </h1>
             <p className="text-2xl text-white/90 mb-12 max-w-3xl mx-auto">
