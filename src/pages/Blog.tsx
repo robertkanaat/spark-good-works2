@@ -368,9 +368,14 @@ const Blog = () => {
                 </Link>
                 
                 <div className="p-12 flex flex-col justify-center">
-                  <h3 className="text-3xl lg:text-4xl font-bold mb-6 leading-tight">
-                    {featuredPost.title}
-                  </h3>
+                  <Link 
+                    to={`/${featuredPost.slug}`}
+                    state={{ from: location.pathname + location.search }}
+                  >
+                    <h3 className="text-3xl lg:text-4xl font-bold mb-6 leading-tight hover:text-primary transition-colors duration-300 cursor-pointer">
+                      {featuredPost.title}
+                    </h3>
+                  </Link>
                   <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
                     {featuredPost.excerpt}
                   </p>
