@@ -26,6 +26,50 @@ const AICompanion = () => {
       meta.content = 'Meet your AI recovery companion. Get 24/7 personalized support, guidance, and resources on your addiction recovery journey. Always available when you need help most.';
       document.head.appendChild(meta);
     }
+
+    // Initialize Delphi AI widget
+    (window as any).delphi = {...((window as any).delphi ?? {}) };
+    (window as any).delphi.bubble = {
+      config: "c061c0ab-f09a-49fa-aa95-d00e7e4dcdf5",
+      trigger: {
+        color: "#FF6A27",
+      },
+    };
+
+    // Load Delphi widget script
+    const initDelphiWidget = () => {
+      if (!(window as any).delphi || (typeof (window as any).delphi?.bubble === "undefined" && typeof (window as any).delphi?.page === "undefined")) {
+        console.error("Invalid or missing delphi object");
+        return;
+      }
+
+      if ((window as any).delphi.bubble && !document.getElementById("delphi-bubble-container")) {
+        const script = document.createElement("script");
+        script.src = "https://embed.delphi.ai/widget.js";
+        script.type = "text/javascript";
+        script.async = true;
+        script.defer = true;
+        if ((window as any)?.delphi?.bubble?.config) {
+          script.setAttribute("data-config", (window as any).delphi.bubble.config);
+        }
+        document.body.appendChild(script);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      initDelphiWidget();
+    } else {
+      window.addEventListener("load", initDelphiWidget);
+    }
+
+    // Add style to hide grecaptcha badge
+    const style = document.createElement('style');
+    style.textContent = '.grecaptcha-badge { visibility: hidden; }';
+    document.head.appendChild(style);
+
+    return () => {
+      window.removeEventListener("load", initDelphiWidget);
+    };
   }, []);
 
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -122,7 +166,17 @@ const AICompanion = () => {
               <h2 className="text-2xl font-bold text-foreground mb-4">
                 Chat With The Genius Recovery AI Clone Now
               </h2>
-              <Button size="lg" className="group">
+              <Button 
+                size="lg" 
+                className="group"
+                onClick={() => {
+                  // Trigger Delphi widget
+                  const delphiTrigger = document.querySelector('[data-delphi-trigger]') as HTMLElement;
+                  if (delphiTrigger) {
+                    delphiTrigger.click();
+                  }
+                }}
+              >
                 <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                 Start Conversation
               </Button>
@@ -221,7 +275,18 @@ const AICompanion = () => {
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
               Take the first step towards personalized recovery support. Your AI companion is ready to help you navigate your journey.
             </p>
-            <Button size="lg" variant="secondary" className="group">
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              className="group"
+              onClick={() => {
+                // Trigger Delphi widget
+                const delphiTrigger = document.querySelector('[data-delphi-trigger]') as HTMLElement;
+                if (delphiTrigger) {
+                  delphiTrigger.click();
+                }
+              }}
+            >
               <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Begin Chat Now
             </Button>
