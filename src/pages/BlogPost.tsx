@@ -127,8 +127,8 @@ const BlogPost = () => {
         const wordpressPosts = await response.json();
         
         if (wordpressPosts.length === 0) {
-          // Post not found, redirect to blog
-          navigate('/blog');
+          setError('Post not found');
+          setIsLoading(false);
           return;
         }
         
@@ -154,7 +154,6 @@ const BlogPost = () => {
       } catch (err) {
         console.error('Error fetching WordPress post:', err);
         setError(err instanceof Error ? err.message : 'Failed to load post');
-        navigate('/blog');
       } finally {
         setIsLoading(false);
       }
