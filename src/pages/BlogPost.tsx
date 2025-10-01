@@ -374,7 +374,7 @@ const BlogPost = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
               {/* Sidebar - Now on the left */}
-              <div className="lg:col-span-1 lg:order-1">
+              <div className="lg:col-span-1 order-2 lg:order-1">
                 <div className="sticky top-8 space-y-8">
                   {/* Share Options */}
                   <Card className="p-6">
@@ -477,7 +477,7 @@ const BlogPost = () => {
               </div>
 
               {/* Main Content - Now on the right */}
-              <div className="lg:col-span-3 lg:order-2">
+              <div className="lg:col-span-3 order-1 lg:order-2">
                 <Card className="p-8 md:p-12 shadow-elegant">
                   <div 
                     className="space-y-8 text-lg leading-relaxed"
