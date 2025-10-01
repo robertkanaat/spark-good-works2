@@ -42,7 +42,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-hero-overlay/60"></div>
       </LazyBackgroundImage>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Mission statement and action buttons */}
           <div>
@@ -52,7 +52,7 @@ const HeroSection = () => {
               </span>
             </div>
             
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-snug sm:leading-tight">
+            <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-snug sm:leading-tight">
               On A Mission To{" "}
               <span className="text-primary">Change The Way The World Understands & Treats Addiction</span>{" "}
               One Human At A Time
