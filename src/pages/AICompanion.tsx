@@ -27,9 +27,27 @@ const AICompanion = () => {
       document.head.appendChild(meta);
     }
 
-    // Add style to hide grecaptcha badge
+    // Add style to hide grecaptcha badge and customize Delphi bubble
     const style = document.createElement('style');
-    style.textContent = '.grecaptcha-badge { visibility: hidden; }';
+    style.textContent = `
+      .grecaptcha-badge { 
+        visibility: hidden; 
+      }
+      /* Customize Delphi bubble text */
+      #delphi-bubble-container button span,
+      #delphi-bubble-container button div,
+      [data-delphi-trigger] span,
+      [data-delphi-trigger] div {
+        font-size: 0 !important;
+      }
+      #delphi-bubble-container button::after,
+      [data-delphi-trigger]::after {
+        content: 'GET HELP' !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        display: block !important;
+      }
+    `;
     document.head.appendChild(style);
 
     // Load Delphi widget script directly
@@ -149,9 +167,21 @@ const AICompanion = () => {
               <h2 className="text-2xl font-bold text-foreground mb-4">
                 Chat With The Genius Recovery AI Clone Now
               </h2>
-              <p className="text-muted-foreground">
-                Look for the orange chat bubble in the bottom right corner of your screen to start a conversation with the AI companion.
-              </p>
+              <Button 
+                size="lg" 
+                className="group"
+                onClick={() => {
+                  // Try multiple selectors to find and trigger the Delphi widget
+                  const delphiButton = document.querySelector('#delphi-bubble-container button') as HTMLElement ||
+                                      document.querySelector('[data-delphi-trigger]') as HTMLElement;
+                  if (delphiButton) {
+                    delphiButton.click();
+                  }
+                }}
+              >
+                <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                Start Conversation
+              </Button>
             </div>
           </div>
         </section>
@@ -248,8 +278,24 @@ const AICompanion = () => {
               Take the first step towards personalized recovery support. Your AI companion is ready to help you navigate your journey.
             </p>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Click the orange chat bubble in the bottom right corner to begin your conversation with the AI companion.
+              Take the first step towards personalized recovery support. Your AI companion is ready to help you navigate your journey.
             </p>
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              className="group"
+              onClick={() => {
+                // Try multiple selectors to find and trigger the Delphi widget
+                const delphiButton = document.querySelector('#delphi-bubble-container button') as HTMLElement ||
+                                    document.querySelector('[data-delphi-trigger]') as HTMLElement;
+                if (delphiButton) {
+                  delphiButton.click();
+                }
+              }}
+            >
+              <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              Begin Chat Now
+            </Button>
           </div>
         </section>
       </main>
