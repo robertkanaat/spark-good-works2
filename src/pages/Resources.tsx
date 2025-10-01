@@ -152,7 +152,7 @@ const Resources = () => {
                 </div>
               </div>
               
-              <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight drop-shadow-sm">
+              <h1 className="text-4xl md:text-8xl font-bold mb-8 leading-tight drop-shadow-sm">
                 <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-fade-in">
                   Recovery Resources
                 </span>
@@ -162,7 +162,7 @@ const Resources = () => {
                 </span>
               </h1>
               
-              <p className="text-2xl text-white/90 mb-12 leading-relaxed max-w-4xl mx-auto font-medium drop-shadow-sm">
+              <p className="text-lg md:text-2xl text-white/90 mb-12 leading-relaxed max-w-4xl mx-auto font-medium drop-shadow-sm">
                 Your comprehensive gateway to healing, growth, and lasting recovery. 
                 <span className="text-primary font-semibold">Discover resources, connect with support, and transform your journey.</span>
               </p>
