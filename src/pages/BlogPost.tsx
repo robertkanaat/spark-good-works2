@@ -112,7 +112,7 @@ const BlogPost = () => {
         
         // If not found, fetch directly from WordPress API
         const response = await fetch(
-          `https://geniusrecovery.org/wp-json/wp/v2/posts?_embed&slug=${slug}`,
+          `https://blog.geniusrecovery.org/wp-json/wp/v2/posts?_embed&slug=${slug}`,
           {
             headers: {
               'Accept': 'application/json',
