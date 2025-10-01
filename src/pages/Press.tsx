@@ -124,23 +124,23 @@ const Press = () => {
                 <div className="flex items-center gap-4 text-white">
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-primary" />
-                    <span className="text-lg font-medium">Comprehensive Media Kit</span>
+                    <span className="text-lg font-medium">Expert Interviews Available</span>
                   </div>
                   <div className="w-2 h-2 bg-white/40 rounded-full"></div>
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-primary" />
-                    <span className="text-lg font-medium">Expert Interviews Available</span>
+                    <span className="text-lg font-medium">24/7 Press Support</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 text-white">
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-primary" />
-                    <span className="text-lg font-medium">24/7 Press Support</span>
+                    <span className="text-lg font-medium">Media Resources</span>
                   </div>
                   <div className="w-2 h-2 bg-white/40 rounded-full"></div>
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-6 h-6 text-primary" />
-                    <span className="text-lg font-medium">High-Res Assets</span>
+                    <span className="text-lg font-medium">Press Team Available</span>
                   </div>
                 </div>
               </div>
@@ -151,21 +151,6 @@ const Press = () => {
                   size="lg" 
                   className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-2xl hover:shadow-primary/30 group"
                   onClick={() => {
-                    window.open('https://lhwxxzxdsrykvznrtigf.supabase.co/storage/v1/object/public/press-materials/Genius%20Recovery%20Media%20Kit.pdf', '_blank');
-                  }}
-                >
-                  <span className="relative">
-                    Download Media Kit
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white/50 transition-all duration-300 group-hover:w-full"></span>
-                  </span>
-                  <Download className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-y-0.5" />
-                </Button>
-                
-                <Button 
-                  variant="outline" 
-                  size="lg" 
-                  className="border-white/30 text-white hover:bg-white/10 hover:text-white px-8 py-6 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 group bg-black/20"
-                  onClick={() => {
                     document.getElementById('media-contacts')?.scrollIntoView({ 
                       behavior: 'smooth',
                       block: 'start' 
@@ -174,6 +159,18 @@ const Press = () => {
                 >
                   Contact Press Team
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                </Button>
+                
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="border-white/30 text-white hover:bg-white/10 hover:text-white px-8 py-6 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 group bg-black/20"
+                  asChild
+                >
+                  <Link to="/blog">
+                    View Latest News
+                    <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -260,72 +257,6 @@ const Press = () => {
         </div>
       </section>
       */}
-
-      {/* Media Kit Section */}
-      <section className="py-16 bg-muted/50" id="media-kit">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Media Kit
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Download our media kit or get in touch with us below
-            </p>
-          </div>
-
-          {/* Complete Media Kit Download */}
-          <div className="mb-12">
-            <Card className="p-8 text-center bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Download className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">
-                Complete Media Kit
-              </h3>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Download our comprehensive media kit containing logos, brand guidelines, fact sheets, 
-                executive photos, and everything you need for your story.
-              </p>
-              <Button 
-                size="lg" 
-                className="bg-primary hover:bg-primary/90 text-white px-8 py-4 gap-3 hover:scale-105 transition-all duration-300"
-                onClick={() => {
-                  window.open('https://lhwxxzxdsrykvznrtigf.supabase.co/storage/v1/object/public/press-materials/Genius%20Recovery%20Media%20Kit.pdf', '_blank');
-                }}
-              >
-                <Download className="w-5 h-5" />
-                Download Media Kit (PDF)
-              </Button>
-            </Card>
-          </div>
-
-          {/* Individual Asset Downloads - Hidden temporarily */}
-          {/* 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {mediaKit.map((item, index) => (
-              <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow duration-300">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <FileText className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">
-                  {item.name}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-3">
-                  {item.description}
-                </p>
-                <div className="text-xs text-muted-foreground mb-4">
-                  {item.fileSize}
-                </div>
-                <Button variant="outline" size="sm" className="w-full gap-2">
-                  <Download className="w-4 h-4" />
-                  Download
-                </Button>
-              </Card>
-            ))}
-          </div>
-          */}
-        </div>
-      </section>
 
       {/* Contact Information */}
       <section className="py-16" id="media-contacts">
