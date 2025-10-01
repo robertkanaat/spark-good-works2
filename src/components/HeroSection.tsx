@@ -160,7 +160,7 @@ const HeroSection = () => {
             <Card className="p-8 bg-white/95 backdrop-blur-sm max-w-lg w-full min-h-[520px] flex flex-col">
               {activeView === 'donate' && (
                 <>
-                  <h3 className="text-2xl font-bold mb-6 text-center">Choose An Amount To Support Genius Recovery</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center">Choose An Amount To Support Genius Recovery</h3>
                   
                   <div className="grid grid-cols-2 gap-3 mb-6">
                     {presetAmounts.map((amount) => (
