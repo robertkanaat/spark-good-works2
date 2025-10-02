@@ -121,7 +121,7 @@ const RecoveryTools = () => {
       title: "The Big Book (AA)",
       description: "The foundational text of Alcoholics Anonymous, available in digital format",
       icon: BookOpen,
-      downloadLink: "https://www.aa.org/sites/default/files/literature/assets/p-10_theaabigbook_en.pdf",
+      downloadLink: "https://wagga.aagroup.org.au/wp-content/uploads/2016/02/AA-Big-Book-4th-edition.pdf",
       type: "PDF/eBook",
       topics: ["12 Steps", "Personal stories", "Recovery principles", "Spiritual awakening"]
     },
