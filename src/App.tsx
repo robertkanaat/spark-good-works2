@@ -159,19 +159,21 @@ const App = () => {
           configEl.parentNode.insertBefore(script, configEl);
         }
 
-        // Add close button after Delphi loads
+        // Add close button and click-outside handler after Delphi loads
         setTimeout(() => {
+          const closePopup = () => {
+            const trigger = document.getElementById('delphi-bubble-trigger') as HTMLElement;
+            if (trigger && trigger.getAttribute('data-is-open') === 'true') {
+              trigger.click();
+            }
+          };
+
           if (!document.getElementById('delphi-close-button')) {
             const closeButton = document.createElement('button');
             closeButton.id = 'delphi-close-button';
             closeButton.innerHTML = '×';
             closeButton.setAttribute('aria-label', 'Close help popup');
-            closeButton.addEventListener('click', () => {
-              const trigger = document.getElementById('delphi-bubble-trigger') as HTMLElement;
-              if (trigger) {
-                trigger.click();
-              }
-            });
+            closeButton.addEventListener('click', closePopup);
             document.body.appendChild(closeButton);
 
             // Watch for changes to the trigger's data-is-open attribute
@@ -179,6 +181,7 @@ const App = () => {
               const trigger = document.getElementById('delphi-bubble-trigger');
               if (trigger) {
                 const isOpen = trigger.getAttribute('data-is-open') === 'true';
+                console.log('Delphi popup state:', isOpen ? 'open' : 'closed');
                 if (isOpen) {
                   closeButton.classList.add('show');
                 } else {
@@ -187,15 +190,41 @@ const App = () => {
               }
             });
 
-            // Start observing the trigger button
-            const triggerToObserve = document.getElementById('delphi-bubble-trigger');
-            if (triggerToObserve) {
-              observer.observe(triggerToObserve, {
-                attributes: true,
-                attributeFilter: ['data-is-open']
-              });
+            // Start observing - check multiple times if needed
+            const startObserving = () => {
+              const triggerToObserve = document.getElementById('delphi-bubble-trigger');
+              if (triggerToObserve) {
+                observer.observe(triggerToObserve, {
+                  attributes: true,
+                  attributeFilter: ['data-is-open']
+                });
+                console.log('Delphi observer started');
+                return true;
+              }
+              return false;
+            };
+
+            // Try immediately and retry if needed
+            if (!startObserving()) {
+              setTimeout(startObserving, 500);
+              setTimeout(startObserving, 1000);
             }
           }
+
+          // Add click-outside-to-close functionality
+          document.addEventListener('click', (e) => {
+            const trigger = document.getElementById('delphi-bubble-trigger');
+            const container = document.getElementById('delphi-bubble-container');
+            const closeButton = document.getElementById('delphi-close-button');
+            
+            if (trigger && container && trigger.getAttribute('data-is-open') === 'true') {
+              const target = e.target as HTMLElement;
+              // Close if clicking outside the container, trigger, and close button
+              if (!container.contains(target) && !trigger.contains(target) && target !== closeButton) {
+                closePopup();
+              }
+            }
+          });
         }, 1000);
       }
     };
