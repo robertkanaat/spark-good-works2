@@ -122,7 +122,7 @@ const RecoveryTools = () => {
       title: "The Big Book (AA)",
       description: "The foundational text of Alcoholics Anonymous, available in digital format",
       icon: BookOpen,
-      downloadLink: "https://wagga.aagroup.org.au/wp-content/uploads/2016/02/AA-Big-Book-4th-edition.pdf",
+      downloadLink: "https://www.aa.org/the-big-book",
       type: "PDF/eBook",
       topics: ["12 Steps", "Personal stories", "Recovery principles", "Spiritual awakening"]
     },
@@ -406,8 +406,8 @@ const RecoveryTools = () => {
 
                     <a href={resource.downloadLink} target="_blank" rel="noopener noreferrer">
                       <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        {(resource.title === "SMART Recovery Handbook" || resource.title === "Recovery Workbook Collection" || resource.title === "Mindfulness in Recovery Guide") ? "View Resource" : "Download Resource"}
-                        {(resource.title === "SMART Recovery Handbook" || resource.title === "Recovery Workbook Collection" || resource.title === "Mindfulness in Recovery Guide") ? (
+                        {(resource.title === "The Big Book (AA)" || resource.title === "SMART Recovery Handbook" || resource.title === "Recovery Workbook Collection" || resource.title === "Mindfulness in Recovery Guide") ? "View Resource" : "Download Resource"}
+                        {(resource.title === "The Big Book (AA)" || resource.title === "SMART Recovery Handbook" || resource.title === "Recovery Workbook Collection" || resource.title === "Mindfulness in Recovery Guide") ? (
                           <ShoppingCart className="w-5 h-5 ml-2" />
                         ) : (
                           <Download className="w-5 h-5 ml-2" />
