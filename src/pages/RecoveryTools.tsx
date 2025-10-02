@@ -15,6 +15,7 @@ import {
   Shield, 
   Users, 
   CheckCircle, 
+  ShoppingCart,
   Download,
   Target,
   Zap,
@@ -405,8 +406,12 @@ const RecoveryTools = () => {
 
                     <a href={resource.downloadLink} target="_blank" rel="noopener noreferrer">
                       <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        Download Resource
-                        <Download className="w-5 h-5 ml-2" />
+                        {resource.title === "SMART Recovery Handbook" ? "View Resource" : "Download Resource"}
+                        {resource.title === "SMART Recovery Handbook" ? (
+                          <ShoppingCart className="w-5 h-5 ml-2" />
+                        ) : (
+                          <Download className="w-5 h-5 ml-2" />
+                        )}
                       </Button>
                     </a>
                   </div>
