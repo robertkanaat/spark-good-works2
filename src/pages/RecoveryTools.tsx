@@ -57,7 +57,7 @@ const RecoveryTools = () => {
       features: ["Day counter", "Money saved tracker", "Health improvements", "Achievement system"],
       category: "Tracking",
       iosLink: "https://apps.apple.com/app/quit-now/id483994930",
-      androidLink: "https://play.google.com/store/apps/details?id=com.fewlaps.quitnow"
+      androidLink: "https://play.google.com/store/apps/details?id=com.EAGINsoftware.dejaloYa&hl=en_US&pli=1"
     },
     {
       title: "Ten Percent Happier",
