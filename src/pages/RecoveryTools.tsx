@@ -102,7 +102,7 @@ const RecoveryTools = () => {
       features: ["Multiple counters", "Motivational quotes", "Milestone celebrations", "Progress widgets"],
       category: "Recovery Support",
       iosLink: "https://apps.apple.com/us/app/nomo-sobriety-clocks/id566975787",
-      androidLink: "https://play.google.com/store/apps/details?id=com.wunderbucket.nomo"
+      androidLink: "https://play.google.com/store/apps/details?id=air.com.parkerstech.day&hl=en_US"
     },
     {
       title: "Calm - Meditation & Sleep",
