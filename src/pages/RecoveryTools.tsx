@@ -129,7 +129,7 @@ const RecoveryTools = () => {
       title: "SMART Recovery Handbook",
       description: "Comprehensive guide to SMART Recovery tools and techniques",
       icon: Target,
-      downloadLink: "https://www.smartrecovery.org/wp-content/uploads/2016/06/SMART-Recovery-Handbook-3rd-Edition.pdf",
+      downloadLink: "https://smartrecovery.org/handbooks",
       type: "PDF/Print",
       topics: ["Motivation building", "Urge management", "Rational thinking", "Balanced living"]
     },
