@@ -115,7 +115,7 @@ const App = () => {
         transform: scale(1.1);
       }
 
-      #delphi-bubble-trigger[data-is-open="true"] ~ #delphi-close-button {
+      #delphi-close-button.show {
         display: flex;
       }
     `;
@@ -173,6 +173,28 @@ const App = () => {
               }
             });
             document.body.appendChild(closeButton);
+
+            // Watch for changes to the trigger's data-is-open attribute
+            const observer = new MutationObserver(() => {
+              const trigger = document.getElementById('delphi-bubble-trigger');
+              if (trigger) {
+                const isOpen = trigger.getAttribute('data-is-open') === 'true';
+                if (isOpen) {
+                  closeButton.classList.add('show');
+                } else {
+                  closeButton.classList.remove('show');
+                }
+              }
+            });
+
+            // Start observing the trigger button
+            const triggerToObserve = document.getElementById('delphi-bubble-trigger');
+            if (triggerToObserve) {
+              observer.observe(triggerToObserve, {
+                attributes: true,
+                attributeFilter: ['data-is-open']
+              });
+            }
           }
         }, 1000);
       }
