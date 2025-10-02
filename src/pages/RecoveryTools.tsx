@@ -101,7 +101,7 @@ const RecoveryTools = () => {
       cost: "Free with Premium",
       features: ["Multiple counters", "Motivational quotes", "Milestone celebrations", "Progress widgets"],
       category: "Recovery Support",
-      iosLink: "https://apps.apple.com/app/nomo-sobriety-clocks/id1362617749",
+      iosLink: "https://apps.apple.com/us/app/nomo-sobriety-clocks/id566975787",
       androidLink: "https://play.google.com/store/apps/details?id=com.wunderbucket.nomo"
     },
     {
