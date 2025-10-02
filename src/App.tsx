@@ -88,36 +88,6 @@ const App = () => {
         white-space: pre !important;
       }
 
-      /* Close button for Delphi popup */
-      #delphi-close-button {
-        position: fixed;
-        bottom: 140px;
-        right: 24px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: #FF6A27;
-        border: 2px solid #fff;
-        color: #fff;
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
-        z-index: 9999;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-      }
-
-      #delphi-close-button:hover {
-        background: #000;
-        transform: scale(1.1);
-      }
-
-      #delphi-close-button.show {
-        display: flex;
-      }
     `;
     document.head.appendChild(style);
 
@@ -159,69 +129,19 @@ const App = () => {
           configEl.parentNode.insertBefore(script, configEl);
         }
 
-        // Add close button and click-outside handler after Delphi loads
+        // Add click-outside-to-close functionality after Delphi loads
         setTimeout(() => {
-          const closePopup = () => {
-            const trigger = document.getElementById('delphi-bubble-trigger') as HTMLElement;
-            if (trigger && trigger.getAttribute('data-is-open') === 'true') {
-              trigger.click();
-            }
-          };
-
-          if (!document.getElementById('delphi-close-button')) {
-            const closeButton = document.createElement('button');
-            closeButton.id = 'delphi-close-button';
-            closeButton.innerHTML = '×';
-            closeButton.setAttribute('aria-label', 'Close help popup');
-            closeButton.addEventListener('click', closePopup);
-            document.body.appendChild(closeButton);
-
-            // Watch for changes to the trigger's data-is-open attribute
-            const observer = new MutationObserver(() => {
-              const trigger = document.getElementById('delphi-bubble-trigger');
-              if (trigger) {
-                const isOpen = trigger.getAttribute('data-is-open') === 'true';
-                console.log('Delphi popup state:', isOpen ? 'open' : 'closed');
-                if (isOpen) {
-                  closeButton.classList.add('show');
-                } else {
-                  closeButton.classList.remove('show');
-                }
-              }
-            });
-
-            // Start observing - check multiple times if needed
-            const startObserving = () => {
-              const triggerToObserve = document.getElementById('delphi-bubble-trigger');
-              if (triggerToObserve) {
-                observer.observe(triggerToObserve, {
-                  attributes: true,
-                  attributeFilter: ['data-is-open']
-                });
-                console.log('Delphi observer started');
-                return true;
-              }
-              return false;
-            };
-
-            // Try immediately and retry if needed
-            if (!startObserving()) {
-              setTimeout(startObserving, 500);
-              setTimeout(startObserving, 1000);
-            }
-          }
-
-          // Add click-outside-to-close functionality
+          // Add click-outside-to-close that triggers Delphi's built-in close
           document.addEventListener('click', (e) => {
             const trigger = document.getElementById('delphi-bubble-trigger');
             const container = document.getElementById('delphi-bubble-container');
-            const closeButton = document.getElementById('delphi-close-button');
             
             if (trigger && container && trigger.getAttribute('data-is-open') === 'true') {
               const target = e.target as HTMLElement;
-              // Close if clicking outside the container, trigger, and close button
-              if (!container.contains(target) && !trigger.contains(target) && target !== closeButton) {
-                closePopup();
+              // Close if clicking outside the container and trigger button
+              if (!container.contains(target) && !trigger.contains(target)) {
+                console.log('Clicking outside - closing Delphi popup');
+                trigger.click(); // This triggers Delphi's built-in close
               }
             }
           });
