@@ -87,6 +87,37 @@ const App = () => {
         font-size: 1.2em !important;
         white-space: pre !important;
       }
+
+      /* Close button for Delphi popup */
+      #delphi-close-button {
+        position: fixed;
+        bottom: 140px;
+        right: 24px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #FF6A27;
+        border: 2px solid #fff;
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      #delphi-close-button:hover {
+        background: #000;
+        transform: scale(1.1);
+      }
+
+      #delphi-bubble-trigger[data-is-open="true"] ~ #delphi-close-button {
+        display: flex;
+      }
     `;
     document.head.appendChild(style);
 
@@ -127,6 +158,23 @@ const App = () => {
         if (configEl && configEl.parentNode) {
           configEl.parentNode.insertBefore(script, configEl);
         }
+
+        // Add close button after Delphi loads
+        setTimeout(() => {
+          if (!document.getElementById('delphi-close-button')) {
+            const closeButton = document.createElement('button');
+            closeButton.id = 'delphi-close-button';
+            closeButton.innerHTML = '×';
+            closeButton.setAttribute('aria-label', 'Close help popup');
+            closeButton.addEventListener('click', () => {
+              const trigger = document.getElementById('delphi-bubble-trigger') as HTMLElement;
+              if (trigger) {
+                trigger.click();
+              }
+            });
+            document.body.appendChild(closeButton);
+          }
+        }, 1000);
       }
     };
 
