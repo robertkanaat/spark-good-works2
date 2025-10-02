@@ -137,7 +137,7 @@ const RecoveryTools = () => {
       title: "Recovery Workbook Collection",
       description: "Printable worksheets for tracking progress and building coping skills",
       icon: PenTool,
-      downloadLink: "/resources", // Internal link to resources page
+      downloadLink: "https://cpr.bu.edu/store/the-recovery-workbook/",
       type: "PDF Worksheets",
       topics: ["Trigger identification", "Coping strategies", "Goal setting", "Daily reflections"]
     },
