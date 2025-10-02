@@ -492,9 +492,9 @@ export default function TreatmentCenters() {
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>("all");
 
   const scrollToFeaturedCenters = () => {
-    const featuredSection = document.getElementById('featured-centers');
-    if (featuredSection) {
-      featuredSection.scrollIntoView({ 
+    const mapSection = document.getElementById('treatment-centers-map');
+    if (mapSection) {
+      mapSection.scrollIntoView({ 
         behavior: 'smooth',
         block: 'start'
       });
@@ -875,7 +875,7 @@ export default function TreatmentCenters() {
         </section>
 
         {/* Interactive Map Section */}
-        <section className="py-16 px-4 bg-gradient-to-br from-background/50 to-primary/5">
+        <section id="treatment-centers-map" className="py-16 px-4 bg-gradient-to-br from-background/50 to-primary/5">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-foreground mb-4">
