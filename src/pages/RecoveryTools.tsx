@@ -146,7 +146,7 @@ const RecoveryTools = () => {
       title: "Mindfulness in Recovery Guide",
       description: "Evidence-based mindfulness practices for addiction recovery",
       icon: Brain,
-      downloadLink: "/resources", // Internal link to resources page
+      downloadLink: "https://mindfulnessinrecovery.com/product/the-essential-guidebook-to-mindfulness-in-recovery/",
       type: "PDF Guide",
       topics: ["Meditation techniques", "Mindful awareness", "Stress reduction", "Emotional regulation"]
     }
@@ -406,8 +406,8 @@ const RecoveryTools = () => {
 
                     <a href={resource.downloadLink} target="_blank" rel="noopener noreferrer">
                       <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        {(resource.title === "SMART Recovery Handbook" || resource.title === "Recovery Workbook Collection") ? "View Resource" : "Download Resource"}
-                        {(resource.title === "SMART Recovery Handbook" || resource.title === "Recovery Workbook Collection") ? (
+                        {(resource.title === "SMART Recovery Handbook" || resource.title === "Recovery Workbook Collection" || resource.title === "Mindfulness in Recovery Guide") ? "View Resource" : "Download Resource"}
+                        {(resource.title === "SMART Recovery Handbook" || resource.title === "Recovery Workbook Collection" || resource.title === "Mindfulness in Recovery Guide") ? (
                           <ShoppingCart className="w-5 h-5 ml-2" />
                         ) : (
                           <Download className="w-5 h-5 ml-2" />
