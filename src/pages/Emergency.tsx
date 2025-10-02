@@ -73,9 +73,11 @@ const Emergency = () => {
               variant="outline" 
               className="bg-white/10 border-white/30 text-white hover:bg-white/90 hover:text-primary backdrop-blur-sm px-6 py-4"
               onClick={() => {
-                const overdoseSection = document.querySelector('h2[class*="text-4xl"]:nth-of-type(1)');
+                const overdoseSection = document.getElementById('overdose-recognition');
                 if (overdoseSection) {
-                  overdoseSection.scrollIntoView({ behavior: 'smooth' });
+                  const yOffset = -120; // Offset to show title properly
+                  const y = overdoseSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                  window.scrollTo({top: y, behavior: 'smooth'});
                 }
               }}
             >
