@@ -256,10 +256,10 @@ const Blog = () => {
               <span className="font-medium">Recovery Stories & Resources</span>
             </div>
             
-            <h1 className="text-4xl md:text-7xl font-bold mb-8 leading-tight">
+            <h1 className="text-3xl md:text-7xl font-bold mb-6 md:mb-8 leading-tight">
               Stories of <span className="text-primary">Hope & Healing</span>
             </h1>
-            <p className="text-2xl text-white/90 mb-12 max-w-3xl mx-auto">
+            <p className="text-lg md:text-2xl text-white/90 mb-8 md:mb-12 max-w-3xl mx-auto">
               Real stories, expert insights, and practical resources to support your recovery journey and inspire transformation
             </p>
             
@@ -300,27 +300,27 @@ const Blog = () => {
 
       <div className="container mx-auto px-4 py-20">
         {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-3 gap-4 md:gap-8 mb-20">
           <div className="text-center">
-            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <BookOpen className="w-8 h-8 text-primary" />
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-2 md:mb-4">
+              <BookOpen className="w-6 h-6 md:w-8 md:h-8 text-primary" />
             </div>
-            <div className="text-4xl font-bold text-foreground mb-2">300+</div>
-            <div className="text-muted-foreground">Recovery Stories</div>
+            <div className="text-2xl md:text-4xl font-bold text-foreground mb-1 md:mb-2">300+</div>
+            <div className="text-xs md:text-base text-muted-foreground">Recovery Stories</div>
           </div>
           <div className="text-center">
-            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Heart className="w-8 h-8 text-primary" />
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-2 md:mb-4">
+              <Heart className="w-6 h-6 md:w-8 md:h-8 text-primary" />
             </div>
-            <div className="text-4xl font-bold text-foreground mb-2">10K+</div>
-            <div className="text-muted-foreground">Lives Impacted</div>
+            <div className="text-2xl md:text-4xl font-bold text-foreground mb-1 md:mb-2">10K+</div>
+            <div className="text-xs md:text-base text-muted-foreground">Lives Impacted</div>
           </div>
           <div className="text-center">
-            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="w-8 h-8 text-primary" />
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-2 md:mb-4">
+              <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-primary" />
             </div>
-            <div className="text-4xl font-bold text-foreground mb-2">95%</div>
-            <div className="text-muted-foreground">Hope Restored</div>
+            <div className="text-2xl md:text-4xl font-bold text-foreground mb-1 md:mb-2">95%</div>
+            <div className="text-xs md:text-base text-muted-foreground">Hope Restored</div>
           </div>
         </div>
 
