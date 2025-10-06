@@ -29,6 +29,7 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string>('');
+  const [turnstileKey, setTurnstileKey] = useState(0);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -142,6 +143,9 @@ const Contact = () => {
         subject: "",
         message: ""
       });
+      // Reset Turnstile widget by changing key
+      setTurnstileToken('');
+      setTurnstileKey(prev => prev + 1);
     } else {
       console.error("Function returned unsuccessful response:", data);
       throw new Error(data?.error || 'Failed to send message');
@@ -496,6 +500,7 @@ const Contact = () => {
                   {/* Cloudflare Turnstile */}
                   <div className="flex justify-center my-6">
                     <Turnstile
+                      key={turnstileKey}
                       sitekey="0x4AAAAAAB5Ja4WmfAWnGyJt"
                       onVerify={(token) => setTurnstileToken(token)}
                       onError={() => {
