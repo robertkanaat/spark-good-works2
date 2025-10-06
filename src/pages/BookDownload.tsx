@@ -11,6 +11,7 @@ import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
+import Turnstile from 'react-turnstile';
 
 // Force re-compile - avatars replaced with icons
 
@@ -25,6 +26,7 @@ const BookDownload = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStartTime] = useState(Date.now());
+  const [turnstileToken, setTurnstileToken] = useState<string>('');
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -116,15 +118,29 @@ const BookDownload = () => {
       return;
     }
 
+    // Verify Turnstile token
+    if (!turnstileToken) {
+      toast({
+        title: "Verification Required",
+        description: "Please complete the security verification.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       // Use Supabase client to call edge function
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: {
-          ...formData,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
           subject: 'Book Download Request - Understanding Addiction And Recovery',
-          message: `Book Download Request:\n\nName: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage: ${formData.message}`
+          message: `Book Download Request:\n\nName: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage: ${formData.message}`,
+          turnstileToken: turnstileToken
         }
       });
 
@@ -565,6 +581,24 @@ const BookDownload = () => {
                       onChange={handleInputChange}
                       tabIndex={-1}
                       autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Cloudflare Turnstile */}
+                  <div className="flex justify-center my-6">
+                    <Turnstile
+                      sitekey="0x4AAAAAAB5Ja4WmfAWnGyJt"
+                      onVerify={(token) => setTurnstileToken(token)}
+                      onError={() => {
+                        setTurnstileToken('');
+                        toast({
+                          title: "Verification Error",
+                          description: "Security verification failed. Please try again.",
+                          variant: "destructive",
+                        });
+                      }}
+                      onExpire={() => setTurnstileToken('')}
+                      theme="light"
                     />
                   </div>
 

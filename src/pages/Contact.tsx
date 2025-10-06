@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import resourcesHeroImage from "@/assets/resources-hero-bg.jpg";
 import DOMPurify from "dompurify";
+import Turnstile from 'react-turnstile';
 
 const Contact = () => {
   useEffect(() => {
@@ -27,6 +28,7 @@ const Contact = () => {
   }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string>('');
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -88,6 +90,15 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
+  
+  // Verify Turnstile token
+  if (!turnstileToken) {
+    toast.error("Verification Required", {
+      description: "Please complete the security verification.",
+    });
+    return;
+  }
+  
   setIsSubmitting(true);
   try {
     // Additional validation before submission
@@ -100,7 +111,10 @@ const Contact = () => {
       throw new Error('Please enter a valid email address');
     }
     const { data, error } = await supabase.functions.invoke('send-contact-email', {
-      body: formData,
+      body: {
+        ...formData,
+        turnstileToken: turnstileToken
+      },
     });
     
     console.log("Supabase response:", { data, error });
@@ -479,7 +493,23 @@ const Contact = () => {
                     </div>
                   </div>
                   
-                  <Button 
+                  {/* Cloudflare Turnstile */}
+                  <div className="flex justify-center my-6">
+                    <Turnstile
+                      sitekey="0x4AAAAAAB5Ja4WmfAWnGyJt"
+                      onVerify={(token) => setTurnstileToken(token)}
+                      onError={() => {
+                        setTurnstileToken('');
+                        toast.error("Verification Error", {
+                          description: "Security verification failed. Please try again.",
+                        });
+                      }}
+                      onExpire={() => setTurnstileToken('')}
+                      theme="light"
+                    />
+                  </div>
+                  
+                  <Button
                     type="submit" 
                     disabled={isSubmitting}
                     className="w-full h-14 text-lg font-bold gap-3 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl relative overflow-hidden group"
