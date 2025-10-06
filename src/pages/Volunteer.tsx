@@ -13,6 +13,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import LazyBgImage from "@/components/LazyBackgroundImage";
+import Turnstile from 'react-turnstile';
+import { supabase } from "@/integrations/supabase/client";
 
 const Volunteer = () => {
   const { toast } = useToast();
@@ -27,6 +29,8 @@ const Volunteer = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
+  const [turnstileKey, setTurnstileKey] = useState(0);
 
   useEffect(() => {
     document.title = "Volunteer with Genius Recovery | Make a Difference";
@@ -135,40 +139,28 @@ const Volunteer = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!turnstileToken) {
+      toast({
+        variant: "destructive",
+        title: "Verification Required",
+        description: "Please complete the security verification.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
-    console.log("=== VOLUNTEER FORM SUBMISSION DEBUG ===");
-    console.log("Form data:", formData);
-    console.log("Timestamp:", new Date().toISOString());
-
     try {
-      // Submit to Zapier webhook
-      const webhookUrl = "https://hooks.zapier.com/hooks/catch/155028/u6j9txh/";
-      
-      const payload = {
-        ...formData,
-        timestamp: new Date().toISOString(),
-        source: "Genius Recovery Volunteer Application",
-        page_url: window.location.href
-      };
-
-      console.log("Webhook URL:", webhookUrl);
-      console.log("Payload being sent:", payload);
-      console.log("Attempting to send request...");
-      
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const { data, error } = await supabase.functions.invoke('submit-volunteer', {
+        body: {
+          ...formData,
+          turnstileToken,
         },
-        mode: "no-cors", // Handle CORS for Zapier webhooks
-        body: JSON.stringify(payload),
       });
 
-      console.log("Request sent successfully (no-cors mode)");
-      
-      // Since we're using no-cors, we can't check response status
-      // So we'll assume success and show confirmation
+      if (error) throw error;
+
       toast({
         title: "Application Submitted!",
         description: "Thank you for your interest in volunteering. We'll be in touch within 48 hours.",
@@ -184,11 +176,10 @@ const Volunteer = () => {
         experience: "",
         message: ""
       });
+      setTurnstileToken("");
+      setTurnstileKey(prev => prev + 1);
     } catch (error) {
-      console.error("=== ERROR submitting volunteer application ===");
-      console.error("Error details:", error);
-      console.error("Error message:", error.message);
-      console.error("Error stack:", error.stack);
+      console.error("Error submitting volunteer application:", error);
       
       toast({
         variant: "destructive",
@@ -197,7 +188,6 @@ const Volunteer = () => {
       });
     } finally {
       setIsSubmitting(false);
-      console.log("=== VOLUNTEER FORM SUBMISSION COMPLETE ===");
     }
   };
 
@@ -508,10 +498,20 @@ const Volunteer = () => {
                     />
                   </div>
 
+                  <div className="flex justify-center">
+                    <Turnstile
+                      key={turnstileKey}
+                      sitekey="0x4AAAAAAA3NXgR8oIQ0U4uJ"
+                      onVerify={(token) => setTurnstileToken(token)}
+                      onError={() => setTurnstileToken("")}
+                      onExpire={() => setTurnstileToken("")}
+                    />
+                  </div>
+
                   <Button 
                     type="submit" 
                     size="lg" 
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !turnstileToken}
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Application"}
