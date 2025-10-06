@@ -20,11 +20,34 @@ const BookDownload = () => {
     lastName: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
+    website: '' // Honeypot field
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formStartTime] = useState(Date.now());
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // List of common disposable email domains
+  const disposableEmailDomains = [
+    'tempmail.com', 'guerrillamail.com', '10minutemail.com', 'throwaway.email',
+    'mailinator.com', 'trashmail.com', 'sharklasers.com', 'yopmail.com'
+  ];
+
+  const isValidEmail = (email: string): boolean => {
+    // Basic format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) return false;
+
+    // Check for disposable email domains
+    const domain = email.split('@')[1]?.toLowerCase();
+    if (disposableEmailDomains.some(d => domain?.includes(d))) return false;
+
+    // Check for suspicious patterns (multiple dots, excessive numbers)
+    if (email.match(/\.{2,}/) || email.match(/\d{5,}/)) return false;
+
+    return true;
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -37,10 +60,57 @@ const BookDownload = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Honeypot check - if filled, it's a bot
+    if (formData.website) {
+      console.log('Spam detected: honeypot field filled');
+      // Silently fail for bots
+      setIsSubmitting(true);
+      setTimeout(() => {
+        setIsSubmitting(false);
+        toast({
+          title: "Success",
+          description: "Thank you for your submission!",
+        });
+      }, 1000);
+      return;
+    }
+
+    // Time-based check - form must be open for at least 3 seconds
+    const timeSpent = Date.now() - formStartTime;
+    if (timeSpent < 3000) {
+      toast({
+        title: "Please slow down",
+        description: "Please take a moment to review your information.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate required fields
     if (!formData.firstName || !formData.lastName || !formData.email) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Enhanced email validation
+    if (!isValidEmail(formData.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Basic name validation (no excessive special characters or numbers)
+    if (!/^[a-zA-Z\s'-]{2,50}$/.test(formData.firstName) || !/^[a-zA-Z\s'-]{2,50}$/.test(formData.lastName)) {
+      toast({
+        title: "Invalid Name",
+        description: "Please enter a valid name.",
         variant: "destructive",
       });
       return;
@@ -481,6 +551,20 @@ const BookDownload = () => {
                       placeholder="Tell us a bit about your journey or how you plan to use this resource..."
                       rows={4}
                       className="text-base border-2 border-border focus:border-primary transition-colors duration-300 rounded-xl"
+                    />
+                  </div>
+
+                  {/* Honeypot field - hidden from users */}
+                  <div className="hidden" aria-hidden="true">
+                    <Label htmlFor="website">Website</Label>
+                    <Input
+                      id="website"
+                      name="website"
+                      type="text"
+                      value={formData.website}
+                      onChange={handleInputChange}
+                      tabIndex={-1}
+                      autoComplete="off"
                     />
                   </div>
 
