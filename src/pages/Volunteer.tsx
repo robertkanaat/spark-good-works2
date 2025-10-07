@@ -522,7 +522,10 @@ const Volunteer = () => {
                   <Button 
                     type="submit" 
                     size="lg" 
-                    disabled={isSubmitting || !turnstileToken}
+                    disabled={
+                      isSubmitting || 
+                      ((window.location.hostname === 'geniusrecovery.org' || window.location.hostname === 'www.geniusrecovery.org') && !turnstileToken)
+                    }
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Application"}
