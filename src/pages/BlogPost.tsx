@@ -75,32 +75,25 @@ const getFeaturedImage = (post: any): string => {
     
     // Check if media is an error response using type guard
     if ('code' in media && 'message' in media) {
-      console.log('Featured media access forbidden, using fallback');
       return 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format';
     }
     
-    console.log('Featured media found:', media);
     const sizes = media.media_details?.sizes;
     
-    // Try different size options in priority order
     if (sizes?.large) {
-      console.log('Using large size:', sizes.large.source_url);
       return sizes.large.source_url;
     }
     if (sizes?.medium_large) {
-      console.log('Using medium_large size:', sizes.medium_large.source_url);
       return sizes.medium_large.source_url;
     }
     if (sizes?.medium) {
-      console.log('Using medium size:', sizes.medium.source_url);
       return sizes.medium.source_url;
     }
     if (media.source_url) {
-      console.log('Using full size:', media.source_url);
       return media.source_url;
     }
   }
-  console.log('No featured media found, using fallback');
+  
   return 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format';
 };
 

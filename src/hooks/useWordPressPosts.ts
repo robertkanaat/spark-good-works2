@@ -132,37 +132,25 @@ const getFeaturedImage = (post: WordPressPost): string => {
     
     // Check if media is an error response using type guard
     if ('code' in media && 'message' in media) {
-      console.log('Featured media access forbidden, using fallback');
       return 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format';
     }
     
-    console.log('WordPress featured media:', media);
-    
-    // Now TypeScript knows media has media_details
     const sizes = media.media_details?.sizes;
-    console.log('Available sizes:', sizes);
     
     if (sizes?.large?.source_url) {
-      console.log('Using large size:', sizes.large.source_url);
       return sizes.large.source_url;
     }
     if (sizes?.medium_large?.source_url) {
-      console.log('Using medium_large size:', sizes.medium_large.source_url);
       return sizes.medium_large.source_url;
     }
     if (sizes?.medium?.source_url) {
-      console.log('Using medium size:', sizes.medium.source_url);
       return sizes.medium.source_url;
     }
     if (media.source_url) {
-      console.log('Using full source_url:', media.source_url);
       return media.source_url;
     }
-    console.warn('No valid image URL found in media object');
-  } else {
-    console.log('No featured media found in _embedded');
   }
-  // Fallback image
+  
   return 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format';
 };
 
