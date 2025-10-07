@@ -498,14 +498,17 @@ const Volunteer = () => {
                     />
                   </div>
 
-                  <div className="flex justify-center">
-                    <Turnstile
-                      key={turnstileKey}
-                      sitekey="0x4AAAAAAA3NXgR8oIQ0U4uJ"
-                      onVerify={(token) => setTurnstileToken(token)}
-                      onError={() => setTurnstileToken("")}
-                      onExpire={() => setTurnstileToken("")}
-                    />
+                  <div className="space-y-2">
+                    <Label htmlFor="turnstile">Security Verification *</Label>
+                    <div className="flex justify-center p-4 bg-muted/30 rounded-lg border border-border">
+                      <Turnstile
+                        key={turnstileKey}
+                        sitekey="0x4AAAAAAA3NXgR8oIQ0U4uJ"
+                        onVerify={(token) => setTurnstileToken(token)}
+                        onError={() => setTurnstileToken("")}
+                        onExpire={() => setTurnstileToken("")}
+                      />
+                    </div>
                   </div>
 
                   <Button 
