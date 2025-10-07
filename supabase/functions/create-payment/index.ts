@@ -376,9 +376,9 @@ serve(async (req) => {
             <input type="hidden" name="currency" value="USD">
             <input type="hidden" name="order_description" value="${description}">
             <input type="hidden" name="orderid" value="${paymentId}">
-            <input type="hidden" name="redirect_url" value="${req.url}&amp;status=success">
-            <input type="hidden" name="decline_url" value="${req.url}&amp;status=failed">
-            <input type="hidden" name="postback_url" value="${req.url}&amp;status=postback">
+            <input type="hidden" name="redirect_url" value="${successUrl}">
+            <input type="hidden" name="decline_url" value="${failureUrl}">
+            <input type="hidden" name="postback_url" value="${req.url}">
             ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
             
             ${isRecurring ? `
