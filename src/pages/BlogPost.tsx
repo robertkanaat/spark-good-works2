@@ -72,6 +72,13 @@ const getAuthorName = (post: any): string => {
 const getFeaturedImage = (post: any): string => {
   if (post._embedded?.['wp:featuredmedia']?.[0]) {
     const media = post._embedded['wp:featuredmedia'][0];
+    
+    // Check if media is an error response using type guard
+    if ('code' in media && 'message' in media) {
+      console.log('Featured media access forbidden, using fallback');
+      return 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format';
+    }
+    
     console.log('Featured media found:', media);
     const sizes = media.media_details?.sizes;
     
