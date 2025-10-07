@@ -72,15 +72,28 @@ const getAuthorName = (post: any): string => {
 const getFeaturedImage = (post: any): string => {
   if (post._embedded?.['wp:featuredmedia']?.[0]) {
     const media = post._embedded['wp:featuredmedia'][0];
+    console.log('Featured media found:', media);
     const sizes = media.media_details?.sizes;
-    if (sizes?.medium_large) {
-      return sizes.medium_large.source_url;
-    }
+    
+    // Try different size options in priority order
     if (sizes?.large) {
+      console.log('Using large size:', sizes.large.source_url);
       return sizes.large.source_url;
     }
-    return media.source_url;
+    if (sizes?.medium_large) {
+      console.log('Using medium_large size:', sizes.medium_large.source_url);
+      return sizes.medium_large.source_url;
+    }
+    if (sizes?.medium) {
+      console.log('Using medium size:', sizes.medium.source_url);
+      return sizes.medium.source_url;
+    }
+    if (media.source_url) {
+      console.log('Using full size:', media.source_url);
+      return media.source_url;
+    }
   }
+  console.log('No featured media found, using fallback');
   return 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format';
 };
 
@@ -357,12 +370,14 @@ const BlogPost = () => {
             </div>
 
             {/* Featured Image */}
-            <div className="relative mb-16 overflow-hidden rounded-2xl shadow-2xl">
+            <div className="relative mb-16 overflow-hidden rounded-2xl shadow-2xl bg-muted">
               <OptimizedImage
                 src={post.image} 
                 alt={post.title}
                 className="w-full h-96 md:h-[500px] object-cover"
                 priority={true}
+                placeholder="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format"
+                onError={() => console.error('Failed to load featured image:', post.image)}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
