@@ -25,8 +25,8 @@ serve(async (req) => {
     // Log all request details for debugging in one statement
     console.log(`Gateway response | response=${response} | responsetext=${responseText} | Referer=${referer || 'none'} | Origin=${origin || 'none'} | baseUrl=${baseUrl} | params=${url.search}`);
     
-    // If error response, redirect to failure page
-    if (response === '2' || response === '3' || responseText?.includes('exceed')) {
+    // If error response, redirect to failure page (exact match on response parameter only)
+    if (response === '2' || response === '3' || (responseText?.includes('exceed') && response !== '1')) {
       const errorMessage = encodeURIComponent(responseText || 'Payment failed');
       const redirectUrl = `${baseUrl}/payment-failed?error=${errorMessage}`;
       console.log(`REDIRECTING TO FAILURE: ${redirectUrl}`);
@@ -536,9 +536,9 @@ serve(async (req) => {
     
     console.log("Gateway response received:", responseText);
     
-    // Check if response contains error parameters - be more specific for recurring payments
-    const hasErrorResponse = responseText.includes('response=2') || responseText.includes('response=3');
-    const hasActivityLimit = responseText.includes('Activity limit exceeded') && !responseText.includes('response=1');
+    // Check if response contains error parameters - use exact matching to avoid false positives with avsresponse
+    const hasErrorResponse = /[?&]response=2/.test(responseText) || /[?&]response=3/.test(responseText);
+    const hasActivityLimit = responseText.includes('Activity limit exceeded') && !/[?&]response=1/.test(responseText);
     
     if (hasErrorResponse || hasActivityLimit) {
       console.log("Payment failed with gateway error");
