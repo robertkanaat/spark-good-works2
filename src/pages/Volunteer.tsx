@@ -140,7 +140,9 @@ const Volunteer = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!turnstileToken) {
+    const isProduction = window.location.hostname === 'geniusrecovery.org' || window.location.hostname === 'www.geniusrecovery.org';
+    
+    if (isProduction && !turnstileToken) {
       toast({
         variant: "destructive",
         title: "Verification Required",
@@ -155,7 +157,7 @@ const Volunteer = () => {
       const { data, error } = await supabase.functions.invoke('submit-volunteer', {
         body: {
           ...formData,
-          turnstileToken,
+          turnstileToken: isProduction ? turnstileToken : 'preview-bypass',
         },
       });
 
@@ -501,13 +503,19 @@ const Volunteer = () => {
                   <div className="space-y-2">
                     <Label htmlFor="turnstile">Security Verification *</Label>
                     <div className="flex justify-center p-4 bg-muted/30 rounded-lg border border-border">
-                      <Turnstile
-                        key={turnstileKey}
-                        sitekey="0x4AAAAAAA3NXgR8oIQ0U4uJ"
-                        onVerify={(token) => setTurnstileToken(token)}
-                        onError={() => setTurnstileToken("")}
-                        onExpire={() => setTurnstileToken("")}
-                      />
+                      {(window.location.hostname === 'geniusrecovery.org' || window.location.hostname === 'www.geniusrecovery.org') ? (
+                        <Turnstile
+                          key={turnstileKey}
+                          sitekey="0x4AAAAAAA3NXgR8oIQ0U4uJ"
+                          onVerify={(token) => setTurnstileToken(token)}
+                          onError={() => setTurnstileToken("")}
+                          onExpire={() => setTurnstileToken("")}
+                        />
+                      ) : (
+                        <p className="text-sm text-muted-foreground">
+                          Security verification will appear on the live site
+                        </p>
+                      )}
                     </div>
                   </div>
 

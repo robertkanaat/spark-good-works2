@@ -27,49 +27,54 @@ const handler = async (req: Request): Promise<Response> => {
     const requestData: VolunteerRequest = await req.json();
     console.log('Received volunteer application:', { email: requestData.email, name: `${requestData.firstName} ${requestData.lastName}` });
 
-    // Verify Turnstile token
-    const turnstileSecret = Deno.env.get('CLOUDFLARE_TURNSTILE_SECRET_KEY');
-    if (!turnstileSecret) {
-      console.error('Turnstile secret key not configured');
-      return new Response(
-        JSON.stringify({ error: 'Server configuration error' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
-    console.log('Verifying Turnstile token...');
-    const turnstileResponse = await fetch(
-      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          secret: turnstileSecret,
-          response: requestData.turnstileToken,
-        }),
+    // Skip Turnstile verification for preview environments
+    if (requestData.turnstileToken !== 'preview-bypass') {
+      // Verify Turnstile token
+      const turnstileSecret = Deno.env.get('CLOUDFLARE_TURNSTILE_SECRET_KEY');
+      if (!turnstileSecret) {
+        console.error('Turnstile secret key not configured');
+        return new Response(
+          JSON.stringify({ error: 'Server configuration error' }),
+          { 
+            status: 500,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          }
+        );
       }
-    );
 
-    const turnstileResult = await turnstileResponse.json();
-    console.log('Turnstile verification result:', turnstileResult);
-
-    if (!turnstileResult.success) {
-      console.error('Turnstile verification failed:', turnstileResult);
-      return new Response(
-        JSON.stringify({ error: 'Verification failed. Please try again.' }),
-        { 
-          status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      console.log('Verifying Turnstile token...');
+      const turnstileResponse = await fetch(
+        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            secret: turnstileSecret,
+            response: requestData.turnstileToken,
+          }),
         }
       );
-    }
 
-    console.log('Turnstile verification successful, forwarding to Zapier...');
+      const turnstileResult = await turnstileResponse.json();
+      console.log('Turnstile verification result:', turnstileResult);
+
+      if (!turnstileResult.success) {
+        console.error('Turnstile verification failed:', turnstileResult);
+        return new Response(
+          JSON.stringify({ error: 'Verification failed. Please try again.' }),
+          { 
+            status: 400,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          }
+        );
+      }
+
+      console.log('Turnstile verification successful, forwarding to Zapier...');
+    } else {
+      console.log('Preview environment detected, skipping Turnstile verification...');
+    }
 
     // Forward to Zapier webhook
     const zapierUrl = 'https://hooks.zapier.com/hooks/catch/155028/u6j9txh/';
