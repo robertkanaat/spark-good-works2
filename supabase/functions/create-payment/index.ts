@@ -18,15 +18,30 @@ serve(async (req) => {
   if (req.method === "GET" && (url.searchParams.has('response') || url.searchParams.has('responsetext'))) {
     const response = url.searchParams.get('response');
     const responseText = url.searchParams.get('responsetext');
-    const baseUrl = req.headers.get("referer")?.split('?')[0].replace(/\/[^\/]*$/, '') || "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+    const referer = req.headers.get("referer");
+    const origin = req.headers.get("origin");
+    const baseUrl = referer?.split('?')[0].replace(/\/[^\/]*$/, '') || origin || "https://geniusrecovery.org";
+    
+    // Log all request details for debugging
+    console.log('Payment gateway response:', {
+      response,
+      responseText,
+      referer,
+      origin,
+      baseUrl,
+      allParams: Object.fromEntries(url.searchParams),
+      headers: Object.fromEntries(req.headers)
+    });
     
     // If error response, redirect to failure page
     if (response === '2' || response === '3' || responseText?.includes('exceed')) {
       const errorMessage = encodeURIComponent(responseText || 'Payment failed');
+      const redirectUrl = `${baseUrl}/payment-failed?error=${errorMessage}`;
+      console.log('Redirecting to failure page:', redirectUrl);
       return new Response(null, {
         status: 302,
         headers: {
-          'Location': `${baseUrl}/payment-failed?error=${errorMessage}`
+          'Location': redirectUrl
         }
       });
     }
@@ -97,10 +112,12 @@ serve(async (req) => {
         }
       }
       
+      const redirectUrl = `${baseUrl}/payment-success?transaction=${transactionId || ''}`;
+      console.log('Redirecting to success page:', redirectUrl);
       return new Response(null, {
         status: 302,
         headers: {
-          'Location': `${baseUrl}/payment-success?transaction=${transactionId || ''}`
+          'Location': redirectUrl
         }
       });
     }
