@@ -56,6 +56,7 @@ interface TransformedPost {
   content: string;
   category: string;
   author: string;
+  authorAvatar?: string | null;
   date: string;
   readTime: string;
   image: string;
@@ -123,6 +124,16 @@ const getAuthorName = (post: WordPressPost): string => {
     return post._embedded.author[0].name;
   }
   return 'Genius Recovery';
+};
+
+// Function to get author avatar
+const getAuthorAvatar = (post: WordPressPost): string | null => {
+  if (post._embedded?.author?.[0]?.avatar_urls) {
+    const avatarUrls = post._embedded.author[0].avatar_urls;
+    // Try to get the largest available avatar
+    return avatarUrls['96'] || avatarUrls['48'] || avatarUrls['24'] || Object.values(avatarUrls)[0] || null;
+  }
+  return null;
 };
 
 // Function to get featured image
@@ -193,6 +204,7 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
         content: post.content.rendered,
         category: getCategoryName(post),
         author: getAuthorName(post),
+        authorAvatar: getAuthorAvatar(post),
         date: formatDate(post.date),
         readTime: calculateReadTime(post.content.rendered),
         image: getFeaturedImage(post),
@@ -243,6 +255,7 @@ export const useWordPressPosts = (): UseWordPressPostsReturn => {
         content: post.content.rendered,
         category: getCategoryName(post),
         author: getAuthorName(post),
+        authorAvatar: getAuthorAvatar(post),
         date: formatDate(post.date),
         readTime: calculateReadTime(post.content.rendered),
         image: getFeaturedImage(post),

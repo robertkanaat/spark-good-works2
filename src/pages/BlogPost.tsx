@@ -69,6 +69,15 @@ const getAuthorName = (post: any): string => {
   return 'Genius Recovery';
 };
 
+const getAuthorAvatar = (post: any): string | null => {
+  if (post._embedded?.author?.[0]?.avatar_urls) {
+    const avatarUrls = post._embedded.author[0].avatar_urls;
+    // Try to get the largest available avatar
+    return avatarUrls['96'] || avatarUrls['48'] || avatarUrls['24'] || Object.values(avatarUrls)[0] || null;
+  }
+  return null;
+};
+
 const getFeaturedImage = (post: any): string => {
   if (post._embedded?.['wp:featuredmedia']?.[0]) {
     const media = post._embedded['wp:featuredmedia'][0];
@@ -164,6 +173,7 @@ const BlogPost = () => {
           content: wordpressPost.content.rendered,
           category: getCategoryName(wordpressPost),
           author: getAuthorName(wordpressPost),
+          authorAvatar: getAuthorAvatar(wordpressPost),
           date: formatDate(wordpressPost.date),
           readTime: calculateReadTime(wordpressPost.content.rendered),
           image: getFeaturedImage(wordpressPost),
@@ -524,9 +534,17 @@ const BlogPost = () => {
                     <div className="flex items-start gap-4">
                       {/* Author Avatar */}
                       <div className="flex-shrink-0">
-                        <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
-                          <User className="w-8 h-8 text-white" />
-                        </div>
+                        {post.authorAvatar ? (
+                          <img 
+                            src={post.authorAvatar} 
+                            alt={post.author}
+                            className="w-16 h-16 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
+                            <User className="w-8 h-8 text-white" />
+                          </div>
+                        )}
                       </div>
                       
                       {/* Author Details */}
