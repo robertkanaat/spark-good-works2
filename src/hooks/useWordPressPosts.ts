@@ -125,15 +125,31 @@ const getAuthorName = (post: WordPressPost): string => {
 const getFeaturedImage = (post: WordPressPost): string => {
   if (post._embedded?.['wp:featuredmedia']?.[0]) {
     const media = post._embedded['wp:featuredmedia'][0];
-    // Try to get a medium-large size, fall back to full size
+    console.log('WordPress featured media:', media);
+    
+    // Try to get different sizes in priority order
     const sizes = media.media_details?.sizes;
-    if (sizes?.medium_large) {
-      return sizes.medium_large.source_url;
-    }
-    if (sizes?.large) {
+    console.log('Available sizes:', sizes);
+    
+    if (sizes?.large?.source_url) {
+      console.log('Using large size:', sizes.large.source_url);
       return sizes.large.source_url;
     }
-    return media.source_url;
+    if (sizes?.medium_large?.source_url) {
+      console.log('Using medium_large size:', sizes.medium_large.source_url);
+      return sizes.medium_large.source_url;
+    }
+    if (sizes?.medium?.source_url) {
+      console.log('Using medium size:', sizes.medium.source_url);
+      return sizes.medium.source_url;
+    }
+    if (media.source_url) {
+      console.log('Using full source_url:', media.source_url);
+      return media.source_url;
+    }
+    console.warn('No valid image URL found in media object');
+  } else {
+    console.log('No featured media found in _embedded');
   }
   // Fallback image
   return 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop&auto=format';
