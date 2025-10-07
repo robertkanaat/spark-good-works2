@@ -22,18 +22,14 @@ serve(async (req) => {
     const origin = req.headers.get("origin");
     const baseUrl = referer?.split('?')[0].replace(/\/[^\/]*$/, '') || origin || "https://geniusrecovery.org";
     
-    // Log all request details for debugging
-    console.log(`Gateway response received: response=${response}&responsetext=${responseText}`);
-    console.log(`Referer: ${referer || 'none'}`);
-    console.log(`Origin: ${origin || 'none'}`);
-    console.log(`Calculated baseUrl: ${baseUrl}`);
-    console.log(`All search params: ${url.search}`);
+    // Log all request details for debugging in one statement
+    console.log(`Gateway response | response=${response} | responsetext=${responseText} | Referer=${referer || 'none'} | Origin=${origin || 'none'} | baseUrl=${baseUrl} | params=${url.search}`);
     
     // If error response, redirect to failure page
     if (response === '2' || response === '3' || responseText?.includes('exceed')) {
       const errorMessage = encodeURIComponent(responseText || 'Payment failed');
       const redirectUrl = `${baseUrl}/payment-failed?error=${errorMessage}`;
-      console.log(`Redirecting to FAILURE page: ${redirectUrl}`);
+      console.log(`REDIRECTING TO FAILURE: ${redirectUrl}`);
       return new Response(null, {
         status: 302,
         headers: {
@@ -109,7 +105,7 @@ serve(async (req) => {
       }
       
       const redirectUrl = `${baseUrl}/payment-success?transaction=${transactionId || ''}`;
-      console.log(`Redirecting to SUCCESS page: ${redirectUrl}`);
+      console.log(`REDIRECTING TO SUCCESS: ${redirectUrl}`);
       return new Response(null, {
         status: 302,
         headers: {
@@ -142,7 +138,7 @@ serve(async (req) => {
     const failureUrl = `${baseUrl}/payment-failed`;
     const description = `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`;
     
-    console.log(`GET payment form - Referer: ${referer || 'none'}, Origin: ${origin || 'none'}, baseUrl: ${baseUrl}`);
+    console.log(`GET form | Referer=${referer || 'none'} | Origin=${origin || 'none'} | baseUrl=${baseUrl}`);
     
     const paymentFormHtml = `
 <!DOCTYPE html>
@@ -528,7 +524,7 @@ serve(async (req) => {
     const origin = req.headers.get("origin");
     const baseUrl = referer?.split('?')[0].replace(/\/[^\/]*$/, '') || origin || "https://geniusrecovery.org";
     
-    console.log(`POST payment submission - Referer: ${referer || 'none'}, Origin: ${origin || 'none'}, baseUrl: ${baseUrl}`);
+    console.log(`POST submission | Referer=${referer || 'none'} | Origin=${origin || 'none'} | baseUrl=${baseUrl}`);
     
     // Forward the payment to the actual gateway
     const gatewayResponse = await fetch("https://secure.inchekgateway.com/api/transact.php", {
@@ -557,7 +553,7 @@ serve(async (req) => {
       }
       
       const redirectUrl = `${baseUrl}/payment-failed?error=${encodeURIComponent(errorMessage)}`;
-      console.log(`POST handler - Redirecting to FAILURE page: ${redirectUrl}`);
+      console.log(`POST - REDIRECTING TO FAILURE: ${redirectUrl}`);
       
       return new Response(null, {
         status: 302,
@@ -623,7 +619,7 @@ serve(async (req) => {
       }
       
       const redirectUrl = `${baseUrl}/payment-success`;
-      console.log(`POST handler - Redirecting to SUCCESS page: ${redirectUrl}`);
+      console.log(`POST - REDIRECTING TO SUCCESS: ${redirectUrl}`);
       
       return new Response(null, {
         status: 302,
@@ -636,7 +632,7 @@ serve(async (req) => {
     // Default to failure page for any unexpected response
     console.log("Payment failed - unexpected response format:", responseText);
     const defaultRedirectUrl = `${baseUrl}/payment-failed?error=${encodeURIComponent('Payment processing error')}`;
-    console.log(`POST handler - Redirecting to FAILURE page (unexpected response): ${defaultRedirectUrl}`);
+    console.log(`POST - REDIRECTING TO FAILURE (unexpected): ${defaultRedirectUrl}`);
     
     return new Response(null, {
       status: 302,
