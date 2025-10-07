@@ -135,10 +135,14 @@ serve(async (req) => {
       return new Response("Payment gateway not configured", { status: 500 });
     }
     
-    const baseUrl = req.headers.get("origin") || "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+    const referer = req.headers.get("referer");
+    const origin = req.headers.get("origin");
+    const baseUrl = referer?.split('?')[0].replace(/\/[^\/]*$/, '') || origin || "https://geniusrecovery.org";
     const successUrl = `${baseUrl}/payment-success`;
     const failureUrl = `${baseUrl}/payment-failed`;
     const description = `Genius Recovery ${isRecurring ? 'Monthly' : 'One-time'} Donation`;
+    
+    console.log(`GET payment form - Referer: ${referer || 'none'}, Origin: ${origin || 'none'}, baseUrl: ${baseUrl}`);
     
     const paymentFormHtml = `
 <!DOCTYPE html>
@@ -520,7 +524,11 @@ serve(async (req) => {
   // Handle form submission from embedded form
   if (req.method === "POST" && req.headers.get("content-type")?.includes("application/x-www-form-urlencoded")) {
     const formData = await req.formData();
-    const baseUrl = req.headers.get("referer")?.split('?')[0].replace(/\/[^\/]*$/, '') || "https://98ead7f7-984d-400e-8140-92b6075fec1e.lovableproject.com";
+    const referer = req.headers.get("referer");
+    const origin = req.headers.get("origin");
+    const baseUrl = referer?.split('?')[0].replace(/\/[^\/]*$/, '') || origin || "https://geniusrecovery.org";
+    
+    console.log(`POST payment submission - Referer: ${referer || 'none'}, Origin: ${origin || 'none'}, baseUrl: ${baseUrl}`);
     
     // Forward the payment to the actual gateway
     const gatewayResponse = await fetch("https://secure.inchekgateway.com/api/transact.php", {
@@ -548,10 +556,13 @@ serve(async (req) => {
         errorMessage = 'Payment error - Please try a different payment method';
       }
       
+      const redirectUrl = `${baseUrl}/payment-failed?error=${encodeURIComponent(errorMessage)}`;
+      console.log(`POST handler - Redirecting to FAILURE page: ${redirectUrl}`);
+      
       return new Response(null, {
         status: 302,
         headers: {
-          'Location': `${baseUrl}/payment-failed?error=${encodeURIComponent(errorMessage)}`
+          'Location': redirectUrl
         }
       });
     }
@@ -611,20 +622,26 @@ serve(async (req) => {
         }
       }
       
+      const redirectUrl = `${baseUrl}/payment-success`;
+      console.log(`POST handler - Redirecting to SUCCESS page: ${redirectUrl}`);
+      
       return new Response(null, {
         status: 302,
         headers: {
-          'Location': `${baseUrl}/payment-success`
+          'Location': redirectUrl
         }
       });
     }
     
     // Default to failure page for any unexpected response
     console.log("Payment failed - unexpected response format:", responseText);
+    const defaultRedirectUrl = `${baseUrl}/payment-failed?error=${encodeURIComponent('Payment processing error')}`;
+    console.log(`POST handler - Redirecting to FAILURE page (unexpected response): ${defaultRedirectUrl}`);
+    
     return new Response(null, {
       status: 302,
       headers: {
-        'Location': `${baseUrl}/payment-failed?error=${encodeURIComponent('Payment processing error')}`
+        'Location': defaultRedirectUrl
       }
     });
   }
