@@ -140,9 +140,7 @@ const Volunteer = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const isProduction = window.location.hostname === 'geniusrecovery.org' || window.location.hostname === 'www.geniusrecovery.org';
-    
-    if (isProduction && !turnstileToken) {
+    if (!turnstileToken) {
       toast({
         variant: "destructive",
         title: "Verification Required",
@@ -157,7 +155,7 @@ const Volunteer = () => {
       const { data, error } = await supabase.functions.invoke('submit-volunteer', {
         body: {
           ...formData,
-          turnstileToken: isProduction ? turnstileToken : 'preview-bypass',
+          turnstileToken: turnstileToken,
         },
       });
 
@@ -503,29 +501,28 @@ const Volunteer = () => {
                   <div className="space-y-2">
                     <Label htmlFor="turnstile">Security Verification *</Label>
                     <div className="flex justify-center p-4 bg-muted/30 rounded-lg border border-border">
-                      {(window.location.hostname === 'geniusrecovery.org' || window.location.hostname === 'www.geniusrecovery.org') ? (
-                        <Turnstile
-                          key={turnstileKey}
-                          sitekey="0x4AAAAAAA3NXgR8oIQ0U4uJ"
-                          onVerify={(token) => setTurnstileToken(token)}
-                          onError={() => setTurnstileToken("")}
-                          onExpire={() => setTurnstileToken("")}
-                        />
-                      ) : (
-                        <p className="text-sm text-muted-foreground">
-                          Security verification will appear on the live site
-                        </p>
-                      )}
+                      <Turnstile
+                        key={turnstileKey}
+                        sitekey="0x4AAAAAAB5Ja4WmfAWnGyJt"
+                        onVerify={(token) => setTurnstileToken(token)}
+                        onError={() => {
+                          setTurnstileToken('');
+                          toast({
+                            variant: "destructive",
+                            title: "Verification Error",
+                            description: "Please refresh the page and try again.",
+                          });
+                        }}
+                        onExpire={() => setTurnstileToken('')}
+                        theme="light"
+                      />
                     </div>
                   </div>
 
                   <Button 
                     type="submit" 
                     size="lg" 
-                    disabled={
-                      isSubmitting || 
-                      ((window.location.hostname === 'geniusrecovery.org' || window.location.hostname === 'www.geniusrecovery.org') && !turnstileToken)
-                    }
+                    disabled={isSubmitting || !turnstileToken}
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Application"}
