@@ -23,6 +23,7 @@ import {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import OptimizedImage from "@/components/OptimizedImage";
 import { useWordPressPosts } from "@/hooks/useWordPressPosts";
 import { toast } from "@/components/ui/use-toast";
 
@@ -357,10 +358,11 @@ const BlogPost = () => {
 
             {/* Featured Image */}
             <div className="relative mb-16 overflow-hidden rounded-2xl shadow-2xl">
-              <img 
+              <OptimizedImage
                 src={post.image} 
                 alt={post.title}
                 className="w-full h-96 md:h-[500px] object-cover"
+                priority={true}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
