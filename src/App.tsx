@@ -6,6 +6,7 @@ import { Toaster as ShadcnToaster } from '@/components/ui/toaster';
 import ExitIntentPopup from '@/components/ExitIntentPopup';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import ScrollToTop from '@/components/ScrollToTop';
+import GTMPageView from '@/components/GTMPageView';
 import { useEffect } from 'react';
 import Index from './pages/Index';
 import About from './pages/About';
@@ -163,6 +164,7 @@ const App = () => {
         <TooltipProvider>
         <BrowserRouter>
           <ScrollToTop />
+          <GTMPageView />
           <Toaster />
           <ShadcnToaster />
           <ExitIntentPopup />
