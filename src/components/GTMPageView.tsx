@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 declare global {
   interface Window {
     dataLayer: any[];
+    gtag?: (...args: any[]) => void;
   }
 }
 
@@ -17,10 +18,8 @@ const GTMPageView = () => {
       (window.location.hostname === 'geniusrecovery.org' || 
        window.location.hostname === 'www.geniusrecovery.org')
     ) {
-      // Ensure dataLayer exists
+      // Track with Google Tag Manager
       window.dataLayer = window.dataLayer || [];
-      
-      // Push page view event to GTM
       window.dataLayer.push({
         event: 'pageview',
         page: {
@@ -32,7 +31,19 @@ const GTMPageView = () => {
         }
       });
 
-      console.log('GTM page view tracked:', location.pathname);
+      // Track with Google Analytics
+      if (window.gtag) {
+        window.gtag('config', 'G-KRFV9ED0L3', {
+          page_path: location.pathname + location.search,
+          page_title: document.title,
+        });
+        window.gtag('config', 'GT-MQ7Q8CB', {
+          page_path: location.pathname + location.search,
+          page_title: document.title,
+        });
+      }
+
+      console.log('GTM & GA page view tracked:', location.pathname);
     }
   }, [location]);
 
