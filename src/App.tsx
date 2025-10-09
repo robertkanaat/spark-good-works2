@@ -42,6 +42,7 @@ import RecoveryTools from './pages/RecoveryTools';
 import Speakers from './pages/Speakers';
 import RecoveryQuiz from './pages/RecoveryQuiz';
 import RecoveryGame from './pages/RecoveryGame';
+import TagPage from './pages/TagPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -183,6 +184,7 @@ const App = () => {
             <Route path="/help" element={<Emergency />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/page/:pageNumber" element={<Blog />} />
+            <Route path="/tag/:slug" element={<TagPage />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/open-letter" element={<OpenLetter />} />
             <Route path="/ai-companion" element={<AICompanion />} />
