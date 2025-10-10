@@ -107,7 +107,7 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     // Trigger Zapier webhook if configured
-    const zapierWebhook = Deno.env.get("ZAPIER_WEBHOOK_URL");
+    const zapierWebhook = Deno.env.get("ZAPIER_CONTACT_WEBHOOK_URL");
     if (zapierWebhook) {
       console.log("Triggering Zapier webhook...");
       try {
@@ -124,7 +124,7 @@ const handler = async (req: Request): Promise<Response> => {
             subject,
             message,
             timestamp: new Date().toISOString(),
-            source: "book-download"
+            source: "contact-form"
           }),
         });
         console.log("Zapier webhook triggered successfully");
