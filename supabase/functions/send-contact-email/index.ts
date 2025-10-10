@@ -106,6 +106,36 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
+    // Trigger Zapier webhook if configured
+    const zapierWebhook = Deno.env.get("ZAPIER_WEBHOOK_URL");
+    if (zapierWebhook) {
+      console.log("Triggering Zapier webhook...");
+      try {
+        await fetch(zapierWebhook, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            phone: phone || '',
+            subject,
+            message,
+            timestamp: new Date().toISOString(),
+            source: "book-download"
+          }),
+        });
+        console.log("Zapier webhook triggered successfully");
+      } catch (zapierError) {
+        console.error("Error triggering Zapier webhook:", zapierError);
+        // Don't fail the entire request if webhook fails
+      }
+    } else {
+      console.log("No Zapier webhook URL configured");
+    }
+
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: {
