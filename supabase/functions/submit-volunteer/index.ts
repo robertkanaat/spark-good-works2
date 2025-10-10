@@ -76,34 +76,48 @@ const handler = async (req: Request): Promise<Response> => {
       console.log('Preview environment detected, skipping Turnstile verification...');
     }
 
-    // Forward to Zapier webhook
-    const zapierUrl = 'https://hooks.zapier.com/hooks/catch/155028/u6j9txh/';
-    const payload = {
-      firstName: requestData.firstName,
-      lastName: requestData.lastName,
-      email: requestData.email,
-      phone: requestData.phone,
-      interest: requestData.interest,
-      availability: requestData.availability,
-      experience: requestData.experience,
-      message: requestData.message,
-      timestamp: new Date().toISOString(),
-      source: 'Genius Recovery Volunteer Application',
-      verified: true,
-    };
+    // Forward to Zapier webhook if configured
+    const zapierUrl = Deno.env.get('ZAPIER_VOLUNTEER_WEBHOOK_URL') || 'https://hooks.zapier.com/hooks/catch/155028/u6j9txh/';
+    
+    if (zapierUrl) {
+      console.log('Triggering Zapier webhook for volunteer application...');
+      
+      const payload = {
+        firstName: requestData.firstName,
+        lastName: requestData.lastName,
+        email: requestData.email,
+        phone: requestData.phone,
+        interest: requestData.interest,
+        availability: requestData.availability,
+        experience: requestData.experience,
+        message: requestData.message,
+        timestamp: new Date().toISOString(),
+        source: 'Genius Recovery Volunteer Application',
+        verified: true,
+      };
 
-    const zapierResponse = await fetch(zapierUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+      try {
+        const zapierResponse = await fetch(zapierUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
 
-    console.log('Zapier response status:', zapierResponse.status);
+        console.log('Zapier response status:', zapierResponse.status);
 
-    if (!zapierResponse.ok) {
-      throw new Error('Failed to forward to Zapier');
+        if (!zapierResponse.ok) {
+          console.error('Failed to forward to Zapier, but continuing...');
+        } else {
+          console.log('Volunteer application forwarded to Zapier successfully');
+        }
+      } catch (zapierError) {
+        console.error('Error forwarding to Zapier:', zapierError);
+        // Don't fail the entire request if webhook fails
+      }
+    } else {
+      console.log('No Zapier webhook URL configured for volunteers');
     }
 
     return new Response(
