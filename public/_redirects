@@ -1,1 +1,11 @@
+# Serve XML sitemaps directly
+/sitemap.xml /sitemap.xml 200
+/sitemap-static.xml /sitemap-static.xml 200
+/wp-sitemap.xml /wp-sitemap.xml 200
+/wp-sitemap-posts.xml /wp-sitemap-posts.xml 200
+/wp-sitemap-tags.xml /wp-sitemap-tags.xml 200
+/wp-sitemap-authors.xml /wp-sitemap-authors.xml 200
+/wp-sitemap-categories.xml /wp-sitemap-categories.xml 200
+
+# SPA fallback for all other routes
 /*    /index.html   200
