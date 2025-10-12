@@ -1,3 +1,6 @@
+# Redirect favicon.ico to custom favicon
+/favicon.ico /favicon-custom.ico 200
+
 # Serve all XML files directly (force, don't fall through)
 /*.xml /:splat 200!
 
