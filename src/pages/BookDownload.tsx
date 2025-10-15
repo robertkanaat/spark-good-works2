@@ -577,19 +577,6 @@ const BookDownload = () => {
                     />
                   </div>
 
-                  <div className="space-y-3">
-                    <Label htmlFor="message" className="text-base font-semibold text-foreground">How will this book help you? (Optional)</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder="Tell us a bit about your journey or how you plan to use this resource..."
-                      rows={4}
-                      className="text-base border-2 border-border focus:border-primary transition-colors duration-300 rounded-xl"
-                    />
-                  </div>
-
                   {/* Honeypot field - hidden from users */}
                   <div className="hidden" aria-hidden="true">
                     <Label htmlFor="website">Website</Label>
