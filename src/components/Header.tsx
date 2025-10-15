@@ -118,8 +118,7 @@ const Header = () => {
                 {/* About Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger 
-                    onClick={() => window.location.href = '/about'}
-                    className={`text-sm font-medium transition-all duration-300 hover:scale-105 cursor-pointer ${
+                    className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
                       isActiveRoute('/about') || isActiveRoute('/press') || isActiveRoute('/open-letter') || isActiveRoute('/speakers') ? 'text-primary bg-primary/5' : 'text-muted-foreground'
                     }`}
                   >
@@ -329,8 +328,7 @@ const Header = () => {
                 {/* Resources Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger 
-                    onClick={() => window.location.href = '/resources'}
-                    className={`text-sm font-medium transition-all duration-300 hover:scale-105 cursor-pointer ${
+                    className={`text-sm font-medium transition-all duration-300 hover:scale-105 ${
                       isActiveRoute('/resources') || isActiveRoute('/education') || isActiveRoute('/recovery-tools') || isActiveRoute('/faq')
                         ? 'text-primary bg-primary/5' 
                         : 'text-muted-foreground'
