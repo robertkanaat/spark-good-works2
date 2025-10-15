@@ -15,7 +15,7 @@ interface ContactEmailRequest {
   email: string;
   phone?: string;
   subject: string;
-  message: string;
+  message?: string;
   turnstileToken: string;
 }
 
@@ -86,8 +86,7 @@ const handler = async (req: Request): Promise<Response> => {
         <p><strong>Email:</strong> ${email}</p>
         ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
         <p><strong>Subject:</strong> ${subject}</p>
-        <h3>Message:</h3>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        ${message ? `<h3>Message:</h3><p>${message.replace(/\n/g, '<br>')}</p>` : ''}
       `,
     });
 
@@ -122,7 +121,7 @@ const handler = async (req: Request): Promise<Response> => {
             email,
             phone: phone || '',
             subject,
-            message,
+            message: message || '',
             timestamp: new Date().toISOString(),
             source: "contact-form"
           }),

@@ -4,8 +4,8 @@ import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle, CheckCircle, Heart, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -35,8 +35,7 @@ const Contact = () => {
     lastName: "",
     email: "",
     phone: "",
-    subject: "",
-    message: ""
+    subject: ""
   });
   
 
@@ -48,8 +47,7 @@ const Contact = () => {
       lastName: 50,
       email: 254,
       phone: 20,
-      subject: 200,
-      message: 2000
+      subject: 200
     };
 
     if (value.length > (maxLengths[field] || 100)) {
@@ -63,7 +61,7 @@ const Contact = () => {
       KEEP_CONTENT: true
     });
 
-    // Only trim for email field, preserve spaces for other fields like subject and message
+    // Only trim for email field, preserve spaces for other fields
     return field === 'email' ? sanitized.trim() : sanitized;
   };
 
@@ -103,7 +101,7 @@ const Contact = () => {
   setIsSubmitting(true);
   try {
     // Additional validation before submission
-    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.message.trim()) {
+    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.subject) {
       throw new Error('Please fill in all required fields');
     }
     // Email validation
@@ -140,8 +138,7 @@ const Contact = () => {
         lastName: "",
         email: "",
         phone: "",
-        subject: "",
-        message: ""
+        subject: ""
       });
       // Reset Turnstile widget by changing key
       setTurnstileToken('');
@@ -459,26 +456,27 @@ const Contact = () => {
                   
                   <div className="space-y-2">
                     <Label htmlFor="subject" className="font-semibold">Subject *</Label>
-                    <Input 
-                      id="subject" 
-                      placeholder="How can we help you?" 
-                      className="h-12 border-2 border-border/50 focus:border-primary transition-colors duration-300"
-                      value={formData.subject}
-                      onChange={handleInputChange}
+                    <Select 
+                      value={formData.subject} 
+                      onValueChange={(value) => setFormData(prev => ({ ...prev, subject: value }))}
                       required
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="font-semibold">Message *</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Please tell us more about how we can help you or answer your questions..."
-                      className="min-h-[150px] border-2 border-border/50 focus:border-primary transition-colors duration-300 resize-none"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                    />
+                    >
+                      <SelectTrigger className="h-12 border-2 border-border/50 focus:border-primary transition-colors duration-300">
+                        <SelectValue placeholder="Select a subject" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-background z-50">
+                        <SelectItem value="General Inquiry">General Inquiry</SelectItem>
+                        <SelectItem value="Recovery Support">Recovery Support</SelectItem>
+                        <SelectItem value="Treatment Information">Treatment Information</SelectItem>
+                        <SelectItem value="Resource Request">Resource Request</SelectItem>
+                        <SelectItem value="Partnership Opportunity">Partnership Opportunity</SelectItem>
+                        <SelectItem value="Press Inquiry">Press Inquiry</SelectItem>
+                        <SelectItem value="Volunteer Information">Volunteer Information</SelectItem>
+                        <SelectItem value="Donation Question">Donation Question</SelectItem>
+                        <SelectItem value="Family Support">Family Support</SelectItem>
+                        <SelectItem value="Other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   
                   <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-400 rounded-lg p-6">
