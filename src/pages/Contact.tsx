@@ -466,14 +466,11 @@ const Contact = () => {
                       </SelectTrigger>
                       <SelectContent className="bg-background z-50">
                         <SelectItem value="General Inquiry">General Inquiry</SelectItem>
-                        <SelectItem value="Recovery Support">Recovery Support</SelectItem>
-                        <SelectItem value="Treatment Information">Treatment Information</SelectItem>
                         <SelectItem value="Resource Request">Resource Request</SelectItem>
                         <SelectItem value="Partnership Opportunity">Partnership Opportunity</SelectItem>
                         <SelectItem value="Press Inquiry">Press Inquiry</SelectItem>
                         <SelectItem value="Volunteer Information">Volunteer Information</SelectItem>
                         <SelectItem value="Donation Question">Donation Question</SelectItem>
-                        <SelectItem value="Family Support">Family Support</SelectItem>
                         <SelectItem value="Other">Other</SelectItem>
                       </SelectContent>
                     </Select>
