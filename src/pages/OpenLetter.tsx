@@ -223,7 +223,7 @@ const OpenLetter = () => {
                 </p>
 
                 <p>
-                  What I've learned since then is that <strong className="font-semibold text-primary">almost all addiction stems from trauma.</strong> This can be difficult for some people to understand; they assume trauma has to mean a person was beaten, molested or in a life-threatening accident. But we all have different levels of sensitivity.
+                  What I've learned since then is that <strong className="font-semibold text-foreground">almost all addiction stems from trauma.</strong> This can be difficult for some people to understand; they assume trauma has to mean a person was beaten, molested or in a life-threatening accident. But we all have different levels of sensitivity.
                 </p>
                 
                 <p>
@@ -235,7 +235,7 @@ const OpenLetter = () => {
                 </p>
                 
                 <p>
-                  I'm of the belief that addiction is not a choice. <strong className="font-semibold text-primary">Once the addict goes into a craving state, it's beyond willpower or intelligence.</strong> Intelligence can actually be a detriment because the smarter people are, the more they believe they can think their way out of the problem.
+                  I'm of the belief that addiction is not a choice. <strong className="font-semibold text-foreground">Once the addict goes into a craving state, it's beyond willpower or intelligence.</strong> Intelligence can actually be a detriment because the smarter people are, the more they believe they can think their way out of the problem.
                 </p>
 
                 <p className="italic border-l-4 border-primary pl-6 py-2 my-8 text-xl text-foreground/80">
@@ -243,15 +243,15 @@ const OpenLetter = () => {
                 </p>
 
                 <p>
-                  <strong className="font-semibold text-primary">What many don't understand is that addiction isn't a problem—it's actually a solution.</strong> If you're in pain, angst, anxiety, fear, rage, depression, sadness, loneliness or experiencing any other form of suffering, there's nothing wrong with wanting to be out of that pain. It's how we go about scratching that itch that causes the issue.
+                  <strong className="font-semibold text-foreground">What many don't understand is that addiction isn't a problem—it's actually a solution.</strong> If you're in pain, angst, anxiety, fear, rage, depression, sadness, loneliness or experiencing any other form of suffering, there's nothing wrong with wanting to be out of that pain. It's how we go about scratching that itch that causes the issue.
                 </p>
                 
                 <p>
-                  <strong className="font-semibold text-primary">Looking at addiction from a state of compassion, as opposed to judgment, is critical.</strong> We cannot punish or beat addiction out of somebody. Love and compassion are critical—though, of course, those can be difficult emotions to embrace when dealing with addicts.
+                  <strong className="font-semibold text-foreground">Looking at addiction from a state of compassion, as opposed to judgment, is critical.</strong> We cannot punish or beat addiction out of somebody. Love and compassion are critical—though, of course, those can be difficult emotions to embrace when dealing with addicts.
                 </p>
                 
                 <p>
-                  <strong className="font-semibold text-primary">Addiction is also biochemical.</strong> You are dealing with serotonin and dopamine. Once you quit the drug or behavior, you may have to fix and repair the gut. Movement, community, and consistent care can help heal.
+                  <strong className="font-semibold text-foreground">Addiction is also biochemical.</strong> You are dealing with serotonin and dopamine. Once you quit the drug or behavior, you may have to fix and repair the gut. Movement, community, and consistent care can help heal.
                 </p>
                 
                 <p className="text-xl font-medium pt-4">
