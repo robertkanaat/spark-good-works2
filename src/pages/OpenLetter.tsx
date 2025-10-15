@@ -264,37 +264,40 @@ const OpenLetter = () => {
                     With compassion and hope,
                   </p>
                   <p className="text-lg font-semibold text-foreground mt-2">
-                    The Genius Recovery Community
+                    Joe Polish
                   </p>
                 </div>
               </article>
+            </div>
+          </div>
+        </section>
 
-              {/* Enhanced call-to-action section */}
-              <div className="mt-16 pt-12 border-t border-border/20">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Ready to take the next step?</h3>
-                  <p className="text-muted-foreground">We're here to support you on your journey to recovery.</p>
-                </div>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Link to="/emergency" className="w-full sm:w-auto">
-                    <Button 
-                      className="w-full sm:w-auto text-primary-foreground font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105"
-                      style={{ 
-                        background: 'var(--gradient-primary)',
-                        boxShadow: 'var(--shadow-elegant)'
-                      }}
-                    >
-                      Get Help Now
-                    </Button>
-                  </Link>
-                  <Link to="/donation" className="w-full sm:w-auto">
-                    <Button variant="secondary" className="w-full sm:w-auto border-2 border-primary/20 hover:border-primary/40 bg-card/50 hover:bg-card/70 backdrop-blur px-8 py-3 rounded-xl transition-all duration-300">
-                      Support Recovery
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+        {/* Call to Action Section */}
+        <section className="py-24 relative bg-gradient-to-br from-primary/10 via-background to-muted/20 overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,hsl(var(--primary)/0.1),transparent_50%)] opacity-50"></div>
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent mb-6">
+                Ready to take the next step?
+              </h2>
+              <p className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-4xl mx-auto">
+                We're here to support you on your journey to recovery. Whether you need immediate help or want to support others, we're ready to assist.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link to="/emergency">
+                <Button 
+                  className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                >
+                  Get Help Now
+                </Button>
+              </Link>
+              <Link to="/donation">
+                <Button variant="outline" className="px-8 py-4 text-lg font-semibold border-primary/30 hover:bg-primary hover:text-primary-foreground rounded-xl transition-all duration-300">
+                  Support Recovery
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
