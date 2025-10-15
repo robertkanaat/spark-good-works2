@@ -194,92 +194,78 @@ const OpenLetter = () => {
           </div>
         </section>
 
-        {/* Main Content */}
+        {/* Main Content - Letter Style */}
         <section className="relative mt-20 pb-20" id="letter-content">
-          {/* Background pattern */}
-          <div className="absolute inset-0 bg-gradient-subtle opacity-30" aria-hidden />
+          {/* Elegant background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" aria-hidden />
           
           <div className="relative max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
-            {/* Main content card */}
+            {/* Letter Container - Single unified card with paper-like feel */}
             <div 
-              className="backdrop-blur-xl rounded-3xl p-8 md:p-12 lg:p-16 border border-border/20"
+              className="backdrop-blur-xl rounded-2xl shadow-2xl border border-border/30 overflow-hidden"
               style={{ 
                 background: 'var(--gradient-card)',
-                boxShadow: 'var(--shadow-card)'
+                boxShadow: '0 20px 60px -10px rgba(0,0,0,0.15)'
               }}
             >
-              <article className="prose prose-neutral dark:prose-invert max-w-none prose-xl leading-relaxed">
-                {/* Introduction with special styling */}
-                <div className="mb-12 p-8 bg-gradient-to-r from-primary/5 to-donate/5 rounded-2xl border border-primary/10">
-                  <p className="text-2xl leading-relaxed font-light text-foreground/90 mb-0">
-                    First, I want to say how sorry I am that you or someone you love is struggling with addiction. I know first-hand how painful it is. Addiction nearly killed me when I was 18 years old.
-                  </p>
-                </div>
+              {/* Letter Header with subtle accent */}
+              <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-donate/10 px-8 md:px-12 lg:px-16 pt-12 pb-8 border-b border-primary/10">
+                <div className="text-sm text-muted-foreground mb-4 font-medium">An Open Letter</div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                  To Anyone Struggling with Addiction
+                </h2>
+              </div>
 
-                {/* Core content with enhanced typography */}
-                <div className="space-y-8 text-lg leading-relaxed">
-                  <p className="text-foreground/90">
-                    What I've learned since then is that <strong className="font-bold text-primary">almost all addiction stems from trauma.</strong> This can be difficult for some people to understand; they assume trauma has to mean a person was beaten, molested or in a life-threatening accident. But we all have different levels of sensitivity.
-                  </p>
-                  
-                  <p className="text-foreground/90">
-                    Addiction is something you are driven to do—anything you crave that gives you temporary pleasure or relief but then causes negative consequences. Addiction is something you are unable to give up, despite the suffering it causes.
-                  </p>
-                  
-                  <p className="text-foreground/90">
-                    The challenging thing for people that don't have this craving to understand is how someone could have that craving in the first place. They wonder why the addict can't just make a better choice.
-                  </p>
-                  
-                  <p className="text-foreground/90">
-                    I'm of the belief that addiction is not a choice. <strong className="font-bold text-primary">Once the addict goes into a craving state, it's beyond willpower or intelligence.</strong> Intelligence can actually be a detriment because the smarter people are, the more they believe they can think their way out of the problem.
-                  </p>
-                </div>
+              {/* Letter Body - Unified content flow */}
+              <article className="px-8 md:px-12 lg:px-16 py-12 space-y-6 text-lg leading-relaxed text-foreground/90">
+                <p className="text-xl leading-relaxed">
+                  First, I want to say how sorry I am that you or someone you love is struggling with addiction. I know first-hand how painful it is. Addiction nearly killed me when I was 18 years old.
+                </p>
 
-                {/* Elegant divider */}
-                <div className="my-16 flex items-center justify-center">
-                  <div className="h-px w-24 bg-gradient-to-r from-transparent via-primary to-transparent" />
-                  <div className="mx-4 w-2 h-2 rounded-full bg-primary" />
-                  <div className="h-px w-24 bg-gradient-to-r from-primary via-transparent to-transparent" />
-                </div>
+                <p>
+                  What I've learned since then is that <strong className="font-semibold text-primary">almost all addiction stems from trauma.</strong> This can be difficult for some people to understand; they assume trauma has to mean a person was beaten, molested or in a life-threatening accident. But we all have different levels of sensitivity.
+                </p>
+                
+                <p>
+                  Addiction is something you are driven to do—anything you crave that gives you temporary pleasure or relief but then causes negative consequences. Addiction is something you are unable to give up, despite the suffering it causes.
+                </p>
+                
+                <p>
+                  The challenging thing for people that don't have this craving to understand is how someone could have that craving in the first place. They wonder why the addict can't just make a better choice.
+                </p>
+                
+                <p>
+                  I'm of the belief that addiction is not a choice. <strong className="font-semibold text-primary">Once the addict goes into a craving state, it's beyond willpower or intelligence.</strong> Intelligence can actually be a detriment because the smarter people are, the more they believe they can think their way out of the problem.
+                </p>
 
-                {/* Featured section */}
-                <div className="my-16">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-primary to-donate bg-clip-text text-transparent">
-                    What many don't understand
-                  </h2>
-                  
-                  {/* Key insight callout */}
-                  <div className="relative p-8 my-12 bg-gradient-to-br from-primary/10 via-primary/5 to-donate/10 rounded-2xl border border-primary/20">
-                    <div className="absolute -top-4 left-8">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                        <span className="text-primary-foreground font-bold text-sm">✦</span>
-                      </div>
-                    </div>
-                    <blockquote className="text-xl md:text-2xl italic font-light text-foreground leading-relaxed">
-                      "Ultimately, addiction is a connection disorder. It's feeling incredibly disconnected and uncomfortable in your own skin. You just want to numb out or escape."
-                    </blockquote>
-                  </div>
-                </div>
+                <p className="italic border-l-4 border-primary pl-6 py-2 my-8 text-xl text-foreground/80">
+                  "Ultimately, addiction is a connection disorder. It's feeling incredibly disconnected and uncomfortable in your own skin. You just want to numb out or escape."
+                </p>
 
-                <div className="space-y-8 text-lg leading-relaxed">
-                  <p className="text-foreground/90">
-                    <strong className="font-bold text-primary">What many don't understand is that addiction isn't a problem—it's actually a solution.</strong> If you're in pain, angst, anxiety, fear, rage, depression, sadness, loneliness or experiencing any other form of suffering, there's nothing wrong with wanting to be out of that pain. It's how we go about scratching that itch that causes the issue.
+                <p>
+                  <strong className="font-semibold text-primary">What many don't understand is that addiction isn't a problem—it's actually a solution.</strong> If you're in pain, angst, anxiety, fear, rage, depression, sadness, loneliness or experiencing any other form of suffering, there's nothing wrong with wanting to be out of that pain. It's how we go about scratching that itch that causes the issue.
+                </p>
+                
+                <p>
+                  <strong className="font-semibold text-primary">Looking at addiction from a state of compassion, as opposed to judgment, is critical.</strong> We cannot punish or beat addiction out of somebody. Love and compassion are critical—though, of course, those can be difficult emotions to embrace when dealing with addicts.
+                </p>
+                
+                <p>
+                  <strong className="font-semibold text-primary">Addiction is also biochemical.</strong> You are dealing with serotonin and dopamine. Once you quit the drug or behavior, you may have to fix and repair the gut. Movement, community, and consistent care can help heal.
+                </p>
+                
+                <p className="text-xl font-medium pt-4">
+                  It's a lot of work—but not nearly as much work as active addiction. And if you're willing to do the work, there's freedom on the other side. <strong className="font-semibold text-donate">The bottom line: help is available.</strong>
+                </p>
+
+                {/* Letter Signature */}
+                <div className="pt-8 mt-8 border-t border-border/20">
+                  <p className="text-base text-muted-foreground italic">
+                    With compassion and hope,
                   </p>
-                  
-                  <p className="text-foreground/90">
-                    <strong className="font-bold text-primary">Looking at addiction from a state of compassion, as opposed to judgment, is critical.</strong> We cannot punish or beat addiction out of somebody. Love and compassion are critical—though, of course, those can be difficult emotions to embrace when dealing with addicts.
+                  <p className="text-lg font-semibold text-foreground mt-2">
+                    The Genius Recovery Community
                   </p>
-                  
-                  <p className="text-foreground/90">
-                    <strong className="font-bold text-primary">Addiction is also biochemical.</strong> You are dealing with serotonin and dopamine. Once you quit the drug or behavior, you may have to fix and repair the gut. Movement, community, and consistent care can help heal.
-                  </p>
-                  
-                  {/* Final message with emphasis */}
-                  <div className="p-6 bg-gradient-to-r from-donate/10 to-primary/10 rounded-xl border border-donate/20 mt-12">
-                    <p className="text-xl font-medium text-foreground mb-0">
-                      It's a lot of work—but not nearly as much work as active addiction. And if you're willing to do the work, there's freedom on the other side. <strong className="font-bold text-donate">The bottom line: help is available.</strong>
-                    </p>
-                  </div>
                 </div>
               </article>
 
