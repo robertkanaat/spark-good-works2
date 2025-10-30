@@ -125,7 +125,8 @@ const AICompanion = () => {
               <Button 
                 size="lg" 
                 className="group"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   // Find and click the Delphi bubble trigger
                   const delphiButton = document.querySelector('#delphi-bubble-trigger') as HTMLElement ||
                                       document.querySelector('#delphi-bubble-container button') as HTMLElement ||
@@ -240,7 +241,8 @@ const AICompanion = () => {
               size="lg" 
               variant="secondary" 
               className="group"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 // Find and click the Delphi bubble trigger
                 const delphiButton = document.querySelector('#delphi-bubble-trigger') as HTMLElement ||
                                     document.querySelector('#delphi-bubble-container button') as HTMLElement ||
