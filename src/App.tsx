@@ -208,6 +208,7 @@ const App = () => {
             <Route path="/recovery-game" element={<RecoveryGame />} />
             <Route path="/GeniusRebels" element={<Navigate to="/donation" replace />} />
             <Route path="/GRQR" element={<Navigate to="/" replace />} />
+            <Route path="/ai" element={<Navigate to="/ai-companion" replace />} />
             <Route path="/:slug" element={<BlogPost />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
