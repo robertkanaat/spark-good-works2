@@ -340,6 +340,72 @@ serve(async (req) => {
                 }
             }
             
+            const usStates = [
+                {value: '', label: 'Select State'},
+                {value: 'AL', label: 'Alabama'}, {value: 'AK', label: 'Alaska'}, {value: 'AZ', label: 'Arizona'},
+                {value: 'AR', label: 'Arkansas'}, {value: 'CA', label: 'California'}, {value: 'CO', label: 'Colorado'},
+                {value: 'CT', label: 'Connecticut'}, {value: 'DE', label: 'Delaware'}, {value: 'FL', label: 'Florida'},
+                {value: 'GA', label: 'Georgia'}, {value: 'HI', label: 'Hawaii'}, {value: 'ID', label: 'Idaho'},
+                {value: 'IL', label: 'Illinois'}, {value: 'IN', label: 'Indiana'}, {value: 'IA', label: 'Iowa'},
+                {value: 'KS', label: 'Kansas'}, {value: 'KY', label: 'Kentucky'}, {value: 'LA', label: 'Louisiana'},
+                {value: 'ME', label: 'Maine'}, {value: 'MD', label: 'Maryland'}, {value: 'MA', label: 'Massachusetts'},
+                {value: 'MI', label: 'Michigan'}, {value: 'MN', label: 'Minnesota'}, {value: 'MS', label: 'Mississippi'},
+                {value: 'MO', label: 'Missouri'}, {value: 'MT', label: 'Montana'}, {value: 'NE', label: 'Nebraska'},
+                {value: 'NV', label: 'Nevada'}, {value: 'NH', label: 'New Hampshire'}, {value: 'NJ', label: 'New Jersey'},
+                {value: 'NM', label: 'New Mexico'}, {value: 'NY', label: 'New York'}, {value: 'NC', label: 'North Carolina'},
+                {value: 'ND', label: 'North Dakota'}, {value: 'OH', label: 'Ohio'}, {value: 'OK', label: 'Oklahoma'},
+                {value: 'OR', label: 'Oregon'}, {value: 'PA', label: 'Pennsylvania'}, {value: 'RI', label: 'Rhode Island'},
+                {value: 'SC', label: 'South Carolina'}, {value: 'SD', label: 'South Dakota'}, {value: 'TN', label: 'Tennessee'},
+                {value: 'TX', label: 'Texas'}, {value: 'UT', label: 'Utah'}, {value: 'VT', label: 'Vermont'},
+                {value: 'VA', label: 'Virginia'}, {value: 'WA', label: 'Washington'}, {value: 'WV', label: 'West Virginia'},
+                {value: 'WI', label: 'Wisconsin'}, {value: 'WY', label: 'Wyoming'}, {value: 'DC', label: 'Washington DC'}
+            ];
+            
+            const caProvinces = [
+                {value: '', label: 'Select Province'},
+                {value: 'AB', label: 'Alberta'}, {value: 'BC', label: 'British Columbia'},
+                {value: 'MB', label: 'Manitoba'}, {value: 'NB', label: 'New Brunswick'},
+                {value: 'NL', label: 'Newfoundland and Labrador'}, {value: 'NS', label: 'Nova Scotia'},
+                {value: 'NT', label: 'Northwest Territories'}, {value: 'NU', label: 'Nunavut'},
+                {value: 'ON', label: 'Ontario'}, {value: 'PE', label: 'Prince Edward Island'},
+                {value: 'QC', label: 'Quebec'}, {value: 'SK', label: 'Saskatchewan'}, {value: 'YT', label: 'Yukon'}
+            ];
+            
+            function updateStateField() {
+                const countrySelect = document.getElementById('country');
+                const stateSelect = document.querySelector('select[name="state"]');
+                const country = countrySelect.value;
+                
+                stateSelect.innerHTML = '';
+                
+                if (country === 'US') {
+                    usStates.forEach(function(state) {
+                        const option = document.createElement('option');
+                        option.value = state.value;
+                        option.textContent = state.label;
+                        stateSelect.appendChild(option);
+                    });
+                    stateSelect.required = true;
+                    stateSelect.style.display = 'block';
+                } else if (country === 'CA') {
+                    caProvinces.forEach(function(province) {
+                        const option = document.createElement('option');
+                        option.value = province.value;
+                        option.textContent = province.label;
+                        stateSelect.appendChild(option);
+                    });
+                    stateSelect.required = true;
+                    stateSelect.style.display = 'block';
+                } else {
+                    const option = document.createElement('option');
+                    option.value = 'N/A';
+                    option.textContent = 'N/A';
+                    stateSelect.appendChild(option);
+                    stateSelect.required = false;
+                    stateSelect.style.display = 'block';
+                }
+            }
+            
             document.addEventListener('DOMContentLoaded', function() {
                 const cardInput = document.getElementById('card-number');
                 const expiryInput = document.getElementById('expiry-date');
