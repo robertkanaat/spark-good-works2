@@ -674,6 +674,59 @@ serve(async (req) => {
             .card-form .form-row input { flex: 1 !important; min-width: 0 !important; }
           </style>
           <script>
+            const usStates = [
+              {code: 'AL', name: 'Alabama'}, {code: 'AK', name: 'Alaska'}, {code: 'AZ', name: 'Arizona'}, {code: 'AR', name: 'Arkansas'},
+              {code: 'CA', name: 'California'}, {code: 'CO', name: 'Colorado'}, {code: 'CT', name: 'Connecticut'}, {code: 'DE', name: 'Delaware'},
+              {code: 'FL', name: 'Florida'}, {code: 'GA', name: 'Georgia'}, {code: 'HI', name: 'Hawaii'}, {code: 'ID', name: 'Idaho'},
+              {code: 'IL', name: 'Illinois'}, {code: 'IN', name: 'Indiana'}, {code: 'IA', name: 'Iowa'}, {code: 'KS', name: 'Kansas'},
+              {code: 'KY', name: 'Kentucky'}, {code: 'LA', name: 'Louisiana'}, {code: 'ME', name: 'Maine'}, {code: 'MD', name: 'Maryland'},
+              {code: 'MA', name: 'Massachusetts'}, {code: 'MI', name: 'Michigan'}, {code: 'MN', name: 'Minnesota'}, {code: 'MS', name: 'Mississippi'},
+              {code: 'MO', name: 'Missouri'}, {code: 'MT', name: 'Montana'}, {code: 'NE', name: 'Nebraska'}, {code: 'NV', name: 'Nevada'},
+              {code: 'NH', name: 'New Hampshire'}, {code: 'NJ', name: 'New Jersey'}, {code: 'NM', name: 'New Mexico'}, {code: 'NY', name: 'New York'},
+              {code: 'NC', name: 'North Carolina'}, {code: 'ND', name: 'North Dakota'}, {code: 'OH', name: 'Ohio'}, {code: 'OK', name: 'Oklahoma'},
+              {code: 'OR', name: 'Oregon'}, {code: 'PA', name: 'Pennsylvania'}, {code: 'RI', name: 'Rhode Island'}, {code: 'SC', name: 'South Carolina'},
+              {code: 'SD', name: 'South Dakota'}, {code: 'TN', name: 'Tennessee'}, {code: 'TX', name: 'Texas'}, {code: 'UT', name: 'Utah'},
+              {code: 'VT', name: 'Vermont'}, {code: 'VA', name: 'Virginia'}, {code: 'WA', name: 'Washington'}, {code: 'WV', name: 'West Virginia'},
+              {code: 'WI', name: 'Wisconsin'}, {code: 'WY', name: 'Wyoming'}, {code: 'DC', name: 'District of Columbia'}
+            ];
+            
+            const canadianProvinces = [
+              {code: 'AB', name: 'Alberta'}, {code: 'BC', name: 'British Columbia'}, {code: 'MB', name: 'Manitoba'},
+              {code: 'NB', name: 'New Brunswick'}, {code: 'NL', name: 'Newfoundland and Labrador'}, {code: 'NS', name: 'Nova Scotia'},
+              {code: 'NT', name: 'Northwest Territories'}, {code: 'NU', name: 'Nunavut'}, {code: 'ON', name: 'Ontario'},
+              {code: 'PE', name: 'Prince Edward Island'}, {code: 'QC', name: 'Quebec'}, {code: 'SK', name: 'Saskatchewan'},
+              {code: 'YT', name: 'Yukon'}
+            ];
+            
+            function toggleStateField(country) {
+              const stateField = document.getElementById('stateField');
+              if (!stateField) return;
+              stateField.innerHTML = '<option value="">Select State/Province</option>';
+              
+              if (country === 'US') {
+                stateField.style.display = 'block';
+                stateField.required = true;
+                usStates.forEach(function(state) {
+                  const option = document.createElement('option');
+                  option.value = state.code;
+                  option.textContent = state.code;
+                  stateField.appendChild(option);
+                });
+              } else if (country === 'CA') {
+                stateField.style.display = 'block';
+                stateField.required = true;
+                canadianProvinces.forEach(function(province) {
+                  const option = document.createElement('option');
+                  option.value = province.code;
+                  option.textContent = province.name;
+                  stateField.appendChild(option);
+                });
+              } else {
+                stateField.style.display = 'none';
+                stateField.required = false;
+              }
+            }
+            
             function formatCardNumber(input) {
                 let value = input.value.replace(/\\s+/g, '').replace(/[^0-9]/gi, '');
                 
@@ -746,7 +799,7 @@ serve(async (req) => {
                         const requiredFields = form.querySelectorAll('input[required], select[required]');
                         let isValid = true;
                         
-                        requiredFields.forEach(field => {
+                        requiredFields.forEach(function(field) {
                             if (!field.value.trim()) {
                                 field.style.borderColor = '#ff0000';
                                 isValid = false;
@@ -773,19 +826,19 @@ serve(async (req) => {
                         fetch(form.action, {
                             method: 'POST',
                             body: formData
-                        }).then(response => {
+                        }).then(function(response) {
                             if (response.redirected) {
                                 // Follow the redirect
                                 window.top.location.href = response.url;
                             } else {
                                 return response.text();
                             }
-                        }).then(responseText => {
+                        }).then(function(responseText) {
                             if (responseText) {
                                 // Handle response here if needed
                                 console.log('Form response:', responseText);
                             }
-                        }).catch(error => {
+                        }).catch(function(error) {
                             console.error('Form submission error:', error);
                             alert('Payment processing error. Please try again.');
                             if (submitBtn) {
@@ -809,6 +862,9 @@ serve(async (req) => {
                 if (expiryInput) { expiryInput.addEventListener('input', function() { formatExpiryDate(this); }); }
                 
                 setupFormHandler();
+                
+                // Initialize state field with US states
+                toggleStateField('US');
                 
                 // Continuously check for error redirects
                 setInterval(checkAndRedirectOnError, 1000);
@@ -1024,67 +1080,8 @@ serve(async (req) => {
                      onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                      onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
              </div>
-             
-             <script>
-               const usStates = [
-                 {code: 'AL', name: 'Alabama'}, {code: 'AK', name: 'Alaska'}, {code: 'AZ', name: 'Arizona'}, {code: 'AR', name: 'Arkansas'},
-                 {code: 'CA', name: 'California'}, {code: 'CO', name: 'Colorado'}, {code: 'CT', name: 'Connecticut'}, {code: 'DE', name: 'Delaware'},
-                 {code: 'FL', name: 'Florida'}, {code: 'GA', name: 'Georgia'}, {code: 'HI', name: 'Hawaii'}, {code: 'ID', name: 'Idaho'},
-                 {code: 'IL', name: 'Illinois'}, {code: 'IN', name: 'Indiana'}, {code: 'IA', name: 'Iowa'}, {code: 'KS', name: 'Kansas'},
-                 {code: 'KY', name: 'Kentucky'}, {code: 'LA', name: 'Louisiana'}, {code: 'ME', name: 'Maine'}, {code: 'MD', name: 'Maryland'},
-                 {code: 'MA', name: 'Massachusetts'}, {code: 'MI', name: 'Michigan'}, {code: 'MN', name: 'Minnesota'}, {code: 'MS', name: 'Mississippi'},
-                 {code: 'MO', name: 'Missouri'}, {code: 'MT', name: 'Montana'}, {code: 'NE', name: 'Nebraska'}, {code: 'NV', name: 'Nevada'},
-                 {code: 'NH', name: 'New Hampshire'}, {code: 'NJ', name: 'New Jersey'}, {code: 'NM', name: 'New Mexico'}, {code: 'NY', name: 'New York'},
-                 {code: 'NC', name: 'North Carolina'}, {code: 'ND', name: 'North Dakota'}, {code: 'OH', name: 'Ohio'}, {code: 'OK', name: 'Oklahoma'},
-                 {code: 'OR', name: 'Oregon'}, {code: 'PA', name: 'Pennsylvania'}, {code: 'RI', name: 'Rhode Island'}, {code: 'SC', name: 'South Carolina'},
-                 {code: 'SD', name: 'South Dakota'}, {code: 'TN', name: 'Tennessee'}, {code: 'TX', name: 'Texas'}, {code: 'UT', name: 'Utah'},
-                 {code: 'VT', name: 'Vermont'}, {code: 'VA', name: 'Virginia'}, {code: 'WA', name: 'Washington'}, {code: 'WV', name: 'West Virginia'},
-                 {code: 'WI', name: 'Wisconsin'}, {code: 'WY', name: 'Wyoming'}, {code: 'DC', name: 'District of Columbia'}
-               ];
-               
-               const canadianProvinces = [
-                 {code: 'AB', name: 'Alberta'}, {code: 'BC', name: 'British Columbia'}, {code: 'MB', name: 'Manitoba'},
-                 {code: 'NB', name: 'New Brunswick'}, {code: 'NL', name: 'Newfoundland and Labrador'}, {code: 'NS', name: 'Nova Scotia'},
-                 {code: 'NT', name: 'Northwest Territories'}, {code: 'NU', name: 'Nunavut'}, {code: 'ON', name: 'Ontario'},
-                 {code: 'PE', name: 'Prince Edward Island'}, {code: 'QC', name: 'Quebec'}, {code: 'SK', name: 'Saskatchewan'},
-                 {code: 'YT', name: 'Yukon'}
-               ];
-               
-               function toggleStateField(country) {
-                 const stateField = document.getElementById('stateField');
-                 stateField.innerHTML = '<option value="">Select State/Province</option>';
-                 
-                 if (country === 'US') {
-                   stateField.style.display = 'block';
-                   stateField.required = true;
-                    usStates.forEach(state => {
-                      const option = document.createElement('option');
-                      option.value = state.code;
-                      option.textContent = state.code;
-                      stateField.appendChild(option);
-                    });
-                 } else if (country === 'CA') {
-                   stateField.style.display = 'block';
-                   stateField.required = true;
-                   canadianProvinces.forEach(province => {
-                     const option = document.createElement('option');
-                     option.value = province.code;
-                     option.textContent = province.name;
-                     stateField.appendChild(option);
-                   });
-                 } else {
-                   stateField.style.display = 'none';
-                   stateField.required = false;
-                 }
-               }
-               
-               // Initialize on page load
-               document.addEventListener('DOMContentLoaded', function() {
-                 toggleStateField('US'); // Default to US
-               });
-             </script>
             
-            <button type="submit" 
+            <button type="submit"
                     style="background: linear-gradient(45deg, #4CAF50, #45a049); color: white; padding: 18px 30px; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: bold; width: 100%; box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;"
                     onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 20px rgba(76, 175, 80, 0.4)'"
                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 16px rgba(76, 175, 80, 0.3)'">
