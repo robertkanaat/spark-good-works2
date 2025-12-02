@@ -173,7 +173,7 @@ export type Database = {
     }
     Functions: {
       admin_get_email_notifications: {
-        Args: never
+        Args: Record<PropertyKey, never>
         Returns: {
           created_at: string
           email: string
@@ -185,7 +185,7 @@ export type Database = {
         }[]
       }
       admin_get_memories_with_emails: {
-        Args: never
+        Args: Record<PropertyKey, never>
         Returns: {
           category: string
           created_at: string
@@ -202,7 +202,7 @@ export type Database = {
         }[]
       }
       get_public_memories: {
-        Args: never
+        Args: Record<PropertyKey, never>
         Returns: {
           category: string
           created_at: string
@@ -217,7 +217,7 @@ export type Database = {
         }[]
       }
       get_safe_memories: {
-        Args: never
+        Args: Record<PropertyKey, never>
         Returns: {
           category: string
           created_at: string
@@ -231,9 +231,18 @@ export type Database = {
           updated_at: string
         }[]
       }
-      is_admin: { Args: never; Returns: boolean }
-      is_admin_user: { Args: never; Returns: boolean }
-      promote_user_to_admin: { Args: { user_email: string }; Returns: string }
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      is_admin_user: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      promote_user_to_admin: {
+        Args: { user_email: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
