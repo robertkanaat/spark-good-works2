@@ -1020,7 +1020,7 @@ serve(async (req) => {
                 <select id="stateField" name="state" style="flex: 1; padding: 15px; border: 2px solid transparent; border-radius: 10px; background: #ffffff !important; color: #333; font-size: 16px; box-sizing: border-box; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none; transition: all 0.3s ease; cursor: pointer; z-index: 100;"
                         onfocus="this.style.borderColor='#4CAF50'; this.style.boxShadow='0 0 0 3px rgba(76, 175, 80, 0.1)'"
                         onblur="this.style.borderColor='transparent'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
-                  <option value="">Select State/Province</option>
+                  <option value="">State/Province</option>
                   <option disabled>── US States ──</option>
                   <option value="AL">AL - Alabama</option>
                   <option value="AK">AK - Alaska</option>
