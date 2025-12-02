@@ -1073,22 +1073,22 @@ serve(async (req) => {
                   <option value="WV">WV - West Virginia</option>
                   <option value="WI">WI - Wisconsin</option>
                   <option value="WY">WY - Wyoming</option>
-                  <option disabled>── Canadian Provinces ──</option>
+                  <option disabled>── Canada ──</option>
                   <option value="AB">AB - Alberta</option>
                   <option value="BC">BC - British Columbia</option>
                   <option value="MB">MB - Manitoba</option>
                   <option value="NB">NB - New Brunswick</option>
-                  <option value="NL">NL - Newfoundland and Labrador</option>
+                  <option value="NL">NL - Newfoundland</option>
                   <option value="NS">NS - Nova Scotia</option>
-                  <option value="NT">NT - Northwest Territories</option>
+                  <option value="NT">NT - NW Territories</option>
                   <option value="NU">NU - Nunavut</option>
                   <option value="ON">ON - Ontario</option>
-                  <option value="PE">PE - Prince Edward Island</option>
+                  <option value="PE">PE - PEI</option>
                   <option value="QC">QC - Quebec</option>
                   <option value="SK">SK - Saskatchewan</option>
                   <option value="YT">YT - Yukon</option>
-                  <option disabled>── Other ──</option>
-                  <option value="OTHER">Other / International</option>
+                  <option disabled>────────</option>
+                  <option value="OTHER">Other</option>
                 </select>
               </div>
               <input type="text" name="phone" placeholder="Phone Number (optional)" 
