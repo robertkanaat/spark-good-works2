@@ -15,7 +15,7 @@ const HeroSection = () => {
     return (saved as 'donate' | 'help' | 'support') || 'donate';
   });
   const [currentHeroImage, setCurrentHeroImage] = useState(heroRecoveryPerson);
-  const presetAmounts = [25, 50, 100, 200, 500, 1000];
+  const presetAmounts = [1000, 500, 200, 100, 50, 25];
   
   const heroImages = [heroRecoveryPerson, heroFamilyEmbrace];
   
