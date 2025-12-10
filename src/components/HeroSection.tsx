@@ -15,7 +15,7 @@ const HeroSection = () => {
     return (saved as 'donate' | 'help' | 'support') || 'donate';
   });
   const [currentHeroImage, setCurrentHeroImage] = useState(heroRecoveryPerson);
-  const presetAmounts = [25, 50, 100, 200];
+  const presetAmounts = [25, 50, 100, 200, 500, 1000];
   
   const heroImages = [heroRecoveryPerson, heroFamilyEmbrace];
   
@@ -162,15 +162,15 @@ const HeroSection = () => {
                 <>
                   <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center">Choose An Amount To Support Genius Recovery</h3>
                   
-                  <div className="grid grid-cols-2 gap-3 mb-6">
+                  <div className="grid grid-cols-3 gap-2 mb-6">
                     {presetAmounts.map((amount) => (
                       <Button
                         key={amount}
                         variant={selectedAmount === amount ? "default" : "outline"}
                         onClick={() => setSelectedAmount(amount)}
-                        className="h-12 font-semibold"
+                        className="h-10 text-sm font-semibold"
                       >
-                        ${amount}.00
+                        ${amount}
                       </Button>
                     ))}
                   </div>
