@@ -361,7 +361,7 @@ const Donation = () => {
 
                 {/* Quick amounts - updated values */}
                 <div className="grid grid-cols-4 gap-2 mb-8">
-                  {[25, 50, 100, 200, 500, 1000, 5000, 10000].map((quickAmount) => (
+                  {[1000, 500, 200, 100, 50, 25].map((quickAmount) => (
                     <Button
                       key={quickAmount}
                       variant={amount === quickAmount ? "default" : "outline"}
