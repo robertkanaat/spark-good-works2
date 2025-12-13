@@ -4,5 +4,8 @@
 # Serve all XML files directly (force, don't fall through)
 /*.xml /:splat 200!
 
+# Handle trailing slashes - redirect to non-trailing slash version
+/:slug/ /:slug 301
+
 # SPA fallback for all other routes
 /* /index.html 200
