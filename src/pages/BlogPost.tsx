@@ -271,7 +271,7 @@ const BlogPost = () => {
         keywords={`recovery story, addiction recovery, ${post.category}, ${post.author}, inspiration, hope, healing`}
         ogType="article"
         ogImage={post.image}
-        canonicalUrl={`https://geniusrecovery.org/${post.slug}`}
+        canonicalUrl={`https://geniusrecovery.org/blog/${post.slug}`}
         structuredData={{
           "@context": "https://schema.org",
           "@type": "Article",
@@ -294,7 +294,7 @@ const BlogPost = () => {
           "dateModified": post.date,
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://geniusrecovery.org/${post.slug}`
+            "@id": `https://geniusrecovery.org/blog/${post.slug}`
           }
         }}
       />
