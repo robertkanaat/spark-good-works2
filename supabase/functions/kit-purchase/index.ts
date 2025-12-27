@@ -165,64 +165,61 @@ serve(async (req) => {
       const successUrl = `${baseUrl}/payment-success?type=kit`;
       const failureUrl = `${baseUrl}/payment-failed`;
 
-      // Pre-populate US states in HTML so the dropdown works even when the form is injected via innerHTML.
-      const usStates: Array<{ code: string; name: string }> = [
-        { code: "AL", name: "Alabama" },
-        { code: "AK", name: "Alaska" },
-        { code: "AZ", name: "Arizona" },
-        { code: "AR", name: "Arkansas" },
-        { code: "CA", name: "California" },
-        { code: "CO", name: "Colorado" },
-        { code: "CT", name: "Connecticut" },
-        { code: "DE", name: "Delaware" },
-        { code: "FL", name: "Florida" },
-        { code: "GA", name: "Georgia" },
-        { code: "HI", name: "Hawaii" },
-        { code: "ID", name: "Idaho" },
-        { code: "IL", name: "Illinois" },
-        { code: "IN", name: "Indiana" },
-        { code: "IA", name: "Iowa" },
-        { code: "KS", name: "Kansas" },
-        { code: "KY", name: "Kentucky" },
-        { code: "LA", name: "Louisiana" },
-        { code: "ME", name: "Maine" },
-        { code: "MD", name: "Maryland" },
-        { code: "MA", name: "Massachusetts" },
-        { code: "MI", name: "Michigan" },
-        { code: "MN", name: "Minnesota" },
-        { code: "MS", name: "Mississippi" },
-        { code: "MO", name: "Missouri" },
-        { code: "MT", name: "Montana" },
-        { code: "NE", name: "Nebraska" },
-        { code: "NV", name: "Nevada" },
-        { code: "NH", name: "New Hampshire" },
-        { code: "NJ", name: "New Jersey" },
-        { code: "NM", name: "New Mexico" },
-        { code: "NY", name: "New York" },
-        { code: "NC", name: "North Carolina" },
-        { code: "ND", name: "North Dakota" },
-        { code: "OH", name: "Ohio" },
-        { code: "OK", name: "Oklahoma" },
-        { code: "OR", name: "Oregon" },
-        { code: "PA", name: "Pennsylvania" },
-        { code: "RI", name: "Rhode Island" },
-        { code: "SC", name: "South Carolina" },
-        { code: "SD", name: "South Dakota" },
-        { code: "TN", name: "Tennessee" },
-        { code: "TX", name: "Texas" },
-        { code: "UT", name: "Utah" },
-        { code: "VT", name: "Vermont" },
-        { code: "VA", name: "Virginia" },
-        { code: "WA", name: "Washington" },
-        { code: "WV", name: "West Virginia" },
-        { code: "WI", name: "Wisconsin" },
-        { code: "WY", name: "Wyoming" },
-        { code: "DC", name: "District of Columbia" },
-      ];
-
-      const usStateOptionsHtml = usStates
-        .map((s) => `<option value="${s.code}">${s.name}</option>`)
-        .join("");
+      // Pre-populate US states in HTML (using short codes like the donation form)
+      const usStateOptionsHtml = `
+        <option value="">Select State</option>
+        <option value="AL">AL</option>
+        <option value="AK">AK</option>
+        <option value="AZ">AZ</option>
+        <option value="AR">AR</option>
+        <option value="CA">CA</option>
+        <option value="CO">CO</option>
+        <option value="CT">CT</option>
+        <option value="DE">DE</option>
+        <option value="FL">FL</option>
+        <option value="GA">GA</option>
+        <option value="HI">HI</option>
+        <option value="ID">ID</option>
+        <option value="IL">IL</option>
+        <option value="IN">IN</option>
+        <option value="IA">IA</option>
+        <option value="KS">KS</option>
+        <option value="KY">KY</option>
+        <option value="LA">LA</option>
+        <option value="ME">ME</option>
+        <option value="MD">MD</option>
+        <option value="MA">MA</option>
+        <option value="MI">MI</option>
+        <option value="MN">MN</option>
+        <option value="MS">MS</option>
+        <option value="MO">MO</option>
+        <option value="MT">MT</option>
+        <option value="NE">NE</option>
+        <option value="NV">NV</option>
+        <option value="NH">NH</option>
+        <option value="NJ">NJ</option>
+        <option value="NM">NM</option>
+        <option value="NY">NY</option>
+        <option value="NC">NC</option>
+        <option value="ND">ND</option>
+        <option value="OH">OH</option>
+        <option value="OK">OK</option>
+        <option value="OR">OR</option>
+        <option value="PA">PA</option>
+        <option value="RI">RI</option>
+        <option value="SC">SC</option>
+        <option value="SD">SD</option>
+        <option value="TN">TN</option>
+        <option value="TX">TX</option>
+        <option value="UT">UT</option>
+        <option value="VT">VT</option>
+        <option value="VA">VA</option>
+        <option value="WA">WA</option>
+        <option value="WV">WV</option>
+        <option value="WI">WI</option>
+        <option value="WY">WY</option>
+        <option value="DC">DC</option>
+      `;
       
       const formHtml = `
         <div style="background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%) !important; padding: 40px; border-radius: 20px; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.15); width: 100%; max-width: 100%; overflow: hidden; box-sizing: border-box;">
@@ -298,14 +295,34 @@ serve(async (req) => {
             <div class="form-row" style="display: flex; gap: 12px; margin-bottom: 30px;">
               <select name="country" id="countryField" required
                 style="flex: 1; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333; cursor: pointer;">
+                <option value="">Select Country</option>
                 <option value="US">United States</option>
                 <option value="CA">Canada</option>
                 <option value="GB">United Kingdom</option>
                 <option value="AU">Australia</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="IT">Italy</option>
+                <option value="ES">Spain</option>
+                <option value="NL">Netherlands</option>
+                <option value="SE">Sweden</option>
+                <option value="NO">Norway</option>
+                <option value="DK">Denmark</option>
+                <option value="FI">Finland</option>
+                <option value="CH">Switzerland</option>
+                <option value="AT">Austria</option>
+                <option value="BE">Belgium</option>
+                <option value="IE">Ireland</option>
+                <option value="PT">Portugal</option>
+                <option value="LU">Luxembourg</option>
+                <option value="JP">Japan</option>
+                <option value="KR">South Korea</option>
+                <option value="SG">Singapore</option>
+                <option value="HK">Hong Kong</option>
+                <option value="NZ">New Zealand</option>
               </select>
               <select name="state" id="stateField" required
                 style="flex: 1; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333; cursor: pointer;">
-                <option value="">Select State</option>
                 ${usStateOptionsHtml}
               </select>
             </div>
