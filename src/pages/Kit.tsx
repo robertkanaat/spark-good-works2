@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -34,10 +34,18 @@ const Kit = () => {
   const [name, setName] = useState("");
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [paymentFormHtml, setPaymentFormHtml] = useState("");
+
+  const checkoutIframeRef = useRef<HTMLIFrameElement | null>(null);
+  const [checkoutHeight, setCheckoutHeight] = useState<number>(980);
+
   const { toast } = useToast();
 
   const totalAmount = KIT_PRICE * quantity;
 
+  const checkoutSrcDoc = useMemo(() => {
+    if (!paymentFormHtml) return "";
+    return `<!doctype html><html><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /></head><body style="margin:0;">${paymentFormHtml}</body></html>`;
+  }, [paymentFormHtml]);
   const isValidEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -403,9 +411,23 @@ const Kit = () => {
                     ← Back
                   </Button>
                 </div>
-                <div 
-                  className="w-full"
-                  dangerouslySetInnerHTML={{ __html: paymentFormHtml }}
+                <iframe
+                  ref={checkoutIframeRef}
+                  title="Secure Recovery Kit Checkout"
+                  className="w-full rounded-2xl overflow-hidden bg-background"
+                  style={{ height: checkoutHeight }}
+                  srcDoc={checkoutSrcDoc}
+                  onLoad={() => {
+                    const doc = checkoutIframeRef.current?.contentWindow?.document;
+                    if (!doc) return;
+                    const nextHeight = Math.max(
+                      doc.body?.scrollHeight || 0,
+                      doc.documentElement?.scrollHeight || 0
+                    );
+                    if (nextHeight > 0) {
+                      setCheckoutHeight(Math.min(Math.max(nextHeight, 780), 1600));
+                    }
+                  }}
                 />
               </div>
             )}
