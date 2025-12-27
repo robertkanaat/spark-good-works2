@@ -65,18 +65,14 @@ const Kit = () => {
     setIsProcessing(true);
     
     try {
-      const { data, error } = await supabase.functions.invoke('create-payment', {
+      const { data, error } = await supabase.functions.invoke('kit-purchase', {
         body: {
           amount: totalAmount,
+          quantity: quantity,
           currency: 'USD',
-          isRecurring: false,
           customerEmail: email,
           customerName: name,
-          embedForm: true,
-          metadata: {
-            type: 'recovery_kit',
-            quantity: quantity
-          }
+          embedForm: true
         }
       });
 
