@@ -392,17 +392,19 @@ const Kit = () => {
                 </div>
               </>
             ) : (
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between mb-4">
                   <h3 className="text-2xl font-bold">Complete Your Order</h3>
                   <Button
                     variant="outline"
                     onClick={() => setShowPaymentForm(false)}
+                    className="rounded-xl"
                   >
-                    Back
+                    ← Back
                   </Button>
                 </div>
                 <div 
+                  className="w-full"
                   dangerouslySetInnerHTML={{ __html: paymentFormHtml }}
                 />
               </div>
