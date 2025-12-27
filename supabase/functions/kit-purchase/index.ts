@@ -166,12 +166,13 @@ serve(async (req) => {
       const failureUrl = `${baseUrl}/payment-failed`;
 
       const formHtml = `
-        <div style="background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%) !important; padding: 40px; border-radius: 20px; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.15); width: 100%; max-width: 100%; overflow: hidden; box-sizing: border-box;">
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%) !important; padding: 40px; border-radius: 20px; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.15); width: 100%; max-width: 100%; overflow: hidden; box-sizing: border-box;">
           <style>
-            .kit-form * { box-sizing: border-box !important; }
-            .kit-form input, .kit-form select { width: 100% !important; max-width: 100% !important; }
+            .kit-form, .kit-form * { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important; box-sizing: border-box !important; }
+            .kit-form input, .kit-form select { width: 100% !important; max-width: 100% !important; font-family: inherit !important; }
             .kit-form .form-row { display: flex !important; gap: 12px !important; width: 100% !important; }
             .kit-form .form-row > * { flex: 1 !important; min-width: 0 !important; }
+            .kit-form label { font-family: inherit !important; letter-spacing: 0.01em; }
           </style>
           <script>
             var usStates = [
