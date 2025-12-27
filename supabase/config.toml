@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.submit-volunteer]
 verify_jwt = false
+
+[functions.kit-purchase]
+verify_jwt = false
