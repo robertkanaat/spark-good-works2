@@ -43,6 +43,7 @@ import Speakers from './pages/Speakers';
 import RecoveryQuiz from './pages/RecoveryQuiz';
 import RecoveryGame from './pages/RecoveryGame';
 import TagPage from './pages/TagPage';
+import Kit from './pages/Kit';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -206,6 +207,7 @@ const App = () => {
             <Route path="/addiction-recovery-book" element={<BookDownload />} />
             <Route path="/addiction-recovery-book-download" element={<BookDownloadConfirmation />} />
             <Route path="/recovery-game" element={<RecoveryGame />} />
+            <Route path="/kit" element={<Kit />} />
             <Route path="/GeniusRebels" element={<Navigate to="/donation" replace />} />
             <Route path="/GRQR" element={<Navigate to="/" replace />} />
             <Route path="/ai" element={<Navigate to="/ai-companion" replace />} />
