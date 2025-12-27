@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import recoveryKitBox from "@/assets/recovery-kit-box.png";
 
-const KIT_PRICE = 99;
+const KIT_PRICE = 100;
 
 const Kit = () => {
   useEffect(() => {
@@ -187,7 +187,7 @@ const Kit = () => {
                 <div className="text-center mb-8">
                   <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-medium mb-4">
                     <Gift className="w-4 h-4" />
-                    <span>Complete Recovery Toolkit</span>
+                    <span>A First Aid Kit For... Addiction</span>
                   </div>
                   <h2 className="text-3xl font-bold mb-4">A Minute for You, A Miracle for Them</h2>
                   <p className="text-muted-foreground">
