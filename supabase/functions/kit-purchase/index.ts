@@ -166,176 +166,14 @@ serve(async (req) => {
       const failureUrl = `${baseUrl}/payment-failed`;
       
       const formHtml = `
-        <div style="background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%) !important; padding: 30px; border-radius: 15px; color: white; box-shadow: 0 20px 40px rgba(0,0,0,0.1); max-width: 500px; overflow: hidden; box-sizing: border-box;">
+        <div style="background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%) !important; padding: 40px; border-radius: 20px; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.15); width: 100%; max-width: 100%; overflow: hidden; box-sizing: border-box;">
           <style>
-            .card-form * { box-sizing: border-box !important; }
-            .card-form input { width: 100% !important; max-width: 100% !important; }
-            .card-form .form-row { display: flex !important; gap: 10px !important; width: 100% !important; }
-            .card-form .form-row input { flex: 1 !important; min-width: 0 !important; }
+            .kit-form * { box-sizing: border-box !important; }
+            .kit-form input, .kit-form select { width: 100% !important; max-width: 100% !important; }
+            .kit-form .form-row { display: flex !important; gap: 12px !important; width: 100% !important; }
+            .kit-form .form-row > * { flex: 1 !important; min-width: 0 !important; }
           </style>
-          <script>
-            const usStates = [
-              {code: 'AL', name: 'Alabama'}, {code: 'AK', name: 'Alaska'}, {code: 'AZ', name: 'Arizona'}, {code: 'AR', name: 'Arkansas'},
-              {code: 'CA', name: 'California'}, {code: 'CO', name: 'Colorado'}, {code: 'CT', name: 'Connecticut'}, {code: 'DE', name: 'Delaware'},
-              {code: 'FL', name: 'Florida'}, {code: 'GA', name: 'Georgia'}, {code: 'HI', name: 'Hawaii'}, {code: 'ID', name: 'Idaho'},
-              {code: 'IL', name: 'Illinois'}, {code: 'IN', name: 'Indiana'}, {code: 'IA', name: 'Iowa'}, {code: 'KS', name: 'Kansas'},
-              {code: 'KY', name: 'Kentucky'}, {code: 'LA', name: 'Louisiana'}, {code: 'ME', name: 'Maine'}, {code: 'MD', name: 'Maryland'},
-              {code: 'MA', name: 'Massachusetts'}, {code: 'MI', name: 'Michigan'}, {code: 'MN', name: 'Minnesota'}, {code: 'MS', name: 'Mississippi'},
-              {code: 'MO', name: 'Missouri'}, {code: 'MT', name: 'Montana'}, {code: 'NE', name: 'Nebraska'}, {code: 'NV', name: 'Nevada'},
-              {code: 'NH', name: 'New Hampshire'}, {code: 'NJ', name: 'New Jersey'}, {code: 'NM', name: 'New Mexico'}, {code: 'NY', name: 'New York'},
-              {code: 'NC', name: 'North Carolina'}, {code: 'ND', name: 'North Dakota'}, {code: 'OH', name: 'Ohio'}, {code: 'OK', name: 'Oklahoma'},
-              {code: 'OR', name: 'Oregon'}, {code: 'PA', name: 'Pennsylvania'}, {code: 'RI', name: 'Rhode Island'}, {code: 'SC', name: 'South Carolina'},
-              {code: 'SD', name: 'South Dakota'}, {code: 'TN', name: 'Tennessee'}, {code: 'TX', name: 'Texas'}, {code: 'UT', name: 'Utah'},
-              {code: 'VT', name: 'Vermont'}, {code: 'VA', name: 'Virginia'}, {code: 'WA', name: 'Washington'}, {code: 'WV', name: 'West Virginia'},
-              {code: 'WI', name: 'Wisconsin'}, {code: 'WY', name: 'Wyoming'}, {code: 'DC', name: 'District of Columbia'}
-            ];
-            
-            const canadianProvinces = [
-              {code: 'AB', name: 'Alberta'}, {code: 'BC', name: 'British Columbia'}, {code: 'MB', name: 'Manitoba'},
-              {code: 'NB', name: 'New Brunswick'}, {code: 'NL', name: 'Newfoundland and Labrador'}, {code: 'NS', name: 'Nova Scotia'},
-              {code: 'NT', name: 'Northwest Territories'}, {code: 'NU', name: 'Nunavut'}, {code: 'ON', name: 'Ontario'},
-              {code: 'PE', name: 'Prince Edward Island'}, {code: 'QC', name: 'Quebec'}, {code: 'SK', name: 'Saskatchewan'},
-              {code: 'YT', name: 'Yukon'}
-            ];
-            
-            function toggleStateField(country) {
-              const stateField = document.getElementById('stateField');
-              if (!stateField) return;
-              stateField.innerHTML = '<option value="">Select State/Province</option>';
-              
-              if (country === 'US') {
-                stateField.style.display = 'block';
-                stateField.required = true;
-                usStates.forEach(function(state) {
-                  const option = document.createElement('option');
-                  option.value = state.code;
-                  option.textContent = state.code;
-                  stateField.appendChild(option);
-                });
-              } else if (country === 'CA') {
-                stateField.style.display = 'block';
-                stateField.required = true;
-                canadianProvinces.forEach(function(province) {
-                  const option = document.createElement('option');
-                  option.value = province.code;
-                  option.textContent = province.name;
-                  stateField.appendChild(option);
-                });
-              } else {
-                stateField.style.display = 'none';
-                stateField.required = false;
-              }
-            }
-            
-            function formatCardNumber(input) {
-                let value = input.value.replace(/\\s+/g, '').replace(/[^0-9]/gi, '');
-                if (value.length > 16) { value = value.substring(0, 16); }
-                
-                let formattedValue = '';
-                if (value.match(/^3[47]/)) {
-                    if (value.length > 15) { value = value.substring(0, 15); }
-                    for (let i = 0; i < value.length; i++) {
-                        if (i === 4 || i === 10) { formattedValue += ' '; }
-                        formattedValue += value[i];
-                    }
-                    input.maxLength = 17;
-                } else {
-                    for (let i = 0; i < value.length; i++) {
-                        if (i > 0 && i % 4 === 0) { formattedValue += ' '; }
-                        formattedValue += value[i];
-                    }
-                    input.maxLength = 19;
-                }
-                input.value = formattedValue;
-            }
-            
-            function formatExpiryDate(input) {
-                let value = input.value.replace(/\\D/g, '');
-                if (value.length >= 2) { value = value.substring(0,2) + '/' + value.substring(2,4); }
-                input.value = value;
-            }
-            
-            function checkAndRedirectOnError() {
-                const params = new URLSearchParams(window.location.search);
-                const response = params.get('response');
-                const responseText = params.get('responsetext');
-                
-                if ((response === '2' || response === '3') || 
-                    (responseText && responseText.includes('Activity limit exceeded') && response !== '1')) {
-                    const baseUrl = '${baseUrl}';
-                    const failureUrl = baseUrl + '/payment-failed?error=' + encodeURIComponent(responseText || 'Payment failed');
-                    window.top.location.href = failureUrl;
-                    return true;
-                }
-                return false;
-            }
-            
-            function setupFormHandler() {
-                const form = document.querySelector('.card-form');
-                if (form) {
-                    form.addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        
-                        const requiredFields = form.querySelectorAll('input[required], select[required]');
-                        let isValid = true;
-                        
-                        requiredFields.forEach(function(field) {
-                            if (!field.value.trim()) {
-                                field.style.borderColor = '#ff0000';
-                                isValid = false;
-                            } else {
-                                field.style.borderColor = 'transparent';
-                            }
-                        });
-                        
-                        if (!isValid) {
-                            alert('Please fill in all required fields.');
-                            return;
-                        }
-                        
-                        const submitBtn = form.querySelector('button[type="submit"]');
-                        if (submitBtn) {
-                            submitBtn.innerHTML = '🔄 Processing... Please wait';
-                            submitBtn.disabled = true;
-                        }
-                        
-                        const formData = new FormData(form);
-                        
-                        fetch(form.action, {
-                            method: 'POST',
-                            body: formData
-                        }).then(function(response) {
-                            if (response.redirected) {
-                                window.top.location.href = response.url;
-                            } else {
-                                return response.text();
-                            }
-                        }).catch(function(error) {
-                            console.error('Form submission error:', error);
-                            alert('Payment processing error. Please try again.');
-                            if (submitBtn) {
-                                submitBtn.innerHTML = 'Complete Order';
-                                submitBtn.disabled = false;
-                            }
-                        });
-                    });
-                }
-            }
-            
-            setTimeout(function() {
-                if (checkAndRedirectOnError()) { return; }
-                
-                const cardInput = document.querySelector('.card-form input[name="ccnumber"]');
-                const expiryInput = document.querySelector('.card-form input[name="ccexp"]');
-                if (cardInput) { cardInput.addEventListener('input', function() { formatCardNumber(this); }); }
-                if (expiryInput) { expiryInput.addEventListener('input', function() { formatExpiryDate(this); }); }
-                
-                setupFormHandler();
-                toggleStateField('US');
-                setInterval(checkAndRedirectOnError, 1000);
-            }, 100);
-          </script>
-          <form action="https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/kit-purchase" method="POST" class="card-form">
+          <form action="https://lhwxxzxdsrykvznrtigf.supabase.co/functions/v1/kit-purchase" method="POST" class="kit-form">
             <input type="hidden" name="type" value="sale">
             <input type="hidden" name="security_key" value="${securityKey}">
             <input type="hidden" name="amount" value="${amount}">
@@ -347,79 +185,258 @@ serve(async (req) => {
             <input type="hidden" name="postback_url" value="${failureUrl}">
             ${customerEmail ? `<input type="hidden" name="email" value="${customerEmail}">` : ''}
             
-            <div style="text-align: center; margin-bottom: 30px;">
-              <div style="font-size: 28px; font-weight: bold; margin-bottom: 8px; background: linear-gradient(45deg, #fff, #f0f0f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            <div style="text-align: center; margin-bottom: 35px;">
+              <div style="font-size: 32px; font-weight: bold; margin-bottom: 10px;">
                 Recovery Kit Order
               </div>
-              <div style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">
+              <div style="font-size: 28px; font-weight: bold; margin-bottom: 8px; opacity: 0.95;">
                 $${amount} - ${quantity} Kit${quantity > 1 ? 's' : ''}
               </div>
-              <div style="opacity: 0.9; font-size: 16px;">${description}</div>
+              <div style="opacity: 0.85; font-size: 16px;">${description}</div>
             </div>
             
-            <div style="margin-bottom: 20px;">
-              <label style="display: block; margin-bottom: 8px; font-weight: 600;">Cardholder Name</label>
-              <div class="form-row" style="display: flex; gap: 10px;">
+            <div style="margin-bottom: 24px;">
+              <label style="display: block; margin-bottom: 10px; font-weight: 600; font-size: 15px;">Cardholder Name</label>
+              <div class="form-row" style="display: flex; gap: 12px;">
                 <input type="text" name="first_name" placeholder="First Name" required 
-                  style="flex: 1; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
+                  style="flex: 1; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
                 <input type="text" name="last_name" placeholder="Last Name" required
-                  style="flex: 1; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
+                  style="flex: 1; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
               </div>
             </div>
             
-            <div style="margin-bottom: 20px;">
-              <label style="display: block; margin-bottom: 8px; font-weight: 600;">Card Number</label>
-              <input type="text" name="ccnumber" placeholder="1234 5678 9012 3456" required maxlength="19"
-                style="width: 100%; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
+            <div style="margin-bottom: 24px;">
+              <label style="display: block; margin-bottom: 10px; font-weight: 600; font-size: 15px;">Card Number</label>
+              <input type="text" name="ccnumber" id="ccnumber" placeholder="1234 5678 9012 3456" required maxlength="19"
+                style="width: 100%; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
             </div>
             
-            <div class="form-row" style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <div class="form-row" style="display: flex; gap: 12px; margin-bottom: 24px;">
               <div style="flex: 1;">
-                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Expiry</label>
-                <input type="text" name="ccexp" placeholder="MM/YY" maxlength="5" required
-                  style="width: 100%; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
+                <label style="display: block; margin-bottom: 10px; font-weight: 600; font-size: 15px;">Expiry</label>
+                <input type="text" name="ccexp" id="ccexp" placeholder="MM/YY" maxlength="5" required
+                  style="width: 100%; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
               </div>
               <div style="flex: 1;">
-                <label style="display: block; margin-bottom: 8px; font-weight: 600;">CVV</label>
+                <label style="display: block; margin-bottom: 10px; font-weight: 600; font-size: 15px;">CVV</label>
                 <input type="text" name="cvv" placeholder="123" maxlength="4" required
-                  style="width: 100%; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
+                  style="width: 100%; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
               </div>
             </div>
             
-            <div style="margin-bottom: 20px;">
-              <label style="display: block; margin-bottom: 8px; font-weight: 600;">Shipping Address</label>
+            <div style="margin-bottom: 24px;">
+              <label style="display: block; margin-bottom: 10px; font-weight: 600; font-size: 15px;">Shipping Address</label>
               <input type="text" name="address1" placeholder="Street Address" required
-                style="width: 100%; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333; margin-bottom: 10px;">
-              <div class="form-row" style="display: flex; gap: 10px;">
+                style="width: 100%; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333; margin-bottom: 12px;">
+              <div class="form-row" style="display: flex; gap: 12px;">
                 <input type="text" name="city" placeholder="City" required
-                  style="flex: 1; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
+                  style="flex: 1; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
                 <input type="text" name="zip" placeholder="ZIP" required
-                  style="flex: 1; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
+                  style="flex: 1; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
               </div>
             </div>
             
-            <div class="form-row" style="display: flex; gap: 10px; margin-bottom: 25px;">
-              <select name="country" id="countryField" required onchange="toggleStateField(this.value)"
-                style="flex: 1; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
+            <div class="form-row" style="display: flex; gap: 12px; margin-bottom: 30px;">
+              <select name="country" id="countryField" required
+                style="flex: 1; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333; cursor: pointer;">
                 <option value="US">United States</option>
                 <option value="CA">Canada</option>
                 <option value="GB">United Kingdom</option>
                 <option value="AU">Australia</option>
               </select>
               <select name="state" id="stateField"
-                style="flex: 1; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333;">
+                style="flex: 1; padding: 16px; border: none; border-radius: 12px; background: rgba(255,255,255,0.95); font-size: 16px; color: #333; cursor: pointer;">
                 <option value="">Select State</option>
               </select>
             </div>
             
-            <button type="submit" style="width: 100%; padding: 18px; background: rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.5); border-radius: 12px; color: white; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">
+            <button type="submit" id="submitBtn" style="width: 100%; padding: 20px; background: rgba(0,0,0,0.25); border: 2px solid rgba(255,255,255,0.6); border-radius: 14px; color: white; font-size: 20px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">
               ✓ Complete Order - $${amount}
             </button>
             
-            <div style="text-align: center; margin-top: 15px; opacity: 0.8; font-size: 13px;">
+            <div style="text-align: center; margin-top: 18px; opacity: 0.85; font-size: 14px;">
               🔒 Secure checkout • 📦 Free shipping
             </div>
           </form>
+          <script>
+            (function() {
+              const usStates = [
+                {code: 'AL', name: 'Alabama'}, {code: 'AK', name: 'Alaska'}, {code: 'AZ', name: 'Arizona'}, {code: 'AR', name: 'Arkansas'},
+                {code: 'CA', name: 'California'}, {code: 'CO', name: 'Colorado'}, {code: 'CT', name: 'Connecticut'}, {code: 'DE', name: 'Delaware'},
+                {code: 'FL', name: 'Florida'}, {code: 'GA', name: 'Georgia'}, {code: 'HI', name: 'Hawaii'}, {code: 'ID', name: 'Idaho'},
+                {code: 'IL', name: 'Illinois'}, {code: 'IN', name: 'Indiana'}, {code: 'IA', name: 'Iowa'}, {code: 'KS', name: 'Kansas'},
+                {code: 'KY', name: 'Kentucky'}, {code: 'LA', name: 'Louisiana'}, {code: 'ME', name: 'Maine'}, {code: 'MD', name: 'Maryland'},
+                {code: 'MA', name: 'Massachusetts'}, {code: 'MI', name: 'Michigan'}, {code: 'MN', name: 'Minnesota'}, {code: 'MS', name: 'Mississippi'},
+                {code: 'MO', name: 'Missouri'}, {code: 'MT', name: 'Montana'}, {code: 'NE', name: 'Nebraska'}, {code: 'NV', name: 'Nevada'},
+                {code: 'NH', name: 'New Hampshire'}, {code: 'NJ', name: 'New Jersey'}, {code: 'NM', name: 'New Mexico'}, {code: 'NY', name: 'New York'},
+                {code: 'NC', name: 'North Carolina'}, {code: 'ND', name: 'North Dakota'}, {code: 'OH', name: 'Ohio'}, {code: 'OK', name: 'Oklahoma'},
+                {code: 'OR', name: 'Oregon'}, {code: 'PA', name: 'Pennsylvania'}, {code: 'RI', name: 'Rhode Island'}, {code: 'SC', name: 'South Carolina'},
+                {code: 'SD', name: 'South Dakota'}, {code: 'TN', name: 'Tennessee'}, {code: 'TX', name: 'Texas'}, {code: 'UT', name: 'Utah'},
+                {code: 'VT', name: 'Vermont'}, {code: 'VA', name: 'Virginia'}, {code: 'WA', name: 'Washington'}, {code: 'WV', name: 'West Virginia'},
+                {code: 'WI', name: 'Wisconsin'}, {code: 'WY', name: 'Wyoming'}, {code: 'DC', name: 'District of Columbia'}
+              ];
+              
+              const canadianProvinces = [
+                {code: 'AB', name: 'Alberta'}, {code: 'BC', name: 'British Columbia'}, {code: 'MB', name: 'Manitoba'},
+                {code: 'NB', name: 'New Brunswick'}, {code: 'NL', name: 'Newfoundland and Labrador'}, {code: 'NS', name: 'Nova Scotia'},
+                {code: 'NT', name: 'Northwest Territories'}, {code: 'NU', name: 'Nunavut'}, {code: 'ON', name: 'Ontario'},
+                {code: 'PE', name: 'Prince Edward Island'}, {code: 'QC', name: 'Quebec'}, {code: 'SK', name: 'Saskatchewan'},
+                {code: 'YT', name: 'Yukon'}
+              ];
+              
+              function updateStateField(country) {
+                const stateField = document.getElementById('stateField');
+                if (!stateField) return;
+                stateField.innerHTML = '<option value="">Select State/Province</option>';
+                
+                if (country === 'US') {
+                  stateField.style.display = 'block';
+                  stateField.required = true;
+                  usStates.forEach(function(state) {
+                    const option = document.createElement('option');
+                    option.value = state.code;
+                    option.textContent = state.name;
+                    stateField.appendChild(option);
+                  });
+                } else if (country === 'CA') {
+                  stateField.style.display = 'block';
+                  stateField.required = true;
+                  canadianProvinces.forEach(function(province) {
+                    const option = document.createElement('option');
+                    option.value = province.code;
+                    option.textContent = province.name;
+                    stateField.appendChild(option);
+                  });
+                } else {
+                  stateField.style.display = 'none';
+                  stateField.required = false;
+                }
+              }
+              
+              function formatCardNumber(input) {
+                let value = input.value.replace(/\\s+/g, '').replace(/[^0-9]/gi, '');
+                if (value.length > 16) { value = value.substring(0, 16); }
+                
+                let formattedValue = '';
+                if (value.match(/^3[47]/)) {
+                  if (value.length > 15) { value = value.substring(0, 15); }
+                  for (let i = 0; i < value.length; i++) {
+                    if (i === 4 || i === 10) { formattedValue += ' '; }
+                    formattedValue += value[i];
+                  }
+                  input.maxLength = 17;
+                } else {
+                  for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) { formattedValue += ' '; }
+                    formattedValue += value[i];
+                  }
+                  input.maxLength = 19;
+                }
+                input.value = formattedValue;
+              }
+              
+              function formatExpiryDate(input) {
+                let value = input.value.replace(/\\D/g, '');
+                if (value.length >= 2) { value = value.substring(0,2) + '/' + value.substring(2,4); }
+                input.value = value;
+              }
+              
+              // Initialize when DOM is ready
+              const countryField = document.getElementById('countryField');
+              const cardInput = document.getElementById('ccnumber');
+              const expiryInput = document.getElementById('ccexp');
+              const form = document.querySelector('.kit-form');
+              const submitBtn = document.getElementById('submitBtn');
+              
+              // Country change handler
+              if (countryField) {
+                countryField.addEventListener('change', function() {
+                  updateStateField(this.value);
+                });
+                // Initialize with US states
+                updateStateField('US');
+              }
+              
+              // Card formatting
+              if (cardInput) {
+                cardInput.addEventListener('input', function() { formatCardNumber(this); });
+              }
+              if (expiryInput) {
+                expiryInput.addEventListener('input', function() { formatExpiryDate(this); });
+              }
+              
+              // Form submission
+              if (form) {
+                form.addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  
+                  const requiredFields = form.querySelectorAll('input[required], select[required]');
+                  let isValid = true;
+                  
+                  requiredFields.forEach(function(field) {
+                    if (!field.value.trim()) {
+                      field.style.borderColor = '#ff0000';
+                      field.style.border = '2px solid #ff0000';
+                      isValid = false;
+                    } else {
+                      field.style.border = 'none';
+                    }
+                  });
+                  
+                  if (!isValid) {
+                    alert('Please fill in all required fields.');
+                    return;
+                  }
+                  
+                  if (submitBtn) {
+                    submitBtn.innerHTML = '🔄 Processing... Please wait';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.7';
+                  }
+                  
+                  const formData = new FormData(form);
+                  
+                  fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                  }).then(function(response) {
+                    if (response.redirected) {
+                      window.top.location.href = response.url;
+                    } else {
+                      return response.text();
+                    }
+                  }).catch(function(error) {
+                    console.error('Form submission error:', error);
+                    alert('Payment processing error. Please try again.');
+                    if (submitBtn) {
+                      submitBtn.innerHTML = '✓ Complete Order - $${amount}';
+                      submitBtn.disabled = false;
+                      submitBtn.style.opacity = '1';
+                    }
+                  });
+                });
+              }
+              
+              // Check for error redirects
+              function checkAndRedirectOnError() {
+                const params = new URLSearchParams(window.location.search);
+                const response = params.get('response');
+                const responseText = params.get('responsetext');
+                
+                if ((response === '2' || response === '3') || 
+                    (responseText && responseText.includes('Activity limit exceeded') && response !== '1')) {
+                  const baseUrl = '${baseUrl}';
+                  const failureUrl = baseUrl + '/payment-failed?error=' + encodeURIComponent(responseText || 'Payment failed');
+                  window.top.location.href = failureUrl;
+                  return true;
+                }
+                return false;
+              }
+              
+              checkAndRedirectOnError();
+              setInterval(checkAndRedirectOnError, 1000);
+            })();
+          </script>
         </div>
       `;
       
