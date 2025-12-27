@@ -259,8 +259,8 @@ serve(async (req) => {
             </div>
           </form>
           <script>
-            (function() {
-              const usStates = [
+            function initKitForm() {
+              var usStates = [
                 {code: 'AL', name: 'Alabama'}, {code: 'AK', name: 'Alaska'}, {code: 'AZ', name: 'Arizona'}, {code: 'AR', name: 'Arkansas'},
                 {code: 'CA', name: 'California'}, {code: 'CO', name: 'Colorado'}, {code: 'CT', name: 'Connecticut'}, {code: 'DE', name: 'Delaware'},
                 {code: 'FL', name: 'Florida'}, {code: 'GA', name: 'Georgia'}, {code: 'HI', name: 'Hawaii'}, {code: 'ID', name: 'Idaho'},
@@ -276,7 +276,7 @@ serve(async (req) => {
                 {code: 'WI', name: 'Wisconsin'}, {code: 'WY', name: 'Wyoming'}, {code: 'DC', name: 'District of Columbia'}
               ];
               
-              const canadianProvinces = [
+              var canadianProvinces = [
                 {code: 'AB', name: 'Alberta'}, {code: 'BC', name: 'British Columbia'}, {code: 'MB', name: 'Manitoba'},
                 {code: 'NB', name: 'New Brunswick'}, {code: 'NL', name: 'Newfoundland and Labrador'}, {code: 'NS', name: 'Nova Scotia'},
                 {code: 'NT', name: 'Northwest Territories'}, {code: 'NU', name: 'Nunavut'}, {code: 'ON', name: 'Ontario'},
@@ -284,108 +284,96 @@ serve(async (req) => {
                 {code: 'YT', name: 'Yukon'}
               ];
               
-              function updateStateField(country) {
-                const stateField = document.getElementById('stateField');
-                if (!stateField) return;
+              var stateField = document.getElementById('stateField');
+              var countryField = document.getElementById('countryField');
+              
+              if (!stateField || !countryField) {
+                setTimeout(initKitForm, 100);
+                return;
+              }
+              
+              function populateStates(country) {
                 stateField.innerHTML = '<option value="">Select State/Province</option>';
+                var states = [];
                 
                 if (country === 'US') {
+                  states = usStates;
                   stateField.style.display = 'block';
                   stateField.required = true;
-                  usStates.forEach(function(state) {
-                    const option = document.createElement('option');
-                    option.value = state.code;
-                    option.textContent = state.name;
-                    stateField.appendChild(option);
-                  });
                 } else if (country === 'CA') {
+                  states = canadianProvinces;
                   stateField.style.display = 'block';
                   stateField.required = true;
-                  canadianProvinces.forEach(function(province) {
-                    const option = document.createElement('option');
-                    option.value = province.code;
-                    option.textContent = province.name;
-                    stateField.appendChild(option);
-                  });
                 } else {
                   stateField.style.display = 'none';
                   stateField.required = false;
+                  return;
                 }
-              }
-              
-              function formatCardNumber(input) {
-                let value = input.value.replace(/\\s+/g, '').replace(/[^0-9]/gi, '');
-                if (value.length > 16) { value = value.substring(0, 16); }
                 
-                let formattedValue = '';
-                if (value.match(/^3[47]/)) {
-                  if (value.length > 15) { value = value.substring(0, 15); }
-                  for (let i = 0; i < value.length; i++) {
-                    if (i === 4 || i === 10) { formattedValue += ' '; }
-                    formattedValue += value[i];
-                  }
-                  input.maxLength = 17;
-                } else {
-                  for (let i = 0; i < value.length; i++) {
-                    if (i > 0 && i % 4 === 0) { formattedValue += ' '; }
-                    formattedValue += value[i];
-                  }
-                  input.maxLength = 19;
+                for (var i = 0; i < states.length; i++) {
+                  var opt = document.createElement('option');
+                  opt.value = states[i].code;
+                  opt.textContent = states[i].name;
+                  stateField.appendChild(opt);
                 }
-                input.value = formattedValue;
               }
               
-              function formatExpiryDate(input) {
-                let value = input.value.replace(/\\D/g, '');
-                if (value.length >= 2) { value = value.substring(0,2) + '/' + value.substring(2,4); }
-                input.value = value;
-              }
+              countryField.onchange = function() {
+                populateStates(this.value);
+              };
               
-              // Initialize when DOM is ready
-              const countryField = document.getElementById('countryField');
-              const cardInput = document.getElementById('ccnumber');
-              const expiryInput = document.getElementById('ccexp');
-              const form = document.querySelector('.kit-form');
-              const submitBtn = document.getElementById('submitBtn');
-              
-              // Country change handler
-              if (countryField) {
-                countryField.addEventListener('change', function() {
-                  updateStateField(this.value);
-                });
-                // Initialize with US states
-                updateStateField('US');
-              }
+              // Initialize with US states
+              populateStates('US');
               
               // Card formatting
+              var cardInput = document.getElementById('ccnumber');
+              var expiryInput = document.getElementById('ccexp');
+              
               if (cardInput) {
-                cardInput.addEventListener('input', function() { formatCardNumber(this); });
+                cardInput.oninput = function() {
+                  var value = this.value.replace(/\\s+/g, '').replace(/[^0-9]/gi, '');
+                  if (value.length > 16) value = value.substring(0, 16);
+                  var formatted = '';
+                  for (var i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) formatted += ' ';
+                    formatted += value[i];
+                  }
+                  this.value = formatted;
+                };
               }
+              
               if (expiryInput) {
-                expiryInput.addEventListener('input', function() { formatExpiryDate(this); });
+                expiryInput.oninput = function() {
+                  var value = this.value.replace(/\\D/g, '');
+                  if (value.length >= 2) value = value.substring(0,2) + '/' + value.substring(2,4);
+                  this.value = value;
+                };
               }
               
               // Form submission
+              var form = document.querySelector('.kit-form');
+              var submitBtn = document.getElementById('submitBtn');
+              
               if (form) {
-                form.addEventListener('submit', function(e) {
+                form.onsubmit = function(e) {
                   e.preventDefault();
                   
-                  const requiredFields = form.querySelectorAll('input[required], select[required]');
-                  let isValid = true;
+                  var requiredFields = form.querySelectorAll('input[required], select[required]');
+                  var isValid = true;
                   
-                  requiredFields.forEach(function(field) {
+                  for (var i = 0; i < requiredFields.length; i++) {
+                    var field = requiredFields[i];
                     if (!field.value.trim()) {
-                      field.style.borderColor = '#ff0000';
                       field.style.border = '2px solid #ff0000';
                       isValid = false;
                     } else {
                       field.style.border = 'none';
                     }
-                  });
+                  }
                   
                   if (!isValid) {
                     alert('Please fill in all required fields.');
-                    return;
+                    return false;
                   }
                   
                   if (submitBtn) {
@@ -394,7 +382,7 @@ serve(async (req) => {
                     submitBtn.style.opacity = '0.7';
                   }
                   
-                  const formData = new FormData(form);
+                  var formData = new FormData(form);
                   
                   fetch(form.action, {
                     method: 'POST',
@@ -402,40 +390,28 @@ serve(async (req) => {
                   }).then(function(response) {
                     if (response.redirected) {
                       window.top.location.href = response.url;
-                    } else {
-                      return response.text();
                     }
                   }).catch(function(error) {
-                    console.error('Form submission error:', error);
-                    alert('Payment processing error. Please try again.');
+                    console.error('Form error:', error);
+                    alert('Payment error. Please try again.');
                     if (submitBtn) {
                       submitBtn.innerHTML = '✓ Complete Order - $${amount}';
                       submitBtn.disabled = false;
                       submitBtn.style.opacity = '1';
                     }
                   });
-                });
+                  
+                  return false;
+                };
               }
-              
-              // Check for error redirects
-              function checkAndRedirectOnError() {
-                const params = new URLSearchParams(window.location.search);
-                const response = params.get('response');
-                const responseText = params.get('responsetext');
-                
-                if ((response === '2' || response === '3') || 
-                    (responseText && responseText.includes('Activity limit exceeded') && response !== '1')) {
-                  const baseUrl = '${baseUrl}';
-                  const failureUrl = baseUrl + '/payment-failed?error=' + encodeURIComponent(responseText || 'Payment failed');
-                  window.top.location.href = failureUrl;
-                  return true;
-                }
-                return false;
-              }
-              
-              checkAndRedirectOnError();
-              setInterval(checkAndRedirectOnError, 1000);
-            })();
+            }
+            
+            // Start initialization
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', initKitForm);
+            } else {
+              setTimeout(initKitForm, 50);
+            }
           </script>
         </div>
       `;
