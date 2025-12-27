@@ -273,13 +273,13 @@ const Kit = () => {
                 <Button 
                   onClick={handlePurchase}
                   disabled={isProcessing || !email.trim() || !name.trim() || !isValidEmail(email.trim())}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-4 text-xl font-semibold mb-4"
+                  className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-primary-foreground py-6 text-2xl font-bold mb-4 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
                 >
                   {isProcessing ? 'PROCESSING...' : `ORDER NOW - $${totalAmount}`}
                 </Button>
 
-                <p className="text-xs text-muted-foreground text-center">
-                  Secure checkout • Free shipping • 30-day satisfaction guarantee
+                <p className="text-sm text-muted-foreground text-center">
+                  🔒 Secure checkout • 📦 Free shipping • ✓ 30-day satisfaction guarantee
                 </p>
               </>
             ) : (
