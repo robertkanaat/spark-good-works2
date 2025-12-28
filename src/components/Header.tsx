@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake, Mic, ClipboardCheck, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Shield, Phone, Heart, BookOpen, Users, Stethoscope, GraduationCap, Mail, HelpCircle, Briefcase, DollarSign, Gift, Handshake, Mic, ClipboardCheck, ChevronDown, ChevronRight, Gamepad2, Package } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
@@ -398,6 +398,30 @@ const Header = () => {
                           Frequently asked questions about addiction and recovery
                         </p>
                       </Link>
+                      <Link
+                        to="/kit"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Package className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Recovery Kit</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Essential tools and resources to support your recovery journey
+                        </p>
+                      </Link>
+                      <Link
+                        to="/recovery-game"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Gamepad2 className="h-4 w-4 text-primary transition-transform duration-300 group-hover:scale-110" />
+                          <div className="text-sm font-medium leading-none">Recovery Game</div>
+                        </div>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          Interactive 3D journey with daily challenges and achievements
+                        </p>
+                      </Link>
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -749,6 +773,28 @@ const Header = () => {
                            onClick={() => setIsOpen(false)}
                          >
                            FAQ
+                         </Link>
+                         <Link 
+                           to="/kit" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/kit')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Recovery Kit
+                         </Link>
+                         <Link 
+                           to="/recovery-game" 
+                           className={`text-base font-medium px-6 py-2 rounded-md transition-colors ml-4 ${
+                             isActiveRoute('/recovery-game')
+                               ? 'text-primary bg-primary/10'
+                               : 'text-muted-foreground hover:text-primary hover:bg-muted'
+                           }`}
+                           onClick={() => setIsOpen(false)}
+                         >
+                           Recovery Game
                          </Link>
                        </CollapsibleContent>
                      </Collapsible>
